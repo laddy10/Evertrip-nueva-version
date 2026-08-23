@@ -1,6 +1,5 @@
 "use client";
 
-import { useRef, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaClock, FaUsers, FaStar, FaMapMarkerAlt } from "react-icons/fa";
@@ -15,80 +14,13 @@ interface Props {
   quote: string;
 }
 
-const EASE = "0.42s cubic-bezier(0.4, 0, 0.2, 1)";
-
 export default function RouteCard({ route, locale, startingPrice, from, quote }: Props) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const revealRef   = useRef<HTMLDivElement>(null);
-  const dividerRef  = useRef<HTMLDivElement>(null);
-  const activeRef   = useRef(false); // true while mouse is inside
-
-  /* ── Direct DOM helpers (no React state → no re-render lag) ── */
-  const applyClip = (pct: number, animated: boolean) => {
-    const el = revealRef.current;
-    if (!el) return;
-    el.style.transition = animated ? `clip-path ${EASE}` : "none";
-    el.style.clipPath    = `inset(0 ${100 - pct}% 0 0)`;
-  };
-
-  const applyDivider = (pct: number, animated: boolean) => {
-    const el = dividerRef.current;
-    if (!el) return;
-    el.style.transition = animated ? `left ${EASE}, opacity ${EASE}` : "none";
-    el.style.left       = `${pct}%`;
-    el.style.opacity    = pct > 2 ? "1" : "0";
-  };
-
-  /* ── Event handlers ── */
-  const handleMouseEnter = useCallback(() => {
-    if (!route.image2) return;
-    activeRef.current = true;
-    applyClip(50, true);      // slide origin image in from left → 50/50
-    applyDivider(50, true);   // show divider at center
-  }, [route.image2]);          // eslint-disable-line react-hooks/exhaustive-deps
-
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (!route.image2 || !activeRef.current || !containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const pct  = Math.min(Math.max(((e.clientX - rect.left) / rect.width) * 100, 5), 95);
-    applyClip(pct, false);    // instant — follows cursor
-    applyDivider(pct, false); // instant — follows cursor
-  }, [route.image2]);          // eslint-disable-line react-hooks/exhaustive-deps
-
-  const handleMouseLeave = useCallback(() => {
-    if (!route.image2) return;
-    activeRef.current = false;
-    applyClip(0, true);       // slide origin image back to left
-    applyDivider(0, true);    // hide divider
-  }, [route.image2]);          // eslint-disable-line react-hooks/exhaustive-deps
-
   return (
-    <div
-      ref={containerRef}
-      className="relative h-80 md:h-[22rem] rounded-3xl overflow-hidden shadow-md"
-      onMouseEnter={handleMouseEnter}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-    >
+    <div className="relative h-80 md:h-[22rem] rounded-3xl overflow-hidden shadow-md group">
       {/* ── Images ── */}
       {route.image2 ? (
-        <>
-          {/* Base: destination — always full width */}
-          <Image
-            src={route.image2}
-            alt={route.h1[locale] + " – destino"}
-            fill
-            className="object-cover"
-            draggable={false}
-            priority
-          />
-
-          {/* Reveal: origin — clipped from right, slides in from left */}
-          <div
-            ref={revealRef}
-            className="absolute inset-0"
-            style={{ clipPath: "inset(0 100% 0 0)" }} /* start fully hidden */
-          >
+        <div className="absolute inset-0 flex transition-transform duration-700 group-hover:scale-105">
+          <div className="relative w-1/2 h-full overflow-hidden">
             <Image
               src={route.image!}
               alt={route.h1[locale] + " – origen"}
@@ -97,25 +29,17 @@ export default function RouteCard({ route, locale, startingPrice, from, quote }:
               draggable={false}
             />
           </div>
-
-          {/* Divider line + handle — always in DOM, opacity-controlled */}
-          <div
-            ref={dividerRef}
-            className="absolute inset-y-0 z-20 flex items-center justify-center pointer-events-none"
-            style={{ left: "50%", opacity: 0, transform: "translateX(-50%)" }}
-          >
-            <div className="w-[2px] h-full bg-white/90 shadow-[0_0_10px_rgba(0,0,0,0.6)]" />
-            <div
-              className="absolute w-9 h-9 rounded-full bg-white flex items-center justify-center"
-              style={{ boxShadow: "0 2px 14px rgba(0,0,0,0.4)" }}
-            >
-              <svg width="16" height="10" viewBox="0 0 16 10" fill="none">
-                <path d="M5 5L1 2.5M1 2.5L5 0M1 2.5H8" stroke="#334155" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M11 5L15 7.5M15 7.5L11 10M15 7.5H8" stroke="#334155" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
+          <div className="relative w-1/2 h-full overflow-hidden">
+            <Image
+              src={route.image2}
+              alt={route.h1[locale] + " – destino"}
+              fill
+              className="object-cover"
+              draggable={false}
+            />
           </div>
-        </>
+          <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[2px] bg-white/40 shadow-[0_0_8px_rgba(0,0,0,0.5)] z-10 pointer-events-none" />
+        </div>
       ) : route.image ? (
         <Image
           src={route.image}

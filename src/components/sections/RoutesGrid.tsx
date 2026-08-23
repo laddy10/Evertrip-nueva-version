@@ -71,12 +71,36 @@ export default function RoutesGrid({ locale }: { locale: Locale }) {
                   transition={{ delay: idx * 0.15, duration: 0.6 }}
                   className="bg-white rounded-[24px] overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 relative h-[420px] w-full group-hover:-translate-y-1"
                 >
-                  <Image
-                    src={route.image || "https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&q=80"}
-                    alt={route.h1[locale]}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
+                  {route.image2 ? (
+                    <div className="absolute inset-0 flex transition-transform duration-700 group-hover:scale-105">
+                      <div className="relative w-1/2 h-full overflow-hidden">
+                        <Image
+                          src={route.image!}
+                          alt={route.h1[locale] + " – origen"}
+                          fill
+                          className="object-cover"
+                          draggable={false}
+                        />
+                      </div>
+                      <div className="relative w-1/2 h-full overflow-hidden">
+                        <Image
+                          src={route.image2}
+                          alt={route.h1[locale] + " – destino"}
+                          fill
+                          className="object-cover"
+                          draggable={false}
+                        />
+                      </div>
+                      <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[2px] bg-white/40 shadow-[0_0_8px_rgba(0,0,0,0.5)] z-10 pointer-events-none" />
+                    </div>
+                  ) : (
+                    <Image
+                      src={route.image || "https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&q=80"}
+                      alt={route.h1[locale]}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10"></div>
                   
                   {lowestPrice && (

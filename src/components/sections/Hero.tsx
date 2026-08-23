@@ -2,9 +2,9 @@
 
 import type { Locale } from "@/i18n/config";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { getWhatsAppLink } from "@/data/routes";
-import { ArrowRight, MapPin, Users } from "lucide-react";
+import { ArrowRight, MapPin, Users, Play, X } from "lucide-react";
 import { useState } from "react";
 
 const content = {
@@ -17,6 +17,7 @@ const content = {
     from: "Origen",
     to: "Destino",
     pax: "Pasajeros",
+    watchVideo: "Ver Experiencia",
   },
   en: {
     headingPart1: "YOUR CARIBBEAN JOURNEY",
@@ -27,6 +28,7 @@ const content = {
     from: "From",
     to: "To",
     pax: "Passengers",
+    watchVideo: "Watch Experience",
   },
 };
 
@@ -121,17 +123,19 @@ export default function Hero({ locale }: { locale: Locale }) {
                   </div>
                   <input 
                     type="number" 
+                    inputMode="numeric"
+                    pattern="[0-9]*"
                     min="1"
                     placeholder={t.pax}
                     required
                     value={formData.pax}
                     onChange={(e) => setFormData({...formData, pax: e.target.value})}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-12 pr-4 text-sm focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-all"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-12 pr-4 text-sm focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-all min-h-[44px]"
                   />
                 </div>
                 <button 
                   type="submit"
-                  className="bg-brand-accent hover:bg-brand-accent-light text-white px-6 rounded-xl flex items-center justify-center transition-colors shadow-md hover:shadow-brand-accent/30"
+                  className="bg-brand-accent hover:bg-brand-accent-light text-white px-6 rounded-xl flex items-center justify-center transition-colors shadow-md hover:shadow-brand-accent/30 min-h-[44px]"
                 >
                   <ArrowRight size={20} />
                 </button>
@@ -140,21 +144,24 @@ export default function Hero({ locale }: { locale: Locale }) {
           </motion.div>
         </div>
 
-        {/* Image Showcase */}
-        <div className="w-full lg:w-1/2 relative min-h-[250px] aspect-[16/9] lg:aspect-[4/3] mt-8 lg:mt-0">
+        {/* Video Showcase */}
+        <div className="w-full lg:w-1/2 relative min-h-[250px] aspect-[16/9] mt-8 lg:mt-0">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3, duration: 1, ease: "easeOut" }}
-            className="absolute inset-0 w-full h-full"
+            className="absolute inset-0 w-full h-full rounded-[32px] overflow-hidden shadow-2xl bg-black border border-slate-200/20"
           >
-            <Image
-              src="/assets/hero.png"
-              alt="Premium private transfer"
-              fill
-              priority
-              className="object-cover rounded-[32px] premium-image shadow-2xl"
-            />
+            <iframe 
+              width="100%" 
+              height="100%" 
+              src="https://www.youtube.com/embed/QbrpOFVaFbA?autoplay=0&rel=0" 
+              title="YouTube video player" 
+              frameBorder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowFullScreen
+              className="absolute inset-0 w-full h-full"
+            ></iframe>
           </motion.div>
         </div>
         
