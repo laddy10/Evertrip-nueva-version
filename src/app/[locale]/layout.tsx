@@ -50,8 +50,8 @@ export async function generateMetadata({
     title: meta.title,
     description: meta.description,
     icons: {
-      icon: "/assets/icon-round.svg",
-      apple: "/assets/icon-round.svg",
+      icon: "/assets/logo2-rounded.png",
+      apple: "/assets/logo2-rounded.png",
     },
     alternates: {
       canonical: `/${locale}`,
@@ -89,9 +89,13 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={`${outfit.variable} ${inter.variable}`} suppressHydrationWarning>
       <body className="flex flex-col min-h-screen" suppressHydrationWarning>
-        <Navbar locale={locale} />
+        <div className="print:hidden">
+          <Navbar locale={locale} />
+        </div>
         <main className="flex-grow">{children}</main>
-        <Footer locale={locale} />
+        <div className="print:hidden">
+          <Footer locale={locale} />
+        </div>
       </body>
     </html>
   );

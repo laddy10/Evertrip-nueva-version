@@ -32,7 +32,7 @@ export default function Navbar({ locale }: { locale: Locale }) {
       >
         <Link href={`/${locale}`} className="hover:opacity-80 transition-opacity flex items-center">
           <Image
-            src="/assets/evertrip_logo_alta_resolucion.png"
+            src="/assets/logo2-normal.png"
             alt="Evertrip Logo"
             width={48}
             height={48}

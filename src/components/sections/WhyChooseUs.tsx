@@ -17,7 +17,7 @@ const content = {
       {
         icon: <FaMapMarkedAlt className="w-8 h-8 text-brand-accent" />,
         title: "Paradas Flexibles",
-        desc: "¿Hambre en el camino? ¿Quieres tomar una foto? Tú mandas. Hacemos paradas sin costo adicional para que disfrutes."
+        desc: "Disfruta del viaje a tu ritmo. Incluimos una parada de cortesía (15-25 min) sin costo adicional para comer, tomar fotos o estirar las piernas."
       },
       {
         icon: <FaCarSide className="w-8 h-8 text-brand-accent" />,
@@ -38,7 +38,7 @@ const content = {
       {
         icon: <FaMapMarkedAlt className="w-8 h-8 text-brand-accent" />,
         title: "Flexible Stops",
-        desc: "Hungry on the road? Want to take a picture? You're the boss. We make stops at no extra cost for you to enjoy."
+        desc: "Enjoy the journey at your own pace. We include a complimentary stop (15-25 mins) at no extra cost to eat, take photos, or stretch your legs."
       },
       {
         icon: <FaCarSide className="w-8 h-8 text-brand-accent" />,

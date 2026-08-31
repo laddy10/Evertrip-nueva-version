@@ -3,9 +3,20 @@
 import type { Locale } from "@/i18n/config";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { getWhatsAppLink } from "@/data/routes";
+import { routes, getWhatsAppLink } from "@/data/routes";
 import { ArrowRight, MapPin, Users, Play, X } from "lucide-react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+const LOCATIONS = [
+  "Barranquilla",
+  "Santa Marta",
+  "Cartagena",
+  "Palomino",
+  "Valledupar",
+  "Minca",
+  "Tayrona"
+];
 
 const content = {
   es: {
@@ -13,7 +24,7 @@ const content = {
     headingPart2: "A TU RITMO.",
     subheading: "Traslados privados exclusivos desde el aeropuerto hasta tu hotel. Confiable, seguro y sin estrés.",
     cta: "Reservar Ahora",
-    quickQuote: "Cotización Rápida",
+    quickQuote: "Cotizar Ruta",
     from: "Origen",
     to: "Destino",
     pax: "Pasajeros",
@@ -24,7 +35,7 @@ const content = {
     headingPart2: "AT YOUR PACE.",
     subheading: "Exclusive private transfers from the airport to your hotel. Reliable, safe, and stress-free.",
     cta: "Book Now",
-    quickQuote: "Quick Quote",
+    quickQuote: "Quote Route",
     from: "From",
     to: "To",
     pax: "Passengers",
@@ -34,6 +45,7 @@ const content = {
 
 export default function Hero({ locale }: { locale: Locale }) {
   const t = content[locale] || content.es;
+  const router = useRouter();
   
   const [formData, setFormData] = useState({
     origin: "",
@@ -43,8 +55,29 @@ export default function Hero({ locale }: { locale: Locale }) {
 
   const handleBooking = (e: React.FormEvent) => {
     e.preventDefault();
-    const msg = `*Cotización Rápida*\n\n*Ruta:* ${formData.origin} -> ${formData.destination}\n*Pasajeros:* ${formData.pax}`;
-    window.open(getWhatsAppLink(msg), "_blank");
+    
+    if (formData.origin === formData.destination) {
+      alert(locale === "es" ? "El origen y el destino no pueden ser iguales." : "Origin and destination cannot be the same.");
+      return;
+    }
+
+    const originSlug = formData.origin.toLowerCase().replace(" ", "-");
+    const destSlug = formData.destination.toLowerCase().replace(" ", "-");
+    
+    // Find a matching predefined route
+    const matchedRoute = routes.find(r => 
+      r.slug.includes(originSlug) && r.slug.includes(destSlug)
+    );
+
+    if (matchedRoute) {
+      router.push(`/${locale}/${matchedRoute.slug}?pax=${formData.pax}`);
+    } else {
+      // Fallback to WhatsApp for unmapped/custom routes
+      const msg = locale === "es" 
+        ? `*Cotización Especial*\n\n*Ruta:* ${formData.origin} -> ${formData.destination}\n*Pasajeros:* ${formData.pax}`
+        : `*Custom Quote*\n\n*Route:* ${formData.origin} -> ${formData.destination}\n*Passengers:* ${formData.pax}`;
+      window.open(getWhatsAppLink(msg), "_blank");
+    }
   };
 
   return (
@@ -90,32 +123,48 @@ export default function Hero({ locale }: { locale: Locale }) {
             </h3>
             
             <form onSubmit={handleBooking} className="flex flex-col gap-4">
-              <div className="relative">
-                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-brand-text-secondary">
-                  <MapPin size={18} />
+              <div className="flex flex-col sm:flex-row gap-4">
+                <div className="relative w-full">
+                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-brand-text-secondary">
+                    <MapPin size={18} />
+                  </div>
+                  <select 
+                    required
+                    value={formData.origin}
+                    onChange={(e) => setFormData({...formData, origin: e.target.value})}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-12 pr-10 text-sm focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-all appearance-none cursor-pointer text-brand-text-primary font-medium"
+                  >
+                    <option value="" disabled>{t.from}</option>
+                    {LOCATIONS.map(loc => (
+                      <option key={loc} value={loc}>{loc}</option>
+                    ))}
+                  </select>
+                  <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-brand-text-secondary">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                  </div>
                 </div>
-                <input 
-                  type="text" 
-                  placeholder={t.from}
-                  required
-                  value={formData.origin}
-                  onChange={(e) => setFormData({...formData, origin: e.target.value})}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-12 pr-4 text-sm focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-all"
-                />
-              </div>
-              <div className="relative">
-                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-brand-text-secondary">
-                  <MapPin size={18} />
+
+                <div className="relative w-full">
+                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-brand-text-secondary">
+                    <MapPin size={18} />
+                  </div>
+                  <select 
+                    required
+                    value={formData.destination}
+                    onChange={(e) => setFormData({...formData, destination: e.target.value})}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-12 pr-10 text-sm focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-all appearance-none cursor-pointer text-brand-text-primary font-medium"
+                  >
+                    <option value="" disabled>{t.to}</option>
+                    {LOCATIONS.map(loc => (
+                      <option key={loc} value={loc}>{loc}</option>
+                    ))}
+                  </select>
+                  <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-brand-text-secondary">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                  </div>
                 </div>
-                <input 
-                  type="text" 
-                  placeholder={t.to}
-                  required
-                  value={formData.destination}
-                  onChange={(e) => setFormData({...formData, destination: e.target.value})}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-12 pr-4 text-sm focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-all"
-                />
               </div>
+
               <div className="flex gap-4">
                 <div className="relative w-full">
                   <div className="absolute left-4 top-1/2 -translate-y-1/2 text-brand-text-secondary">
@@ -126,6 +175,7 @@ export default function Hero({ locale }: { locale: Locale }) {
                     inputMode="numeric"
                     pattern="[0-9]*"
                     min="1"
+                    max="30"
                     placeholder={t.pax}
                     required
                     value={formData.pax}
@@ -155,7 +205,7 @@ export default function Hero({ locale }: { locale: Locale }) {
             <iframe 
               width="100%" 
               height="100%" 
-              src="https://www.youtube.com/embed/QbrpOFVaFbA?autoplay=0&rel=0" 
+              src="https://www.youtube.com/embed/QbrpOFVaFbA?autoplay=0&rel=0&v=newlogo" 
               title="YouTube video player" 
               frameBorder="0" 
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 

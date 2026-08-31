@@ -50,7 +50,7 @@ export default function MainVideoSection({ locale = "es" }: { locale?: Locale })
             <iframe 
               width="100%" 
               height="100%" 
-              src="https://www.youtube.com/embed/QbrpOFVaFbA?autoplay=0&rel=0" 
+              src="https://www.youtube.com/embed/QbrpOFVaFbA?autoplay=0&rel=0&v=newlogo" 
               title="YouTube video player" 
               frameBorder="0" 
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 

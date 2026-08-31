@@ -3,7 +3,7 @@
 import { useState } from "react";
 import type { Locale } from "@/i18n/config";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { FaChevronLeft, FaChevronRight, FaCarSide } from "react-icons/fa";
 
 const content = {
@@ -25,7 +25,7 @@ const content = {
       {
         name: "HYUNDAI H1",
         model: "MODELO 2024",
-        capacity: "10 PASAJEROS",
+        capacity: "17 PASAJEROS",
         images: [
           "/assets/carros2/ChatGPT%20Image%20Aug%205,%202026,%2001_20_30%20PM.png",
           "/assets/carros2/ChatGPT%20Image%20Aug%205,%202026,%2001_20_34%20PM.png",
@@ -35,7 +35,7 @@ const content = {
       {
         name: "MERCEDES VITO",
         model: "MODELO 2020",
-        capacity: "8 PASAJEROS",
+        capacity: "10 PASAJEROS",
         images: [
           "/assets/carros3/ChatGPT%20Image%20Aug%205,%202026,%2001_42_01%20PM.png",
           "/assets/carros3/ChatGPT%20Image%20Aug%205,%202026,%2001_42_06%20PM.png",
@@ -45,7 +45,7 @@ const content = {
       {
         name: "NISSAN KICKS",
         model: "MODELO 2026",
-        capacity: "5 PASAJEROS",
+        capacity: "4 PASAJEROS",
         images: [
           "/assets/carros4/ChatGPT%20Image%20Aug%205,%202026,%2001_58_38%20PM.png",
           "/assets/carros4/ChatGPT%20Image%20Aug%205,%202026,%2001_58_42%20PM.png",
@@ -55,7 +55,7 @@ const content = {
       {
         name: "RENAULT DUSTER",
         model: "MODELO 2025",
-        capacity: "5 PASAJEROS",
+        capacity: "4 PASAJEROS",
         images: [
           "/assets/carros5/ChatGPT%20Image%20Aug%205,%202026,%2002_09_17%20PM.png",
           "/assets/carros5/ChatGPT%20Image%20Aug%205,%202026,%2002_09_22%20PM.png",
@@ -82,7 +82,7 @@ const content = {
       {
         name: "HYUNDAI H1",
         model: "2024 MODEL",
-        capacity: "10 PASSENGERS",
+        capacity: "17 PASSENGERS",
         images: [
           "/assets/carros2/ChatGPT%20Image%20Aug%205,%202026,%2001_20_30%20PM.png",
           "/assets/carros2/ChatGPT%20Image%20Aug%205,%202026,%2001_20_34%20PM.png",
@@ -92,7 +92,7 @@ const content = {
       {
         name: "MERCEDES VITO",
         model: "2020 MODEL",
-        capacity: "8 PASSENGERS",
+        capacity: "10 PASSENGERS",
         images: [
           "/assets/carros3/ChatGPT%20Image%20Aug%205,%202026,%2001_42_01%20PM.png",
           "/assets/carros3/ChatGPT%20Image%20Aug%205,%202026,%2001_42_06%20PM.png",
@@ -102,7 +102,7 @@ const content = {
       {
         name: "NISSAN KICKS",
         model: "2026 MODEL",
-        capacity: "5 PASSENGERS",
+        capacity: "4 PASSENGERS",
         images: [
           "/assets/carros4/ChatGPT%20Image%20Aug%205,%202026,%2001_58_38%20PM.png",
           "/assets/carros4/ChatGPT%20Image%20Aug%205,%202026,%2001_58_42%20PM.png",
@@ -112,7 +112,7 @@ const content = {
       {
         name: "RENAULT DUSTER",
         model: "2025 MODEL",
-        capacity: "5 PASSENGERS",
+        capacity: "4 PASSENGERS",
         images: [
           "/assets/carros5/ChatGPT%20Image%20Aug%205,%202026,%2002_09_17%20PM.png",
           "/assets/carros5/ChatGPT%20Image%20Aug%205,%202026,%2002_09_22%20PM.png",
@@ -127,10 +127,42 @@ import { Users } from "lucide-react";
 import { useEffect, useRef } from "react";
 
 function CarGallery({ images, name, model, capacity, delay }: { images: string[], name: string, model: string, capacity: string, delay: number }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [[page, direction], setPage] = useState([0, 0]);
 
-  const next = () => setCurrentIndex((prev) => (prev + 1) % images.length);
-  const prev = () => setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+  const paginate = (newDirection: number) => {
+    let newPage = page + newDirection;
+    if (newPage < 0) newPage = images.length - 1;
+    if (newPage >= images.length) newPage = 0;
+    setPage([newPage, newDirection]);
+  };
+
+  const next = () => paginate(1);
+  const prev = () => paginate(-1);
+  const goTo = (index: number) => {
+    setPage([index, index > page ? 1 : -1]);
+  };
+
+  const swipeConfidenceThreshold = 10000;
+  const swipePower = (offset: number, velocity: number) => {
+    return Math.abs(offset) * velocity;
+  };
+
+  const variants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? '100%' : '-100%',
+      opacity: 0
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1
+    },
+    exit: (direction: number) => ({
+      zIndex: 0,
+      x: direction < 0 ? '100%' : '-100%',
+      opacity: 0
+    })
+  };
 
   return (
     <motion.div 
@@ -140,42 +172,74 @@ function CarGallery({ images, name, model, capacity, delay }: { images: string[]
       transition={{ delay: delay, duration: 0.6 }}
       className="relative group bg-white rounded-[24px] overflow-hidden shadow-[0_4px_20px_rgb(0,0,0,0.06)] border border-slate-100 flex flex-col hover:shadow-xl transition-all duration-500 hover:-translate-y-1"
     >
-      <div className="p-5 bg-white text-center">
+      <div className="p-5 bg-white text-center z-10 relative">
         <h3 className="font-heading font-bold text-lg text-[#0F292E] tracking-tight">{name}</h3>
         <p className="text-[#0E6C75] text-xs font-semibold mt-1 tracking-wider">{model}</p>
       </div>
 
-      <div className="relative aspect-[4/3] w-full bg-white overflow-hidden">
-        <Image 
-          src={images[currentIndex]} 
-          alt={`${name} - view ${currentIndex + 1}`} 
-          fill 
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="relative aspect-[4/3] w-full bg-slate-50 overflow-hidden touch-pan-y">
+        <AnimatePresence initial={false} custom={direction} mode="popLayout">
+          <motion.div
+            key={page}
+            custom={direction}
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{
+              x: { type: "spring", stiffness: 300, damping: 30 },
+              opacity: { duration: 0.2 }
+            }}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={1}
+            onDragEnd={(e, { offset, velocity }) => {
+              const swipe = swipePower(offset.x, velocity.x);
+              if (swipe < -swipeConfidenceThreshold) {
+                paginate(1);
+              } else if (swipe > swipeConfidenceThreshold) {
+                paginate(-1);
+              }
+            }}
+            className="absolute inset-0 cursor-grab active:cursor-grabbing"
+          >
+            <Image 
+              src={images[page]} 
+              alt={`${name} - view ${page + 1}`} 
+              fill 
+              className="object-cover transition-transform duration-700 group-hover:scale-105 pointer-events-none"
+            />
+          </motion.div>
+        </AnimatePresence>
+
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+        
         {images.length > 1 && (
           <>
             <button 
               onClick={prev}
-              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 p-2 rounded-full text-brand-navy shadow-lg hover:bg-white hover:scale-110 transition-all opacity-0 group-hover:opacity-100 z-10"
+              className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-white/90 p-2 rounded-full text-brand-text-primary shadow-lg hover:bg-white hover:scale-110 transition-all opacity-100 md:opacity-0 md:group-hover:opacity-100 z-10"
               aria-label="Previous image"
             >
               <FaChevronLeft size={10} />
             </button>
             <button 
               onClick={next}
-              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 p-2 rounded-full text-brand-navy shadow-lg hover:bg-white hover:scale-110 transition-all opacity-0 group-hover:opacity-100 z-10"
+              className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-white/90 p-2 rounded-full text-brand-text-primary shadow-lg hover:bg-white hover:scale-110 transition-all opacity-100 md:opacity-0 md:group-hover:opacity-100 z-10"
               aria-label="Next image"
             >
               <FaChevronRight size={10} />
             </button>
           </>
         )}
-        <div className="absolute bottom-4 left-0 right-0 flex gap-2 justify-center z-10">
+        
+        <div className="absolute bottom-4 left-0 right-0 flex gap-2 justify-center z-20">
           {images.map((_, idx) => (
-            <div 
-              key={idx} 
-              className={`h-1.5 rounded-full shadow-md transition-all duration-300 ${idx === currentIndex ? "w-6 bg-white" : "w-1.5 bg-white/50"}`}
+            <button 
+              key={idx}
+              onClick={() => goTo(idx)}
+              aria-label={`Ir a la imagen ${idx + 1}`}
+              className={`h-2 rounded-full shadow-md transition-all duration-300 ${idx === page ? "w-6 bg-white" : "w-2 bg-white/60 hover:bg-white"} cursor-pointer`}
             />
           ))}
         </div>

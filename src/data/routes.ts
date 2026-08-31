@@ -1,4 +1,5 @@
 import { palominoPricing, santaMartaPricing, formatCOP } from "./pricing";
+import { getVehicleForPassengers, Vehicle } from "./vehicles";
 
 export type Locale = "es" | "en";
 
@@ -13,12 +14,6 @@ export interface RouteFAQ {
 }
 
 export type PriceMode = "tiered" | "base" | "quote";
-
-export interface PriceCard {
-  label: Localized;
-  price: string;
-  note?: Localized;
-}
 
 export interface RouteDefinition {
   slug: string;
@@ -39,44 +34,86 @@ export interface RouteDefinition {
 
 const WHATSAPP_NUMBER = "573147659756";
 
-function tieredCards(destinationKey: keyof typeof palominoPricing): PriceCard[] {
-  const price = palominoPricing[destinationKey];
-  return [
-    { label: { es: "1 a 4 pasajeros", en: "1 to 4 passengers" }, price: formatCOP(price["1-4"]), note: { es: "Auto o camioneta privada", en: "Private car or SUV" } },
-    { label: { es: "5 a 10 pasajeros", en: "5 to 10 passengers" }, price: formatCOP(price["5-10"]), note: { es: "Van mediana", en: "Mid-size van" } },
-    { label: { es: "11 a 17 pasajeros", en: "11 to 17 passengers" }, price: formatCOP(price["11-17"]), note: { es: "Van grande / minibús", en: "Large van / minibus" } },
-  ];
+export interface QuoteResult {
+  vehicle: Vehicle;
+  price: number;
+  priceFormatted: string;
+  isQuoteOnly: boolean;
 }
 
-function baseCard(destinationKey: keyof typeof santaMartaPricing): PriceCard[] {
-  const price = santaMartaPricing[destinationKey];
-  return [
-    {
-      label: { es: "1 a 4 pasajeros", en: "1 to 4 passengers" },
-      price: formatCOP(price),
-      note: { es: "Grupos más grandes: cotiza por WhatsApp", en: "Larger groups: quote via WhatsApp" },
-    },
-  ];
+export function getQuoteForRoute(slug: string, passengers: number): QuoteResult | null {
+  const vehicle = getVehicleForPassengers(passengers);
+
+  // Helper to resolve tiered pricing (Palomino routes)
+  const getTiered = (destinationKey: keyof typeof palominoPricing) => {
+    const prices = palominoPricing[destinationKey];
+    if (!prices) return null;
+    return prices[vehicle.capacityRange as keyof typeof prices];
+  };
+
+  // Helper to resolve base pricing (Santa Marta routes)
+  const getBase = (destinationKey: keyof typeof santaMartaPricing) => {
+    return santaMartaPricing[destinationKey];
+  };
+
+  let price = 0;
+  let isQuoteOnly = false;
+
+  switch (slug) {
+    case "barranquilla-to-palomino":
+      price = getTiered("barranquilla") || 0;
+      break;
+    case "barranquilla-to-santa-marta":
+      price = getBase("barranquilla") || 0;
+      if (passengers > 4) isQuoteOnly = true; // For base pricing, >4 needs a manual quote
+      break;
+    case "santa-marta-to-palomino":
+      price = getBase("palomino") || 0;
+      if (passengers > 4) isQuoteOnly = true;
+      break;
+    case "private-transfer-santa-marta-cartagena":
+    case "cartagena-airport-to-santa-marta":
+      price = getBase("cartagena") || 0;
+      if (passengers > 4) isQuoteOnly = true;
+      break;
+    case "santa-marta-to-tayrona":
+      price = getBase("parque-tayrona") || 0;
+      if (passengers > 4) isQuoteOnly = true;
+      break;
+    case "santa-marta-to-minca":
+      price = getBase("minca") || 0;
+      if (passengers > 4) isQuoteOnly = true;
+      break;
+    default:
+      // Custom routes or routes that are always manual quote
+      isQuoteOnly = true;
+  }
+
+  return {
+    vehicle,
+    price,
+    priceFormatted: formatCOP(price),
+    isQuoteOnly,
+  };
+}
+
+export interface PriceCard {
+  label: Localized;
+  price: string;
+  note?: Localized;
 }
 
 export function getPriceCards(route: RouteDefinition): PriceCard[] {
-  switch (route.slug) {
-    case "santa-marta-to-palomino":
-      return baseCard("palomino");
-    case "barranquilla-to-palomino":
-      return tieredCards("barranquilla");
-    case "barranquilla-to-santa-marta":
-      return baseCard("barranquilla");
-    case "private-transfer-santa-marta-cartagena":
-    case "cartagena-airport-to-santa-marta":
-      return baseCard("cartagena");
-    case "santa-marta-to-tayrona":
-      return baseCard("parque-tayrona");
-    case "santa-marta-to-minca":
-      return baseCard("minca");
-    default:
-      return [];
-  }
+  const quote = getQuoteForRoute(route.slug, 4); // Get quote for base vehicle
+  if (!quote || quote.price === 0) return [];
+  
+  return [
+    {
+      label: { es: "Desde (1 a 4 pasajeros)", en: "From (1 to 4 passengers)" },
+      price: quote.priceFormatted,
+      note: { es: quote.vehicle.name.es, en: quote.vehicle.name.en }
+    }
+  ];
 }
 
 export const routes: RouteDefinition[] = [
@@ -581,6 +618,690 @@ export const routes: RouteDefinition[] = [
     ],
     waMessage: { es: "Hola, necesito un traslado desde el Aeropuerto de Santa Marta.", en: "Hi, I need a transfer from Santa Marta Airport." },
     image: "/assets/lugares/real-airport-transfer.jpg",
+  },
+  {
+    slug: "cartagena-to-palomino",
+    featured: false,
+    priceMode: "quote",
+    title: {
+      es: "Transporte privado de Cartagena a Palomino | EverTrip",
+      en: "Private Transfer Cartagena to Palomino | EverTrip",
+    },
+    h1: {
+      es: "Transporte privado Cartagena ↔ Palomino",
+      en: "Private Transfer Cartagena ↔ Palomino",
+    },
+    metaDescription: {
+      es: "Viaje privado puerta a puerta entre Cartagena y Palomino. Reserva tu traslado con EverTrip. Conductores expertos y vehiculos premium.",
+      en: "Door-to-door private transfer between Cartagena and Palomino. Book your ride with EverTrip. Expert drivers and premium vehicles.",
+    },
+    description: {
+      es: "Disfruta de un viaje comodo, seguro y sin complicaciones entre Cartagena y Palomino. Nuestros servicios son 100% privados, asegurando tu tranquilidad.",
+      en: "Enjoy a comfortable, safe, and hassle-free journey between Cartagena and Palomino. Our services are 100% private, ensuring your peace of mind.",
+    },
+    duration: { es: "Aprox. 5h 30m", en: "Approx. 5h 30m" },
+    idealFor: { es: "Parejas, Familias y Grupos", en: "Couples, Families, and Groups" },
+    highlights: {
+      es: [
+        "Mismo precio en ambos sentidos",
+        "Servicio puerta a puerta",
+        "Vehiculo privado con aire acondicionado",
+        "Conductor puntual y profesional",
+        "Sin cargos ocultos",
+        "Asistencia y soporte via WhatsApp"
+      ],
+      en: [
+        "Same price in both directions",
+        "Door-to-door service",
+        "Private vehicle with AC",
+        "Punctual and professional driver",
+        "No hidden fees",
+        "WhatsApp support and assistance"
+      ]
+    },
+    faqs: [
+      {
+        q: { es: "¿El servicio es compartido?", en: "Is the service shared?" },
+        a: { es: "No, todos nuestros traslados son 100% privados para ti y tu grupo.", en: "No, all our transfers are 100% private for you and your group." }
+      },
+      {
+        q: { es: "¿Puedo hacer paradas en el camino?", en: "Can I make stops along the way?" },
+        a: { es: "Sí, podemos programar paradas breves para ir al baño o comprar snacks. Por favor indícalo al momento de reservar.", en: "Yes, we can schedule brief stops for restrooms or snacks. Please let us know when booking." }
+      }
+    ],
+    waMessage: {
+      es: "Hola, me gustaria cotizar un traslado privado desde Cartagena hacia Palomino.",
+      en: "Hello, I would like to get a quote for a private transfer from Cartagena to Palomino."
+    },
+    image: "/assets/lugares/cartagena.jpg",
+    image2: "/assets/lugares/palomino.jpg"
+  },
+  {
+    slug: "cartagena-to-valledupar",
+    featured: false,
+    priceMode: "quote",
+    title: {
+      es: "Transporte privado de Cartagena a Valledupar | EverTrip",
+      en: "Private Transfer Cartagena to Valledupar | EverTrip",
+    },
+    h1: {
+      es: "Transporte privado Cartagena ↔ Valledupar",
+      en: "Private Transfer Cartagena ↔ Valledupar",
+    },
+    metaDescription: {
+      es: "Viaje privado puerta a puerta entre Cartagena y Valledupar. Reserva tu traslado con EverTrip. Conductores expertos y vehiculos premium.",
+      en: "Door-to-door private transfer between Cartagena and Valledupar. Book your ride with EverTrip. Expert drivers and premium vehicles.",
+    },
+    description: {
+      es: "Disfruta de un viaje comodo, seguro y sin complicaciones entre Cartagena y Valledupar. Nuestros servicios son 100% privados, asegurando tu tranquilidad.",
+      en: "Enjoy a comfortable, safe, and hassle-free journey between Cartagena and Valledupar. Our services are 100% private, ensuring your peace of mind.",
+    },
+    duration: { es: "Aprox. 6h", en: "Approx. 6h" },
+    idealFor: { es: "Parejas, Familias y Grupos", en: "Couples, Families, and Groups" },
+    highlights: {
+      es: [
+        "Mismo precio en ambos sentidos",
+        "Servicio puerta a puerta",
+        "Vehiculo privado con aire acondicionado",
+        "Conductor puntual y profesional",
+        "Sin cargos ocultos",
+        "Asistencia y soporte via WhatsApp"
+      ],
+      en: [
+        "Same price in both directions",
+        "Door-to-door service",
+        "Private vehicle with AC",
+        "Punctual and professional driver",
+        "No hidden fees",
+        "WhatsApp support and assistance"
+      ]
+    },
+    faqs: [
+      {
+        q: { es: "¿El servicio es compartido?", en: "Is the service shared?" },
+        a: { es: "No, todos nuestros traslados son 100% privados para ti y tu grupo.", en: "No, all our transfers are 100% private for you and your group." }
+      },
+      {
+        q: { es: "¿Puedo hacer paradas en el camino?", en: "Can I make stops along the way?" },
+        a: { es: "Sí, podemos programar paradas breves para ir al baño o comprar snacks. Por favor indícalo al momento de reservar.", en: "Yes, we can schedule brief stops for restrooms or snacks. Please let us know when booking." }
+      }
+    ],
+    waMessage: {
+      es: "Hola, me gustaria cotizar un traslado privado desde Cartagena hacia Valledupar.",
+      en: "Hello, I would like to get a quote for a private transfer from Cartagena to Valledupar."
+    },
+    image: "/assets/lugares/cartagena.jpg",
+    image2: "/assets/lugares/valledupar.jpg"
+  },
+  {
+    slug: "cartagena-to-minca",
+    featured: false,
+    priceMode: "quote",
+    title: {
+      es: "Transporte privado de Cartagena a Minca | EverTrip",
+      en: "Private Transfer Cartagena to Minca | EverTrip",
+    },
+    h1: {
+      es: "Transporte privado Cartagena ↔ Minca",
+      en: "Private Transfer Cartagena ↔ Minca",
+    },
+    metaDescription: {
+      es: "Viaje privado puerta a puerta entre Cartagena y Minca. Reserva tu traslado con EverTrip. Conductores expertos y vehiculos premium.",
+      en: "Door-to-door private transfer between Cartagena and Minca. Book your ride with EverTrip. Expert drivers and premium vehicles.",
+    },
+    description: {
+      es: "Disfruta de un viaje comodo, seguro y sin complicaciones entre Cartagena y Minca. Nuestros servicios son 100% privados, asegurando tu tranquilidad.",
+      en: "Enjoy a comfortable, safe, and hassle-free journey between Cartagena and Minca. Our services are 100% private, ensuring your peace of mind.",
+    },
+    duration: { es: "Aprox. 4h 30m", en: "Approx. 4h 30m" },
+    idealFor: { es: "Parejas, Familias y Grupos", en: "Couples, Families, and Groups" },
+    highlights: {
+      es: [
+        "Mismo precio en ambos sentidos",
+        "Servicio puerta a puerta",
+        "Vehiculo privado con aire acondicionado",
+        "Conductor puntual y profesional",
+        "Sin cargos ocultos",
+        "Asistencia y soporte via WhatsApp"
+      ],
+      en: [
+        "Same price in both directions",
+        "Door-to-door service",
+        "Private vehicle with AC",
+        "Punctual and professional driver",
+        "No hidden fees",
+        "WhatsApp support and assistance"
+      ]
+    },
+    faqs: [
+      {
+        q: { es: "¿El servicio es compartido?", en: "Is the service shared?" },
+        a: { es: "No, todos nuestros traslados son 100% privados para ti y tu grupo.", en: "No, all our transfers are 100% private for you and your group." }
+      },
+      {
+        q: { es: "¿Puedo hacer paradas en el camino?", en: "Can I make stops along the way?" },
+        a: { es: "Sí, podemos programar paradas breves para ir al baño o comprar snacks. Por favor indícalo al momento de reservar.", en: "Yes, we can schedule brief stops for restrooms or snacks. Please let us know when booking." }
+      }
+    ],
+    waMessage: {
+      es: "Hola, me gustaria cotizar un traslado privado desde Cartagena hacia Minca.",
+      en: "Hello, I would like to get a quote for a private transfer from Cartagena to Minca."
+    },
+    image: "/assets/lugares/cartagena.jpg",
+    image2: "/assets/lugares/minca.jpg"
+  },
+  {
+    slug: "cartagena-to-tayrona",
+    featured: false,
+    priceMode: "quote",
+    title: {
+      es: "Transporte privado de Cartagena a Tayrona | EverTrip",
+      en: "Private Transfer Cartagena to Tayrona | EverTrip",
+    },
+    h1: {
+      es: "Transporte privado Cartagena ↔ Tayrona",
+      en: "Private Transfer Cartagena ↔ Tayrona",
+    },
+    metaDescription: {
+      es: "Viaje privado puerta a puerta entre Cartagena y Tayrona. Reserva tu traslado con EverTrip. Conductores expertos y vehiculos premium.",
+      en: "Door-to-door private transfer between Cartagena and Tayrona. Book your ride with EverTrip. Expert drivers and premium vehicles.",
+    },
+    description: {
+      es: "Disfruta de un viaje comodo, seguro y sin complicaciones entre Cartagena y Tayrona. Nuestros servicios son 100% privados, asegurando tu tranquilidad.",
+      en: "Enjoy a comfortable, safe, and hassle-free journey between Cartagena and Tayrona. Our services are 100% private, ensuring your peace of mind.",
+    },
+    duration: { es: "Aprox. 5h", en: "Approx. 5h" },
+    idealFor: { es: "Parejas, Familias y Grupos", en: "Couples, Families, and Groups" },
+    highlights: {
+      es: [
+        "Mismo precio en ambos sentidos",
+        "Servicio puerta a puerta",
+        "Vehiculo privado con aire acondicionado",
+        "Conductor puntual y profesional",
+        "Sin cargos ocultos",
+        "Asistencia y soporte via WhatsApp"
+      ],
+      en: [
+        "Same price in both directions",
+        "Door-to-door service",
+        "Private vehicle with AC",
+        "Punctual and professional driver",
+        "No hidden fees",
+        "WhatsApp support and assistance"
+      ]
+    },
+    faqs: [
+      {
+        q: { es: "¿El servicio es compartido?", en: "Is the service shared?" },
+        a: { es: "No, todos nuestros traslados son 100% privados para ti y tu grupo.", en: "No, all our transfers are 100% private for you and your group." }
+      },
+      {
+        q: { es: "¿Puedo hacer paradas en el camino?", en: "Can I make stops along the way?" },
+        a: { es: "Sí, podemos programar paradas breves para ir al baño o comprar snacks. Por favor indícalo al momento de reservar.", en: "Yes, we can schedule brief stops for restrooms or snacks. Please let us know when booking." }
+      }
+    ],
+    waMessage: {
+      es: "Hola, me gustaria cotizar un traslado privado desde Cartagena hacia Tayrona.",
+      en: "Hello, I would like to get a quote for a private transfer from Cartagena to Tayrona."
+    },
+    image: "/assets/lugares/cartagena.jpg",
+    image2: "/assets/lugares/tayrona.jpg"
+  },
+  {
+    slug: "barranquilla-to-minca",
+    featured: false,
+    priceMode: "quote",
+    title: {
+      es: "Transporte privado de Barranquilla a Minca | EverTrip",
+      en: "Private Transfer Barranquilla to Minca | EverTrip",
+    },
+    h1: {
+      es: "Transporte privado Barranquilla ↔ Minca",
+      en: "Private Transfer Barranquilla ↔ Minca",
+    },
+    metaDescription: {
+      es: "Viaje privado puerta a puerta entre Barranquilla y Minca. Reserva tu traslado con EverTrip. Conductores expertos y vehiculos premium.",
+      en: "Door-to-door private transfer between Barranquilla and Minca. Book your ride with EverTrip. Expert drivers and premium vehicles.",
+    },
+    description: {
+      es: "Disfruta de un viaje comodo, seguro y sin complicaciones entre Barranquilla y Minca. Nuestros servicios son 100% privados, asegurando tu tranquilidad.",
+      en: "Enjoy a comfortable, safe, and hassle-free journey between Barranquilla and Minca. Our services are 100% private, ensuring your peace of mind.",
+    },
+    duration: { es: "Aprox. 2h 30m", en: "Approx. 2h 30m" },
+    idealFor: { es: "Parejas, Familias y Grupos", en: "Couples, Families, and Groups" },
+    highlights: {
+      es: [
+        "Mismo precio en ambos sentidos",
+        "Servicio puerta a puerta",
+        "Vehiculo privado con aire acondicionado",
+        "Conductor puntual y profesional",
+        "Sin cargos ocultos",
+        "Asistencia y soporte via WhatsApp"
+      ],
+      en: [
+        "Same price in both directions",
+        "Door-to-door service",
+        "Private vehicle with AC",
+        "Punctual and professional driver",
+        "No hidden fees",
+        "WhatsApp support and assistance"
+      ]
+    },
+    faqs: [
+      {
+        q: { es: "¿El servicio es compartido?", en: "Is the service shared?" },
+        a: { es: "No, todos nuestros traslados son 100% privados para ti y tu grupo.", en: "No, all our transfers are 100% private for you and your group." }
+      },
+      {
+        q: { es: "¿Puedo hacer paradas en el camino?", en: "Can I make stops along the way?" },
+        a: { es: "Sí, podemos programar paradas breves para ir al baño o comprar snacks. Por favor indícalo al momento de reservar.", en: "Yes, we can schedule brief stops for restrooms or snacks. Please let us know when booking." }
+      }
+    ],
+    waMessage: {
+      es: "Hola, me gustaria cotizar un traslado privado desde Barranquilla hacia Minca.",
+      en: "Hello, I would like to get a quote for a private transfer from Barranquilla to Minca."
+    },
+    image: "/assets/lugares/barranquilla.jpg",
+    image2: "/assets/lugares/minca.jpg"
+  },
+  {
+    slug: "barranquilla-to-tayrona",
+    featured: false,
+    priceMode: "quote",
+    title: {
+      es: "Transporte privado de Barranquilla a Tayrona | EverTrip",
+      en: "Private Transfer Barranquilla to Tayrona | EverTrip",
+    },
+    h1: {
+      es: "Transporte privado Barranquilla ↔ Tayrona",
+      en: "Private Transfer Barranquilla ↔ Tayrona",
+    },
+    metaDescription: {
+      es: "Viaje privado puerta a puerta entre Barranquilla y Tayrona. Reserva tu traslado con EverTrip. Conductores expertos y vehiculos premium.",
+      en: "Door-to-door private transfer between Barranquilla and Tayrona. Book your ride with EverTrip. Expert drivers and premium vehicles.",
+    },
+    description: {
+      es: "Disfruta de un viaje comodo, seguro y sin complicaciones entre Barranquilla y Tayrona. Nuestros servicios son 100% privados, asegurando tu tranquilidad.",
+      en: "Enjoy a comfortable, safe, and hassle-free journey between Barranquilla and Tayrona. Our services are 100% private, ensuring your peace of mind.",
+    },
+    duration: { es: "Aprox. 3h", en: "Approx. 3h" },
+    idealFor: { es: "Parejas, Familias y Grupos", en: "Couples, Families, and Groups" },
+    highlights: {
+      es: [
+        "Mismo precio en ambos sentidos",
+        "Servicio puerta a puerta",
+        "Vehiculo privado con aire acondicionado",
+        "Conductor puntual y profesional",
+        "Sin cargos ocultos",
+        "Asistencia y soporte via WhatsApp"
+      ],
+      en: [
+        "Same price in both directions",
+        "Door-to-door service",
+        "Private vehicle with AC",
+        "Punctual and professional driver",
+        "No hidden fees",
+        "WhatsApp support and assistance"
+      ]
+    },
+    faqs: [
+      {
+        q: { es: "¿El servicio es compartido?", en: "Is the service shared?" },
+        a: { es: "No, todos nuestros traslados son 100% privados para ti y tu grupo.", en: "No, all our transfers are 100% private for you and your group." }
+      },
+      {
+        q: { es: "¿Puedo hacer paradas en el camino?", en: "Can I make stops along the way?" },
+        a: { es: "Sí, podemos programar paradas breves para ir al baño o comprar snacks. Por favor indícalo al momento de reservar.", en: "Yes, we can schedule brief stops for restrooms or snacks. Please let us know when booking." }
+      }
+    ],
+    waMessage: {
+      es: "Hola, me gustaria cotizar un traslado privado desde Barranquilla hacia Tayrona.",
+      en: "Hello, I would like to get a quote for a private transfer from Barranquilla to Tayrona."
+    },
+    image: "/assets/lugares/barranquilla.jpg",
+    image2: "/assets/lugares/tayrona.jpg"
+  },
+  {
+    slug: "palomino-to-valledupar",
+    featured: false,
+    priceMode: "quote",
+    title: {
+      es: "Transporte privado de Palomino a Valledupar | EverTrip",
+      en: "Private Transfer Palomino to Valledupar | EverTrip",
+    },
+    h1: {
+      es: "Transporte privado Palomino ↔ Valledupar",
+      en: "Private Transfer Palomino ↔ Valledupar",
+    },
+    metaDescription: {
+      es: "Viaje privado puerta a puerta entre Palomino y Valledupar. Reserva tu traslado con EverTrip. Conductores expertos y vehiculos premium.",
+      en: "Door-to-door private transfer between Palomino and Valledupar. Book your ride with EverTrip. Expert drivers and premium vehicles.",
+    },
+    description: {
+      es: "Disfruta de un viaje comodo, seguro y sin complicaciones entre Palomino y Valledupar. Nuestros servicios son 100% privados, asegurando tu tranquilidad.",
+      en: "Enjoy a comfortable, safe, and hassle-free journey between Palomino and Valledupar. Our services are 100% private, ensuring your peace of mind.",
+    },
+    duration: { es: "Aprox. 4h", en: "Approx. 4h" },
+    idealFor: { es: "Parejas, Familias y Grupos", en: "Couples, Families, and Groups" },
+    highlights: {
+      es: [
+        "Mismo precio en ambos sentidos",
+        "Servicio puerta a puerta",
+        "Vehiculo privado con aire acondicionado",
+        "Conductor puntual y profesional",
+        "Sin cargos ocultos",
+        "Asistencia y soporte via WhatsApp"
+      ],
+      en: [
+        "Same price in both directions",
+        "Door-to-door service",
+        "Private vehicle with AC",
+        "Punctual and professional driver",
+        "No hidden fees",
+        "WhatsApp support and assistance"
+      ]
+    },
+    faqs: [
+      {
+        q: { es: "¿El servicio es compartido?", en: "Is the service shared?" },
+        a: { es: "No, todos nuestros traslados son 100% privados para ti y tu grupo.", en: "No, all our transfers are 100% private for you and your group." }
+      },
+      {
+        q: { es: "¿Puedo hacer paradas en el camino?", en: "Can I make stops along the way?" },
+        a: { es: "Sí, podemos programar paradas breves para ir al baño o comprar snacks. Por favor indícalo al momento de reservar.", en: "Yes, we can schedule brief stops for restrooms or snacks. Please let us know when booking." }
+      }
+    ],
+    waMessage: {
+      es: "Hola, me gustaria cotizar un traslado privado desde Palomino hacia Valledupar.",
+      en: "Hello, I would like to get a quote for a private transfer from Palomino to Valledupar."
+    },
+    image: "/assets/lugares/palomino.jpg",
+    image2: "/assets/lugares/valledupar.jpg"
+  },
+  {
+    slug: "palomino-to-minca",
+    featured: false,
+    priceMode: "quote",
+    title: {
+      es: "Transporte privado de Palomino a Minca | EverTrip",
+      en: "Private Transfer Palomino to Minca | EverTrip",
+    },
+    h1: {
+      es: "Transporte privado Palomino ↔ Minca",
+      en: "Private Transfer Palomino ↔ Minca",
+    },
+    metaDescription: {
+      es: "Viaje privado puerta a puerta entre Palomino y Minca. Reserva tu traslado con EverTrip. Conductores expertos y vehiculos premium.",
+      en: "Door-to-door private transfer between Palomino and Minca. Book your ride with EverTrip. Expert drivers and premium vehicles.",
+    },
+    description: {
+      es: "Disfruta de un viaje comodo, seguro y sin complicaciones entre Palomino y Minca. Nuestros servicios son 100% privados, asegurando tu tranquilidad.",
+      en: "Enjoy a comfortable, safe, and hassle-free journey between Palomino and Minca. Our services are 100% private, ensuring your peace of mind.",
+    },
+    duration: { es: "Aprox. 2h", en: "Approx. 2h" },
+    idealFor: { es: "Parejas, Familias y Grupos", en: "Couples, Families, and Groups" },
+    highlights: {
+      es: [
+        "Mismo precio en ambos sentidos",
+        "Servicio puerta a puerta",
+        "Vehiculo privado con aire acondicionado",
+        "Conductor puntual y profesional",
+        "Sin cargos ocultos",
+        "Asistencia y soporte via WhatsApp"
+      ],
+      en: [
+        "Same price in both directions",
+        "Door-to-door service",
+        "Private vehicle with AC",
+        "Punctual and professional driver",
+        "No hidden fees",
+        "WhatsApp support and assistance"
+      ]
+    },
+    faqs: [
+      {
+        q: { es: "¿El servicio es compartido?", en: "Is the service shared?" },
+        a: { es: "No, todos nuestros traslados son 100% privados para ti y tu grupo.", en: "No, all our transfers are 100% private for you and your group." }
+      },
+      {
+        q: { es: "¿Puedo hacer paradas en el camino?", en: "Can I make stops along the way?" },
+        a: { es: "Sí, podemos programar paradas breves para ir al baño o comprar snacks. Por favor indícalo al momento de reservar.", en: "Yes, we can schedule brief stops for restrooms or snacks. Please let us know when booking." }
+      }
+    ],
+    waMessage: {
+      es: "Hola, me gustaria cotizar un traslado privado desde Palomino hacia Minca.",
+      en: "Hello, I would like to get a quote for a private transfer from Palomino to Minca."
+    },
+    image: "/assets/lugares/palomino.jpg",
+    image2: "/assets/lugares/minca.jpg"
+  },
+  {
+    slug: "palomino-to-tayrona",
+    featured: false,
+    priceMode: "quote",
+    title: {
+      es: "Transporte privado de Palomino a Tayrona | EverTrip",
+      en: "Private Transfer Palomino to Tayrona | EverTrip",
+    },
+    h1: {
+      es: "Transporte privado Palomino ↔ Tayrona",
+      en: "Private Transfer Palomino ↔ Tayrona",
+    },
+    metaDescription: {
+      es: "Viaje privado puerta a puerta entre Palomino y Tayrona. Reserva tu traslado con EverTrip. Conductores expertos y vehiculos premium.",
+      en: "Door-to-door private transfer between Palomino and Tayrona. Book your ride with EverTrip. Expert drivers and premium vehicles.",
+    },
+    description: {
+      es: "Disfruta de un viaje comodo, seguro y sin complicaciones entre Palomino y Tayrona. Nuestros servicios son 100% privados, asegurando tu tranquilidad.",
+      en: "Enjoy a comfortable, safe, and hassle-free journey between Palomino and Tayrona. Our services are 100% private, ensuring your peace of mind.",
+    },
+    duration: { es: "Aprox. 1h", en: "Approx. 1h" },
+    idealFor: { es: "Parejas, Familias y Grupos", en: "Couples, Families, and Groups" },
+    highlights: {
+      es: [
+        "Mismo precio en ambos sentidos",
+        "Servicio puerta a puerta",
+        "Vehiculo privado con aire acondicionado",
+        "Conductor puntual y profesional",
+        "Sin cargos ocultos",
+        "Asistencia y soporte via WhatsApp"
+      ],
+      en: [
+        "Same price in both directions",
+        "Door-to-door service",
+        "Private vehicle with AC",
+        "Punctual and professional driver",
+        "No hidden fees",
+        "WhatsApp support and assistance"
+      ]
+    },
+    faqs: [
+      {
+        q: { es: "¿El servicio es compartido?", en: "Is the service shared?" },
+        a: { es: "No, todos nuestros traslados son 100% privados para ti y tu grupo.", en: "No, all our transfers are 100% private for you and your group." }
+      },
+      {
+        q: { es: "¿Puedo hacer paradas en el camino?", en: "Can I make stops along the way?" },
+        a: { es: "Sí, podemos programar paradas breves para ir al baño o comprar snacks. Por favor indícalo al momento de reservar.", en: "Yes, we can schedule brief stops for restrooms or snacks. Please let us know when booking." }
+      }
+    ],
+    waMessage: {
+      es: "Hola, me gustaria cotizar un traslado privado desde Palomino hacia Tayrona.",
+      en: "Hello, I would like to get a quote for a private transfer from Palomino to Tayrona."
+    },
+    image: "/assets/lugares/palomino.jpg",
+    image2: "/assets/lugares/tayrona.jpg"
+  },
+  {
+    slug: "valledupar-to-minca",
+    featured: false,
+    priceMode: "quote",
+    title: {
+      es: "Transporte privado de Valledupar a Minca | EverTrip",
+      en: "Private Transfer Valledupar to Minca | EverTrip",
+    },
+    h1: {
+      es: "Transporte privado Valledupar ↔ Minca",
+      en: "Private Transfer Valledupar ↔ Minca",
+    },
+    metaDescription: {
+      es: "Viaje privado puerta a puerta entre Valledupar y Minca. Reserva tu traslado con EverTrip. Conductores expertos y vehiculos premium.",
+      en: "Door-to-door private transfer between Valledupar and Minca. Book your ride with EverTrip. Expert drivers and premium vehicles.",
+    },
+    description: {
+      es: "Disfruta de un viaje comodo, seguro y sin complicaciones entre Valledupar y Minca. Nuestros servicios son 100% privados, asegurando tu tranquilidad.",
+      en: "Enjoy a comfortable, safe, and hassle-free journey between Valledupar and Minca. Our services are 100% private, ensuring your peace of mind.",
+    },
+    duration: { es: "Aprox. 4h 30m", en: "Approx. 4h 30m" },
+    idealFor: { es: "Parejas, Familias y Grupos", en: "Couples, Families, and Groups" },
+    highlights: {
+      es: [
+        "Mismo precio en ambos sentidos",
+        "Servicio puerta a puerta",
+        "Vehiculo privado con aire acondicionado",
+        "Conductor puntual y profesional",
+        "Sin cargos ocultos",
+        "Asistencia y soporte via WhatsApp"
+      ],
+      en: [
+        "Same price in both directions",
+        "Door-to-door service",
+        "Private vehicle with AC",
+        "Punctual and professional driver",
+        "No hidden fees",
+        "WhatsApp support and assistance"
+      ]
+    },
+    faqs: [
+      {
+        q: { es: "¿El servicio es compartido?", en: "Is the service shared?" },
+        a: { es: "No, todos nuestros traslados son 100% privados para ti y tu grupo.", en: "No, all our transfers are 100% private for you and your group." }
+      },
+      {
+        q: { es: "¿Puedo hacer paradas en el camino?", en: "Can I make stops along the way?" },
+        a: { es: "Sí, podemos programar paradas breves para ir al baño o comprar snacks. Por favor indícalo al momento de reservar.", en: "Yes, we can schedule brief stops for restrooms or snacks. Please let us know when booking." }
+      }
+    ],
+    waMessage: {
+      es: "Hola, me gustaria cotizar un traslado privado desde Valledupar hacia Minca.",
+      en: "Hello, I would like to get a quote for a private transfer from Valledupar to Minca."
+    },
+    image: "/assets/lugares/valledupar.jpg",
+    image2: "/assets/lugares/minca.jpg"
+  },
+  {
+    slug: "valledupar-to-tayrona",
+    featured: false,
+    priceMode: "quote",
+    title: {
+      es: "Transporte privado de Valledupar a Tayrona | EverTrip",
+      en: "Private Transfer Valledupar to Tayrona | EverTrip",
+    },
+    h1: {
+      es: "Transporte privado Valledupar ↔ Tayrona",
+      en: "Private Transfer Valledupar ↔ Tayrona",
+    },
+    metaDescription: {
+      es: "Viaje privado puerta a puerta entre Valledupar y Tayrona. Reserva tu traslado con EverTrip. Conductores expertos y vehiculos premium.",
+      en: "Door-to-door private transfer between Valledupar and Tayrona. Book your ride with EverTrip. Expert drivers and premium vehicles.",
+    },
+    description: {
+      es: "Disfruta de un viaje comodo, seguro y sin complicaciones entre Valledupar y Tayrona. Nuestros servicios son 100% privados, asegurando tu tranquilidad.",
+      en: "Enjoy a comfortable, safe, and hassle-free journey between Valledupar and Tayrona. Our services are 100% private, ensuring your peace of mind.",
+    },
+    duration: { es: "Aprox. 4h 30m", en: "Approx. 4h 30m" },
+    idealFor: { es: "Parejas, Familias y Grupos", en: "Couples, Families, and Groups" },
+    highlights: {
+      es: [
+        "Mismo precio en ambos sentidos",
+        "Servicio puerta a puerta",
+        "Vehiculo privado con aire acondicionado",
+        "Conductor puntual y profesional",
+        "Sin cargos ocultos",
+        "Asistencia y soporte via WhatsApp"
+      ],
+      en: [
+        "Same price in both directions",
+        "Door-to-door service",
+        "Private vehicle with AC",
+        "Punctual and professional driver",
+        "No hidden fees",
+        "WhatsApp support and assistance"
+      ]
+    },
+    faqs: [
+      {
+        q: { es: "¿El servicio es compartido?", en: "Is the service shared?" },
+        a: { es: "No, todos nuestros traslados son 100% privados para ti y tu grupo.", en: "No, all our transfers are 100% private for you and your group." }
+      },
+      {
+        q: { es: "¿Puedo hacer paradas en el camino?", en: "Can I make stops along the way?" },
+        a: { es: "Sí, podemos programar paradas breves para ir al baño o comprar snacks. Por favor indícalo al momento de reservar.", en: "Yes, we can schedule brief stops for restrooms or snacks. Please let us know when booking." }
+      }
+    ],
+    waMessage: {
+      es: "Hola, me gustaria cotizar un traslado privado desde Valledupar hacia Tayrona.",
+      en: "Hello, I would like to get a quote for a private transfer from Valledupar to Tayrona."
+    },
+    image: "/assets/lugares/valledupar.jpg",
+    image2: "/assets/lugares/tayrona.jpg"
+  },
+  {
+    slug: "valledupar-to-santa-marta",
+    featured: false,
+    priceMode: "quote",
+    title: {
+      es: "Transporte privado de Valledupar a Santa Marta | EverTrip",
+      en: "Private Transfer Valledupar to Santa Marta | EverTrip",
+    },
+    h1: {
+      es: "Transporte privado Valledupar ↔ Santa Marta",
+      en: "Private Transfer Valledupar ↔ Santa Marta",
+    },
+    metaDescription: {
+      es: "Viaje privado puerta a puerta entre Valledupar y Santa Marta. Reserva tu traslado con EverTrip. Conductores expertos y vehiculos premium.",
+      en: "Door-to-door private transfer between Valledupar and Santa Marta. Book your ride with EverTrip. Expert drivers and premium vehicles.",
+    },
+    description: {
+      es: "Disfruta de un viaje comodo, seguro y sin complicaciones entre Valledupar y Santa Marta. Nuestros servicios son 100% privados, asegurando tu tranquilidad.",
+      en: "Enjoy a comfortable, safe, and hassle-free journey between Valledupar and Santa Marta. Our services are 100% private, ensuring your peace of mind.",
+    },
+    duration: { es: "Aprox. 4h", en: "Approx. 4h" },
+    idealFor: { es: "Parejas, Familias y Grupos", en: "Couples, Families, and Groups" },
+    highlights: {
+      es: [
+        "Mismo precio en ambos sentidos",
+        "Servicio puerta a puerta",
+        "Vehiculo privado con aire acondicionado",
+        "Conductor puntual y profesional",
+        "Sin cargos ocultos",
+        "Asistencia y soporte via WhatsApp"
+      ],
+      en: [
+        "Same price in both directions",
+        "Door-to-door service",
+        "Private vehicle with AC",
+        "Punctual and professional driver",
+        "No hidden fees",
+        "WhatsApp support and assistance"
+      ]
+    },
+    faqs: [
+      {
+        q: { es: "¿El servicio es compartido?", en: "Is the service shared?" },
+        a: { es: "No, todos nuestros traslados son 100% privados para ti y tu grupo.", en: "No, all our transfers are 100% private for you and your group." }
+      },
+      {
+        q: { es: "¿Puedo hacer paradas en el camino?", en: "Can I make stops along the way?" },
+        a: { es: "Sí, podemos programar paradas breves para ir al baño o comprar snacks. Por favor indícalo al momento de reservar.", en: "Yes, we can schedule brief stops for restrooms or snacks. Please let us know when booking." }
+      }
+    ],
+    waMessage: {
+      es: "Hola, me gustaria cotizar un traslado privado desde Valledupar hacia Santa Marta.",
+      en: "Hello, I would like to get a quote for a private transfer from Valledupar to Santa Marta."
+    },
+    image: "/assets/lugares/valledupar.jpg",
+    image2: "/assets/lugares/santa-marta.jpg"
   }
 ];
 
