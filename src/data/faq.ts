@@ -1,7 +1,7 @@
 export const faqsByLocale = {
   es: [
     { q: "¿Cómo reservo un traslado?", a: "Reservar es simple: solo haz clic en cualquier botón de WhatsApp en el sitio. Envíanos tus fechas de viaje, la ruta y el número de pasajeros, y te responderemos en minutos con una cotización y confirmación." },
-    { q: "¿Los precios son por persona o por vehículo?", a: "Nuestros precios son por vehículo, no por persona. Esto hace que nuestros traslados privados sean una excelente opción para parejas, familias y grupos." },
+    { q: "¿Las tarifas son por persona o por vehículo?", a: "Nuestras tarifas son por vehículo, no por persona. Esto hace que nuestros traslados privados sean una excelente opción para parejas, familias y grupos." },
     { q: "¿Voy a compartir la van con otras personas?", a: "No. Todos nuestros traslados son 100% privados. Serán solo tú, tu grupo y el conductor." },
     { q: "¿Hacen seguimiento de mi vuelo para recogidas en el aeropuerto?", a: "¡Sí! Cuando reservas una recogida en el aeropuerto, te pedimos el número de vuelo. Hacemos seguimiento en tiempo real y estaremos ahí cuando aterrices, incluso si hay retraso." },
     { q: "¿Dónde exactamente me espera el conductor en el aeropuerto?", a: "Tu conductor estará esperando en la zona de llegadas con un cartel con tu nombre. También te enviaremos un mensaje de WhatsApp cuando aterrices para asegurar un encuentro sin contratiempos." },
@@ -15,7 +15,7 @@ export const faqsByLocale = {
   ],
   en: [
     { q: "How do I book a transfer?", a: "Booking is simple: just click any WhatsApp button on our site. Send us your travel dates, route, and number of passengers, and we'll reply within minutes with a quote and confirmation." },
-    { q: "Are the prices per person or per vehicle?", a: "Our prices are per vehicle, not per person. This makes our private transfers an excellent value for couples, families, and groups." },
+    { q: "Are the rates per person or per vehicle?", a: "Our rates are per vehicle, not per person. This makes our private transfers an excellent value for couples, families, and groups." },
     { q: "Will I share the van with other people?", a: "No. All our transfers are 100% private. It will just be you, your group, and the driver." },
     { q: "Do you track my flight for airport pickups?", a: "Yes! When you book an airport pickup, we ask for your flight number. We track your flight in real-time and will be there when you land, even if you are delayed." },
     { q: "Where exactly will the driver meet me at the airport?", a: "Your driver will be waiting in the arrivals area holding a sign with your name. We'll also send you a WhatsApp message when you land to ensure a smooth meeting." },

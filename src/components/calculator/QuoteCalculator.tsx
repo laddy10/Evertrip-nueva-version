@@ -46,7 +46,7 @@ export default function QuoteCalculator({ routeSlug, locale, routeTitle, waBaseM
   const isQuoteOnly = quote.isQuoteOnly;
 
   // Build the specific WA message with all context
-  const fullMessage = `${waBaseMessage}\n\nDetalles / Details:\n- Pasajeros / Passengers: ${passengers}\n- Vehículo sugerido / Suggested Vehicle: ${vehicleName}${isQuoteOnly ? '' : `\n- Precio cotizado / Quoted Price: ${quote.priceFormatted}`}`;
+  const fullMessage = `${waBaseMessage}\n\nDetalles / Details:\n- Pasajeros / Passengers: ${passengers}\n- Vehículo sugerido / Suggested Vehicle: ${vehicleName}`;
   const waLink = getWhatsAppLink(fullMessage);
 
   return (
@@ -126,15 +126,9 @@ export default function QuoteCalculator({ routeSlug, locale, routeTitle, waBaseM
             {locale === "es" ? "Precio Total" : "Total Price"}
           </span>
           <div className="text-right">
-            {isQuoteOnly ? (
-              <span className="font-bold text-2xl text-brand-navy tracking-tight">
-                {locale === "es" ? "Cotizar" : "Quote"}
-              </span>
-            ) : (
-              <span className="font-bold text-4xl text-brand-navy tracking-tight text-brand-accent">
-                {quote.priceFormatted}
-              </span>
-            )}
+            <span className="font-bold text-2xl text-brand-navy tracking-tight">
+              {locale === "es" ? "Cotizar" : "Quote"}
+            </span>
           </div>
         </div>
 

@@ -20,8 +20,8 @@ export default function TrustBadges({ locale, className = "" }: TrustBadgesProps
     },
     {
       icon: <FaMoneyBillWave className="text-brand-accent text-2xl mb-3" />,
-      title: locale === "es" ? "Sin Cobros Ocultos" : "No Hidden Fees",
-      desc: locale === "es" ? "El precio que ves es el precio final." : "The price you see is the final price.",
+      title: locale === "es" ? "Tarifas Transparentes" : "Transparent Rates",
+      desc: locale === "es" ? "Sin sorpresas, cotiza con confianza." : "No surprises, quote with confidence.",
     },
     {
       icon: <FaPlaneDeparture className="text-brand-accent text-2xl mb-3" />,

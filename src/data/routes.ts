@@ -65,35 +65,30 @@ export function getQuoteForRoute(slug: string, passengers: number): QuoteResult 
       break;
     case "barranquilla-to-santa-marta":
       price = getBase("barranquilla") || 0;
-      if (passengers > 4) isQuoteOnly = true; // For base pricing, >4 needs a manual quote
       break;
     case "santa-marta-to-palomino":
       price = getBase("palomino") || 0;
-      if (passengers > 4) isQuoteOnly = true;
       break;
     case "private-transfer-santa-marta-cartagena":
     case "cartagena-airport-to-santa-marta":
       price = getBase("cartagena") || 0;
-      if (passengers > 4) isQuoteOnly = true;
       break;
     case "santa-marta-to-tayrona":
       price = getBase("parque-tayrona") || 0;
-      if (passengers > 4) isQuoteOnly = true;
       break;
     case "santa-marta-to-minca":
       price = getBase("minca") || 0;
-      if (passengers > 4) isQuoteOnly = true;
       break;
     default:
       // Custom routes or routes that are always manual quote
-      isQuoteOnly = true;
+      break;
   }
 
   return {
     vehicle,
     price,
     priceFormatted: formatCOP(price),
-    isQuoteOnly,
+    isQuoteOnly: true,
   };
 }
 
@@ -104,16 +99,7 @@ export interface PriceCard {
 }
 
 export function getPriceCards(route: RouteDefinition): PriceCard[] {
-  const quote = getQuoteForRoute(route.slug, 4); // Get quote for base vehicle
-  if (!quote || quote.price === 0) return [];
-  
-  return [
-    {
-      label: { es: "Desde (1 a 4 pasajeros)", en: "From (1 to 4 passengers)" },
-      price: quote.priceFormatted,
-      note: { es: quote.vehicle.name.es, en: quote.vehicle.name.en }
-    }
-  ];
+  return [];
 }
 
 export const routes: RouteDefinition[] = [
@@ -130,8 +116,8 @@ export const routes: RouteDefinition[] = [
       en: "Private Transfer Barranquilla ↔ Palomino",
     },
     metaDescription: {
-      es: "Viaje puerta a puerta desde Barranquilla hasta Palomino (La Guajira). Vehículo privado, precio por vehículo según grupo, reserva por WhatsApp en minutos.",
-      en: "Door-to-door private transfer from Barranquilla to Palomino (La Guajira). Private vehicle, price per group size, book on WhatsApp in minutes.",
+      es: "Viaje puerta a puerta desde Barranquilla hasta Palomino (La Guajira). Vehículo privado, tarifa por vehículo según grupo, reserva por WhatsApp en minutos.",
+      en: "Door-to-door private transfer from Barranquilla to Palomino (La Guajira). Private vehicle, rate per group size, book on WhatsApp in minutes.",
     },
     description: {
       es: "Conectamos Barranquilla con Palomino en un vehículo 100% privado, sin paradas para recoger a otros pasajeros. Ideal para quienes llegan al Aeropuerto Ernesto Cortissoz o salen desde cualquier punto de la ciudad directo a la playa.",
@@ -143,14 +129,14 @@ export const routes: RouteDefinition[] = [
       es: [
         "Recogida puerta a puerta en Barranquilla (hotel, aeropuerto o domicilio)",
         "Vehículo 100% privado, sin compartir con otros pasajeros",
-        "Precio por vehículo, no por persona",
+        "Tarifa por vehículo, no por persona",
         "Conductor local con experiencia en la vía a La Guajira",
         "Disponible para grupos grandes (hasta 17 pasajeros)",
       ],
       en: [
         "Door-to-door pickup in Barranquilla (hotel, airport or address)",
         "100% private vehicle, never shared with other passengers",
-        "Priced per vehicle, not per person",
+        "Rate per vehicle, not per person",
         "Local driver experienced on the route to La Guajira",
         "Available for large groups (up to 17 passengers)",
       ],
@@ -161,8 +147,8 @@ export const routes: RouteDefinition[] = [
         a: { es: "En promedio entre 2 horas y media y 3 horas, dependiendo del tráfico en la vía y el punto exacto de recogida en Barranquilla.", en: "On average between 2.5 and 3 hours, depending on traffic and the exact pickup point in Barranquilla." },
       },
       {
-        q: { es: "¿El precio es por persona o por vehículo?", en: "Is the price per person or per vehicle?" },
-        a: { es: "El precio es por vehículo completo. Por eso mostramos 3 tarifas según el tamaño del grupo (1 a 4, 5 a 10 y 11 a 17 pasajeros).", en: "The price is for the entire vehicle. That's why we show 3 rates based on group size (1-4, 5-10 and 11-17 passengers)." },
+        q: { es: "¿La tarifa es por persona o por vehículo?", en: "Is the rate per person or per vehicle?" },
+        a: { es: "La tarifa es por vehículo completo. Por eso cotizamos según el tamaño del grupo (1 a 4, 5 a 10 y 11 a 17 pasajeros).", en: "The rate is for the entire vehicle. That's why we quote based on group size (1-4, 5-10 and 11-17 passengers)." },
       },
       {
         q: { es: "¿Pueden recogerme en el Aeropuerto Ernesto Cortissoz?", en: "Can you pick me up at Ernesto Cortissoz Airport?" },
@@ -193,8 +179,8 @@ export const routes: RouteDefinition[] = [
       en: "Private Transfer Barranquilla ↔ Santa Marta",
     },
     metaDescription: {
-      es: "Traslado privado puerta a puerta entre Barranquilla y Santa Marta. Mismo precio en ambos sentidos, reserva por WhatsApp.",
-      en: "Private door-to-door transfer between Barranquilla and Santa Marta. Same price both directions, book on WhatsApp.",
+      es: "Traslado privado puerta a puerta entre Barranquilla y Santa Marta. Misma tarifa en ambos sentidos, reserva por WhatsApp.",
+      en: "Private door-to-door transfer between Barranquilla and Santa Marta. Same rate both directions, book on WhatsApp.",
     },
     description: {
       es: "Uno de los trayectos más solicitados de la costa Caribe. Te llevamos directo desde tu hotel, casa o el aeropuerto en Barranquilla hasta cualquier punto de Santa Marta, sin escalas ni paradas para recoger a otros pasajeros.",
@@ -204,14 +190,14 @@ export const routes: RouteDefinition[] = [
     idealFor: { es: "Viajeros y negocios", en: "Travelers and business" },
     highlights: {
       es: [
-        "Mismo precio en ambos sentidos: Barranquilla → Santa Marta o Santa Marta → Barranquilla",
+        "Misma tarifa en ambos sentidos: Barranquilla → Santa Marta o Santa Marta → Barranquilla",
         "Recogida en el Aeropuerto Ernesto Cortissoz o en cualquier dirección de la ciudad",
         "Vehículo privado con aire acondicionado",
         "Conductor puntual, seguimiento de vuelo si aplica",
         "Reserva confirmada por WhatsApp en minutos",
       ],
       en: [
-        "Same price in both directions: Barranquilla → Santa Marta or Santa Marta → Barranquilla",
+        "Same rate in both directions: Barranquilla → Santa Marta or Santa Marta → Barranquilla",
         "Pickup at Ernesto Cortissoz Airport or anywhere in the city",
         "Private air-conditioned vehicle",
         "On-time driver, flight tracking when applicable",
@@ -220,8 +206,8 @@ export const routes: RouteDefinition[] = [
     },
     faqs: [
       {
-        q: { es: "¿El precio cambia si voy de Santa Marta a Barranquilla en vez de al revés?", en: "Does the price change if I go from Santa Marta to Barranquilla instead?" },
-        a: { es: "No, el precio es el mismo sin importar la dirección del viaje.", en: "No, the price is the same regardless of the direction of travel." },
+        q: { es: "¿La tarifa cambia si voy de Santa Marta a Barranquilla en vez de al revés?", en: "Does the rate change if I go from Santa Marta to Barranquilla instead?" },
+        a: { es: "No, la tarifa es la misma sin importar la dirección del viaje.", en: "No, the rate is the same regardless of the direction of travel." },
       },
       {
         q: { es: "¿Cuánto se demora el viaje?", en: "How long does the trip take?" },
@@ -600,20 +586,20 @@ export const routes: RouteDefinition[] = [
       es: [
         "Conductor esperando en la sala de llegadas",
         "Seguimiento de vuelo en tiempo real",
-        "Precio según la zona exacta de destino en Santa Marta",
+        "Tarifa según la zona exacta de destino en Santa Marta",
         "Disponible también para el regreso al aeropuerto",
       ],
       en: [
         "Driver waiting in the arrivals area",
         "Real-time flight tracking",
-        "Price depends on the exact drop-off zone in Santa Marta",
+        "Rate depends on the exact drop-off zone in Santa Marta",
         "Also available for the return trip to the airport",
       ],
     },
     faqs: [
       {
         q: { es: "¿Cuánto cuesta el traslado desde el aeropuerto?", en: "How much does the airport transfer cost?" },
-        a: { es: "Depende de la zona exacta de tu hotel en Santa Marta (Rodadero, El Rodadero, centro, Pozos Colorados, etc). Escríbenos por WhatsApp con tu dirección y te damos el precio exacto al momento.", en: "It depends on the exact zone of your hotel in Santa Marta (Rodadero, downtown, Pozos Colorados, etc). Message us on WhatsApp with your address and we'll give you the exact price right away." },
+        a: { es: "Depende de la zona exacta de tu hotel en Santa Marta (Rodadero, El Rodadero, centro, Pozos Colorados, etc). Escríbenos por WhatsApp con tu dirección y te cotizamos al momento.", en: "It depends on the exact zone of your hotel in Santa Marta (Rodadero, downtown, Pozos Colorados, etc). Message us on WhatsApp with your address and we'll quote it right away." },
       },
     ],
     waMessage: { es: "Hola, necesito un traslado desde el Aeropuerto de Santa Marta.", en: "Hi, I need a transfer from Santa Marta Airport." },
@@ -643,7 +629,7 @@ export const routes: RouteDefinition[] = [
     idealFor: { es: "Parejas, Familias y Grupos", en: "Couples, Families, and Groups" },
     highlights: {
       es: [
-        "Mismo precio en ambos sentidos",
+        "Misma tarifa en ambos sentidos",
         "Servicio puerta a puerta",
         "Vehiculo privado con aire acondicionado",
         "Conductor puntual y profesional",
@@ -651,7 +637,7 @@ export const routes: RouteDefinition[] = [
         "Asistencia y soporte via WhatsApp"
       ],
       en: [
-        "Same price in both directions",
+        "Same rate in both directions",
         "Door-to-door service",
         "Private vehicle with AC",
         "Punctual and professional driver",
@@ -700,7 +686,7 @@ export const routes: RouteDefinition[] = [
     idealFor: { es: "Parejas, Familias y Grupos", en: "Couples, Families, and Groups" },
     highlights: {
       es: [
-        "Mismo precio en ambos sentidos",
+        "Misma tarifa en ambos sentidos",
         "Servicio puerta a puerta",
         "Vehiculo privado con aire acondicionado",
         "Conductor puntual y profesional",
@@ -708,7 +694,7 @@ export const routes: RouteDefinition[] = [
         "Asistencia y soporte via WhatsApp"
       ],
       en: [
-        "Same price in both directions",
+        "Same rate in both directions",
         "Door-to-door service",
         "Private vehicle with AC",
         "Punctual and professional driver",
@@ -757,7 +743,7 @@ export const routes: RouteDefinition[] = [
     idealFor: { es: "Parejas, Familias y Grupos", en: "Couples, Families, and Groups" },
     highlights: {
       es: [
-        "Mismo precio en ambos sentidos",
+        "Misma tarifa en ambos sentidos",
         "Servicio puerta a puerta",
         "Vehiculo privado con aire acondicionado",
         "Conductor puntual y profesional",
@@ -765,7 +751,7 @@ export const routes: RouteDefinition[] = [
         "Asistencia y soporte via WhatsApp"
       ],
       en: [
-        "Same price in both directions",
+        "Same rate in both directions",
         "Door-to-door service",
         "Private vehicle with AC",
         "Punctual and professional driver",
@@ -814,7 +800,7 @@ export const routes: RouteDefinition[] = [
     idealFor: { es: "Parejas, Familias y Grupos", en: "Couples, Families, and Groups" },
     highlights: {
       es: [
-        "Mismo precio en ambos sentidos",
+        "Misma tarifa en ambos sentidos",
         "Servicio puerta a puerta",
         "Vehiculo privado con aire acondicionado",
         "Conductor puntual y profesional",
@@ -822,7 +808,7 @@ export const routes: RouteDefinition[] = [
         "Asistencia y soporte via WhatsApp"
       ],
       en: [
-        "Same price in both directions",
+        "Same rate in both directions",
         "Door-to-door service",
         "Private vehicle with AC",
         "Punctual and professional driver",
@@ -871,7 +857,7 @@ export const routes: RouteDefinition[] = [
     idealFor: { es: "Parejas, Familias y Grupos", en: "Couples, Families, and Groups" },
     highlights: {
       es: [
-        "Mismo precio en ambos sentidos",
+        "Misma tarifa en ambos sentidos",
         "Servicio puerta a puerta",
         "Vehiculo privado con aire acondicionado",
         "Conductor puntual y profesional",
@@ -879,7 +865,7 @@ export const routes: RouteDefinition[] = [
         "Asistencia y soporte via WhatsApp"
       ],
       en: [
-        "Same price in both directions",
+        "Same rate in both directions",
         "Door-to-door service",
         "Private vehicle with AC",
         "Punctual and professional driver",
@@ -928,7 +914,7 @@ export const routes: RouteDefinition[] = [
     idealFor: { es: "Parejas, Familias y Grupos", en: "Couples, Families, and Groups" },
     highlights: {
       es: [
-        "Mismo precio en ambos sentidos",
+        "Misma tarifa en ambos sentidos",
         "Servicio puerta a puerta",
         "Vehiculo privado con aire acondicionado",
         "Conductor puntual y profesional",
@@ -936,7 +922,7 @@ export const routes: RouteDefinition[] = [
         "Asistencia y soporte via WhatsApp"
       ],
       en: [
-        "Same price in both directions",
+        "Same rate in both directions",
         "Door-to-door service",
         "Private vehicle with AC",
         "Punctual and professional driver",
@@ -985,7 +971,7 @@ export const routes: RouteDefinition[] = [
     idealFor: { es: "Parejas, Familias y Grupos", en: "Couples, Families, and Groups" },
     highlights: {
       es: [
-        "Mismo precio en ambos sentidos",
+        "Misma tarifa en ambos sentidos",
         "Servicio puerta a puerta",
         "Vehiculo privado con aire acondicionado",
         "Conductor puntual y profesional",
@@ -993,7 +979,7 @@ export const routes: RouteDefinition[] = [
         "Asistencia y soporte via WhatsApp"
       ],
       en: [
-        "Same price in both directions",
+        "Same rate in both directions",
         "Door-to-door service",
         "Private vehicle with AC",
         "Punctual and professional driver",
@@ -1042,7 +1028,7 @@ export const routes: RouteDefinition[] = [
     idealFor: { es: "Parejas, Familias y Grupos", en: "Couples, Families, and Groups" },
     highlights: {
       es: [
-        "Mismo precio en ambos sentidos",
+        "Misma tarifa en ambos sentidos",
         "Servicio puerta a puerta",
         "Vehiculo privado con aire acondicionado",
         "Conductor puntual y profesional",
@@ -1050,7 +1036,7 @@ export const routes: RouteDefinition[] = [
         "Asistencia y soporte via WhatsApp"
       ],
       en: [
-        "Same price in both directions",
+        "Same rate in both directions",
         "Door-to-door service",
         "Private vehicle with AC",
         "Punctual and professional driver",
@@ -1099,7 +1085,7 @@ export const routes: RouteDefinition[] = [
     idealFor: { es: "Parejas, Familias y Grupos", en: "Couples, Families, and Groups" },
     highlights: {
       es: [
-        "Mismo precio en ambos sentidos",
+        "Misma tarifa en ambos sentidos",
         "Servicio puerta a puerta",
         "Vehiculo privado con aire acondicionado",
         "Conductor puntual y profesional",
@@ -1107,7 +1093,7 @@ export const routes: RouteDefinition[] = [
         "Asistencia y soporte via WhatsApp"
       ],
       en: [
-        "Same price in both directions",
+        "Same rate in both directions",
         "Door-to-door service",
         "Private vehicle with AC",
         "Punctual and professional driver",
@@ -1156,7 +1142,7 @@ export const routes: RouteDefinition[] = [
     idealFor: { es: "Parejas, Familias y Grupos", en: "Couples, Families, and Groups" },
     highlights: {
       es: [
-        "Mismo precio en ambos sentidos",
+        "Misma tarifa en ambos sentidos",
         "Servicio puerta a puerta",
         "Vehiculo privado con aire acondicionado",
         "Conductor puntual y profesional",
@@ -1164,7 +1150,7 @@ export const routes: RouteDefinition[] = [
         "Asistencia y soporte via WhatsApp"
       ],
       en: [
-        "Same price in both directions",
+        "Same rate in both directions",
         "Door-to-door service",
         "Private vehicle with AC",
         "Punctual and professional driver",
@@ -1213,7 +1199,7 @@ export const routes: RouteDefinition[] = [
     idealFor: { es: "Parejas, Familias y Grupos", en: "Couples, Families, and Groups" },
     highlights: {
       es: [
-        "Mismo precio en ambos sentidos",
+        "Misma tarifa en ambos sentidos",
         "Servicio puerta a puerta",
         "Vehiculo privado con aire acondicionado",
         "Conductor puntual y profesional",
@@ -1221,7 +1207,7 @@ export const routes: RouteDefinition[] = [
         "Asistencia y soporte via WhatsApp"
       ],
       en: [
-        "Same price in both directions",
+        "Same rate in both directions",
         "Door-to-door service",
         "Private vehicle with AC",
         "Punctual and professional driver",
@@ -1270,7 +1256,7 @@ export const routes: RouteDefinition[] = [
     idealFor: { es: "Parejas, Familias y Grupos", en: "Couples, Families, and Groups" },
     highlights: {
       es: [
-        "Mismo precio en ambos sentidos",
+        "Misma tarifa en ambos sentidos",
         "Servicio puerta a puerta",
         "Vehiculo privado con aire acondicionado",
         "Conductor puntual y profesional",
@@ -1278,7 +1264,7 @@ export const routes: RouteDefinition[] = [
         "Asistencia y soporte via WhatsApp"
       ],
       en: [
-        "Same price in both directions",
+        "Same rate in both directions",
         "Door-to-door service",
         "Private vehicle with AC",
         "Punctual and professional driver",

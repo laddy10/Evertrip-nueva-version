@@ -126,7 +126,7 @@ const content = {
 import { Users } from "lucide-react";
 import { useEffect, useRef } from "react";
 
-function CarGallery({ images, name, model, capacity, delay }: { images: string[], name: string, model: string, capacity: string, delay: number }) {
+function CarGallery({ images, name, model, capacity, delay, priority = false }: { images: string[], name: string, model: string, capacity: string, delay: number, priority?: boolean }) {
   const [[page, direction], setPage] = useState([0, 0]);
 
   const paginate = (newDirection: number) => {
@@ -165,7 +165,7 @@ function CarGallery({ images, name, model, capacity, delay }: { images: string[]
   };
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -203,27 +203,29 @@ function CarGallery({ images, name, model, capacity, delay }: { images: string[]
             }}
             className="absolute inset-0 cursor-grab active:cursor-grabbing"
           >
-            <Image 
-              src={images[page]} 
-              alt={`${name} - view ${page + 1}`} 
-              fill 
+            <Image
+              src={images[page]}
+              alt={`${name} - view ${page + 1}`}
+              fill
+              priority={priority}
+              sizes="(max-width: 768px) 85vw, 340px"
               className="object-cover transition-transform duration-700 group-hover:scale-105 pointer-events-none"
             />
           </motion.div>
         </AnimatePresence>
 
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-        
+
         {images.length > 1 && (
           <>
-            <button 
+            <button
               onClick={prev}
               className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-white/90 p-2 rounded-full text-brand-text-primary shadow-lg hover:bg-white hover:scale-110 transition-all opacity-100 md:opacity-0 md:group-hover:opacity-100 z-10"
               aria-label="Previous image"
             >
               <FaChevronLeft size={10} />
             </button>
-            <button 
+            <button
               onClick={next}
               className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-white/90 p-2 rounded-full text-brand-text-primary shadow-lg hover:bg-white hover:scale-110 transition-all opacity-100 md:opacity-0 md:group-hover:opacity-100 z-10"
               aria-label="Next image"
@@ -232,10 +234,10 @@ function CarGallery({ images, name, model, capacity, delay }: { images: string[]
             </button>
           </>
         )}
-        
+
         <div className="absolute bottom-4 left-0 right-0 flex gap-2 justify-center z-20">
           {images.map((_, idx) => (
-            <button 
+            <button
               key={idx}
               onClick={() => goTo(idx)}
               aria-label={`Ir a la imagen ${idx + 1}`}
@@ -244,7 +246,7 @@ function CarGallery({ images, name, model, capacity, delay }: { images: string[]
           ))}
         </div>
       </div>
-      
+
       <div className="p-4 bg-white text-center border-t border-slate-100 flex items-center justify-center gap-2">
         <Users className="w-4 h-4 text-[#0F292E]" />
         <span className="text-sm font-medium text-[#2C3E42]">{capacity}</span>
@@ -283,18 +285,18 @@ export default function FleetShowcase({ locale }: { locale: Locale }) {
           <p className="text-base md:text-lg text-brand-text-secondary max-w-2xl mx-auto">{t.subheading}</p>
         </div>
 
-        <div 
+        <div
           ref={scrollRef}
           className="flex overflow-x-auto snap-x snap-mandatory pb-8 -mx-6 px-6 md:-mx-4 md:px-4 gap-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] scroll-smooth"
         >
           {t.cars.map((car, index) => (
             <div key={index} className="w-[85vw] sm:w-[320px] lg:w-[340px] shrink-0 snap-center">
-              <CarGallery 
-                images={car.images} 
-                name={car.name} 
-                model={car.model} 
-                capacity={car.capacity} 
-                delay={index * 0.1} 
+              <CarGallery
+                images={car.images}
+                name={car.name}
+                model={car.model}
+                capacity={car.capacity}
+                delay={index * 0.1}
               />
             </div>
           ))}

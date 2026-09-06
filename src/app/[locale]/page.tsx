@@ -5,6 +5,7 @@ import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import Testimonials from "@/components/sections/Testimonials";
 import FAQ from "@/components/sections/FAQ";
 import JsonLd from "@/components/JsonLd";
+import InstagramGallery from "@/components/sections/InstagramGallery";
 import { isLocale, defaultLocale, type Locale } from "@/i18n/config";
 
 export default async function Home({
@@ -23,6 +24,7 @@ export default async function Home({
       <FleetShowcase locale={locale} />
       <RoutesGrid locale={locale} />
       <Testimonials locale={locale} />
+      <InstagramGallery locale={locale} />
       <FAQ locale={locale} />
     </>
   );

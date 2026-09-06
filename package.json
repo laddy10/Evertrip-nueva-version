@@ -11,12 +11,18 @@
   "dependencies": {
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.1",
+    "@sanity/image-url": "^2.1.1",
+    "browserslist": "^4.28.9",
+    "caniuse-lite": "^1.0.30001810",
     "framer-motion": "^12.42.2",
     "lucide-react": "^1.28.0",
     "next": "16.2.10",
+    "next-sanity": "^13.3.4",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-icons": "^5.7.0",
+    "sanity": "^6.12.0",
+    "styled-components": "^6.5.3",
     "three": "^0.185.1"
   },
   "devDependencies": {
