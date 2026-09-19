@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaClock, FaUsers, FaStar, FaMapMarkerAlt } from "react-icons/fa";
-import type { RouteDefinition } from "@/data/routes";
+import { getRouteCardTitle, type RouteDefinition } from "@/data/routes";
 import type { Locale } from "@/i18n/config";
 
 interface Props {
@@ -59,7 +59,7 @@ export default function RouteCard({ route, locale, startingPrice, from, quote }:
 
       {/* Text content */}
       <div className="absolute bottom-0 left-0 right-0 p-6 text-white z-10 pointer-events-none">
-        <h2 className="font-bold text-xl mb-2 font-sans leading-tight">{route.h1[locale]}</h2>
+        <h2 className="font-bold text-xl mb-2 font-sans leading-tight">{getRouteCardTitle(route, locale)}</h2>
         <div className="flex items-center text-xs text-white/90 gap-3 mb-3">
           <span className="flex items-center gap-1.5"><FaUsers className="text-white/70" /> {route.idealFor[locale]}</span>
           <span className="text-white/30">|</span>

@@ -1,10 +1,9 @@
 "use client";
 
 import type { Locale } from "@/i18n/config";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { routes, getWhatsAppLink } from "@/data/routes";
-import { ArrowRight, MapPin, Users, Play, X } from "lucide-react";
+import { ArrowRight, MapPin, Users, X } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -81,7 +80,7 @@ export default function Hero({ locale }: { locale: Locale }) {
   };
 
   return (
-    <section className="relative min-h-screen w-full bg-brand-primary-bg pt-24 pb-12 md:pt-32 md:pb-20 flex flex-col items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen lg:min-h-[calc(100vh-1rem)] w-full bg-brand-primary-bg pt-24 pb-12 md:pt-32 md:pb-20 lg:pb-16 flex flex-col items-center justify-center overflow-hidden">
       {/* Background abstract element (very subtle) */}
       <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-brand-accent/5 rounded-full blur-[120px] -z-10" />
       <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-blue-500/5 rounded-full blur-[120px] -z-10" />
@@ -128,7 +127,9 @@ export default function Hero({ locale }: { locale: Locale }) {
                   <div className="absolute left-4 top-1/2 -translate-y-1/2 text-brand-text-secondary">
                     <MapPin size={18} />
                   </div>
-                  <select 
+                  <label htmlFor="hero-origin" className="sr-only">{t.from}</label>
+                  <select
+                    id="hero-origin"
                     required
                     value={formData.origin}
                     onChange={(e) => setFormData({...formData, origin: e.target.value})}
@@ -148,7 +149,9 @@ export default function Hero({ locale }: { locale: Locale }) {
                   <div className="absolute left-4 top-1/2 -translate-y-1/2 text-brand-text-secondary">
                     <MapPin size={18} />
                   </div>
-                  <select 
+                  <label htmlFor="hero-destination" className="sr-only">{t.to}</label>
+                  <select
+                    id="hero-destination"
                     required
                     value={formData.destination}
                     onChange={(e) => setFormData({...formData, destination: e.target.value})}

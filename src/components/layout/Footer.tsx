@@ -21,7 +21,7 @@ export default function Footer({ locale }: { locale: Locale }) {
           <div className="md:col-span-5 lg:col-span-4 flex flex-col items-start">
             <Link href={`/${locale}`} className="hover:opacity-80 transition-opacity mb-6 inline-block">
               <Image
-                src="/assets/logo2-normal.png"
+                src="/assets/logo2-normal-ui.png"
                 alt="Evertrip Logo"
                 width={56}
                 height={56}

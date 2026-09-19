@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { FaInstagram, FaPlay, FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 
 const BEHOLD_FEED_URL = 'https://feeds.behold.so/jnOqnG9EkhouJG9irFw7'
@@ -36,25 +36,59 @@ export default function InstagramInteractive({ t }: { t: any }) {
   const [posts, setPosts] = useState<BeholdPost[]>([])
   const [loading, setLoading] = useState(true)
   const [activeIndex, setActiveIndex] = useState(0)
+  const [shouldLoad, setShouldLoad] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    const element = containerRef.current
+    if (!element) return
+
+    if (!('IntersectionObserver' in window)) {
+      setShouldLoad(true)
+      return
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoad(true)
+          observer.disconnect()
+        }
+      },
+      { rootMargin: '300px 0px' }
+    )
+
+    observer.observe(element)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!shouldLoad) return
+
+    let cancelled = false
+
     async function fetchInstagram() {
       try {
         const res = await fetch(BEHOLD_FEED_URL)
         if (res.ok) {
           const data = await res.json()
-          setPosts(data.posts?.slice(0, 5) || [])
+          if (!cancelled) setPosts(data.posts?.slice(0, 5) || [])
         }
       } catch (e) {
         console.error('Error fetching Instagram feed', e)
       } finally {
-        setLoading(false)
+        if (!cancelled) setLoading(false)
       }
     }
     fetchInstagram()
-  }, [])
+    return () => {
+      cancelled = true
+    }
+  }, [shouldLoad])
 
-  if (loading) return null // Could add a skeleton here
+  if (!shouldLoad || loading) {
+    return <div ref={containerRef} className="w-full min-h-[600px] animate-pulse bg-[#0A1D31]/[0.02]" aria-hidden="true" />
+  }
   if (!posts || posts.length === 0) return null
 
   const activePost = posts[activeIndex]

@@ -39,35 +39,35 @@ export default function RoutePageTemplate({ locale, route, priceCards, relatedRo
             {/* Left Content Column */}
             <div className="lg:col-span-7 xl:col-span-7">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-brand-navy font-bold text-xs tracking-[0.15em] uppercase mb-6 shadow-sm border border-gray-100">
-                <FaRoute className="text-brand-accent text-sm" /> Traslado Privado
+                <FaRoute className="text-brand-accent text-sm" /> {locale === "es" ? "Traslado Privado" : "Private Transfer"}
               </div>
               
               <h1 className="text-4xl md:text-5xl font-bold text-brand-navy mb-6 leading-tight font-sans">
                 {route.h1[locale]}
               </h1>
               
-              <p className="text-brand-carbon/80 text-lg leading-relaxed mb-10 text-justify">
+              <p className="text-brand-carbon/80 text-lg leading-relaxed mb-10 text-left md:text-justify">
                 {route.description[locale]}
               </p>
 
-              <div className="flex flex-wrap gap-4 text-sm font-medium mb-12">
-                <div className="flex items-center gap-3 bg-white border border-gray-100 px-5 py-3 rounded-2xl text-brand-navy shadow-sm">
+              <div className="flex flex-wrap gap-4 text-sm font-medium mb-12 max-sm:gap-3">
+                <div className="flex items-center gap-3 bg-white border border-gray-100 px-5 py-3 rounded-2xl text-brand-navy shadow-sm max-sm:gap-2 max-sm:px-3 max-sm:py-2">
                   <div className="w-8 h-8 rounded-full bg-brand-navy/5 flex items-center justify-center shrink-0">
                     <FaClock className="text-brand-accent" />
                   </div>
                   {route.duration[locale]}
                 </div>
-                <div className="flex items-center gap-3 bg-white border border-gray-100 px-5 py-3 rounded-2xl text-brand-navy shadow-sm">
+                <div className="flex items-center gap-3 bg-white border border-gray-100 px-5 py-3 rounded-2xl text-brand-navy shadow-sm max-sm:gap-2 max-sm:px-3 max-sm:py-2">
                   <div className="w-8 h-8 rounded-full bg-brand-navy/5 flex items-center justify-center shrink-0">
                     <FaUsers className="text-brand-accent" />
                   </div>
                   {route.idealFor[locale]}
                 </div>
-                <div className="flex items-center gap-3 bg-white border border-gray-100 px-5 py-3 rounded-2xl text-brand-navy shadow-sm">
+                <div className="flex items-center gap-3 bg-white border border-gray-100 px-5 py-3 rounded-2xl text-brand-navy shadow-sm max-sm:gap-2 max-sm:px-3 max-sm:py-2">
                   <div className="w-8 h-8 rounded-full bg-brand-navy/5 flex items-center justify-center shrink-0">
                     <FaShieldAlt className="text-brand-accent" />
                   </div>
-                  Seguro Incluido
+                  {locale === "es" ? "Seguro Incluido" : "Insurance Included"}
                 </div>
               </div>
 

@@ -1,9 +1,24 @@
 "use client";
 
 import Image from "next/image";
+import { useRef } from "react";
 import { FaGoogle, FaStar, FaQuoteLeft } from "react-icons/fa";
 
 export default function ReviewQRPage() {
+  const printLogoRef = useRef<HTMLImageElement>(null);
+
+  const handlePrint = async () => {
+    const logo = printLogoRef.current;
+    if (!logo) return;
+
+    try {
+      await logo.decode();
+      window.print();
+    } catch (error) {
+      console.error("No se pudo cargar el logo de impresión.", error);
+    }
+  };
+
   return (
     <>
       <style jsx global>{`
@@ -36,12 +51,21 @@ export default function ReviewQRPage() {
             {/* Logo */}
             <div className="mb-10 mt-6">
               <Image
-                src="/assets/logo2-normal.png"
+                src="/assets/logo2-normal-review.png"
                 alt="Evertrip Logo"
                 width={400}
                 height={150}
-                className="h-24 md:h-28 w-auto object-contain mx-auto"
+                className="h-24 md:h-28 w-auto object-contain mx-auto print:hidden"
                 priority
+              />
+              <Image
+                src="/assets/logo2-normal.png"
+                ref={printLogoRef}
+                loading="eager"
+                alt="Evertrip Logo"
+                width={400}
+                height={150}
+                className="hidden h-24 md:h-28 w-auto object-contain mx-auto print:block"
               />
             </div>
 
@@ -105,7 +129,7 @@ export default function ReviewQRPage() {
 
             {/* Print Button */}
             <button 
-              onClick={() => window.print()}
+              onClick={handlePrint}
               className="mt-10 bg-brand-accent hover:bg-brand-accent/90 text-white px-8 py-3 rounded-full font-bold shadow-lg transition-colors print:hidden"
             >
               🖨️ Imprimir Aviso

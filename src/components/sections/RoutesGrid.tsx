@@ -4,7 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { Locale } from "@/i18n/config";
-import { routes, getPriceCards } from "@/data/routes";
+import { routes, getPriceCards, getRouteCardTitle } from "@/data/routes";
 import { motion } from "framer-motion";
 import { Clock, MapPin, Star, Users } from "lucide-react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
@@ -152,7 +152,7 @@ export default function RoutesGrid({ locale }: { locale: Locale }) {
                     </div>
                     
                     <div className="flex flex-col px-1">
-                      <h3 className="text-lg font-bold text-slate-900 group-hover:underline decoration-2 underline-offset-4 mb-1 truncate">{route.h1[locale]}</h3>
+                      <h3 className="text-lg font-bold text-slate-900 group-hover:underline decoration-2 underline-offset-4 mb-1 truncate">{getRouteCardTitle(route, locale)}</h3>
                       
                       <div className="text-sm text-slate-600 mb-2 flex items-center gap-1.5 truncate">
                         <span>{route.duration[locale]}</span>
