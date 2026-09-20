@@ -77,6 +77,12 @@ button {
   top: 26px;
   background: transparent;
 }
+.site-header[data-scrolled="true"],
+.site-header.home-header[data-scrolled="true"] {
+  background: var(--sea);
+  color: var(--salt);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
+}
 .site-nav {
   max-width: 1600px;
   padding: 16px 4.4vw;
@@ -1049,10 +1055,10 @@ body:has(.brand-film-dialog[open]) {
 
   .promise-landscape > img {
     inset: 0 0 0 auto !important;
-    width: 60% !important;
+    width: 72% !important;
     height: 100% !important;
     object-fit: cover;
-    object-position: center 48%;
+    object-position: 54% 46%;
     background: transparent;
   }
 
@@ -1061,19 +1067,20 @@ body:has(.brand-film-dialog[open]) {
       linear-gradient(
         90deg,
         rgba(10, 119, 116, 1) 0%,
-        rgba(10, 119, 116, 1) 34%,
-        rgba(10, 119, 116, 0.92) 42%,
-        rgba(10, 119, 116, 0.42) 56%,
-        rgba(3, 43, 37, 0.10) 72%,
-        rgba(3, 43, 37, 0.12) 100%
+        rgba(10, 119, 116, 1) 27%,
+        rgba(10, 119, 116, 0.94) 34%,
+        rgba(10, 119, 116, 0.74) 42%,
+        rgba(10, 119, 116, 0.36) 51%,
+        rgba(3, 43, 37, 0.12) 63%,
+        rgba(3, 43, 37, 0.08) 100%
       );
   }
 
   .promise-landscape h2 {
     left: 8vw;
     top: 20%;
-    max-width: 48%;
-    font-size: clamp(60px, 6.3vw, 104px);
+    max-width: 45%;
+    font-size: clamp(60px, 6.1vw, 100px);
   }
 
   .promise-landscape > span {
