@@ -102,13 +102,27 @@ export default function DestinationAtlas({ locale }: { locale: Locale }) {
         </div>
         <div className="atlas-landscape" aria-live="polite">
           <div className="atlas-photo">
-            <Image
-              key={destination.photo}
-              src={`/assets/pilot/routes/${destination.photo}`}
-              alt={destination.name}
-              fill
-              sizes="(max-width: 700px) 100vw, 58vw"
-            />
+            <div className="atlas-photo-pair">
+              <div className="atlas-photo-panel">
+                <Image
+                  src="/assets/pilot/routes/santa-marta-01.webp"
+                  alt={es ? "Santa Marta" : "Santa Marta"}
+                  fill
+                  sizes="(max-width: 700px) 50vw, 30vw"
+                />
+                <span className="atlas-photo-place">Santa Marta</span>
+              </div>
+              <div className="atlas-photo-panel">
+                <Image
+                  key={destination.photo}
+                  src={`/assets/pilot/routes/${destination.photo}`}
+                  alt={destination.name}
+                  fill
+                  sizes="(max-width: 700px) 50vw, 34vw"
+                />
+                <span className="atlas-photo-place">{destination.name}</span>
+              </div>
+            </div>
             <span className="atlas-photo-caption">{destination[locale]}</span>
           </div>
           <div className="atlas-route">
