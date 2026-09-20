@@ -1042,24 +1042,43 @@ body:has(.brand-film-dialog[open]) {
 
 @media (min-width: 901px) {
   .promise-landscape {
-    min-height: 680px;
-    height: min(78svh, 760px);
+    min-height: 700px;
+    height: min(78svh, 780px);
     background: #0a7774;
   }
 
   .promise-landscape > img {
-    object-fit: contain;
-    object-position: center center;
-    background: #0a7774;
+    inset: 0 0 0 auto !important;
+    width: 60% !important;
+    height: 100% !important;
+    object-fit: cover;
+    object-position: center 48%;
+    background: transparent;
   }
 
   .promise-landscape > div {
-    background: linear-gradient(
-      180deg,
-      rgba(6, 43, 37, 0.18),
-      rgba(3, 43, 37, 0.16) 55%,
-      rgba(7, 59, 58, 0.42)
-    );
+    background:
+      linear-gradient(
+        90deg,
+        rgba(10, 119, 116, 1) 0%,
+        rgba(10, 119, 116, 1) 34%,
+        rgba(10, 119, 116, 0.92) 42%,
+        rgba(10, 119, 116, 0.42) 56%,
+        rgba(3, 43, 37, 0.10) 72%,
+        rgba(3, 43, 37, 0.12) 100%
+      );
+  }
+
+  .promise-landscape h2 {
+    left: 8vw;
+    top: 20%;
+    max-width: 48%;
+    font-size: clamp(60px, 6.3vw, 104px);
+  }
+
+  .promise-landscape > span {
+    left: 8vw;
+    bottom: 130px;
   }
 }
 .promise-narrative {
