@@ -802,39 +802,55 @@ body:has(.brand-film-dialog[open]) {
   left: -5%;
   width: 110%;
   height: 110px;
-  background: var(--sea);
+  background: #d9efed;
+  border-bottom: 1px solid rgba(16, 155, 150, 0.28);
   border-radius: 0 0 50% 50%;
 }
 .fleet-opening {
   display: grid;
-  grid-template-columns: 1fr 1.8fr 1fr;
-  gap: 30px;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.72fr);
+  grid-template-areas:
+    "eyebrow copy"
+    "title copy";
+  column-gap: clamp(56px, 8vw, 140px);
+  row-gap: 14px;
   align-items: start;
+  max-width: 1240px;
+  margin: 0 auto;
 }
 .fleet-opening > .chapter-caption {
-  max-width: 200px;
-  padding-top: 12px;
-  color: var(--muted);
+  grid-area: eyebrow;
+  max-width: 300px;
+  padding-top: 0;
+  color: var(--brand-teal);
+  font-size: 11px;
+  letter-spacing: 0.02em;
 }
 .fleet-opening h2 {
-  font-size: clamp(48px, 6vw, 90px);
+  grid-area: title;
+  font-size: clamp(54px, 5.6vw, 84px);
   font-weight: 450;
   letter-spacing: -0.05em;
-  line-height: 1;
+  line-height: 0.98;
   white-space: pre-line;
+  max-width: 660px;
 }
 .fleet-opening > p:last-child {
-  font-size: 12px;
-  line-height: 1.9;
+  grid-area: copy;
+  align-self: end;
+  max-width: 380px;
+  font-size: 13px;
+  line-height: 1.85;
   color: var(--muted);
-  padding-top: 17px;
+  padding-top: 0;
+  padding-bottom: 8px;
 }
 .fleet-studio {
   display: grid;
   grid-template-columns: 220px 1fr;
   gap: 10px;
   position: relative;
-  margin-top: 65px;
+  margin-top: 92px;
   align-items: center;
 }
 .fleet-selector {
@@ -872,7 +888,7 @@ body:has(.brand-film-dialog[open]) {
 }
 .fleet-model-title {
   position: absolute;
-  top: -40px;
+  top: -18px;
   left: 10%;
   right: 0;
   text-align: center;
