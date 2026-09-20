@@ -1,6 +1,8 @@
 /* Evertrip: a continuous coastal journal. */
 :root {
-  --sea: #109b96;
+  --sea: #073b3a;
+  --brand-teal: #109b96;
+  --brand-teal-light: #18b8b2;
   --salt: #f3f4ea;
   --route: #109b96;
   --ink: #0a1d31;
@@ -324,7 +326,7 @@ html[lang="en"] .overture-title h1 {
 .overture-progress i {
   position: absolute;
   inset: 0;
-  background: var(--route);
+  background: var(--brand-teal);
   transform-origin: left;
 }
 .overture-shore {
@@ -573,7 +575,7 @@ body:has(.brand-film-dialog[open]) {
 }
 .atlas-intro .chapter-caption {
   padding-top: 12px;
-  color: var(--route);
+  color: var(--brand-teal-light);
 }
 .atlas-intro h2 {
   white-space: pre-line;
@@ -630,7 +632,7 @@ body:has(.brand-film-dialog[open]) {
   transition: opacity 0.3s;
 }
 .atlas-destinations > button[aria-pressed="true"] {
-  color: var(--route);
+  color: var(--brand-teal-light);
 }
 .atlas-destinations > button[aria-pressed="true"] > span {
   transform: translateX(20px);
@@ -716,7 +718,7 @@ body:has(.brand-film-dialog[open]) {
 }
 .atlas-outro > span + span {
   margin-left: 18%;
-  color: var(--route);
+  color: var(--brand-teal-light);
 }
 .atlas-outro svg {
   position: absolute;
@@ -724,7 +726,7 @@ body:has(.brand-film-dialog[open]) {
   width: 60%;
   height: 160px;
   bottom: 0;
-  color: var(--route);
+  color: var(--brand-teal-light);
   opacity: 0.65;
 }
 .fleet-atelier {
@@ -1907,7 +1909,7 @@ body:has(.brand-film-dialog[open]) {
 .route-cover-copy i {
   height: 1px;
   width: 30px;
-  background: var(--route);
+  background: var(--brand-teal);
 }
 .route-cover > svg {
   position: absolute;
