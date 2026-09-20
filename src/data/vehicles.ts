@@ -1,4 +1,4 @@
-﻿export type VehicleId = "sedan" | "van-medium" | "van-large" | "bus";
+export type VehicleId = "sedan" | "van-medium" | "van-large" | "bus";
 export type PassengerRange = "1-4" | "5-10" | "11-17" | "18-30";
 
 export interface LocalizedString {
@@ -34,7 +34,7 @@ export const vehicles: Record<VehicleId, Vehicle> = {
       { es: "Espacio para 4 maletas grandes", en: "Space for 4 large suitcases" },
       { es: "Viaje directo sin paradas", en: "Direct trip with no layovers" },
     ],
-    image: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/vehicles/nissan-kicks/nissan-kicks-exterior-01-webp-q92.webp",
+    image: "/assets/vehicles/nissan-kicks/nissan-kicks-exterior-01-webp-q92.webp",
   },
   "van-medium": {
     id: "van-medium",
@@ -53,7 +53,7 @@ export const vehicles: Record<VehicleId, Vehicle> = {
       { es: "Asientos reclinables", en: "Reclining seats" },
       { es: "Amplio espacio para equipaje", en: "Ample luggage space" },
     ],
-    image: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/vehicles/mercedes-vito/mercedes-vito-exterior-01-webp-q92.webp",
+    image: "/assets/vehicles/mercedes-vito/mercedes-vito-exterior-01-webp-q92.webp",
   },
   "van-large": {
     id: "van-large",
@@ -72,7 +72,7 @@ export const vehicles: Record<VehicleId, Vehicle> = {
       { es: "Sillas de máximo confort", en: "Maximum comfort seats" },
       { es: "Bodega para maletas", en: "Luggage hold" },
     ],
-    image: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/vehicles/hyundai-h1/hyundai-h1-exterior-01-webp-q92.webp",
+    image: "/assets/vehicles/hyundai-h1/hyundai-h1-exterior-01-webp-q92.webp",
   },
   bus: {
     id: "bus",
@@ -91,7 +91,7 @@ export const vehicles: Record<VehicleId, Vehicle> = {
       { es: "Asientos reclinables premium", en: "Premium reclining seats" },
       { es: "Bodega de gran capacidad", en: "High capacity luggage hold" },
     ],
-    image: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/vehicles/bus-ejecutivo/Bus-exterior-1-webp-q92.webp",
+    image: "/assets/vehicles/bus-ejecutivo/Bus-exterior-1-webp-q92.webp",
   },
 };
 

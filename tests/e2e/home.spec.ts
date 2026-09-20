@@ -31,6 +31,10 @@ test("Home ES carga y sus secciones principales son alcanzables", async ({ page 
   const response = await page.goto("/es/");
   expect(response?.status()).toBe(200);
   await expect(page.locator("html")).toHaveAttribute("lang", "es");
+  // A UTF-8 BOM inside concatenated production CSS can invalidate :root
+  // while leaving every component's dimensions and interactions intact.
+  await expect(page.locator("#routes")).toHaveCSS("background-color", "rgb(7, 59, 58)");
+  await expect(page.locator(".trip-dock")).toHaveCSS("background-color", "rgb(243, 244, 234)");
 
   const h1 = page.getByRole("heading", { level: 1 });
   await expect(h1).toBeVisible();

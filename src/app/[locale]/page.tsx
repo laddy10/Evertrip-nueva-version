@@ -1,11 +1,10 @@
-import Hero from "@/components/sections/Hero";
-import FleetShowcase from "@/components/sections/FleetShowcase";
-import RoutesGrid from "@/components/sections/RoutesGrid";
-import WhyChooseUs from "@/components/sections/WhyChooseUs";
-import Testimonials from "@/components/sections/Testimonials";
-import FAQ from "@/components/sections/FAQ";
 import JsonLd from "@/components/JsonLd";
-import InstagramGallery from "@/components/sections/InstagramGallery";
+import CoastalOverture from "@/components/experience/CoastalOverture";
+import DestinationAtlas from "@/components/experience/DestinationAtlas";
+import FleetAtelier from "@/components/experience/FleetAtelier";
+import TravelPromise from "@/components/experience/TravelPromise";
+import TravelJournal from "@/components/experience/TravelJournal";
+import TravelQuestions from "@/components/experience/TravelQuestions";
 import { isLocale, defaultLocale, type Locale } from "@/i18n/config";
 
 export default async function Home({
@@ -17,15 +16,14 @@ export default async function Home({
   const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
 
   return (
-    <>
+    <div className="experience-home">
       <JsonLd locale={locale} />
-      <Hero locale={locale} />
-      <WhyChooseUs locale={locale} />
-      <FleetShowcase locale={locale} />
-      <RoutesGrid locale={locale} />
-      <Testimonials locale={locale} />
-      <InstagramGallery locale={locale} />
-      <FAQ locale={locale} />
-    </>
+      <CoastalOverture locale={locale} />
+      <DestinationAtlas locale={locale} />
+      <FleetAtelier locale={locale} />
+      <TravelPromise locale={locale} />
+      <TravelJournal locale={locale} />
+      <TravelQuestions locale={locale} />
+    </div>
   );
 }

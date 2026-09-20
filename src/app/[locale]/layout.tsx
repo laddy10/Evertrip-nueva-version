@@ -1,17 +1,22 @@
 import type { Metadata } from "next";
-import { Outfit, Inter } from "next/font/google";
+import localFont from "next/font/local";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { locales, isLocale, defaultLocale, type Locale } from "@/i18n/config";
 import "../globals.css";
+import "../experience.css";
 
-const outfit = Outfit({
-  subsets: ["latin"],
+const outfit = localFont({
+  src: "../../../public/fonts/outfit-latin.woff2",
+  weight: "100 900",
+  display: "swap",
   variable: "--font-outfit",
 });
 
-const inter = Inter({
-  subsets: ["latin"],
+const inter = localFont({
+  src: "../../../public/fonts/inter-latin.woff2",
+  weight: "100 900",
+  display: "swap",
   variable: "--font-inter",
 });
 
@@ -87,11 +92,12 @@ export default async function LocaleLayout({
   const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
 
   return (
-    <html lang={locale} className={`${outfit.variable} ${inter.variable}`} suppressHydrationWarning>
+    <html lang={locale} className={`${outfit.variable} ${inter.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body className="flex flex-col min-h-screen" suppressHydrationWarning>
-        <div className="print:hidden">
-          <Navbar locale={locale} />
+        <div className="showcase-credit print:hidden">
+          {locale === "es" ? "Diseño creado con " : "Design created with "}<strong>GPT-6 Astra</strong> · Ultra
         </div>
+        <Navbar locale={locale} />
         <main className="flex-grow">{children}</main>
         <div className="print:hidden">
           <Footer locale={locale} />

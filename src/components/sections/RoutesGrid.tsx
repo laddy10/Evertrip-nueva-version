@@ -11,14 +11,14 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const content = {
   es: {
-    heading: "Destinos Destacados",
-    subheading: "NUESTRAS RUTAS",
+    heading: "¿Playa, ciudad o montaña?",
+    subheading: "Encuentra tu próxima ruta",
     viewAll: "Ver todas las rutas",
     from: "Desde",
   },
   en: {
-    heading: "Featured Destinations",
-    subheading: "OUR ROUTES",
+    heading: "Beach, city, or mountains?",
+    subheading: "Find your next route",
     viewAll: "View all routes",
     from: "From",
   },
@@ -69,7 +69,7 @@ export default function RoutesGrid({ locale }: { locale: Locale }) {
       <div className="container mx-auto px-6 max-w-7xl">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-16 gap-6">
           <div>
-            <p className="text-brand-accent tracking-[0.2em] text-xs font-semibold uppercase mb-4">{t.subheading}</p>
+            <p className="text-brand-accent text-sm font-medium mb-4">{t.subheading}</p>
             <h2 className="text-3xl md:text-5xl font-heading text-brand-text-primary">{t.heading}</h2>
           </div>
           <Link 

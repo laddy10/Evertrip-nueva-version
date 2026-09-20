@@ -167,8 +167,8 @@ export const routes: RouteDefinition[] = [
       es: "Hola, necesito un transporte privado de Barranquilla a Palomino.",
       en: "Hi, I need a private transfer from Barranquilla to Palomino.",
     },
-    image: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/barranquilla-01.webp",
-    image2: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/palomino-01.webp",
+    image: "/assets/pilot/routes/barranquilla-01.webp",
+    image2: "/assets/pilot/routes/palomino-01.webp",
   },
   {
     slug: "barranquilla-to-santa-marta",
@@ -226,8 +226,8 @@ export const routes: RouteDefinition[] = [
       es: "Hola, necesito un transporte privado entre Barranquilla y Santa Marta.",
       en: "Hi, I need a private transfer between Barranquilla and Santa Marta.",
     },
-    image: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/barranquilla-01.webp",
-    image2: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/santa-marta-01.webp",
+    image: "/assets/pilot/routes/barranquilla-01.webp",
+    image2: "/assets/pilot/routes/santa-marta-01.webp",
   },
   {
     slug: "barranquilla-to-valledupar",
@@ -285,8 +285,8 @@ export const routes: RouteDefinition[] = [
       es: "Hola, quiero cotizar un viaje desde Barranquilla hasta Valledupar.",
       en: "Hi, I'd like a quote for a trip from Barranquilla to Valledupar.",
     },
-    image: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/barranquilla-01.webp",
-    image2: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/valledupar-01.webp",
+    image: "/assets/pilot/routes/barranquilla-01.webp",
+    image2: "/assets/pilot/routes/valledupar-01.webp",
   },
   {
     slug: "private-transfer-santa-marta-cartagena",
@@ -326,8 +326,8 @@ export const routes: RouteDefinition[] = [
       },
     ],
     waMessage: { es: "Hola, necesito un transporte privado entre Santa Marta y Cartagena.", en: "Hi, I need a private transfer between Santa Marta and Cartagena." },
-    image: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/santa-marta-01.webp",
-    image2: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/cartagena-01.webp",
+    image: "/assets/pilot/routes/santa-marta-01.webp",
+    image2: "/assets/pilot/routes/cartagena-01.webp",
   },
   {
     slug: "santa-marta-to-minca",
@@ -365,8 +365,8 @@ export const routes: RouteDefinition[] = [
       },
     ],
     waMessage: { es: "Hola, necesito un transporte a Minca.", en: "Hi, I need a transfer to Minca." },
-    image: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/santa-marta-01.webp",
-    image2: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/minca.jpg",
+    image: "/assets/pilot/routes/santa-marta-01.webp",
+    image2: "/assets/lugares/minca.jpg",
   },
   {
     slug: "cartagena-airport-to-santa-marta",
@@ -404,8 +404,8 @@ export const routes: RouteDefinition[] = [
       },
     ],
     waMessage: { es: "Hola, necesito un traslado desde el Aeropuerto de Cartagena a Santa Marta.", en: "Hi, I need a transfer from Cartagena Airport to Santa Marta." },
-    image: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/cartagena-01.webp",
-    image2: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/santa-marta-01.webp",
+    image: "/assets/pilot/routes/cartagena-01.webp",
+    image2: "/assets/pilot/routes/santa-marta-01.webp",
   },
   {
     slug: "santa-marta-to-palomino",
@@ -452,8 +452,8 @@ export const routes: RouteDefinition[] = [
       },
     ],
     waMessage: { es: "Hola, necesito un transporte privado de Santa Marta a Palomino.", en: "Hi, I need a private transfer from Santa Marta to Palomino." },
-    image: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/santa-marta-01.webp",
-    image2: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/palomino-01.webp",
+    image: "/assets/pilot/routes/santa-marta-01.webp",
+    image2: "/assets/pilot/routes/palomino-01.webp",
   },
   {
     slug: "santa-marta-to-tayrona",
@@ -491,8 +491,8 @@ export const routes: RouteDefinition[] = [
       },
     ],
     waMessage: { es: "Hola, necesito un transporte a Parque Tayrona.", en: "Hi, I need a transfer to Tayrona Park." },
-    image: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/santa-marta-01.webp",
-    image2: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/tayrona-01.webp",
+    image: "/assets/pilot/routes/santa-marta-01.webp",
+    image2: "/assets/pilot/routes/tayrona-01.webp",
   },
   {
     slug: "cartagena-to-barranquilla",
@@ -530,8 +530,8 @@ export const routes: RouteDefinition[] = [
       },
     ],
     waMessage: { es: "Hola, necesito un transporte privado entre Cartagena y Barranquilla.", en: "Hi, I need a private transfer between Cartagena and Barranquilla." },
-    image: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/cartagena-01.webp",
-    image2: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/barranquilla-01.webp",
+    image: "/assets/pilot/routes/cartagena-01.webp",
+    image2: "/assets/pilot/routes/barranquilla-01.webp",
   },
   {
     slug: "custom-private-routes",
@@ -569,7 +569,7 @@ export const routes: RouteDefinition[] = [
       },
     ],
     waMessage: { es: "Hola, quiero cotizar una ruta personalizada.", en: "Hi, I'd like a quote for a custom route." },
-    image: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/private-route-01.webp",
+    image: "/assets/pilot/routes/private-route-01.webp",
   },
   {
     slug: "santa-marta-airport-transfer",
@@ -607,7 +607,7 @@ export const routes: RouteDefinition[] = [
       },
     ],
     waMessage: { es: "Hola, necesito un traslado desde el Aeropuerto de Santa Marta.", en: "Hi, I need a transfer from Santa Marta Airport." },
-    image: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/airport-transfer-01.webp",
+    image: "/assets/pilot/routes/airport-transfer-01.webp",
   },
   {
     slug: "cartagena-to-palomino",
@@ -663,8 +663,8 @@ export const routes: RouteDefinition[] = [
       es: "Hola, me gustaria cotizar un traslado privado desde Cartagena hacia Palomino.",
       en: "Hello, I would like to get a quote for a private transfer from Cartagena to Palomino."
     },
-    image: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/cartagena-01.webp",
-    image2: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/palomino-01.webp"
+    image: "/assets/pilot/routes/cartagena-01.webp",
+    image2: "/assets/pilot/routes/palomino-01.webp"
   },
   {
     slug: "cartagena-to-valledupar",
@@ -720,8 +720,8 @@ export const routes: RouteDefinition[] = [
       es: "Hola, me gustaria cotizar un traslado privado desde Cartagena hacia Valledupar.",
       en: "Hello, I would like to get a quote for a private transfer from Cartagena to Valledupar."
     },
-    image: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/cartagena-01.webp",
-    image2: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/valledupar-01.webp"
+    image: "/assets/pilot/routes/cartagena-01.webp",
+    image2: "/assets/pilot/routes/valledupar-01.webp"
   },
   {
     slug: "cartagena-to-minca",
@@ -777,8 +777,8 @@ export const routes: RouteDefinition[] = [
       es: "Hola, me gustaria cotizar un traslado privado desde Cartagena hacia Minca.",
       en: "Hello, I would like to get a quote for a private transfer from Cartagena to Minca."
     },
-    image: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/cartagena-01.webp",
-    image2: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/minca.jpg"
+    image: "/assets/pilot/routes/cartagena-01.webp",
+    image2: "/assets/lugares/minca.jpg"
   },
   {
     slug: "cartagena-to-tayrona",
@@ -834,8 +834,8 @@ export const routes: RouteDefinition[] = [
       es: "Hola, me gustaria cotizar un traslado privado desde Cartagena hacia Tayrona.",
       en: "Hello, I would like to get a quote for a private transfer from Cartagena to Tayrona."
     },
-    image: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/cartagena-01.webp",
-    image2: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/tayrona-01.webp"
+    image: "/assets/pilot/routes/cartagena-01.webp",
+    image2: "/assets/pilot/routes/tayrona-01.webp"
   },
   {
     slug: "barranquilla-to-minca",
@@ -891,8 +891,8 @@ export const routes: RouteDefinition[] = [
       es: "Hola, me gustaria cotizar un traslado privado desde Barranquilla hacia Minca.",
       en: "Hello, I would like to get a quote for a private transfer from Barranquilla to Minca."
     },
-    image: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/barranquilla-01.webp",
-    image2: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/minca.jpg"
+    image: "/assets/pilot/routes/barranquilla-01.webp",
+    image2: "/assets/lugares/minca.jpg"
   },
   {
     slug: "barranquilla-to-tayrona",
@@ -948,8 +948,8 @@ export const routes: RouteDefinition[] = [
       es: "Hola, me gustaria cotizar un traslado privado desde Barranquilla hacia Tayrona.",
       en: "Hello, I would like to get a quote for a private transfer from Barranquilla to Tayrona."
     },
-    image: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/barranquilla-01.webp",
-    image2: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/tayrona-01.webp"
+    image: "/assets/pilot/routes/barranquilla-01.webp",
+    image2: "/assets/pilot/routes/tayrona-01.webp"
   },
   {
     slug: "palomino-to-valledupar",
@@ -1005,8 +1005,8 @@ export const routes: RouteDefinition[] = [
       es: "Hola, me gustaria cotizar un traslado privado desde Palomino hacia Valledupar.",
       en: "Hello, I would like to get a quote for a private transfer from Palomino to Valledupar."
     },
-    image: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/palomino-01.webp",
-    image2: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/valledupar-01.webp"
+    image: "/assets/pilot/routes/palomino-01.webp",
+    image2: "/assets/pilot/routes/valledupar-01.webp"
   },
   {
     slug: "palomino-to-minca",
@@ -1062,8 +1062,8 @@ export const routes: RouteDefinition[] = [
       es: "Hola, me gustaria cotizar un traslado privado desde Palomino hacia Minca.",
       en: "Hello, I would like to get a quote for a private transfer from Palomino to Minca."
     },
-    image: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/palomino-01.webp",
-    image2: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/minca.jpg"
+    image: "/assets/pilot/routes/palomino-01.webp",
+    image2: "/assets/lugares/minca.jpg"
   },
   {
     slug: "palomino-to-tayrona",
@@ -1119,8 +1119,8 @@ export const routes: RouteDefinition[] = [
       es: "Hola, me gustaria cotizar un traslado privado desde Palomino hacia Tayrona.",
       en: "Hello, I would like to get a quote for a private transfer from Palomino to Tayrona."
     },
-    image: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/palomino-01.webp",
-    image2: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/tayrona-01.webp"
+    image: "/assets/pilot/routes/palomino-01.webp",
+    image2: "/assets/pilot/routes/tayrona-01.webp"
   },
   {
     slug: "valledupar-to-minca",
@@ -1176,8 +1176,8 @@ export const routes: RouteDefinition[] = [
       es: "Hola, me gustaria cotizar un traslado privado desde Valledupar hacia Minca.",
       en: "Hello, I would like to get a quote for a private transfer from Valledupar to Minca."
     },
-    image: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/valledupar-01.webp",
-    image2: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/minca.jpg"
+    image: "/assets/pilot/routes/valledupar-01.webp",
+    image2: "/assets/lugares/minca.jpg"
   },
   {
     slug: "valledupar-to-tayrona",
@@ -1233,8 +1233,8 @@ export const routes: RouteDefinition[] = [
       es: "Hola, me gustaria cotizar un traslado privado desde Valledupar hacia Tayrona.",
       en: "Hello, I would like to get a quote for a private transfer from Valledupar to Tayrona."
     },
-    image: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/valledupar-01.webp",
-    image2: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/tayrona-01.webp"
+    image: "/assets/pilot/routes/valledupar-01.webp",
+    image2: "/assets/pilot/routes/tayrona-01.webp"
   },
   {
     slug: "valledupar-to-santa-marta",
@@ -1290,8 +1290,8 @@ export const routes: RouteDefinition[] = [
       es: "Hola, me gustaria cotizar un traslado privado desde Valledupar hacia Santa Marta.",
       en: "Hello, I would like to get a quote for a private transfer from Valledupar to Santa Marta."
     },
-    image: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/valledupar-01.webp",
-    image2: "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/routes/santa-marta-01.webp"
+    image: "/assets/pilot/routes/valledupar-01.webp",
+    image2: "/assets/pilot/routes/santa-marta-01.webp"
   }
 ];
 

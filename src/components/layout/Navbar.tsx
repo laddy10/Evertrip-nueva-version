@@ -7,7 +7,6 @@ import { useState, useEffect, useRef } from "react";
 import { type Locale } from "@/i18n/config";
 import { dictionaries } from "@/i18n/dictionaries";
 import { getWhatsAppLink } from "@/data/routes";
-import { motion } from "framer-motion";
 
 export default function Navbar({ locale }: { locale: Locale }) {
   const dict = dictionaries[locale];
@@ -18,11 +17,21 @@ export default function Navbar({ locale }: { locale: Locale }) {
     { id: "faq", label: dict.nav.faq },
   ];
   const pathname = usePathname();
-  const router = useRouter();
+  const isHome = pathname.replace(/\/$/, "") === `/${locale}`;
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const router = useRouter();
+  const [menuPath, setMenuPath] = useState<string | null>(null);
+  const menuOpen = menuPath === pathname;
+  const setMenuOpen = (open: boolean) => setMenuPath(open ? pathname : null);
   const navbarRef = useRef<HTMLDivElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 65);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const handleLanguageChange = (event: React.MouseEvent<HTMLAnchorElement>, targetLocale: Locale) => {
     const url = new URL(window.location.href);
@@ -37,33 +46,21 @@ export default function Navbar({ locale }: { locale: Locale }) {
   };
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
-
-  useEffect(() => {
     if (!menuOpen) return;
 
     const closeOutside = (event: Event) => {
-      if (!navbarRef.current?.contains(event.target as Node)) setMenuOpen(false);
+      if (!navbarRef.current?.contains(event.target as Node)) setMenuPath(null);
     };
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         event.preventDefault();
-        setMenuOpen(false);
+        setMenuPath(null);
         menuButtonRef.current?.focus();
       }
     };
-    const desktop = window.matchMedia("(min-width: 48rem)");
+    const desktop = window.matchMedia("(min-width: 64rem)");
     const closeOnDesktop = () => {
-      if (desktop.matches) setMenuOpen(false);
+      if (desktop.matches) setMenuPath(null);
     };
 
     document.addEventListener("pointerdown", closeOutside);
@@ -79,13 +76,10 @@ export default function Navbar({ locale }: { locale: Locale }) {
   }, [menuOpen]);
 
   return (
-    <header className="fixed top-0 z-50 w-full pt-4 px-4 transition-all duration-500">
-      <motion.div 
+    <header className={`site-header${isHome ? " home-header" : ""}`} data-scrolled={scrolled}>
+      <div
         ref={navbarRef}
-        className={`relative max-w-7xl mx-auto rounded-[32px] px-2 md:px-6 py-3 flex items-center justify-between transition-all duration-500 border border-slate-200/50 ${scrolled ? 'glass-premium shadow-lg py-2' : 'bg-transparent py-4'}`}
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="site-nav"
       >
         <Link href={`/${locale}`} className="hover:opacity-80 transition-opacity flex items-center max-md:min-h-11 max-md:min-w-11 max-md:shrink-0">
           <Image
@@ -96,9 +90,10 @@ export default function Navbar({ locale }: { locale: Locale }) {
             className="w-10 h-10 md:w-12 md:h-12 object-cover rounded-full"
             priority
           />
+          <span className="brand-wordmark">evertrip</span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-brand-text-primary/70">
+        <nav className="hidden lg:flex items-center gap-4 lg:gap-8 text-xs font-medium text-brand-text-primary/80">
           {navigationItems.map((item) => (
             <Link key={item.id} href={`/${locale}#${item.id}`} className="hover:text-brand-accent transition-colors">
               {item.label}
@@ -108,10 +103,13 @@ export default function Navbar({ locale }: { locale: Locale }) {
 
         <div className="flex items-center gap-2 md:gap-6">
           <span
-            className="text-xs font-bold tracking-widest text-brand-text-secondary hover:text-brand-text-primary transition-colors max-md:inline-flex max-md:items-center max-md:min-h-11 max-md:whitespace-nowrap"
+            className="language-switch text-xs font-bold tracking-widest text-brand-text-secondary hover:text-brand-text-primary transition-colors max-md:inline-flex max-md:items-center max-md:min-h-11 max-md:whitespace-nowrap"
           >
             <Link
               href={pathname.replace(/^\/(es|en)(?=\/|$)/, "/es")}
+              aria-label="Cambiar a español"
+              aria-current={locale === "es" ? "page" : undefined}
+              hrefLang="es"
               onClick={(event) => handleLanguageChange(event, "es")}
               onAuxClick={(event) => handleLanguageChange(event, "es")}
               onContextMenu={(event) => handleLanguageChange(event, "es")}
@@ -122,6 +120,9 @@ export default function Navbar({ locale }: { locale: Locale }) {
             <span className="opacity-30 mx-1">|</span>{" "}
             <Link
               href={pathname.replace(/^\/(es|en)(?=\/|$)/, "/en")}
+              aria-label="Switch to English"
+              aria-current={locale === "en" ? "page" : undefined}
+              hrefLang="en"
               onClick={(event) => handleLanguageChange(event, "en")}
               onAuxClick={(event) => handleLanguageChange(event, "en")}
               onContextMenu={(event) => handleLanguageChange(event, "en")}
@@ -145,8 +146,8 @@ export default function Navbar({ locale }: { locale: Locale }) {
             aria-label={locale === "es" ? (menuOpen ? "Cerrar menú" : "Abrir menú") : (menuOpen ? "Close menu" : "Open menu")}
             aria-expanded={menuOpen}
             aria-controls="mobile-navigation"
-            onClick={() => setMenuOpen((open) => !open)}
-            className="md:hidden w-11 h-11 shrink-0 inline-flex items-center justify-center rounded-xl text-brand-text-primary hover:text-brand-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent"
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="lg:hidden w-11 h-11 shrink-0 inline-flex items-center justify-center rounded-xl text-brand-text-primary hover:text-brand-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
               <path d={menuOpen ? "M6 6l12 12M6 18L18 6" : "M4 6h16M4 12h16M4 18h16"} />
@@ -157,7 +158,7 @@ export default function Navbar({ locale }: { locale: Locale }) {
           id="mobile-navigation"
           aria-label={locale === "es" ? "Navegación móvil" : "Mobile navigation"}
           hidden={!menuOpen}
-          className="md:hidden absolute top-full left-0 right-0 mt-2 rounded-[24px] border border-slate-200/50 bg-brand-primary-bg p-2 shadow-lg max-h-[calc(100dvh-7rem)] overflow-y-auto"
+          className="lg:hidden absolute top-full left-0 right-0 mt-2 rounded-[24px] border border-slate-200/50 bg-brand-primary-bg p-2 shadow-lg max-h-[calc(100dvh-7rem)] overflow-y-auto"
         >
           {navigationItems.map((item) => (
             <Link key={item.id} href={`/${locale}#${item.id}`} onClick={() => setMenuOpen(false)} className="flex min-h-11 items-center rounded-2xl px-4 py-3 text-sm font-medium text-brand-text-primary hover:text-brand-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent">
@@ -165,7 +166,7 @@ export default function Navbar({ locale }: { locale: Locale }) {
             </Link>
           ))}
         </nav>
-      </motion.div>
+      </div>
     </header>
   );
 }

@@ -3,12 +3,13 @@
 import { useState, useId, type MouseEvent, type PointerEvent } from "react";
 import type { Locale } from "@/i18n/config";
 import Image from "next/image";
+import { vehicles, type VehicleId } from "@/data/vehicles";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaChevronLeft, FaChevronRight, FaCarSide } from "react-icons/fa";
 
 const content = {
   es: {
-    sectionTag: "NUESTROS CARROS",
+    sectionTag: "La flota Evertrip",
     heading: "Tu comodidad es lo primero",
     subheading: "Nuestra flota está diseñada para ofrecerte el viaje más relajante posible. Mantenimiento estricto, aire acondicionado potente y amplio espacio.",
     cars: [
@@ -17,9 +18,9 @@ const content = {
         model: "MODELO 2024",
         capacity: "30 PASAJEROS",
         images: [
-          "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/vehicles/bus-ejecutivo/Bus-exterior-1-webp-q92.webp",
-          "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/vehicles/bus-ejecutivo/Bus-exterior-2-webp-q92.webp",
-          "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/vehicles/bus-ejecutivo/Bus-interior-1-webp-q92.webp"
+          "/assets/vehicles/bus-ejecutivo/Bus-exterior-1-webp-q92.webp",
+          "/assets/vehicles/bus-ejecutivo/Bus-exterior-2-webp-q92.webp",
+          "/assets/vehicles/bus-ejecutivo/Bus-interior-1-webp-q92.webp"
         ]
       },
       {
@@ -65,7 +66,7 @@ const content = {
     ]
   },
   en: {
-    sectionTag: "OUR CARS",
+    sectionTag: "The Evertrip fleet",
     heading: "Your comfort comes first",
     subheading: "Our fleet is designed to offer you the most relaxing trip possible. Strict maintenance, powerful AC, and plenty of space.",
     cars: [
@@ -74,9 +75,9 @@ const content = {
         model: "2024 MODEL",
         capacity: "30 PASSENGERS",
         images: [
-          "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/vehicles/bus-ejecutivo/Bus-exterior-1-webp-q92.webp",
-          "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/vehicles/bus-ejecutivo/Bus-exterior-2-webp-q92.webp",
-          "https://pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev/vehicles/bus-ejecutivo/Bus-interior-1-webp-q92.webp"
+          "/assets/vehicles/bus-ejecutivo/Bus-exterior-1-webp-q92.webp",
+          "/assets/vehicles/bus-ejecutivo/Bus-exterior-2-webp-q92.webp",
+          "/assets/vehicles/bus-ejecutivo/Bus-interior-1-webp-q92.webp"
         ]
       },
       {
@@ -131,7 +132,7 @@ const lightboxLabels = {
   en: { open: "Enlarge image of", close: "Close gallery", previous: "Previous image", next: "Next image", image: "Image", of: "of" },
 };
 
-function useClickGesture() {
+export function useClickGesture() {
   const gestureRef = useRef<{
     pointerId: number; x: number; y: number;
     moved: boolean; dragged: boolean; cancelled: boolean; released: boolean;
@@ -180,7 +181,7 @@ function useClickGesture() {
   return { begin, move, release, cancel, leave, markDrag, consumeClick };
 }
 
-function VehicleLightbox({ name, images, imageIndex, locale, opener, onClose, onNavigate }: {
+export function VehicleLightbox({ name, images, imageIndex, locale, opener, onClose, onNavigate }: {
   name: string; images: string[]; imageIndex: number; locale: Locale;
   opener: HTMLButtonElement; onClose: () => void; onNavigate: (direction: number) => void;
 }) {
@@ -267,7 +268,7 @@ function VehicleLightbox({ name, images, imageIndex, locale, opener, onClose, on
   );
 }
 
-function CarGallery({ images, name, model, capacity, delay, priority = false, locale, onOpenImage }: { images: string[], name: string, model: string, capacity: string, delay: number, priority?: boolean, locale: Locale, onOpenImage: (imageIndex: number, opener: HTMLButtonElement) => void }) {
+function CarGallery({ images, name, model, category, capacity, delay, priority = false, locale, onOpenImage }: { images: string[], name: string, model: string, category: string, capacity: string, delay: number, priority?: boolean, locale: Locale, onOpenImage: (imageIndex: number, opener: HTMLButtonElement) => void }) {
   const [[page, direction], setPage] = useState([0, 0]);
   const photoGesture = useClickGesture();
 
@@ -317,7 +318,7 @@ function CarGallery({ images, name, model, capacity, delay, priority = false, lo
     >
       <div data-fleet-drag-handle className="p-5 bg-white text-center z-10 relative">
         <h3 className="font-heading font-bold text-lg text-[#0F292E] tracking-tight">{name}</h3>
-        <p className="text-[#0E6C75] text-xs font-semibold mt-1 tracking-wider">{model}</p>
+        <p className="text-[#0E6C75] text-xs font-medium mt-1">{category} · {model}</p>
       </div>
 
       <div className="relative aspect-[4/3] w-full bg-slate-50 overflow-hidden touch-pan-y">
@@ -498,10 +499,10 @@ export default function FleetShowcase({ locale }: { locale: Locale }) {
   return (
     <section className="py-16 md:py-24 bg-brand-light-bg" id="fleet">
       <div className="container mx-auto px-6 max-w-7xl">
-        <div className="text-center mb-12 md:mb-16">
-          <p className="text-brand-accent tracking-[0.2em] text-xs font-semibold uppercase mb-4">{t.sectionTag}</p>
+        <div className="fleet-heading mb-12 md:mb-16">
+          <p className="text-brand-accent text-sm font-medium mb-4">{t.sectionTag}</p>
           <h2 className="text-3xl md:text-5xl font-heading font-bold text-brand-text-primary mb-4">{t.heading}</h2>
-          <p className="text-base md:text-lg text-brand-text-secondary max-w-2xl mx-auto">{t.subheading}</p>
+          <p className="text-sm md:text-base text-brand-text-secondary max-w-2xl">{t.subheading}</p>
         </div>
 
         <div className="relative group/fleet">
@@ -539,6 +540,7 @@ export default function FleetShowcase({ locale }: { locale: Locale }) {
                   images={car.images}
                   name={car.name}
                   model={car.model}
+                  category={vehicles[(["bus", "van-large", "van-medium", "sedan", "sedan"] as VehicleId[])[index]].name[locale]}
                   capacity={car.capacity}
                   delay={index * 0.1}
                   locale={locale}

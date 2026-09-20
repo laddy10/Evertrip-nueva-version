@@ -6,7 +6,7 @@ import { FaUserTie, FaMapMarkedAlt, FaCarSide } from "react-icons/fa";
 
 const content = {
   es: {
-    badge: "POR QUÉ ELEGIRNOS",
+    badge: "Viaja con tranquilidad",
     heading: "La forma inteligente de viajar",
     features: [
       {
@@ -27,7 +27,7 @@ const content = {
     ]
   },
   en: {
-    badge: "WHY CHOOSE US",
+    badge: "Travel with peace of mind",
     heading: "The smart way to travel",
     features: [
       {
@@ -56,7 +56,7 @@ export default function WhyChooseUs({ locale }: { locale: Locale }) {
     <section className="py-16 md:py-24 bg-brand-light-bg relative border-t border-slate-100" id="why-choose-us">
       <div className="container mx-auto px-6 max-w-7xl">
         <div className="text-center mb-12 md:mb-20">
-          <p className="text-brand-accent tracking-[0.2em] text-xs font-semibold uppercase mb-4">{t.badge}</p>
+          <p className="text-brand-accent text-sm font-medium mb-4">{t.badge}</p>
           <h2 className="text-3xl md:text-5xl font-heading text-brand-text-primary mb-4">{t.heading}</h2>
         </div>
 
