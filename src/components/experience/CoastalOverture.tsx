@@ -185,11 +185,11 @@ export default function CoastalOverture({ locale }: { locale: Locale }) {
           preserveAspectRatio="none"
           aria-hidden="true"
         >
-          <path d="M0 100 Q400 30 750 94 T1440 55 V130 H0Z" fill="#109B96" />
+          <path d="M0 100 Q400 30 750 94 T1440 55 V130 H0Z" fill="#ffffff" />
           <path
             d="M-10 106 Q400 34 750 98 T1450 59"
             fill="none"
-            stroke="#18B8B2"
+            stroke="#109B96"
             strokeWidth="1"
             opacity=".6"
           />
