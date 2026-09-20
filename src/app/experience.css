@@ -164,7 +164,7 @@ button {
   position: relative;
   height: 260svh;
   background: var(--sea);
-  color: var(--salt);
+  color: var(--ink);
 }
 .overture-stage {
   height: 100svh;
@@ -562,8 +562,8 @@ body:has(.brand-film-dialog[open]) {
 .destination-atlas {
   position: relative;
   padding: 95px 6vw 0;
-  color: var(--salt);
-  background: var(--sea);
+  color: var(--ink);
+  background: #ffffff;
   overflow: hidden;
 }
 .atlas-intro {
@@ -604,7 +604,7 @@ body:has(.brand-film-dialog[open]) {
 }
 .atlas-destinations > .small-note {
   display: block;
-  color: #bdcdc0;
+  color: var(--muted);
   margin-bottom: 30px;
 }
 .atlas-destinations > button {
@@ -613,7 +613,7 @@ body:has(.brand-film-dialog[open]) {
   align-items: center;
   justify-content: space-between;
   gap: 15px;
-  color: #a3bbb0;
+  color: #52646f;
   min-height: 85px;
   text-align: left;
 }
@@ -647,7 +647,7 @@ body:has(.brand-film-dialog[open]) {
   font-size: 12px;
   min-height: 44px;
   margin-top: 30px;
-  border-bottom: 1px solid #ffffff50;
+  border-bottom: 1px solid rgba(10, 29, 49, 0.18);
 }
 .atlas-landscape {
   position: relative;
@@ -683,7 +683,7 @@ body:has(.brand-film-dialog[open]) {
   justify-content: space-between;
   gap: 20px;
   padding: 25px 0;
-  color: #c3d1c5;
+  color: var(--muted);
   font-size: 11px;
 }
 .atlas-route > div > span {
@@ -701,7 +701,7 @@ body:has(.brand-film-dialog[open]) {
   height: 48px;
   display: grid;
   place-items: center;
-  border: 1px solid #c3d1c580;
+  border: 1px solid rgba(10, 29, 49, 0.22);
   border-radius: 50%;
 }
 .atlas-outro {
