@@ -1773,7 +1773,8 @@ body:has(.brand-film-dialog[open]) {
     display: none;
   }
   .overture-film > video {
-    display: none;
+    display: block;
+    opacity: 1;
   }
   .overture-progress i {
     transform: none !important;
