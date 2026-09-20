@@ -50,13 +50,11 @@ export default function CoastalOverture({ locale }: { locale: Locale }) {
       reducedMotion
     )
       return;
-    const start = 0.18;
-    const next = Math.min(
-      element.duration - 0.08,
-      start + targetTime.current * (element.duration - start - 0.08),
-    );
+    const start = 0;
+    const end = Math.min(8, Math.max(0, element.duration - 0.05));
+    const next = start + targetTime.current * (end - start);
     if (Math.abs(element.currentTime - next) > 0.035)
-      element.currentTime = Math.max(0, next);
+      element.currentTime = Math.max(start, Math.min(end, next));
   };
   useMotionValueEvent(scrollYProgress, "change", (value) => {
     if (reducedMotion) return;
@@ -87,7 +85,7 @@ export default function CoastalOverture({ locale }: { locale: Locale }) {
             className={ready ? "is-ready" : ""}
             onLoadedMetadata={() => {
               if (reducedMotion && video.current) {
-                video.current.currentTime = 0.12;
+                video.current.currentTime = Math.min(4, Math.max(0, video.current.duration - 0.05));
                 return;
               }
               syncFrame();
