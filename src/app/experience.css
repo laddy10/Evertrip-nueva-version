@@ -165,11 +165,8 @@ button {
   object-position: 53% 50%;
 }
 .overture-film > video {
-  opacity: 0;
-  transition: opacity 0.5s;
-}
-.overture-film > video.is-ready {
   opacity: 1;
+  background: var(--sea);
 }
 .overture-toning {
   position: absolute;
