@@ -808,40 +808,42 @@ body:has(.brand-film-dialog[open]) {
 }
 .fleet-opening {
   display: block;
-  max-width: 760px;
+  max-width: 980px;
   margin: 0 auto;
-  text-align: left;
+  text-align: center;
+  padding: 10px 24px 0;
 }
 .fleet-opening > .chapter-caption {
-  max-width: 360px;
+  max-width: 520px;
   padding-top: 0;
   color: var(--brand-teal);
   font-size: 11px;
   letter-spacing: 0.02em;
-  margin-bottom: 14px;
+  margin: 0 auto 18px;
 }
 .fleet-opening h2 {
-  font-size: clamp(54px, 5.6vw, 84px);
+  font-size: clamp(56px, 5.4vw, 82px);
   font-weight: 450;
   letter-spacing: -0.05em;
   line-height: 0.98;
   white-space: pre-line;
-  max-width: 660px;
+  max-width: 840px;
+  margin: 0 auto;
 }
 .fleet-opening > p:last-child {
-  max-width: 520px;
+  max-width: 620px;
   font-size: 13px;
   line-height: 1.8;
   color: var(--muted);
   padding-top: 0;
-  margin-top: 20px;
+  margin: 24px auto 0;
 }
 .fleet-studio {
   display: grid;
   grid-template-columns: 220px 1fr;
   gap: 10px;
   position: relative;
-  margin-top: 65px;
+  margin-top: 88px;
   align-items: center;
 }
 .fleet-selector {
@@ -1630,15 +1632,23 @@ body:has(.brand-film-dialog[open]) {
   }
   .fleet-opening {
     display: block;
+    text-align: center;
+    padding: 0;
+  }
+  .fleet-opening > .chapter-caption {
+    margin: 0 auto 14px;
+    max-width: 300px;
   }
   .fleet-opening h2 {
-    font-size: 58px;
-    margin: 22px 0;
+    font-size: 52px;
+    margin: 0 auto;
+    max-width: 330px;
   }
   .fleet-opening > p:last-child {
     font-size: 12px;
-    max-width: 300px;
+    max-width: 320px;
     padding: 0;
+    margin: 18px auto 0;
   }
   .fleet-studio {
     display: flex;
