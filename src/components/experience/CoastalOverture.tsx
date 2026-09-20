@@ -114,7 +114,7 @@ export default function CoastalOverture({ locale }: { locale: Locale }) {
               ? "Tu viaje privado por el"
               : "Your private journey through the"}
           </p>
-          <h1 id="coast-title">{es ? "Caribe." : "Caribbean."}</h1>
+          <h1 id="coast-title">{es ? "Caribe" : "Caribbean"}</h1>
           <div className="overture-intro">
             <span>
               {es
