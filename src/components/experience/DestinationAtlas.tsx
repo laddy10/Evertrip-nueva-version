@@ -127,13 +127,15 @@ export default function DestinationAtlas({ locale }: { locale: Locale }) {
           </div>
           <div className="atlas-route">
             <div>
-              <span>{es ? "Desde Santa Marta" : "From Santa Marta"}</span>
-              <strong>{destination.name}</strong>
+              <span>
+                {es ? "Disponible en ambos sentidos" : "Available both ways"}
+              </span>
+              <strong>Santa Marta ↔ {destination.name}</strong>
             </div>
             <span>{route.duration[locale]}</span>
             <Link
               href={`/${locale}/${destination.slug}`}
-              aria-label={`${es ? "Ver ruta a" : "View route to"} ${destination.name}`}
+              aria-label={`${es ? "Ver ruta entre Santa Marta y" : "View route between Santa Marta and"} ${destination.name}`}
             >
               <ArrowUpRight size={28} />
             </Link>
