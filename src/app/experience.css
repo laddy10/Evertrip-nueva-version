@@ -167,16 +167,20 @@ button {
 .overture-film > video {
   opacity: 1;
   background: var(--sea);
+  filter:
+    brightness(1.06)
+    contrast(1.08)
+    saturate(1.18);
 }
 .overture-toning {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     180deg,
-    #042e3659 0%,
-    #042e3600 48%,
-    #03272578 89%,
-    #073b3a 100%
+    rgba(4, 46, 54, 0.16) 0%,
+    rgba(4, 46, 54, 0.02) 50%,
+    rgba(3, 39, 37, 0.20) 88%,
+    rgba(7, 59, 58, 0.48) 100%
   );
 }
 .overture-title {
