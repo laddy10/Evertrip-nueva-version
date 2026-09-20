@@ -164,7 +164,7 @@ button {
   position: relative;
   height: 260svh;
   background: var(--sea);
-  color: var(--ink);
+  color: var(--salt);
 }
 .overture-stage {
   height: 100svh;
