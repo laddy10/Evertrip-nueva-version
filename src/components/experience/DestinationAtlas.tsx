@@ -71,6 +71,17 @@ export default function DestinationAtlas({ locale }: { locale: Locale }) {
       </div>
       <div className="atlas-spread">
         <div className="atlas-destinations">
+          <p className="chapter-caption">
+            {es ? "El Caribe, de cerca" : "The Caribbean, up close"}
+          </p>
+          <h2 className="atlas-inline-title">
+            {es ? "No es solo a dónde vas." : "It’s more than where you go."}
+          </h2>
+          <p className="atlas-inline-copy">
+            {es
+              ? "Cada ruta tiene su propio ritmo, paisaje y forma de vivirse."
+              : "Every route has its own rhythm, landscape, and way to be experienced."}
+          </p>
           <span className="small-note">
             {es ? "Elige tu próxima parada" : "Choose your next destination"}
           </span>
