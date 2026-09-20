@@ -147,10 +147,6 @@ test("Reduced motion uses the still scene and keeps booking and navigation usabl
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
-  const films: string[] = [];
-  page.on("request", (request) => {
-    if (request.url().includes("coastal-drive.webm")) films.push(request.url());
-  });
   for (const width of [320, 390, 768]) {
     await page.setViewportSize({ width, height: 844 });
     await page.goto("/en/");
@@ -165,11 +161,21 @@ test("Reduced motion uses the still scene and keeps booking and navigation usabl
       "relative",
     );
     await expect(page.locator(".overture-title")).toHaveCSS("opacity", "1");
+    const video = page.locator(".overture-film video");
+    await expect.poll(() => video.evaluate((element) => {
+      const film = element as HTMLVideoElement;
+      return film.readyState >= 2 && !film.seeking && film.paused;
+    })).toBe(true);
+    const stillTime = await video.evaluate((element) => (element as HTMLVideoElement).currentTime);
+    await page.evaluate(() => window.scrollTo({ top: 250, behavior: "instant" }));
+    await expect(page.locator("#journey")).not.toBeInViewport({ ratio: 1 });
+    await expect(video).toHaveJSProperty("currentTime", stillTime);
+    await expect(page.locator(".overture-title")).toHaveCSS("opacity", "1");
+    await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
     await page.locator(".trip-dock-cta").click();
     await expect(page.locator(".booking-submit")).toBeInViewport();
     await page.keyboard.press("Escape");
   }
-  expect(films).toEqual([]);
   await page.setViewportSize({ width: 390, height: 844 });
   await page.getByRole("button", { name: "Open menu" }).click();
   await expect(page.locator("#mobile-navigation")).toBeVisible();

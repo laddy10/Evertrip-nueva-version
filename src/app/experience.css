@@ -204,8 +204,8 @@ button {
       180deg,
       rgba(2, 31, 47, 0.10) 0%,
       rgba(2, 31, 47, 0.00) 48%,
-      rgba(4, 45, 43, 0.14) 86%,
-      rgba(7, 59, 58, 0.40) 100%
+      rgba(4, 45, 43, 0.48) 86%,
+      rgba(7, 59, 58, 0.50) 100%
     ),
     linear-gradient(
       90deg,
@@ -296,6 +296,7 @@ html[lang="en"] .overture-title h1 {
   gap: 35px;
   z-index: 2;
   font-size: 11px;
+  text-shadow: 0 1px 4px rgba(2, 38, 45, 0.65);
 }
 .film-trigger,
 .overture-scroll {
@@ -675,6 +676,7 @@ body:has(.brand-film-dialog[open]) {
 }
 .atlas-photo {
   position: relative;
+  width: 100%;
   aspect-ratio: 16 / 10;
   min-height: 430px;
   max-height: 650px;
@@ -791,9 +793,13 @@ body:has(.brand-film-dialog[open]) {
 }
 .fleet-atelier {
   background: #ffffff;
-  padding: 100px 6vw 75px;
+  padding: 90px max(6vw, calc((100vw - 1560px) / 2)) 65px;
   position: relative;
   overflow: hidden;
+  display: grid;
+  grid-template-columns: clamp(270px, 24vw, 320px) minmax(0, 1fr);
+  grid-template-rows: auto auto auto;
+  column-gap: clamp(32px, 4vw, 72px);
 }
 .fleet-atelier:before {
   content: "";
@@ -807,71 +813,69 @@ body:has(.brand-film-dialog[open]) {
   border-radius: 0 0 50% 50%;
 }
 .fleet-opening {
-  display: grid;
-  grid-template-columns: 220px minmax(0, 1fr);
-  max-width: 1480px;
-  margin: 0 auto;
-  padding: 6px 0 0;
+  grid-column: 1;
+  grid-row: 1;
+  align-self: end;
+  display: block;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
   text-align: left;
 }
 .fleet-opening > .chapter-caption {
-  grid-column: 2;
-  max-width: 560px;
-  padding-top: 0;
-  color: var(--brand-teal);
+  max-width: 260px;
+  color: #109b96;
   font-size: 11px;
+  line-height: 1.7;
   letter-spacing: 0.02em;
-  margin: 0 0 16px;
+  margin: 0 0 14px;
 }
 .fleet-opening h2 {
-  grid-column: 2;
-  font-size: clamp(58px, 5.2vw, 80px);
+  font-size: clamp(42px, 3.6vw, 54px);
   font-weight: 450;
   letter-spacing: -0.05em;
-  line-height: 0.98;
+  line-height: 1.02;
   white-space: pre-line;
-  max-width: 760px;
   margin: 0;
 }
 .fleet-opening > p:last-child {
-  grid-column: 2;
-  max-width: 560px;
+  max-width: 300px;
   font-size: 13px;
   line-height: 1.75;
   color: var(--muted);
   padding-top: 0;
-  margin: 20px 0 0;
+  margin: 18px 0 0;
 }
 .fleet-studio {
-  display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: 10px;
-  position: relative;
-  margin-top: 54px;
-  align-items: center;
+  /* Share the section grid without changing the gallery's DOM or handlers. */
+  display: contents;
 }
 .fleet-selector {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: start;
+  margin-top: 26px;
   position: relative;
   z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 0;
 }
 .fleet-selector > button {
   text-align: left;
-  min-height: 68px;
-  padding: 12px 0 12px 18px;
-  border-left: 1px solid #bec9bf;
+  min-height: 58px;
+  padding: 9px 0 9px 16px;
+  border-left: 2px solid #e1ebe8;
   color: #5d706b;
 }
 .fleet-selector > button[aria-pressed="true"] {
-  border-left: 3px solid var(--sea);
-  color: var(--sea);
+  border-left-color: #109b96;
+  color: #109b96;
 }
 .fleet-selector span {
   font-family: var(--font-outfit);
   display: block;
-  font-size: 19px;
+  font-size: 18px;
   font-weight: 450;
 }
 .fleet-selector small {
@@ -880,21 +884,25 @@ body:has(.brand-film-dialog[open]) {
   margin-top: 3px;
 }
 .fleet-stage {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  align-self: center;
   position: relative;
   min-width: 0;
+  padding-top: 64px;
 }
 .fleet-model-title {
   position: absolute;
-  top: -40px;
-  left: 10%;
+  top: 0;
+  left: 0;
   right: 0;
   text-align: center;
   font-family: var(--font-outfit);
   font-weight: 400;
-  font-size: clamp(70px, 11vw, 170px);
+  font-size: clamp(70px, 10.5vw, 150px);
   line-height: 1;
   letter-spacing: -0.065em;
-  color: #c5cfc7;
+  color: #d4e4e1;
   pointer-events: none;
 }
 .fleet-photo {
@@ -945,6 +953,8 @@ body:has(.brand-film-dialog[open]) {
   place-items: center;
 }
 .fleet-specification {
+  grid-column: 1 / -1;
+  grid-row: 3;
   display: grid;
   grid-template-columns: 220px 1fr auto;
   gap: 30px;
@@ -1296,6 +1306,12 @@ body:has(.brand-film-dialog[open]) {
   max-width: 460px;
   justify-content: end;
 }
+.footer-detail nav a {
+  display: inline-flex;
+  align-items: center;
+  min-width: 24px;
+  min-height: 32px;
+}
 @keyframes atlas-reveal {
   from {
     opacity: 0.5;
@@ -1320,8 +1336,7 @@ body:has(.brand-film-dialog[open]) {
   .overture-stage {
     min-height: 660px;
   }
-  .atlas-intro,
-  .fleet-opening {
+  .atlas-intro {
     grid-template-columns: 175px minmax(0, 1fr);
   }
   .atlas-intro > .chapter-caption {
@@ -1330,23 +1345,35 @@ body:has(.brand-film-dialog[open]) {
     margin: 0;
     max-width: none;
   }
-  .fleet-opening > .chapter-caption {
-    grid-column: 2;
-    padding: 0;
-    margin: 0 0 14px;
-    max-width: 520px;
-  }
   .atlas-intro {
     margin-bottom: 65px;
   }
   .atlas-photo {
-    min-height: 380px;
+    min-height: 320px;
+  }
+  .atlas-route {
+    grid-template-columns: minmax(0, 1fr) 48px;
+    gap: 10px 14px;
+  }
+  .atlas-route > span {
+    grid-column: 1;
+  }
+  .atlas-route > a {
+    grid-column: 2;
+    grid-row: 1 / span 2;
   }
   .atlas-destinations > button {
     min-height: 74px;
   }
-  .fleet-studio {
-    grid-template-columns: 175px 1fr;
+  .fleet-atelier {
+    grid-template-columns: 260px minmax(0, 1fr);
+    column-gap: 26px;
+  }
+  .fleet-opening h2 {
+    font-size: 42px;
+  }
+  .fleet-stage {
+    padding-top: 48px;
   }
   .fleet-selector span {
     font-size: 16px;
@@ -1637,6 +1664,7 @@ body:has(.brand-film-dialog[open]) {
     right: -20%;
   }
   .fleet-atelier {
+    display: block;
     padding: 75px 24px 55px;
   }
   .fleet-opening {
@@ -1649,7 +1677,7 @@ body:has(.brand-film-dialog[open]) {
     max-width: 300px;
   }
   .fleet-opening h2 {
-    font-size: 50px;
+    font-size: clamp(40px, 11.7vw, 48px);
     margin: 0;
     max-width: 330px;
   }
@@ -1662,11 +1690,14 @@ body:has(.brand-film-dialog[open]) {
   .fleet-studio {
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    margin: 35px -24px 0;
+    gap: 24px;
+    margin: 26px -24px 0;
     align-items: stretch;
   }
   .fleet-selector {
+    align-self: stretch;
+    min-width: 0;
+    margin-top: 0;
     flex-direction: row;
     overflow: auto;
     padding: 0 24px 12px;
@@ -1682,7 +1713,7 @@ body:has(.brand-film-dialog[open]) {
   }
   .fleet-selector > button[aria-pressed="true"] {
     border-left: 0;
-    border-bottom: 2px solid var(--sea);
+    border-bottom: 2px solid #109b96;
   }
   .fleet-selector span {
     font-size: 16px;
@@ -1691,10 +1722,11 @@ body:has(.brand-film-dialog[open]) {
     font-size: 9px;
   }
   .fleet-stage {
-    padding-top: 20px;
+    align-self: auto;
+    padding-top: 38px;
   }
   .fleet-model-title {
-    top: -15px;
+    top: 0;
     left: 0;
     font-size: 20vw;
   }
@@ -1881,6 +1913,11 @@ body:has(.brand-film-dialog[open]) {
     justify-content: start;
     margin-top: 20px;
     gap: 10px 20px;
+  }
+  .footer-detail nav a {
+    min-width: 32px;
+    min-height: 44px;
+    font-size: 11px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

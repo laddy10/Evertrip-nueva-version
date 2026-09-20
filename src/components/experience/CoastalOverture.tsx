@@ -77,6 +77,7 @@ export default function CoastalOverture({ locale }: { locale: Locale }) {
           <video
             ref={video}
             src="/assets/journey/evertrip-real-drive.mp4"
+            poster="/assets/journey/evertrip-real-drive-poster.webp"
             muted
             playsInline
             preload="auto"
