@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import {
   motion,
   useMotionValueEvent,
@@ -8,7 +8,6 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowUpRight, Play, X } from "lucide-react";
 import type { Locale } from "@/i18n/config";
@@ -66,34 +65,6 @@ export default function CoastalOverture({ locale }: { locale: Locale }) {
     const next = value < 0.25 ? 0 : value < 0.75 ? 1 : 2;
     setChapter((current) => (current === next ? current : next));
   });
-  useEffect(() => {
-    if (
-      reducedMotion ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    )
-      return;
-    const controller = new AbortController();
-    let blobUrl: string | undefined;
-    // A local, compressed version of the existing film. A blob makes seeking
-    // reliable on static hosts, even when they do not implement Range requests.
-    fetch("/assets/journey/coastal-drive.webm", { signal: controller.signal })
-      .then((response) => {
-        if (!response.ok) throw new Error("Film unavailable");
-        return response.blob();
-      })
-      .then((blob) => {
-        if (controller.signal.aborted) return;
-        blobUrl = URL.createObjectURL(blob);
-        if (video.current) video.current.src = blobUrl;
-      })
-      .catch(() => {
-        /* The original-film poster remains a complete fallback. */
-      });
-    return () => {
-      controller.abort();
-      if (blobUrl) URL.revokeObjectURL(blobUrl);
-    };
-  }, [reducedMotion]);
 
   return (
     <section
@@ -105,26 +76,24 @@ export default function CoastalOverture({ locale }: { locale: Locale }) {
     >
       <div className="overture-stage">
         <motion.div className="overture-film" style={{ scale: sceneScale }}>
-          <Image
-            src="/assets/journey/coastal-poster.webp"
-            alt={
-              es
-                ? "Película de Evertrip: van en una carretera costera del Caribe"
-                : "Evertrip brand film: a van on a Caribbean coastal road"
-            }
-            fill
-            preload
-            sizes="100vw"
-          />
           <video
             ref={video}
+            src="/assets/journey/evertrip-real-drive.mp4"
             muted
             playsInline
-            preload="none"
+            preload="metadata"
             aria-hidden="true"
             tabIndex={-1}
             className={ready ? "is-ready" : ""}
+            onLoadedMetadata={() => {
+              if (reducedMotion && video.current) {
+                video.current.currentTime = 0.12;
+                return;
+              }
+              syncFrame();
+            }}
             onLoadedData={() => {
+              setReady(true);
               syncFrame();
             }}
             onSeeked={() => {
