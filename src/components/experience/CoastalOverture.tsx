@@ -79,15 +79,19 @@ export default function CoastalOverture({ locale }: { locale: Locale }) {
             src="/assets/journey/evertrip-real-drive.mp4"
             muted
             playsInline
-            preload="metadata"
+            preload="auto"
             aria-hidden="true"
             tabIndex={-1}
             className={ready ? "is-ready" : ""}
             onLoadedMetadata={() => {
-              if (reducedMotion && video.current) {
+              if (!video.current) return;
+              if (reducedMotion) {
                 video.current.currentTime = Math.min(4, Math.max(0, video.current.duration - 0.05));
                 return;
               }
+              // Decode and reveal the opening frame immediately instead of
+              // waiting for the user to scroll before the film becomes visible.
+              video.current.currentTime = 0.05;
               syncFrame();
             }}
             onLoadedData={() => {
