@@ -192,7 +192,7 @@ button {
 .overture-title {
   position: absolute;
   top: 132px;
-  left: 5.7vw;
+  left: 3.8vw;
   right: 5.7vw;
   will-change: transform, opacity;
 }
@@ -1321,7 +1321,7 @@ body:has(.brand-film-dialog[open]) {
   }
   .overture-title {
     top: 118px;
-    left: 6vw;
+    left: 5vw;
     right: 6vw;
   }
   .overture-title > p {
