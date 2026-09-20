@@ -1039,6 +1039,17 @@ body:has(.brand-film-dialog[open]) {
   background: var(--salt);
   transform: rotate(-3deg);
 }
+
+@media (min-width: 901px) {
+  .promise-landscape {
+    min-height: 820px;
+    height: clamp(820px, 62vw, 1120px);
+  }
+
+  .promise-landscape > img {
+    object-position: center 48%;
+  }
+}
 .promise-narrative {
   position: relative;
   padding: 40px 9vw 55px;
