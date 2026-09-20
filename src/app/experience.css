@@ -202,14 +202,14 @@ button {
   color: #f0f5e5;
 }
 .overture-title h1 {
-  font-size: clamp(130px, 20.5vw, 360px);
+  font-size: clamp(110px, 16.5vw, 285px);
   font-weight: 450;
   letter-spacing: -0.075em;
   line-height: 0.99;
   margin-left: -0.045em;
 }
 html[lang="en"] .overture-title h1 {
-  font-size: clamp(112px, 15.4vw, 270px);
+  font-size: clamp(96px, 13vw, 230px);
 }
 .overture-intro {
   display: flex;
