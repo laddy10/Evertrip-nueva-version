@@ -682,16 +682,50 @@ body:has(.brand-film-dialog[open]) {
   background: #eef2ef;
   box-shadow: 0 22px 60px rgba(10, 29, 49, 0.08);
 }
-.atlas-photo img {
+.atlas-photo-pair {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 0.44fr 0.56fr;
+}
+.atlas-photo-panel {
+  position: relative;
+  overflow: hidden;
+}
+.atlas-photo-panel + .atlas-photo-panel {
+  border-left: 1px solid rgba(255, 255, 255, 0.7);
+}
+.atlas-photo-panel img {
   object-fit: cover;
   object-position: center;
   animation: atlas-reveal 0.7s ease both;
+}
+.atlas-photo-panel:first-child img {
+  object-position: 52% center;
+}
+.atlas-photo-panel:last-child img {
+  object-position: center;
+}
+.atlas-photo-place {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 2;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--ink);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  backdrop-filter: blur(8px);
 }
 .atlas-photo:after {
   content: "";
   position: absolute;
   inset: 60% 0 0;
-  background: linear-gradient(transparent, rgba(6, 31, 43, 0.58));
+  background: linear-gradient(transparent, rgba(6, 31, 43, 0.60));
+  pointer-events: none;
 }
 .atlas-photo-caption {
   position: absolute;
@@ -701,7 +735,7 @@ body:has(.brand-film-dialog[open]) {
   font-size: clamp(17px, 1.4vw, 21px);
   font-family: var(--font-outfit);
   color: #ffffff;
-  z-index: 1;
+  z-index: 3;
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.22);
 }
 .atlas-route {
@@ -1537,6 +1571,15 @@ body:has(.brand-film-dialog[open]) {
     min-height: 0;
     height: auto;
     border-radius: 22px;
+  }
+  .atlas-photo-pair {
+    grid-template-columns: 0.45fr 0.55fr;
+  }
+  .atlas-photo-place {
+    top: 12px;
+    left: 12px;
+    padding: 6px 8px;
+    font-size: 9px;
   }
   .atlas-photo-caption {
     left: 25px;
