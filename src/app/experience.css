@@ -130,20 +130,21 @@ button {
   opacity: 1;
 }
 .site-nav > div > a {
-  background: transparent;
-  box-shadow: none;
-  border: 1px solid #ffffff70;
-  border-radius: 0;
-  text-transform: none;
-  letter-spacing: 0;
-  font-weight: 500;
-  padding: 11px 20px;
-  color: inherit;
+  background: var(--brand-teal);
+  box-shadow: 0 8px 20px rgba(16, 155, 150, 0.24);
+  border: 1px solid var(--brand-teal);
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-weight: 700;
+  padding: 12px 24px;
+  color: #ffffff;
 }
 .site-nav > div > a:hover {
-  background: var(--salt);
-  color: var(--sea);
-  transform: none;
+  background: var(--brand-teal-light);
+  border-color: var(--brand-teal-light);
+  color: #ffffff;
+  transform: translateY(-1px);
 }
 .site-nav button {
   color: inherit;
