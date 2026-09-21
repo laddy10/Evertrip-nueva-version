@@ -4,11 +4,9 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import {
   motion,
   useMotionValue,
-  useMotionValueEvent,
   useTransform,
 } from "framer-motion";
-import Link from "next/link";
-import { ArrowDown, ArrowUpRight, Play, X } from "lucide-react";
+import { ArrowDown, Play, X } from "lucide-react";
 import type { Locale } from "@/i18n/config";
 import BookingDock from "./BookingDock";
 
@@ -28,31 +26,13 @@ export default function CoastalOverture({ locale }: { locale: Locale }) {
   const videoDialog = useRef<HTMLDialogElement>(null);
   const [watchFilm, setWatchFilm] = useState(false);
   const [ready, setReady] = useState(false);
-  const [chapter, setChapter] = useState(0);
-  const currentChapter = useRef(0);
   const reducedMotion = useSyncExternalStore(
     subscribeReducedMotion,
     getReducedMotion,
     getServerReducedMotion,
   );
   const playbackProgress = useMotionValue(0);
-  const titleY = useTransform(playbackProgress, [0, 0.35], ["0%", "-45%"]);
-  // The film's clock drives the existing composition without a scroll timeline.
-  const titleOpacity = useTransform(() =>
-    Math.max(0, Math.min(1, (0.35 - playbackProgress.get()) / 0.13)),
-  );
-  const travelOpacity = useTransform(() =>
-    Math.max(0, Math.min(1, (playbackProgress.get() - 0.3) / 0.15)),
-  );
   const sceneScale = useTransform(playbackProgress, [0, 1], [1.02, 1.13]);
-  useMotionValueEvent(playbackProgress, "change", (value) => {
-    const next = value <= 0.3 ? 0 : value < 0.75 ? 1 : 2;
-    // Only chapter boundaries render React; frame updates stay in Motion values.
-    if (currentChapter.current !== next) {
-      currentChapter.current = next;
-      setChapter(next);
-    }
-  });
 
   useEffect(() => {
     const element = video.current;
@@ -85,10 +65,8 @@ export default function CoastalOverture({ locale }: { locale: Locale }) {
       const end = segmentEnd();
       playbackProgress.set(Math.min(1, element.currentTime / end));
       if (element.currentTime >= end) {
-        element.pause();
-        // One boundary correction holds the exact final frame on every device.
-        if (element.currentTime > end) element.currentTime = end;
-        return;
+        element.currentTime = 0;
+        playbackProgress.set(0);
       }
       frame = hasVideoFrames
         ? element.requestVideoFrameCallback(watchSegment)
@@ -97,8 +75,7 @@ export default function CoastalOverture({ locale }: { locale: Locale }) {
     const play = () => {
       if (
         disposed || !visible || document.hidden || playPending ||
-        !element.paused || element.currentTime >= segmentEnd() ||
-        motionPreference.matches
+        !element.paused || motionPreference.matches
       ) return;
       playPending = true;
       element.play().then(() => {
@@ -122,6 +99,7 @@ export default function CoastalOverture({ locale }: { locale: Locale }) {
     stage.addEventListener("pointerdown", play, { passive: true });
     stage.addEventListener("touchend", play, { passive: true });
     element.addEventListener("canplay", play);
+    element.addEventListener("loadeddata", play);
     element.addEventListener("play", watchSegment);
     element.addEventListener("pause", cancelFrame);
     document.addEventListener("visibilitychange", onVisibility);
@@ -132,6 +110,7 @@ export default function CoastalOverture({ locale }: { locale: Locale }) {
       stage.removeEventListener("pointerdown", play);
       stage.removeEventListener("touchend", play);
       element.removeEventListener("canplay", play);
+      element.removeEventListener("loadeddata", play);
       element.removeEventListener("play", watchSegment);
       element.removeEventListener("pause", cancelFrame);
       document.removeEventListener("visibilitychange", onVisibility);
@@ -146,7 +125,6 @@ export default function CoastalOverture({ locale }: { locale: Locale }) {
       id="journey"
       className="coastal-overture"
       aria-labelledby="coast-title"
-      data-chapter={chapter}
     >
       <div className="overture-stage">
         <motion.div className="overture-film" style={{ scale: sceneScale }}>
@@ -156,6 +134,7 @@ export default function CoastalOverture({ locale }: { locale: Locale }) {
             poster="/assets/journey/evertrip-real-drive-poster.webp"
             muted
             playsInline
+            autoPlay
             preload="auto"
             aria-hidden="true"
             tabIndex={-1}
@@ -172,10 +151,7 @@ export default function CoastalOverture({ locale }: { locale: Locale }) {
           />
         </motion.div>
         <div className="overture-toning" />
-        <motion.div
-          className="overture-title"
-          style={{ y: titleY, opacity: titleOpacity }}
-        >
+        <div className="overture-title">
           <p>
             {es
               ? "Tu viaje privado por el"
@@ -194,32 +170,7 @@ export default function CoastalOverture({ locale }: { locale: Locale }) {
                 : "Santa Marta, Cartagena, and the Colombian coast. You choose the destination. We take care of the journey."}
             </p>
           </div>
-        </motion.div>
-        <motion.div
-          className="overture-travel"
-          style={{ opacity: travelOpacity }}
-          aria-hidden={chapter === 0}
-        >
-          <p>
-            {es
-              ? "El camino también se disfruta."
-              : "The road is part of the escape."}
-          </p>
-          <h2>
-            {es
-              ? "Baja el ritmo.\nSube la mirada."
-              : "Slow down.\nLook around."}
-          </h2>
-          <Link
-            href={`/${locale}/santa-marta-to-palomino`}
-            tabIndex={chapter === 0 ? -1 : 0}
-          >
-            {es
-              ? "Descubre Santa Marta → Palomino"
-              : "Discover Santa Marta → Palomino"}
-            <ArrowUpRight size={17} />
-          </Link>
-        </motion.div>
+        </div>
         <div className="overture-bottom">
           <button
             className="film-trigger"
