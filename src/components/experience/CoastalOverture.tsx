@@ -50,9 +50,7 @@ export default function CoastalOverture({ locale }: { locale: Locale }) {
     let frame: number | undefined;
     const motionPreference = window.matchMedia(reducedMotionQuery);
     const hasVideoFrames = typeof element.requestVideoFrameCallback === "function";
-    const segmentEnd = () => Number.isFinite(element.duration)
-      ? Math.min(8, Math.max(0, element.duration - 0.05))
-      : 8;
+    const segmentEnd = () => 8;
     const cancelFrame = () => {
       if (frame === undefined) return;
       if (hasVideoFrames) element.cancelVideoFrameCallback(frame);
@@ -64,10 +62,6 @@ export default function CoastalOverture({ locale }: { locale: Locale }) {
       if (element.paused || disposed) return;
       const end = segmentEnd();
       playbackProgress.set(Math.min(1, element.currentTime / end));
-      if (element.currentTime >= end) {
-        element.currentTime = 0;
-        playbackProgress.set(0);
-      }
       frame = hasVideoFrames
         ? element.requestVideoFrameCallback(watchSegment)
         : requestAnimationFrame(watchSegment);
@@ -86,6 +80,22 @@ export default function CoastalOverture({ locale }: { locale: Locale }) {
         playPending = false;
       });
     };
+    const restartSegment = () => {
+      if (element.currentTime < segmentEnd()) return;
+      element.pause();
+      element.currentTime = 0;
+      playbackProgress.set(0);
+    };
+    const resumeAfterLoopSeek = () => {
+      if (
+        visible &&
+        !document.hidden &&
+        !motionPreference.matches &&
+        element.currentTime < 0.25
+      ) {
+        play();
+      }
+    };
     const onVisibility = () => {
       if (document.hidden || motionPreference.matches) element.pause();
       else play();
@@ -102,6 +112,9 @@ export default function CoastalOverture({ locale }: { locale: Locale }) {
     element.addEventListener("loadeddata", play);
     element.addEventListener("play", watchSegment);
     element.addEventListener("pause", cancelFrame);
+    element.addEventListener("timeupdate", restartSegment);
+    element.addEventListener("ended", restartSegment);
+    element.addEventListener("seeked", resumeAfterLoopSeek);
     document.addEventListener("visibilitychange", onVisibility);
 
     return () => {
@@ -113,6 +126,9 @@ export default function CoastalOverture({ locale }: { locale: Locale }) {
       element.removeEventListener("loadeddata", play);
       element.removeEventListener("play", watchSegment);
       element.removeEventListener("pause", cancelFrame);
+      element.removeEventListener("timeupdate", restartSegment);
+      element.removeEventListener("ended", restartSegment);
+      element.removeEventListener("seeked", resumeAfterLoopSeek);
       document.removeEventListener("visibilitychange", onVisibility);
       cancelFrame();
       element.pause();
