@@ -1,0 +1,52 @@
+name: Build mobile hero clip
+
+on:
+  push:
+    branches:
+      - astra-redesign
+    paths:
+      - ".github/workflows/build-mobile-hero.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  build-mobile-hero:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: astra-redesign
+          fetch-depth: 0
+
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Build optimized 0-8s mobile hero
+        run: |
+          ffmpeg -y \
+            -ss 0 -t 8 \
+            -i public/assets/journey/evertrip-real-drive.mp4 \
+            -an \
+            -vf "crop=ih*9/16:ih:(iw-ih*9/16)*0.55:0,scale=720:1280:flags=lanczos,unsharp=5:5:0.35:5:5:0.0,fps=30" \
+            -c:v libx264 \
+            -preset slow \
+            -crf 19 \
+            -profile:v high \
+            -level 4.0 \
+            -pix_fmt yuv420p \
+            -movflags +faststart \
+            -g 60 \
+            -keyint_min 30 \
+            -sc_threshold 0 \
+            public/assets/journey/evertrip-real-drive-mobile.mp4
+
+      - name: Commit generated mobile asset
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/assets/journey/evertrip-real-drive-mobile.mp4
+          git diff --cached --quiet && exit 0
+          git commit -m "Add optimized mobile hero video"
+          git push origin astra-redesign
