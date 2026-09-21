@@ -1,11 +1,10 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import {
   motion,
+  useMotionValue,
   useMotionValueEvent,
-  useReducedMotion,
-  useScroll,
   useTransform,
 } from "framer-motion";
 import Link from "next/link";
@@ -13,56 +12,133 @@ import { ArrowDown, ArrowUpRight, Play, X } from "lucide-react";
 import type { Locale } from "@/i18n/config";
 import BookingDock from "./BookingDock";
 
+const reducedMotionQuery = "(prefers-reduced-motion: reduce)";
+const getReducedMotion = () => window.matchMedia(reducedMotionQuery).matches;
+const getServerReducedMotion = () => false;
+function subscribeReducedMotion(onChange: () => void) {
+  const query = window.matchMedia(reducedMotionQuery);
+  query.addEventListener("change", onChange);
+  return () => query.removeEventListener("change", onChange);
+}
+
 export default function CoastalOverture({ locale }: { locale: Locale }) {
   const es = locale === "es";
   const section = useRef<HTMLElement>(null);
   const video = useRef<HTMLVideoElement>(null);
-  const targetTime = useRef(0);
   const videoDialog = useRef<HTMLDialogElement>(null);
   const [watchFilm, setWatchFilm] = useState(false);
   const [ready, setReady] = useState(false);
   const [chapter, setChapter] = useState(0);
-  const reducedMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: section,
-    offset: ["start start", "end end"],
-  });
-  const titleY = useTransform(scrollYProgress, [0, 0.35], ["0%", "-45%"]);
-  // Function transforms keep the chapter fades tied to this scene's progress.
-  // Native scroll-timeline interpolation can remap multi-stop opacity ranges.
-  const titleOpacity = useTransform(() =>
-    Math.max(0, Math.min(1, (0.35 - scrollYProgress.get()) / 0.13)),
+  const currentChapter = useRef(0);
+  const reducedMotion = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotion,
+    getServerReducedMotion,
   );
-  const travelOpacity = useTransform(() => {
-    const progress = scrollYProgress.get();
-    return Math.max(
-      0,
-      Math.min(1, (progress - 0.3) / 0.15, (1 - progress) / 0.15),
-    );
+  const playbackProgress = useMotionValue(0);
+  const titleY = useTransform(playbackProgress, [0, 0.35], ["0%", "-45%"]);
+  // The film's clock drives the existing composition without a scroll timeline.
+  const titleOpacity = useTransform(() =>
+    Math.max(0, Math.min(1, (0.35 - playbackProgress.get()) / 0.13)),
+  );
+  const travelOpacity = useTransform(() =>
+    Math.max(0, Math.min(1, (playbackProgress.get() - 0.3) / 0.15)),
+  );
+  const sceneScale = useTransform(playbackProgress, [0, 1], [1.02, 1.13]);
+  useMotionValueEvent(playbackProgress, "change", (value) => {
+    const next = value <= 0.3 ? 0 : value < 0.75 ? 1 : 2;
+    // Only chapter boundaries render React; frame updates stay in Motion values.
+    if (currentChapter.current !== next) {
+      currentChapter.current = next;
+      setChapter(next);
+    }
   });
-  const sceneScale = useTransform(scrollYProgress, [0, 1], [1.02, 1.13]);
-  const syncFrame = () => {
+
+  useEffect(() => {
     const element = video.current;
-    if (
-      !element ||
-      !Number.isFinite(element.duration) ||
-      element.seeking ||
-      reducedMotion
-    )
+    const stage = section.current?.querySelector(".overture-stage");
+    if (!element || !stage) return;
+    if (reducedMotion) {
+      element.pause();
+      playbackProgress.set(0);
       return;
-    const start = 0;
-    const end = Math.min(8, Math.max(0, element.duration - 0.05));
-    const next = start + targetTime.current * (end - start);
-    if (Math.abs(element.currentTime - next) > 0.035)
-      element.currentTime = Math.max(start, Math.min(end, next));
-  };
-  useMotionValueEvent(scrollYProgress, "change", (value) => {
-    if (reducedMotion) return;
-    targetTime.current = value;
-    syncFrame();
-    const next = value < 0.25 ? 0 : value < 0.75 ? 1 : 2;
-    setChapter((current) => (current === next ? current : next));
-  });
+    }
+
+    let visible = false;
+    let disposed = false;
+    let playPending = false;
+    let frame: number | undefined;
+    const motionPreference = window.matchMedia(reducedMotionQuery);
+    const hasVideoFrames = typeof element.requestVideoFrameCallback === "function";
+    const segmentEnd = () => Number.isFinite(element.duration)
+      ? Math.min(8, Math.max(0, element.duration - 0.05))
+      : 8;
+    const cancelFrame = () => {
+      if (frame === undefined) return;
+      if (hasVideoFrames) element.cancelVideoFrameCallback(frame);
+      else cancelAnimationFrame(frame);
+      frame = undefined;
+    };
+    const watchSegment = () => {
+      cancelFrame();
+      if (element.paused || disposed) return;
+      const end = segmentEnd();
+      playbackProgress.set(Math.min(1, element.currentTime / end));
+      if (element.currentTime >= end) {
+        element.pause();
+        // One boundary correction holds the exact final frame on every device.
+        if (element.currentTime > end) element.currentTime = end;
+        return;
+      }
+      frame = hasVideoFrames
+        ? element.requestVideoFrameCallback(watchSegment)
+        : requestAnimationFrame(watchSegment);
+    };
+    const play = () => {
+      if (
+        disposed || !visible || document.hidden || playPending ||
+        !element.paused || element.currentTime >= segmentEnd() ||
+        motionPreference.matches
+      ) return;
+      playPending = true;
+      element.play().then(() => {
+        playPending = false;
+        if (disposed || !visible || document.hidden || motionPreference.matches) element.pause();
+      }).catch(() => {
+        // Keep the poster/first frame if autoplay is restricted; input may retry.
+        playPending = false;
+      });
+    };
+    const onVisibility = () => {
+      if (document.hidden || motionPreference.matches) element.pause();
+      else play();
+    };
+    const observer = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      if (visible) play();
+      else element.pause();
+    });
+    observer.observe(stage);
+    stage.addEventListener("pointerdown", play, { passive: true });
+    stage.addEventListener("touchend", play, { passive: true });
+    element.addEventListener("canplay", play);
+    element.addEventListener("play", watchSegment);
+    element.addEventListener("pause", cancelFrame);
+    document.addEventListener("visibilitychange", onVisibility);
+
+    return () => {
+      disposed = true;
+      observer.disconnect();
+      stage.removeEventListener("pointerdown", play);
+      stage.removeEventListener("touchend", play);
+      element.removeEventListener("canplay", play);
+      element.removeEventListener("play", watchSegment);
+      element.removeEventListener("pause", cancelFrame);
+      document.removeEventListener("visibilitychange", onVisibility);
+      cancelFrame();
+      element.pause();
+    };
+  }, [playbackProgress, reducedMotion]);
 
   return (
     <section
@@ -90,19 +166,9 @@ export default function CoastalOverture({ locale }: { locale: Locale }) {
                 video.current.currentTime = Math.min(4, Math.max(0, video.current.duration - 0.05));
                 return;
               }
-              // Decode and reveal the opening frame immediately instead of
-              // waiting for the user to scroll before the film becomes visible.
-              video.current.currentTime = 0.05;
-              syncFrame();
             }}
-            onLoadedData={() => {
-              setReady(true);
-              syncFrame();
-            }}
-            onSeeked={() => {
-              setReady(true);
-              syncFrame();
-            }}
+            onLoadedData={() => setReady(true)}
+            onSeeked={() => setReady(true)}
           />
         </motion.div>
         <div className="overture-toning" />
@@ -171,7 +237,7 @@ export default function CoastalOverture({ locale }: { locale: Locale }) {
           >
             <span>{es ? "Recogida" : "Pickup"}</span>
             <div>
-              <motion.i style={{ scaleX: scrollYProgress }} />
+              <motion.i style={{ scaleX: playbackProgress }} />
             </div>
             <span>{es ? "Destino" : "Arrival"}</span>
           </div>

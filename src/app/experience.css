@@ -169,14 +169,13 @@ button {
 }
 .coastal-overture {
   position: relative;
-  height: 260svh;
   background: var(--sea);
   color: var(--salt);
 }
 .overture-stage {
+  height: 100vh;
   height: 100svh;
-  position: sticky;
-  top: 0;
+  position: relative;
   overflow: hidden;
   min-height: 680px;
 }
@@ -1478,9 +1477,6 @@ body:has(.brand-film-dialog[open]) {
   .site-nav > div > a {
     display: none;
   }
-  .coastal-overture {
-    height: 230svh;
-  }
   .overture-stage {
     min-height: 640px;
   }
@@ -1979,13 +1975,6 @@ body:has(.brand-film-dialog[open]) {
     animation: none !important;
     transition: none !important;
     scroll-behavior: auto !important;
-  }
-  .coastal-overture {
-    height: 100svh;
-    min-height: 680px;
-  }
-  .overture-stage {
-    position: relative;
   }
   .overture-film,
   .overture-title {

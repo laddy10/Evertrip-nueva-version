@@ -1,6 +1,6 @@
 ﻿import { test, expect } from "@playwright/test";
 
-test("The complete coastal scene scrubs forward and backward and typography changes cleanly", async ({
+test("The coastal story follows playback time while desktop scrolling stays native", async ({
   page,
 }) => {
   const errors: string[] = [];
@@ -21,11 +21,10 @@ test("The complete coastal scene scrubs forward and backward and typography chan
         top:
           element.getBoundingClientRect().top +
           scrollY +
-          (element.getBoundingClientRect().height - innerHeight) * progress,
+          element.getBoundingClientRect().height * progress,
         behavior: "instant",
       });
     }, value);
-  await scroll(0.55);
   await expect(journey).toHaveAttribute("data-chapter", "1");
   await expect
     .poll(() =>
@@ -34,7 +33,10 @@ test("The complete coastal scene scrubs forward and backward and typography chan
     .toBeGreaterThan(3);
   await expect(page.locator(".overture-title")).toHaveCSS("opacity", "0");
   await expect(page.locator(".overture-travel")).toHaveCSS("opacity", "1");
-  await scroll(0.94);
+  expect(await page.evaluate(() => scrollY)).toBe(0);
+  await scroll(0.4);
+  await expect(page.locator(".overture-stage")).toHaveCSS("position", "relative");
+  await expect(video).toHaveJSProperty("paused", false);
   await expect(journey).toHaveAttribute("data-chapter", "2");
   await expect
     .poll(() =>
@@ -42,13 +44,13 @@ test("The complete coastal scene scrubs forward and backward and typography chan
     )
     .toBeGreaterThan(6);
   await scroll(0.08);
-  await expect(journey).toHaveAttribute("data-chapter", "0");
+  await expect(journey).toHaveAttribute("data-chapter", "2");
   await expect
     .poll(() =>
       video.evaluate((element) => (element as HTMLVideoElement).currentTime),
     )
-    .toBeLessThan(1);
-  await expect(page.locator(".overture-title")).toHaveCSS("opacity", "1");
+    .toBeGreaterThan(6);
+  await expect(page.locator(".overture-title")).toHaveCSS("opacity", "0");
   expect(errors).toEqual([]);
 });
 
