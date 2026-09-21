@@ -156,7 +156,6 @@ export default function CoastalOverture({ locale }: { locale: Locale }) {
         <motion.div className="overture-film" style={{ scale: sceneScale }}>
           <video
             ref={video}
-            src="/assets/journey/evertrip-real-drive.mp4"
             poster="/assets/journey/evertrip-real-drive-poster.webp"
             muted
             playsInline
@@ -174,7 +173,17 @@ export default function CoastalOverture({ locale }: { locale: Locale }) {
             }}
             onLoadedData={() => setReady(true)}
             onSeeked={() => setReady(true)}
-          />
+          >
+            <source
+              media="(max-width: 700px)"
+              src="/assets/journey/evertrip-real-drive-mobile.mp4"
+              type="video/mp4"
+            />
+            <source
+              src="/assets/journey/evertrip-real-drive.mp4"
+              type="video/mp4"
+            />
+          </video>
         </motion.div>
         <div className="overture-toning" />
         <div className="overture-title">
