@@ -11,10 +11,13 @@ import type { Locale } from "@/i18n/config";
 import BookingDock from "./BookingDock";
 
 const reducedMotionQuery = "(prefers-reduced-motion: reduce)";
+const mobileQuery = "(max-width: 700px)";
 const getReducedMotion = () => window.matchMedia(reducedMotionQuery).matches;
 const getServerReducedMotion = () => false;
-function subscribeReducedMotion(onChange: () => void) {
-  const query = window.matchMedia(reducedMotionQuery);
+const getMobileViewport = () => window.matchMedia(mobileQuery).matches;
+const getServerMobileViewport = () => false;
+function subscribeMediaQuery(queryText: string, onChange: () => void) {
+  const query = window.matchMedia(queryText);
   query.addEventListener("change", onChange);
   return () => query.removeEventListener("change", onChange);
 }
@@ -27,12 +30,19 @@ export default function CoastalOverture({ locale }: { locale: Locale }) {
   const [watchFilm, setWatchFilm] = useState(false);
   const [ready, setReady] = useState(false);
   const reducedMotion = useSyncExternalStore(
-    subscribeReducedMotion,
+    (onChange) => subscribeMediaQuery(reducedMotionQuery, onChange),
     getReducedMotion,
     getServerReducedMotion,
   );
+  const isMobileViewport = useSyncExternalStore(
+    (onChange) => subscribeMediaQuery(mobileQuery, onChange),
+    getMobileViewport,
+    getServerMobileViewport,
+  );
   const playbackProgress = useMotionValue(0);
-  const sceneScale = useTransform(playbackProgress, [0, 1], [1.02, 1.13]);
+  const sceneScale = useTransform(playbackProgress, (value) =>
+    isMobileViewport ? 1 + value * 0.035 : 1.02 + value * 0.11,
+  );
 
   useEffect(() => {
     const element = video.current;
