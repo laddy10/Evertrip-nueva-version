@@ -1482,7 +1482,7 @@ body:has(.brand-film-dialog[open]) {
   }
   .overture-film > img,
   .overture-film > video {
-    object-position: 57% center;
+    object-position: 55% center;
   }
   .overture-toning {
     background: linear-gradient(
