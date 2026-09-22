@@ -1847,15 +1847,16 @@ body:has(.brand-film-dialog[open]) {
   .promise-landscape h2 {
     left: 20px;
     right: auto;
-    top: 22%;
-    max-width: 78%;
-    font-size: clamp(42px, 11.5vw, 52px);
+    top: 42%;
+    max-width: 82%;
+    font-size: clamp(40px, 10.8vw, 48px);
     line-height: 0.98;
     text-shadow: 0 2px 16px rgba(2, 38, 45, 0.28);
   }
   .promise-landscape > span {
     left: 20px;
-    bottom: 112px;
+    top: 70%;
+    bottom: auto;
     font-size: 11px;
     max-width: 70%;
     text-shadow: 0 1px 10px rgba(2, 38, 45, 0.24);
