@@ -922,13 +922,15 @@ body:has(.brand-film-dialog[open]) {
   width: 100%;
   height: auto;
   object-fit: contain;
-  mix-blend-mode: multiply;
   display: block;
   pointer-events: none;
-  mask-image:
-    linear-gradient(0deg, transparent, black 16%, black 78%, transparent),
-    linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
-  mask-composite: intersect;
+  mask-image: linear-gradient(
+    0deg,
+    transparent 0%,
+    black 9%,
+    black 91%,
+    transparent 100%
+  );
   animation: atlas-reveal 0.5s ease both;
 }
 .fleet-expand {
@@ -1078,15 +1080,15 @@ body:has(.brand-film-dialog[open]) {
   .promise-landscape > div {
     right: auto;
     bottom: auto;
-    width: min(68%, calc(6vw + var(--promise-title-size) * 9.8));
-    height: calc(15% + var(--promise-title-size) * 3.8);
+    width: min(54%, calc(6vw + var(--promise-title-size) * 7.5));
+    height: calc(13% + var(--promise-title-size) * 3.3);
     background: linear-gradient(
       90deg,
-      rgba(6, 24, 23, 0.42) 0%,
-      rgba(6, 24, 23, 0.30) 65%,
+      rgba(6, 24, 23, 0.20) 0%,
+      rgba(6, 24, 23, 0.11) 58%,
       rgba(6, 24, 23, 0) 100%
     );
-    mask-image: linear-gradient(180deg, transparent, #000 26%, #000 74%, transparent);
+    mask-image: linear-gradient(180deg, transparent, #000 18%, #000 82%, transparent);
   }
 
   .promise-landscape h2 {
