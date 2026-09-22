@@ -1167,6 +1167,27 @@ body:has(.brand-film-dialog[open]) {
   margin-top: 20px;
   color: var(--sea);
 }
+
+@media (min-width: 901px) {
+  .promise-landscape:after {
+    background: #ffffff;
+  }
+
+  .promise-narrative {
+    background: #ffffff;
+  }
+
+  .promise-narrative .promise-thread {
+    color: #dce9e5;
+    opacity: 0.42;
+  }
+
+  .promise-narrative .promise-stop {
+    background: #ffffff;
+    border-color: #d2e1dd;
+    color: var(--sea);
+  }
+}
 .travel-journal {
   background: var(--salt);
   padding: 55px 9vw 110px;
