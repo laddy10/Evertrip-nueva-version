@@ -1104,6 +1104,20 @@ body:has(.brand-film-dialog[open]) {
     max-width: 30%;
     text-shadow: none;
   }
+
+  .promise-narrative {
+    background: #ffffff;
+  }
+
+  .promise-thread {
+    color: #dce9e5;
+    opacity: 0.58;
+  }
+
+  .promise-stop {
+    background: #ffffff;
+    border-color: #c8d8d4;
+  }
 }
 .promise-narrative {
   position: relative;
