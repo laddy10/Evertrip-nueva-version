@@ -1090,16 +1090,16 @@ body:has(.brand-film-dialog[open]) {
   }
 
   .promise-landscape h2 {
-    left: 6vw;
-    top: 15%;
+    left: 4.5vw;
+    top: 19%;
     max-width: 60%;
-    font-size: var(--promise-title-size);
+    font-size: calc(var(--promise-title-size) * 0.9);
     text-shadow: none;
   }
 
   .promise-landscape > span {
-    left: 6vw;
-    top: calc(15% + var(--promise-title-size) * 2.04 + 30px);
+    left: 4.5vw;
+    top: calc(19% + var(--promise-title-size) * 2.04 * 0.9 + 30px);
     bottom: auto;
     max-width: 36%;
     text-shadow: none;
