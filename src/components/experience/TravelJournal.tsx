@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
-import { FaInstagram as Instagram } from "react-icons/fa";
+import { FaGoogle, FaInstagram as Instagram } from "react-icons/fa";
 import type { Locale } from "@/i18n/config";
 
 const travelers = [
@@ -78,7 +78,19 @@ export default function TravelJournal({ locale }: { locale: Locale }) {
         <div className="traveler-quote" aria-live="polite">
           <blockquote lang="en">“{travelers[review].text}”</blockquote>
           <div>
-            <span>{travelers[review].name}</span>
+            <div className="traveler-meta">
+              <span>{travelers[review].name}</span>
+              <a
+                className="google-reviews-link"
+                href="https://www.google.com/maps/search/?api=1&query=Evertrip&query_place_id=ChIJHzbjopH19I4RBmesdbLr950"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaGoogle size={13} />
+                {es ? "Ver todas las reseñas en Google" : "Read all reviews on Google"}
+                <ArrowUpRight size={14} />
+              </a>
+            </div>
             <div className="journal-controls">
               <button
                 aria-label={es ? "Testimonio anterior" : "Previous testimonial"}
