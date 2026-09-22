@@ -8,16 +8,16 @@ import type { Locale } from "@/i18n/config";
 
 const travelers = [
   {
-    name: "John & Sarah M.",
-    text: "The transfer from Santa Marta to Cartagena was seamless. The driver was punctual, the van was spotless, and we felt safe the entire journey.",
+    name: "Diana Lucia Duque Guevara",
+    text: "Nos sentimos muy bien atendidos por la empresa Evertrip. Su puntualidad, cortesía y buen estado de limpieza y confort de los carros nos dio seguridad y comodidad en nuestro viaje. Lo recomendamos 10/10. Gracias Evertrip.",
   },
   {
-    name: "David L.",
-    text: "Booking through WhatsApp was incredibly easy. They tracked our delayed flight and were waiting for us with a sign. Excellent English support.",
+    name: "Juana Maria Romero",
+    text: "Excelente servicio! Ever muy querido, muy amable y el carro en perfecto estado. Muy buen conductor, 100% recomendado para sus trayectos!!",
   },
   {
-    name: "Emily R.",
-    text: "We used them for a custom route to Palomino. Professional service, very comfortable van with AC, and safe driving on the coastal roads.",
+    name: "Luz Galvan",
+    text: "Excelente servicio, sin duda la mejor opción para viajar cómodos y seguros.",
   },
 ];
 type Post = {
@@ -76,7 +76,7 @@ export default function TravelJournal({ locale }: { locale: Locale }) {
             : "The journey, told\nby those who lived it."}
         </h2>
         <div className="traveler-quote" aria-live="polite">
-          <blockquote lang="en">“{travelers[review].text}”</blockquote>
+          <blockquote lang="es">“{travelers[review].text}”</blockquote>
           <div>
             <div className="traveler-meta">
               <span>{travelers[review].name}</span>
