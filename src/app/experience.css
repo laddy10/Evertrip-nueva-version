@@ -1057,46 +1057,47 @@ body:has(.brand-film-dialog[open]) {
 
 @media (min-width: 901px) {
   .promise-landscape {
+    --promise-title-size: clamp(60px, 5.9vw, 96px);
     min-height: 700px;
     height: min(78svh, 780px);
-    background: #178f91;
+    background: var(--sea);
   }
 
   .promise-landscape > img {
-    inset: 0 0 0 auto !important;
-    width: 64% !important;
-    height: 100% !important;
     object-fit: cover;
-    object-position: 56% 46%;
-    background: transparent;
+    object-position: center 22%;
+    filter: saturate(0.88) contrast(1.055) brightness(1.025) hue-rotate(3deg);
   }
 
   .promise-landscape > div {
     background:
+      radial-gradient(
+        ellipse at 3% 22%,
+        rgba(7, 29, 44, 0.57) 0%,
+        rgba(7, 29, 44, 0.36) 36%,
+        rgba(7, 29, 44, 0) 68%
+      ),
       linear-gradient(
         90deg,
-        rgba(23, 143, 145, 1) 0%,
-        rgba(23, 143, 145, 1) 31%,
-        rgba(23, 143, 145, 0.94) 35%,
-        rgba(23, 143, 145, 0.70) 41%,
-        rgba(23, 143, 145, 0.34) 48%,
-        rgba(23, 143, 145, 0.08) 56%,
-        rgba(23, 143, 145, 0) 64%
+        rgba(7, 29, 44, 0.40) 0%,
+        rgba(7, 29, 44, 0.24) 44%,
+        rgba(7, 29, 44, 0) 72%
       );
   }
 
   .promise-landscape h2 {
-    left: 5.2vw;
-    top: 20%;
-    max-width: 31%;
-    font-size: clamp(60px, 5.9vw, 96px);
+    left: 6vw;
+    top: 15%;
+    max-width: 60%;
+    font-size: var(--promise-title-size);
     text-shadow: none;
   }
 
   .promise-landscape > span {
-    left: 5.2vw;
-    bottom: 130px;
-    max-width: 26%;
+    left: 6vw;
+    top: calc(15% + var(--promise-title-size) * 2.04 + 30px);
+    bottom: auto;
+    max-width: 36%;
     text-shadow: none;
   }
 }
