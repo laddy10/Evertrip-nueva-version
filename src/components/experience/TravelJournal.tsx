@@ -110,56 +110,93 @@ export default function TravelJournal({ locale }: { locale: Locale }) {
         </div>
       </div>
       <div ref={journal} className="journal-postcard">
-        <a
-          className="journal-photo"
-          href={
-            post?.permalink || "https://www.instagram.com/evertripviajesytours/"
-          }
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={
-            es ? "Ver el viaje en Instagram" : "See the journey on Instagram"
-          }
-        >
-          {postImage ? (
-            <Image
-              src={postImage}
-              alt={post.caption?.slice(0, 180) || "Evertrip Instagram"}
-              fill
-              unoptimized
-              sizes="(max-width: 700px) 100vw, 60vw"
-            />
-          ) : (
-            <Image
-              src="/assets/lugares/real-group-transfer.jpg"
-              alt={
-                es
-                  ? "Viajeros y vehículo de Evertrip"
-                  : "Evertrip travelers and vehicle"
-              }
-              fill
-              sizes="(max-width: 700px) 100vw, 60vw"
-            />
+        <div className="journal-media">
+          <a
+            className="journal-photo"
+            href={
+              post?.permalink || "https://www.instagram.com/evertripviajesytours/"
+            }
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={
+              es ? "Ver el viaje en Instagram" : "See the journey on Instagram"
+            }
+          >
+            {postImage ? (
+              <Image
+                src={postImage}
+                alt={post.caption?.slice(0, 180) || "Evertrip Instagram"}
+                fill
+                unoptimized
+                sizes="(max-width: 700px) 100vw, 36vw"
+              />
+            ) : (
+              <Image
+                src="/assets/lugares/real-group-transfer.jpg"
+                alt={
+                  es
+                    ? "Viajeros y vehículo de Evertrip"
+                    : "Evertrip travelers and vehicle"
+                }
+                fill
+                sizes="(max-width: 700px) 100vw, 36vw"
+              />
+            )}
+          </a>
+
+          {posts.length > 1 && (
+            <div className="journal-thumbnails" aria-label={es ? "Publicaciones recientes" : "Recent posts"}>
+              {posts.map((item, index) => {
+                const thumb =
+                  item.sizes?.medium?.mediaUrl ||
+                  (item.mediaType === "VIDEO" ? item.thumbnailUrl : item.mediaUrl);
+                return (
+                  <button
+                    key={item.id}
+                    className={index === postIndex ? "is-active" : ""}
+                    onClick={() => setPostIndex(index)}
+                    aria-label={es ? `Ver publicación ${index + 1}` : `View post ${index + 1}`}
+                  >
+                    {thumb && (
+                      <Image
+                        src={thumb}
+                        alt=""
+                        fill
+                        unoptimized
+                        sizes="64px"
+                      />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
           )}
-        </a>
+        </div>
+
         <div className="journal-caption">
-          <Instagram size={25} />
+          <span className="journal-kicker">
+            <Instagram size={18} />
+            {es ? "Síguenos en Instagram" : "Follow us on Instagram"}
+          </span>
+
           <p>
             {es
               ? "Un pedacito\nde nuestro Caribe."
               : "A little piece\nof our Caribbean."}
           </p>
+
           <a
-            href={
-              post?.permalink ||
-              "https://www.instagram.com/evertripviajesytours/"
-            }
+            className="journal-instagram-cta"
+            href="https://www.instagram.com/evertripviajesytours/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            @evertripviajesytours
+            {es ? "Explorar Instagram" : "Explore Instagram"}
             <ArrowUpRight size={17} />
           </a>
+
+          <span className="journal-handle">@evertripviajesytours</span>
+
           {posts.length > 1 && (
             <div className="journal-controls">
               <button
