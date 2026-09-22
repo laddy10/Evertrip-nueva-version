@@ -1251,6 +1251,22 @@ body:has(.brand-film-dialog[open]) {
   border: 1px solid #bac8b5;
   border-radius: 50%;
 }
+
+@media (min-width: 901px) {
+  .travel-journal {
+    background: #ffffff;
+  }
+
+  .traveler-voice {
+    border-top-color: #dce9e5;
+  }
+
+  .journal-controls button {
+    background: #ffffff;
+    border-color: #d2e1dd;
+    color: var(--sea);
+  }
+}
 .journal-postcard {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
