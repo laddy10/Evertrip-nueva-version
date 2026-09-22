@@ -1237,6 +1237,25 @@ body:has(.brand-film-dialog[open]) {
   gap: 20px;
   font-size: 11px;
 }
+.traveler-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+.google-reviews-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--sea);
+  font-size: 11px;
+  line-height: 1.2;
+  text-decoration: none;
+}
+.google-reviews-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
 .journal-controls {
   display: flex;
   align-items: center;
