@@ -1084,15 +1084,15 @@ body:has(.brand-film-dialog[open]) {
   }
 
   .promise-landscape h2 {
-    left: 5.2vw;
+    left: 3.5vw;
     top: 20%;
-    max-width: 39%;
+    max-width: 34%;
     font-size: clamp(60px, 6.1vw, 100px);
     text-shadow: 0 2px 20px rgba(2, 38, 45, 0.24);
   }
 
   .promise-landscape > span {
-    left: 5.2vw;
+    left: 3.5vw;
     bottom: 130px;
     text-shadow: 0 1px 10px rgba(2, 38, 45, 0.22);
   }
