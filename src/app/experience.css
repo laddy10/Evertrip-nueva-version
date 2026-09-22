@@ -1073,23 +1073,20 @@ body:has(.brand-film-dialog[open]) {
   .promise-landscape-media > img {
     object-fit: cover;
     object-position: center 22%;
-    filter: saturate(0.88) contrast(1.055) brightness(1.025) hue-rotate(3deg);
   }
 
   .promise-landscape > div {
-    background:
-      radial-gradient(
-        ellipse at 3% 22%,
-        rgba(7, 29, 44, 0.57) 0%,
-        rgba(7, 29, 44, 0.36) 36%,
-        rgba(7, 29, 44, 0) 68%
-      ),
-      linear-gradient(
-        90deg,
-        rgba(7, 29, 44, 0.40) 0%,
-        rgba(7, 29, 44, 0.24) 44%,
-        rgba(7, 29, 44, 0) 72%
-      );
+    right: auto;
+    bottom: auto;
+    width: min(68%, calc(6vw + var(--promise-title-size) * 9.8));
+    height: calc(15% + var(--promise-title-size) * 3.8);
+    background: linear-gradient(
+      90deg,
+      rgba(6, 24, 23, 0.42) 0%,
+      rgba(6, 24, 23, 0.30) 65%,
+      rgba(6, 24, 23, 0) 100%
+    );
+    mask-image: linear-gradient(180deg, transparent, #000 26%, #000 74%, transparent);
   }
 
   .promise-landscape h2 {
