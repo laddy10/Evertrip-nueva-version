@@ -1099,7 +1099,7 @@ body:has(.brand-film-dialog[open]) {
 
   .promise-landscape > span {
     left: 4vw;
-    top: calc(40% + var(--promise-title-size) * 2.04 * 0.78 + 18px);
+    top: calc(40% + var(--promise-title-size) * 2.04 * 0.78 + 6px);
     bottom: auto;
     max-width: 30%;
     text-shadow: none;
