@@ -1291,7 +1291,18 @@ body:has(.brand-film-dialog[open]) {
   grid-template-columns: minmax(300px, 0.82fr) minmax(0, 1.18fr);
   gap: clamp(56px, 7vw, 120px);
   align-items: center;
-  padding-top: 25px;
+  padding-top: 72px;
+  margin-top: 56px;
+  position: relative;
+}
+.journal-postcard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(7, 59, 58, 0.14);
 }
 .journal-media {
   width: min(100%, 430px);
@@ -2072,7 +2083,12 @@ body:has(.brand-film-dialog[open]) {
     flex-direction: column;
     gap: 28px;
     align-items: stretch;
-    padding-top: 0;
+    padding-top: 48px;
+    margin-top: 40px;
+  }
+  .journal-postcard::before {
+    left: 0;
+    right: 0;
   }
   .journal-media {
     width: 100%;
