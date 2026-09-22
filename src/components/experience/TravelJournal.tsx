@@ -8,16 +8,16 @@ import type { Locale } from "@/i18n/config";
 
 const travelers = [
   {
-    name: "Diana Lucia Duque Guevara",
-    text: "Nos sentimos muy bien atendidos por la empresa Evertrip. Su puntualidad, cortesía y buen estado de limpieza y confort de los carros nos dio seguridad y comodidad en nuestro viaje. Lo recomendamos 10/10. Gracias Evertrip.",
+    name: "Luz Galvan",
+    text: "Excelente servicio, sin duda la mejor opción para viajar cómodos y seguros.",
+  },
+  {
+    name: "LORENA BERMUDEZ AYALA",
+    text: "Confiable y seguro. Excelente servicio 😊 Súper recomendado!!!...",
   },
   {
     name: "Juana Maria Romero",
     text: "Excelente servicio! Ever muy querido, muy amable y el carro en perfecto estado. Muy buen conductor, 100% recomendado para sus trayectos!!",
-  },
-  {
-    name: "Luz Galvan",
-    text: "Excelente servicio, sin duda la mejor opción para viajar cómodos y seguros.",
   },
 ];
 type Post = {
