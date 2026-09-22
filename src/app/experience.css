@@ -1091,7 +1091,7 @@ body:has(.brand-film-dialog[open]) {
 
   .promise-landscape h2 {
     left: 4vw;
-    top: 34%;
+    top: 40%;
     max-width: 46%;
     font-size: calc(var(--promise-title-size) * 0.78);
     text-shadow: none;
@@ -1099,7 +1099,7 @@ body:has(.brand-film-dialog[open]) {
 
   .promise-landscape > span {
     left: 4vw;
-    top: calc(34% + var(--promise-title-size) * 2.04 * 0.78 + 24px);
+    top: calc(40% + var(--promise-title-size) * 2.04 * 0.78 + 18px);
     bottom: auto;
     max-width: 30%;
     text-shadow: none;
