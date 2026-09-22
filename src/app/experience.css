@@ -922,15 +922,13 @@ body:has(.brand-film-dialog[open]) {
   width: 100%;
   height: auto;
   object-fit: contain;
+  mix-blend-mode: multiply;
   display: block;
   pointer-events: none;
-  mask-image: linear-gradient(
-    0deg,
-    transparent 0%,
-    black 9%,
-    black 91%,
-    transparent 100%
-  );
+  mask-image:
+    linear-gradient(0deg, transparent, black 16%, black 78%, transparent),
+    linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
+  mask-composite: intersect;
   animation: atlas-reveal 0.5s ease both;
 }
 .fleet-expand {
