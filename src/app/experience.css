@@ -1188,6 +1188,22 @@ body:has(.brand-film-dialog[open]) {
     color: var(--sea);
   }
 }
+
+@media (min-width: 901px) {
+  .travel-journal {
+    background: #ffffff;
+  }
+
+  .traveler-voice {
+    border-top-color: #dce9e5;
+  }
+
+  .journal-controls button {
+    background: #ffffff;
+    border-color: #d2e1dd;
+    color: var(--sea);
+  }
+}
 .travel-journal {
   background: var(--salt);
   padding: 55px 9vw 110px;
