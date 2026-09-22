@@ -1005,7 +1005,7 @@ body:has(.brand-film-dialog[open]) {
 .fleet-description li:before {
   content: "+";
   margin-right: 8px;
-  color: var(--sea);
+  color: var(--brand-teal);
 }
 .travel-promise {
   background: var(--salt);
@@ -1165,7 +1165,7 @@ body:has(.brand-film-dialog[open]) {
 }
 .promise-narrative .text-link {
   margin-top: 20px;
-  color: var(--sea);
+  color: var(--brand-teal);
 }
 
 @media (min-width: 901px) {
@@ -1184,8 +1184,8 @@ body:has(.brand-film-dialog[open]) {
 
   .promise-narrative .promise-stop {
     background: #ffffff;
-    border-color: #d2e1dd;
-    color: var(--sea);
+    border-color: rgba(16, 155, 150, 0.26);
+    color: var(--brand-teal);
   }
 }
 
@@ -1247,7 +1247,7 @@ body:has(.brand-film-dialog[open]) {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  color: var(--sea);
+  color: var(--brand-teal);
   font-size: 11px;
   line-height: 1.2;
   text-decoration: none;
@@ -1283,7 +1283,7 @@ body:has(.brand-film-dialog[open]) {
   .journal-controls button {
     background: #ffffff;
     border-color: #d2e1dd;
-    color: var(--sea);
+    color: var(--brand-teal);
   }
 }
 .journal-postcard {
@@ -1302,7 +1302,7 @@ body:has(.brand-film-dialog[open]) {
   left: 0;
   right: 0;
   height: 1px;
-  background: rgba(7, 59, 58, 0.14);
+  background: rgba(16, 155, 150, 0.18);
 }
 .journal-media {
   width: min(100%, 430px);
@@ -1373,15 +1373,15 @@ body:has(.brand-film-dialog[open]) {
   gap: 12px;
   min-height: 48px;
   padding: 0 20px;
-  border: 1px solid var(--sea);
+  border: 1px solid var(--brand-teal);
   border-radius: 999px;
-  color: var(--sea);
+  color: var(--brand-teal);
   font-size: 12px;
   font-weight: 500;
   transition: background 0.2s ease, color 0.2s ease;
 }
 .journal-instagram-cta:hover {
-  background: var(--sea);
+  background: var(--brand-teal);
   color: #ffffff;
 }
 .journal-handle {
@@ -1424,10 +1424,10 @@ body:has(.brand-film-dialog[open]) {
   font-size: 12px;
 }
 .questions-list {
-  border-top: 1px solid #afc0ac;
+  border-top: 1px solid rgba(16, 155, 150, 0.22);
 }
 .questions-list details {
-  border-bottom: 1px solid #c5d0be;
+  border-bottom: 1px solid rgba(16, 155, 150, 0.16);
 }
 .questions-list summary {
   list-style: none;
