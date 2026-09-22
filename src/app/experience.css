@@ -399,8 +399,8 @@ html[lang="en"] .overture-title h1 {
   display: flex;
   align-items: center;
   gap: 45px;
-  background: var(--sea);
-  color: var(--salt);
+  background: var(--brand-teal);
+  color: #ffffff;
   font-size: 12px;
   padding: 13px 20px;
   min-height: 44px;
@@ -1455,8 +1455,8 @@ body:has(.brand-film-dialog[open]) {
   padding: 0 25px 25px 0;
 }
 .journey-footer {
-  background: var(--sea);
-  color: var(--salt);
+  background: var(--brand-teal);
+  color: #ffffff;
   padding: 85px 6vw 95px;
   overflow: hidden;
   position: relative;
@@ -1480,7 +1480,7 @@ body:has(.brand-film-dialog[open]) {
 .footer-invitation p {
   font-size: 12px;
   line-height: 1.85;
-  color: #b6cec0;
+  color: rgba(255, 255, 255, 0.82);
   margin-bottom: 20px;
 }
 .footer-contact {
@@ -1507,7 +1507,7 @@ body:has(.brand-film-dialog[open]) {
   border-top: 1px solid #ffffff35;
   padding-top: 26px;
   font-size: 10px;
-  color: #b6cec0;
+  color: rgba(255, 255, 255, 0.78);
   line-height: 1.8;
 }
 .footer-detail nav {
