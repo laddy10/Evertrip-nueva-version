@@ -1090,18 +1090,18 @@ body:has(.brand-film-dialog[open]) {
   }
 
   .promise-landscape h2 {
-    left: 4.5vw;
-    top: 19%;
-    max-width: 60%;
-    font-size: calc(var(--promise-title-size) * 0.9);
+    left: 4vw;
+    top: 34%;
+    max-width: 46%;
+    font-size: calc(var(--promise-title-size) * 0.78);
     text-shadow: none;
   }
 
   .promise-landscape > span {
-    left: 4.5vw;
-    top: calc(19% + var(--promise-title-size) * 2.04 * 0.9 + 30px);
+    left: 4vw;
+    top: calc(34% + var(--promise-title-size) * 2.04 * 0.78 + 24px);
     bottom: auto;
-    max-width: 36%;
+    max-width: 30%;
     text-shadow: none;
   }
 }
