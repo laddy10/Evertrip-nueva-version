@@ -1059,15 +1059,15 @@ body:has(.brand-film-dialog[open]) {
   .promise-landscape {
     min-height: 700px;
     height: min(78svh, 780px);
-    background: #0a7774;
+    background: transparent;
   }
 
   .promise-landscape > img {
-    inset: 0 0 0 auto !important;
-    width: 72% !important;
+    inset: 0 !important;
+    width: 100% !important;
     height: 100% !important;
     object-fit: cover;
-    object-position: 54% 46%;
+    object-position: 58% 46%;
     background: transparent;
   }
 
@@ -1075,26 +1075,26 @@ body:has(.brand-film-dialog[open]) {
     background:
       linear-gradient(
         90deg,
-        rgba(10, 119, 116, 0.84) 0%,
-        rgba(10, 119, 116, 0.78) 24%,
-        rgba(10, 119, 116, 0.66) 33%,
-        rgba(10, 119, 116, 0.48) 42%,
-        rgba(10, 119, 116, 0.24) 52%,
-        rgba(3, 43, 37, 0.08) 64%,
-        rgba(3, 43, 37, 0.04) 100%
+        rgba(3, 43, 37, 0.42) 0%,
+        rgba(3, 43, 37, 0.28) 15%,
+        rgba(3, 43, 37, 0.12) 28%,
+        rgba(3, 43, 37, 0.03) 42%,
+        rgba(3, 43, 37, 0) 58%
       );
   }
 
   .promise-landscape h2 {
-    left: 8vw;
+    left: 5.2vw;
     top: 20%;
-    max-width: 45%;
+    max-width: 39%;
     font-size: clamp(60px, 6.1vw, 100px);
+    text-shadow: 0 2px 20px rgba(2, 38, 45, 0.24);
   }
 
   .promise-landscape > span {
-    left: 8vw;
+    left: 5.2vw;
     bottom: 130px;
+    text-shadow: 0 1px 10px rgba(2, 38, 45, 0.22);
   }
 }
 .promise-narrative {
