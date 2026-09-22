@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { getWhatsAppLink } from "@/data/routes";
@@ -54,16 +53,20 @@ export default function TravelPromise({ locale }: { locale: Locale }) {
       aria-labelledby="promise-title"
     >
       <div className="promise-landscape">
-        <Image
-          src="/assets/pilot/routes/tayrona-01.webp"
-          alt={
-            es
-              ? "La costa del Parque Tayrona"
-              : "The coast of Tayrona National Park"
-          }
-          fill
-          sizes="100vw"
-        />
+        <picture className="promise-landscape-media">
+          <source
+            media="(min-width: 901px)"
+            srcSet="/assets/pilot/routes/tayrona-desktop-new.webp"
+          />
+          <img
+            src="/assets/pilot/routes/tayrona-01.webp"
+            alt={
+              es
+                ? "La costa del Parque Tayrona"
+                : "The coast of Tayrona National Park"
+            }
+          />
+        </picture>
         <div />
         <h2 id="promise-title">
           {es
