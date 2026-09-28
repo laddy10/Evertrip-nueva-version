@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import { locales, isLocale, defaultLocale, type Locale } from "@/i18n/config";
+import { notFound } from "next/navigation";
+import { locales, isLocale } from "@/i18n/config";
+import { pageMetadata } from "@/lib/seo";
 import RouteDirectory from "@/components/experience/RouteDirectory";
 
 const content = {
@@ -34,21 +36,17 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale: rawLocale } = await params;
-  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  if (!isLocale(rawLocale)) notFound();
+  const locale = rawLocale;
   const t = content[locale];
 
-  return {
+  return pageMetadata({
+    locale,
+    path: "all-routes",
     title: t.title,
     description: t.description,
-    alternates: {
-      canonical: `/${locale}/all-routes`,
-      languages: {
-        es: "/es/all-routes",
-        en: "/en/all-routes",
-        "x-default": "/es/all-routes",
-      },
-    },
-  };
+    image: "/assets/pilot/routes/palomino-01.webp",
+  });
 }
 
 export default async function AllRoutesPage({
@@ -57,6 +55,7 @@ export default async function AllRoutesPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale: rawLocale } = await params;
-  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  if (!isLocale(rawLocale)) notFound();
+  const locale = rawLocale;
   return <RouteDirectory locale={locale} />;
 }

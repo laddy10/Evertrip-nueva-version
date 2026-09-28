@@ -1,5 +1,6 @@
 import type { Locale } from "@/i18n/config";
 import type { RouteDefinition, PriceCard } from "@/data/routes";
+import { BUSINESS_ID, localizedUrl, siteUrl } from "@/lib/seo";
 
 function parsePriceToNumber(price: string): number {
   const digits = price.replace(/[^\d]/g, "");
@@ -23,21 +24,24 @@ export default function RouteJsonLd({
           "@type": "ListItem",
           position: 1,
           name: locale === "es" ? "Inicio" : "Home",
-          item: `https://evertrip.co/${locale}`,
+          item: localizedUrl(locale),
         },
         {
           "@type": "ListItem",
           position: 2,
           name: route.title[locale],
-          item: `https://evertrip.co/${locale}/${route.slug}`,
+          item: localizedUrl(locale, route.slug),
         },
       ],
     },
     {
       "@type": "Service",
+      url: localizedUrl(locale, route.slug),
       serviceType: "Private ground transportation",
       provider: {
         "@type": "LocalBusiness",
+        "@id": BUSINESS_ID,
+        url: siteUrl(),
         name: "VIAJES Y TOURS EVERTRIP",
         telephone: "+573147659756",
       },

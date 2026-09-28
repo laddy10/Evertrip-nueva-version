@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { PHASE_DEVELOPMENT_SERVER } from "next/constants";
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: ["192.168.1.40"],
@@ -29,4 +30,10 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default function config(phase: string): NextConfig {
+  // Next 16's export-mode dev validator can throw before notFound() for unknown
+  // params. Keep production exported, and let dev honor dynamicParams = false.
+  return phase === PHASE_DEVELOPMENT_SERVER
+    ? { ...nextConfig, output: undefined }
+    : nextConfig;
+}

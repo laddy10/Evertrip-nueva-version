@@ -1,5 +1,6 @@
 import type { Locale } from "@/i18n/config";
 import { faqsByLocale } from "@/data/faq";
+import { BUSINESS_ID, siteUrl } from "@/lib/seo";
 
 const businessDescription = {
   es: "Traslados privados puerta a puerta por la costa Caribe colombiana. Recogida en aeropuerto, reserva por WhatsApp, vans cómodas para familias y grupos.",
@@ -12,9 +13,9 @@ export default function JsonLd({ locale }: { locale: Locale }) {
     "@graph": [
       {
         "@type": ["LocalBusiness", "TaxiService"],
-        "@id": "https://evertrip.co/#business",
+        "@id": BUSINESS_ID,
         name: "VIAJES Y TOURS EVERTRIP",
-        url: "https://evertrip.co",
+        url: siteUrl(),
         telephone: "+573147659756",
         priceRange: "$$",
         description: businessDescription[locale],

@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { notFound } from "next/navigation";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { locales, isLocale, defaultLocale, type Locale } from "@/i18n/config";
+import { locales, isLocale, type Locale } from "@/i18n/config";
+import { pageMetadata } from "@/lib/seo";
 import "../globals.css";
 import "../experience.css";
 
@@ -20,20 +22,18 @@ const inter = localFont({
   variable: "--font-inter",
 });
 
-const SITE_URL = "https://evertrip.co";
+export const dynamicParams = false;
 
-const metaByLocale: Record<Locale, { title: string; description: string; locale: string }> = {
+const metaByLocale: Record<Locale, { title: string; description: string }> = {
   es: {
     title: "Transporte privado puerta a puerta | Barranquilla, Santa Marta, Palomino | EverTrip",
     description:
       "Traslados privados puerta a puerta por la costa Caribe: Barranquilla, Santa Marta, Cartagena, Palomino y Valledupar. Reserva por WhatsApp en minutos.",
-    locale: "es_CO",
   },
   en: {
     title: "Private Door-to-Door Transfers | Barranquilla, Santa Marta, Palomino | EverTrip",
     description:
       "Private door-to-door transfers across the Caribbean coast: Barranquilla, Santa Marta, Cartagena, Palomino and Valledupar. Book on WhatsApp in minutes.",
-    locale: "en_US",
   },
 };
 
@@ -47,36 +47,15 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale: rawLocale } = await params;
-  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  if (!isLocale(rawLocale)) notFound();
+  const locale = rawLocale;
   const meta = metaByLocale[locale];
 
   return {
-    metadataBase: new URL(SITE_URL),
-    title: meta.title,
-    description: meta.description,
+    ...pageMetadata({ locale, ...meta }),
     icons: {
       icon: "/assets/logo2-rounded-ui.png",
       apple: "/assets/logo2-apple-touch.png",
-    },
-    alternates: {
-      canonical: `/${locale}`,
-      languages: {
-        es: "/es",
-        en: "/en",
-        "x-default": "/es",
-      },
-    },
-    openGraph: {
-      title: meta.title,
-      description: meta.description,
-      siteName: "EverTrip",
-      locale: meta.locale,
-      type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: meta.title,
-      description: meta.description,
     },
   };
 }
@@ -89,7 +68,8 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale: rawLocale } = await params;
-  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  if (!isLocale(rawLocale)) notFound();
+  const locale = rawLocale;
 
   return (
     <html lang={locale} className={`${outfit.variable} ${inter.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>

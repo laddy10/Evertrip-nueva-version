@@ -3,7 +3,10 @@ import type { Metadata } from "next";
 import RoutePageTemplate from "@/components/RoutePageTemplate";
 import RouteJsonLd from "@/components/RouteJsonLd";
 import { routes, getRouteBySlug, getPriceCards } from "@/data/routes";
-import { locales, isLocale, defaultLocale, type Locale } from "@/i18n/config";
+import { locales, isLocale } from "@/i18n/config";
+import { pageMetadata } from "@/lib/seo";
+
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   return locales.flatMap((locale) => routes.map((route) => ({ locale, slug: route.slug })));
@@ -15,27 +18,18 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
   const { locale: rawLocale, slug } = await params;
-  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  if (!isLocale(rawLocale)) notFound();
+  const locale = rawLocale;
   const route = getRouteBySlug(slug);
-  if (!route) return {};
+  if (!route) notFound();
 
-  return {
+  return pageMetadata({
+    locale,
+    path: slug,
     title: route.title[locale],
     description: route.metaDescription[locale],
-    alternates: {
-      canonical: `/${locale}/${slug}`,
-      languages: {
-        es: `/es/${slug}`,
-        en: `/en/${slug}`,
-        "x-default": `/es/${slug}`,
-      },
-    },
-    openGraph: {
-      title: route.title[locale],
-      description: route.metaDescription[locale],
-      type: "website",
-    },
-  };
+    image: route.image2 || route.image,
+  });
 }
 
 export default async function RoutePage({
@@ -44,7 +38,8 @@ export default async function RoutePage({
   params: Promise<{ locale: string; slug: string }>;
 }) {
   const { locale: rawLocale, slug } = await params;
-  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  if (!isLocale(rawLocale)) notFound();
+  const locale = rawLocale;
   const route = getRouteBySlug(slug);
   if (!route) notFound();
 

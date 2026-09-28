@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
-
-const SITE_URL = "https://evertrip.co";
+import { siteUrl } from "@/lib/seo";
 
 export const dynamic = "force-static";
 
@@ -10,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: `${SITE_URL}/sitemap.xml`,
+    sitemap: siteUrl("/sitemap.xml"),
   };
 }

@@ -1,7 +1,8 @@
-import { redirect } from 'next/navigation';
+import Link from "next/link";
+import { defaultLocale } from "@/i18n/config";
+import { localizedPath } from "@/lib/seo";
 
 export default function RootPage() {
-  // Cuando se utiliza output: export, Next.js generará 
-  // un archivo index.html con un <meta http-equiv="refresh" content="0; url=/es" />
-  redirect('/es');
+  // The root layout supplies a static refresh; this link also works without JS.
+  return <Link href={localizedPath(defaultLocale)}>Continuar a Evertrip / Continue to Evertrip</Link>;
 }
