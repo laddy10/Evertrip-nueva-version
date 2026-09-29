@@ -578,33 +578,47 @@ export const routes: RouteDefinition[] = [
     title: { es: "Transporte privado Cartagena - Barranquilla | EverTrip", en: "Private Transfer Cartagena - Barranquilla | EverTrip" },
     h1: { es: "Cartagena ↔ Barranquilla", en: "Cartagena ↔ Barranquilla" },
     metaDescription: {
-      es: "Traslado privado y puntual entre Cartagena y Barranquilla, ideal para viajes de negocios y eventos. Cotiza por WhatsApp.",
-      en: "Private, punctual transfer between Cartagena and Barranquilla, ideal for business trips and events. Get a quote on WhatsApp.",
+      es: "Traslado privado entre Cartagena y Barranquilla con recogida en hotel, dirección o aeropuerto. Equipaje y paradas coordinadas por WhatsApp.",
+      en: "Private transfer between Cartagena and Barranquilla with hotel, address or airport pickup. Luggage and coordinated stops via WhatsApp.",
     },
     description: {
-      es: "Conexión directa y puntual entre dos de las ciudades más importantes de la costa Caribe, pensada para viajeros de negocios y eventos que no pueden fallar en su hora de llegada.",
-      en: "A direct, punctual connection between two of the most important cities on the Caribbean coast, designed for business travelers and event attendees who can't miss their arrival time.",
+      es: "Conectamos Cartagena y Barranquilla en servicio privado, con recogida en hoteles, direcciones, aeropuertos y otros puntos accesibles previamente coordinados. El trayecto puede reservarse en cualquiera de los dos sentidos.",
+      en: "We connect Cartagena and Barranquilla by private transfer, with pickup at hotels, addresses, airports and other accessible points arranged in advance. The trip can be booked in either direction.",
     },
     duration: { es: "Aprox. 2h - 2h 30min", en: "Approx. 2h - 2h 30min" },
-    idealFor: { es: "Negocios y eventos", en: "Business & events" },
+    idealFor: { es: "Negocios, eventos, familias y grupos", en: "Business, events, families and groups" },
     highlights: {
       es: [
-        "Salidas puntuales, ideal para agendas de negocio",
-        "Vehículo privado con aire acondicionado",
-        "Recogida en aeropuerto, hotel u oficina",
-        "Cotización según horario y punto exacto de recogida",
+        "Recogida en hoteles, direcciones o aeropuertos de Cartagena o Barranquilla",
+        "Equipaje coordinado según pasajeros y vehículo",
+        "Paradas de aproximadamente 30 a 40 minutos, coordinadas con anticipación",
+        "Servicio privado sin terminales ni transbordos",
+        "Disponible en ambos sentidos, con cada trayecto cotizado por separado",
       ],
       en: [
-        "On-time departures, ideal for business schedules",
-        "Private air-conditioned vehicle",
-        "Pickup at the airport, hotel or office",
-        "Quote based on schedule and exact pickup point",
+        "Pickup at hotels, addresses or airports in Cartagena or Barranquilla",
+        "Luggage coordinated according to passengers and vehicle",
+        "Stops of approximately 30 to 40 minutes, arranged in advance",
+        "Private service without terminals or transfers",
+        "Available in both directions, with each trip quoted separately",
       ],
     },
     faqs: [
       {
-        q: { es: "¿Puedo reservar para primera hora de la mañana?", en: "Can I book for early morning?" },
-        a: { es: "Sí, coordinamos la hora exacta que necesites, incluyendo madrugadas para vuelos o reuniones tempranas.", en: "Yes, we coordinate the exact time you need, including early mornings for flights or early meetings." },
+        q: { es: "¿Cuánto dura el viaje entre Cartagena y Barranquilla?", en: "How long does the trip between Cartagena and Barranquilla take?" },
+        a: { es: "Normalmente entre 2 y 2 horas y media, según el tráfico y los puntos exactos de recogida y llegada. Las paradas coordinadas aumentan el tiempo total.", en: "Usually between 2 and 2.5 hours, depending on traffic and the exact pickup and drop-off points. Coordinated stops increase the total journey time." },
+      },
+      {
+        q: { es: "¿Pueden recogerme en el aeropuerto?", en: "Can you pick me up at the airport?" },
+        a: { es: "Sí. Podemos coordinar recogida o llegada en aeropuerto, además de hoteles y direcciones.", en: "Yes. We can coordinate airport pickup or drop-off, as well as hotels and addresses." },
+      },
+      {
+        q: { es: "¿Puedo hacer una parada durante el trayecto?", en: "Can I make a stop during the trip?" },
+        a: { es: "Sí. Podemos coordinar paradas de aproximadamente 30 a 40 minutos. Son flexibles y extienden la duración total del viaje.", en: "Yes. We can coordinate stops of approximately 30 to 40 minutes. They are flexible and extend the total journey time." },
+      },
+      {
+        q: { es: "¿Puedo reservar Barranquilla → Cartagena?", en: "Can I book Barranquilla → Cartagena?" },
+        a: { es: "Sí. El servicio está disponible en ambos sentidos y cada trayecto se cotiza y cobra por separado.", en: "Yes. The service is available in both directions, and each trip is quoted and charged separately." },
       },
     ],
     waMessage: { es: "Hola, necesito un transporte privado entre Cartagena y Barranquilla.", en: "Hi, I need a private transfer between Cartagena and Barranquilla." },
@@ -705,58 +719,55 @@ export const routes: RouteDefinition[] = [
     slug: "cartagena-to-palomino",
     featured: false,
     priceMode: "quote",
-    title: {
-      es: "Transporte privado de Cartagena a Palomino | EverTrip",
-      en: "Private Transfer Cartagena to Palomino | EverTrip",
-    },
-    h1: {
-      es: "Transporte privado Cartagena ↔ Palomino",
-      en: "Private Transfer Cartagena ↔ Palomino",
-    },
+    title: { es: "Transporte privado de Cartagena a Palomino | EverTrip", en: "Private Transfer Cartagena to Palomino | EverTrip" },
+    h1: { es: "Transporte privado Cartagena ↔ Palomino", en: "Private Transfer Cartagena ↔ Palomino" },
     metaDescription: {
-      es: "Viaje privado puerta a puerta entre Cartagena y Palomino. Reserva tu traslado con EverTrip. Conductores expertos y vehiculos premium.",
-      en: "Door-to-door private transfer between Cartagena and Palomino. Book your ride with EverTrip. Expert drivers and premium vehicles.",
+      es: "Traslado privado entre Cartagena y Palomino con recogida en hotel, dirección o aeropuerto. Equipaje y paradas coordinadas. Reserva por WhatsApp.",
+      en: "Private transfer between Cartagena and Palomino with hotel, address or airport pickup. Luggage and coordinated stops. Book via WhatsApp.",
     },
     description: {
-      es: "Disfruta de un viaje comodo, seguro y sin complicaciones entre Cartagena y Palomino. Nuestros servicios son 100% privados, asegurando tu tranquilidad.",
-      en: "Enjoy a comfortable, safe, and hassle-free journey between Cartagena and Palomino. Our services are 100% private, ensuring your peace of mind.",
+      es: "Conectamos Cartagena y Palomino en servicio privado, con recogida en hoteles, direcciones, aeropuerto y otros puntos accesibles previamente coordinados. Puedes viajar con equipaje y reservar el trayecto en cualquiera de los dos sentidos.",
+      en: "We connect Cartagena and Palomino by private transfer, with pickup at hotels, addresses, the airport and other accessible points arranged in advance. You can travel with luggage and book the trip in either direction.",
     },
     duration: { es: "Aprox. 5h 30m", en: "Approx. 5h 30m" },
-    idealFor: { es: "Parejas, Familias y Grupos", en: "Couples, Families, and Groups" },
+    idealFor: { es: "Parejas, familias y grupos", en: "Couples, families and groups" },
     highlights: {
       es: [
-        "Misma tarifa en ambos sentidos",
-        "Servicio puerta a puerta",
-        "Vehiculo privado con aire acondicionado",
-        "Conductor puntual y profesional",
-        "Sin cargos ocultos",
-        "Asistencia y soporte via WhatsApp"
+        "Recogida en hoteles, direcciones o aeropuerto de Cartagena",
+        "Llegada a Palomino o a un punto accesible previamente coordinado",
+        "Equipaje coordinado según pasajeros y vehículo",
+        "Paradas de aproximadamente 30 a 40 minutos, coordinadas con anticipación",
+        "Disponible en ambos sentidos, con cada trayecto cotizado por separado",
       ],
       en: [
-        "Same rate in both directions",
-        "Door-to-door service",
-        "Private vehicle with AC",
-        "Punctual and professional driver",
-        "No hidden fees",
-        "WhatsApp support and assistance"
-      ]
+        "Pickup at hotels, addresses or Cartagena airport",
+        "Drop-off in Palomino or another accessible point arranged in advance",
+        "Luggage coordinated according to passengers and vehicle",
+        "Stops of approximately 30 to 40 minutes, arranged in advance",
+        "Available in both directions, with each trip quoted separately",
+      ],
     },
     faqs: [
       {
-        q: { es: "¿El servicio es compartido?", en: "Is the service shared?" },
-        a: { es: "No, todos nuestros traslados son 100% privados para ti y tu grupo.", en: "No, all our transfers are 100% private for you and your group." }
+        q: { es: "¿Cuánto dura el viaje entre Cartagena y Palomino?", en: "How long is the trip between Cartagena and Palomino?" },
+        a: { es: "El trayecto suele durar aproximadamente 5 horas y media, dependiendo del tráfico y de los puntos exactos de recogida y llegada. Las paradas coordinadas aumentan el tiempo total.", en: "The trip usually takes approximately 5.5 hours, depending on traffic and the exact pickup and drop-off points. Coordinated stops increase the total journey time." },
       },
       {
-        q: { es: "¿Puedo hacer paradas en el camino?", en: "Can I make stops along the way?" },
-        a: { es: "Sí, podemos programar paradas breves para ir al baño o comprar snacks. Por favor indícalo al momento de reservar.", en: "Yes, we can schedule brief stops for restrooms or snacks. Please let us know when booking." }
-      }
+        q: { es: "¿Puedo viajar con equipaje?", en: "Can I travel with luggage?" },
+        a: { es: "Sí. Coordinamos el equipaje según la cantidad de pasajeros y el vehículo asignado.", en: "Yes. We coordinate luggage according to the number of passengers and the vehicle assigned." },
+      },
+      {
+        q: { es: "¿Puedo hacer una parada durante el trayecto?", en: "Can I make a stop during the trip?" },
+        a: { es: "Sí. Podemos coordinar paradas de aproximadamente 30 a 40 minutos. Son flexibles y extienden la duración total del viaje.", en: "Yes. We can coordinate stops of approximately 30 to 40 minutes. They are flexible and extend the total journey time." },
+      },
+      {
+        q: { es: "¿Puedo reservar Palomino → Cartagena?", en: "Can I book Palomino → Cartagena?" },
+        a: { es: "Sí. El servicio está disponible en ambos sentidos y cada trayecto se cotiza y cobra por separado.", en: "Yes. The service is available in both directions, and each trip is quoted and charged separately." },
+      },
     ],
-    waMessage: {
-      es: "Hola, me gustaria cotizar un traslado privado desde Cartagena hacia Palomino.",
-      en: "Hello, I would like to get a quote for a private transfer from Cartagena to Palomino."
-    },
+    waMessage: { es: "Hola, necesito un transporte privado entre Cartagena y Palomino.", en: "Hi, I need a private transfer between Cartagena and Palomino." },
     image: "/assets/pilot/routes/cartagena-01.webp",
-    image2: "/assets/pilot/routes/palomino-01.webp"
+    image2: "/assets/pilot/routes/palomino-01.webp",
   },
   {
     slug: "cartagena-to-valledupar",
