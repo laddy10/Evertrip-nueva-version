@@ -2569,47 +2569,75 @@ body:has(.brand-film-dialog[open]) {
   margin-top: 25px;
 }
 .directory-cover {
-  padding: 148px max(7vw, calc((100vw - 1480px) / 2)) 82px;
+  padding: 150px max(7vw, calc((100vw - 1480px) / 2)) 86px;
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(420px, 1.1fr);
-  gap: clamp(56px, 7vw, 110px);
+  grid-template-columns: minmax(340px, 0.82fr) minmax(480px, 1.18fr);
+  gap: clamp(52px, 6vw, 96px);
   align-items: center;
-  background: var(--sea);
-  color: #ffffff;
+  background: #ffffff;
+  color: var(--ink);
   position: relative;
-  overflow: hidden;
 }
-.directory-cover::after {
-  content: "";
-  position: absolute;
-  left: max(7vw, calc((100vw - 1480px) / 2));
-  right: max(7vw, calc((100vw - 1480px) / 2));
-  bottom: 28px;
-  height: 1px;
-  background: rgba(24, 184, 178, 0.28);
+.directory-cover-copy {
+  max-width: 560px;
+}
+.directory-cover .chapter-caption {
+  color: var(--brand-teal);
+  margin: 0 0 18px;
 }
 .directory-cover h1 {
-  font-size: clamp(50px, 6.5vw, 99px);
-  line-height: 1;
+  font-size: clamp(52px, 6vw, 92px);
+  line-height: 0.98;
   letter-spacing: -0.055em;
   font-weight: 450;
   white-space: pre-line;
-  margin: 25px 0;
+  margin: 0;
+  color: var(--sea);
 }
-.directory-cover > div > p:last-child {
-  font-size: 13px;
-  line-height: 1.9;
-  max-width: 390px;
-  color: rgba(255, 255, 255, 0.74);
+.directory-cover-lead {
+  font-size: 14px;
+  line-height: 1.8;
+  max-width: 500px;
+  margin: 28px 0 0;
+  color: var(--muted);
+}
+.directory-cover-meta {
+  margin-top: 34px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(16, 155, 150, 0.20);
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.55;
+}
+.directory-cover-meta > span:first-child {
+  color: var(--sea);
+  font-family: var(--font-outfit);
+  font-size: 14px;
+}
+.directory-cover-meta strong {
+  color: var(--brand-teal);
+  font-size: 22px;
+  font-weight: 500;
+  margin-right: 7px;
 }
 .directory-photo {
   position: relative;
-  height: clamp(420px, 34vw, 540px);
+  height: clamp(410px, 33vw, 525px);
   overflow: hidden;
-  border-radius: 28px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 0 28px 70px rgba(2, 28, 28, 0.26);
-  background: #0a4a48;
+  border-radius: 24px;
+  background: #eef5f4;
+  box-shadow: 0 24px 64px rgba(7, 59, 58, 0.10);
+}
+.directory-photo::before {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.64);
+  border-radius: 16px;
+  z-index: 2;
+  pointer-events: none;
 }
 .directory-photo::after {
   content: "";
@@ -2618,17 +2646,18 @@ body:has(.brand-film-dialog[open]) {
   pointer-events: none;
   background: linear-gradient(
     180deg,
-    rgba(7, 59, 58, 0.03) 0%,
-    rgba(7, 59, 58, 0.14) 100%
+    rgba(7, 59, 58, 0.00) 55%,
+    rgba(7, 59, 58, 0.12) 100%
   );
 }
 .directory-photo > img {
   object-fit: cover;
-  object-position: center 48%;
+  object-position: center;
 }
 .directory-index {
-  padding: 72px max(8vw, calc((100vw - 1480px) / 2)) 110px;
-  background: #ffffff;
+  padding: 66px max(8vw, calc((100vw - 1480px) / 2)) 110px;
+  background: #f8fbfa;
+  border-top: 1px solid rgba(16, 155, 150, 0.12);
 }
 .directory-index > label {
   max-width: 560px;
@@ -2768,21 +2797,28 @@ body:has(.brand-film-dialog[open]) {
     padding: 118px 24px 56px;
     display: block;
   }
-  .directory-cover::after {
-    left: 24px;
-    right: 24px;
-    bottom: 24px;
+  .directory-cover-copy {
+    max-width: none;
   }
   .directory-cover h1 {
     font-size: 53px;
   }
-  .directory-cover > div > p:last-child {
+  .directory-cover-lead {
     font-size: 12px;
+    max-width: 340px;
+  }
+  .directory-cover-meta {
+    margin-top: 26px;
+    padding-top: 18px;
   }
   .directory-photo {
-    height: 320px;
-    margin-top: 38px;
-    border-radius: 22px;
+    height: 310px;
+    margin-top: 34px;
+    border-radius: 20px;
+  }
+  .directory-photo::before {
+    inset: 10px;
+    border-radius: 13px;
   }
   .directory-index {
     padding: 42px 24px 76px;

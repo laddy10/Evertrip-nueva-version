@@ -26,32 +26,47 @@ export default function RouteDirectory({
   );
   return (
     <div className="route-directory">
-      <div className="directory-cover">
-        <div>
+      <section className="directory-cover" aria-labelledby="routes-directory-title">
+        <div className="directory-cover-copy">
           <p className="chapter-caption">
             {es ? "El atlas Evertrip" : "The Evertrip atlas"}
           </p>
-          <h1>
+          <h1 id="routes-directory-title">
             {es
               ? "Un Caribe.\nMil caminos."
               : "One Caribbean.\nEndless journeys."}
           </h1>
-          <p>
+          <p className="directory-cover-lead">
             {es
-              ? "Todas nuestras rutas privadas. Encuentra tu destino y deja el camino en nuestras manos."
-              : "All our private routes. Find your destination and leave the road to us."}
+              ? "Traslados privados entre los principales destinos del Caribe colombiano. Explora la ruta que necesitas y cotiza tu viaje."
+              : "Private transfers between the Colombian Caribbean's main destinations. Explore the route you need and request your quote."}
           </p>
+          <div className="directory-cover-meta" aria-label={es ? "Cobertura de rutas" : "Route coverage"}>
+            <span>
+              <strong>{routes.length}</strong>
+              {es ? " rutas privadas" : " private routes"}
+            </span>
+            <span>
+              {es
+                ? "Santa Marta · Cartagena · Barranquilla · Palomino · Valledupar"
+                : "Santa Marta · Cartagena · Barranquilla · Palomino · Valledupar"}
+            </span>
+          </div>
         </div>
         <div className="directory-photo">
           <Image
-            src="/assets/pilot/routes/palomino-01.webp"
-            alt="Palomino"
+            src="/assets/pilot/routes/private-route-01.webp"
+            alt={
+              es
+                ? "Traslado privado Evertrip por el Caribe colombiano"
+                : "Evertrip private transfer across the Colombian Caribbean"
+            }
             fill
             preload
-            sizes="(max-width: 700px) 100vw, 50vw"
+            sizes="(max-width: 700px) 100vw, 52vw"
           />
         </div>
-      </div>
+      </section>
       <div className="directory-index">
         <label htmlFor="route-search">
           <Search size={18} />

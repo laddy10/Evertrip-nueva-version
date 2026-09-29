@@ -46,7 +46,7 @@ export async function generateMetadata({
     path: "all-routes",
     title: t.title,
     description: t.description,
-    image: "/assets/pilot/routes/palomino-01.webp",
+    image: "/assets/pilot/routes/private-route-01.webp",
   });
 }
 
