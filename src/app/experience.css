@@ -1206,11 +1206,28 @@ body:has(.brand-film-dialog[open]) {
   padding: 60px 0 115px;
   border-top: 1px solid #bac8b5;
 }
+.traveler-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+}
 .traveler-voice h2 {
   font-size: 24px;
   font-weight: 450;
   line-height: 1.25;
   white-space: pre-line;
+}
+.traveler-proof-photo {
+  position: relative;
+  width: 100%;
+  height: clamp(220px, 19vw, 300px);
+  overflow: hidden;
+  border-radius: 26px;
+  background: #eef4f2;
+}
+.traveler-proof-photo img {
+  object-fit: cover;
+  object-position: center 48%;
 }
 .traveler-quote blockquote {
   font-family: var(--font-outfit);
@@ -2045,9 +2062,17 @@ body:has(.brand-film-dialog[open]) {
     display: block;
     padding: 40px 0 70px;
   }
+  .traveler-intro {
+    gap: 24px;
+    margin-bottom: 34px;
+  }
   .traveler-voice h2 {
     font-size: 23px;
-    margin-bottom: 30px;
+    margin-bottom: 0;
+  }
+  .traveler-proof-photo {
+    height: 235px;
+    border-radius: 22px;
   }
   .traveler-quote blockquote {
     font-size: 28px;

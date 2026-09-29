@@ -70,11 +70,25 @@ export default function TravelJournal({ locale }: { locale: Locale }) {
   return (
     <section className="travel-journal" aria-labelledby="journal-title">
       <div className="traveler-voice">
-        <h2 id="journal-title">
-          {es
-            ? "El viaje, contado\npor quienes lo vivieron."
-            : "The journey, told\nby those who lived it."}
-        </h2>
+        <div className="traveler-intro">
+          <h2 id="journal-title">
+            {es
+              ? "El viaje, contado\npor quienes lo vivieron."
+              : "The journey, told\nby those who lived it."}
+          </h2>
+          <div className="traveler-proof-photo">
+            <Image
+              src="/assets/lugares/real-airport-transfer.jpg"
+              alt={
+                es
+                  ? "Grupo de viajeros junto a un vehículo de Evertrip"
+                  : "Group of travelers beside an Evertrip vehicle"
+              }
+              fill
+              sizes="(max-width: 700px) 100vw, 28vw"
+            />
+          </div>
+        </div>
         <div className="traveler-quote" aria-live="polite">
           <blockquote lang="es">“{travelers[review].text}”</blockquote>
           <div>
