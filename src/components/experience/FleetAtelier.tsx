@@ -2,11 +2,10 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
-import { ArrowLeft, ArrowRight, ArrowUpRight, Expand } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { vehicles, type VehicleId } from "@/data/vehicles";
 import { getWhatsAppLink } from "@/lib/whatsapp";
 import type { Locale } from "@/i18n/config";
-import { VehicleLightbox, useClickGesture } from "../sections/FleetShowcase";
 
 const fleet: { name: string; id: VehicleId; year: string; images: string[] }[] =
   [
@@ -66,12 +65,7 @@ export default function FleetAtelier({ locale }: { locale: Locale }) {
   const es = locale === "es";
   const [selected, setSelected] = useState(0);
   const [photo, setPhoto] = useState(0);
-  const [modal, setModal] = useState<{
-    photo: number;
-    opener: HTMLButtonElement;
-  } | null>(null);
   const swipeStart = useRef<{ x: number; y: number } | null>(null);
-  const gesture = useClickGesture();
   const item = fleet[selected];
   const vehicle = vehicles[item.id];
   const images = item.images.map((path) => `/assets/vehicles/${path}`);
@@ -127,46 +121,24 @@ export default function FleetAtelier({ locale }: { locale: Locale }) {
               ? "Executive"
               : item.name.split(" ").slice(-1)}
           </div>
-          <button
+          <div
             className="fleet-photo"
-            aria-label={`${es ? "Ampliar imagen de" : "Enlarge image of"} ${item.name}`}
-            aria-haspopup="dialog"
             onPointerDown={(event) => {
-              gesture.begin(event);
               swipeStart.current = { x: event.clientX, y: event.clientY };
             }}
-            onPointerMove={gesture.move}
             onPointerCancel={() => {
-              gesture.cancel();
               swipeStart.current = null;
             }}
             onPointerUp={(event) => {
-              gesture.release(event);
               const start = swipeStart.current;
               if (
                 start &&
                 Math.abs(event.clientX - start.x) > 55 &&
                 Math.abs(event.clientY - start.y) < 50
-              )
-                paginate(event.clientX < start.x ? 1 : -1);
-              else if (
-                start &&
-                event.isPrimary &&
-                event.pointerType === "touch" &&
-                Math.hypot(event.clientX - start.x, event.clientY - start.y) <=
-                  6
               ) {
-                // A deliberate touch tap should also work after a pan, when
-                // browsers can suppress the subsequent compatibility click.
-                event.preventDefault();
-                gesture.cancel();
-                setModal({ photo, opener: event.currentTarget });
+                paginate(event.clientX < start.x ? 1 : -1);
               }
               swipeStart.current = null;
-            }}
-            onClick={(event) => {
-              if (gesture.consumeClick(event))
-                setModal({ photo, opener: event.currentTarget });
             }}
           >
             <Image
@@ -178,11 +150,7 @@ export default function FleetAtelier({ locale }: { locale: Locale }) {
               sizes="(max-width: 700px) 100vw, 80vw"
               draggable={false}
             />
-            <span className="fleet-expand">
-              <Expand size={16} />
-              {es ? "Ver de cerca" : "Take a closer look"}
-            </span>
-          </button>
+          </div>
           <div className="fleet-photo-controls">
             <button
               onClick={() => paginate(-1)}
@@ -239,28 +207,6 @@ export default function FleetAtelier({ locale }: { locale: Locale }) {
           <ArrowUpRight size={22} />
         </a>
       </div>
-      {modal && (
-        <VehicleLightbox
-          name={item.name}
-          images={images}
-          imageIndex={modal.photo}
-          locale={locale}
-          opener={modal.opener}
-          onClose={() => setModal(null)}
-          onNavigate={(direction) =>
-            setModal((current) =>
-              current
-                ? {
-                    ...current,
-                    photo:
-                      (current.photo + direction + images.length) %
-                      images.length,
-                  }
-                : null,
-            )
-          }
-        />
-      )}
     </section>
   );
 }
