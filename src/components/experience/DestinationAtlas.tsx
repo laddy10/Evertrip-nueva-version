@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import type { Locale } from "@/i18n/config";
 
 const routesShowcase = [
@@ -104,16 +104,26 @@ export default function DestinationAtlas({
           <span className="small-note">
             {es ? "Elige una ruta" : "Choose a route"}
           </span>
-          {routesShowcase.map((item, index) => (
-            <button
-              key={item.slug}
-              aria-pressed={active === index}
-              onClick={() => setActive(index)}
-            >
-              <span>{item.label}</span>
-              <ArrowUpRight size={24} aria-hidden="true" />
-            </button>
-          ))}
+          <div className="atlas-route-list" role="list">
+            {routesShowcase.map((item, index) => (
+              <button
+                key={item.slug}
+                type="button"
+                role="listitem"
+                aria-pressed={active === index}
+                onClick={() => setActive(index)}
+              >
+                <span className="atlas-route-option">
+                  <span>{item.origin}</span>
+                  <ArrowRight size={16} aria-hidden="true" />
+                  <span>{item.destination}</span>
+                </span>
+                <span className="atlas-route-state" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+              </button>
+            ))}
+          </div>
           <Link href={`/${locale}/all-routes`} className="atlas-all">
             {es ? "Explora todas las rutas" : "Explore every route"}
             <ArrowUpRight size={16} />
