@@ -3,16 +3,26 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Search } from "lucide-react";
-import { routes, getRouteCardTitle } from "@/data/routes";
 import type { Locale } from "@/i18n/config";
 
-export default function RouteDirectory({ locale }: { locale: Locale }) {
+type RouteSummary = {
+  slug: string;
+  title: string;
+  duration: string;
+};
+
+export default function RouteDirectory({
+  locale,
+  routes,
+}: {
+  locale: Locale;
+  routes: RouteSummary[];
+}) {
   const es = locale === "es";
   const [query, setQuery] = useState("");
+  const normalizedQuery = query.toLowerCase().trim();
   const matching = routes.filter((route) =>
-    getRouteCardTitle(route, locale)
-      .toLowerCase()
-      .includes(query.toLowerCase().trim()),
+    route.title.toLowerCase().includes(normalizedQuery),
   );
   return (
     <div className="route-directory">
@@ -64,8 +74,8 @@ export default function RouteDirectory({ locale }: { locale: Locale }) {
         <div>
           {matching.map((route) => (
             <Link key={route.slug} href={`/${locale}/${route.slug}`}>
-              <span>{getRouteCardTitle(route, locale)}</span>
-              <small>{route.duration[locale]}</small>
+              <span>{route.title}</span>
+              <small>{route.duration}</small>
               <ArrowUpRight size={23} />
             </Link>
           ))}

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { locales, isLocale } from "@/i18n/config";
 import { pageMetadata } from "@/lib/seo";
 import RouteDirectory from "@/components/experience/RouteDirectory";
+import { routes, getRouteCardTitle } from "@/data/routes";
 
 const content = {
   es: {
@@ -57,5 +58,11 @@ export default async function AllRoutesPage({
   const { locale: rawLocale } = await params;
   if (!isLocale(rawLocale)) notFound();
   const locale = rawLocale;
-  return <RouteDirectory locale={locale} />;
+  const routeSummaries = routes.map((route) => ({
+    slug: route.slug,
+    title: getRouteCardTitle(route, locale),
+    duration: route.duration[locale],
+  }));
+
+  return <RouteDirectory locale={locale} routes={routeSummaries} />;
 }
