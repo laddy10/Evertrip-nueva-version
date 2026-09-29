@@ -1,5 +1,6 @@
 ﻿import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import { getWhatsAppLink } from "@/lib/whatsapp";
 import { dictionaries } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
@@ -25,8 +26,9 @@ export default function Footer({ locale }: { locale: Locale }) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            +57 314 765 9756
-            <ArrowUpRight size={25} />
+            <FaWhatsapp size={24} aria-hidden="true" />
+            <span>+57 314 765 9756</span>
+            <ArrowUpRight size={23} aria-hidden="true" />
           </a>
         </div>
       </div>
