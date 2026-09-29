@@ -160,7 +160,7 @@ export default function CoastalOverture({ locale }: { locale: Locale }) {
             muted
             playsInline
             autoPlay
-            preload="auto"
+            preload="metadata"
             aria-hidden="true"
             tabIndex={-1}
             className={ready ? "is-ready" : ""}
