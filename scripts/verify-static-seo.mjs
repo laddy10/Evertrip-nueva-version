@@ -64,7 +64,17 @@ for (const locale of ["es", "en"]) {
     assert(!nodes.some((node) => ["Review", "AggregateRating"].includes(node["@type"])));
     if (slugs.includes(slug)) {
       const breadcrumb = nodes.find((node) => node["@type"] === "BreadcrumbList");
-      assert.deepEqual(breadcrumb.itemListElement.map((item) => item.item), [origin + pagePath(locale, ""), url]);
+      assert.deepEqual(
+        breadcrumb.itemListElement.map((item) => item.item),
+        [origin + pagePath(locale, ""), origin + pagePath(locale, "all-routes"), url],
+      );
+      const routeLinks = [...html.matchAll(new RegExp(`href="/${locale}/([^"/?#]+)/"`, "g"))]
+        .map((match) => match[1])
+        .filter((linkedSlug) => slugs.includes(linkedSlug) && linkedSlug !== slug);
+      assert(
+        new Set(routeLinks).size >= 4,
+        `${url}: expected at least four crawlable related-route links`,
+      );
       const service = nodes.find((node) => node["@type"] === "Service");
       assert.equal(service.url, url);
       assert.equal(service.provider["@id"], `${origin}/#business`);

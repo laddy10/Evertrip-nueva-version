@@ -44,7 +44,12 @@ export default function BookingDock({ locale }: { locale: Locale }) {
     );
     if (route) {
       close();
-      router.push(`/${locale}/${route.slug}?pax=${pax}`);
+      const search = new URLSearchParams({
+        pax: String(pax),
+        origin,
+        destination,
+      });
+      router.push(`/${locale}/${route.slug}?${search.toString()}`);
     } else
       window.open(
         getWhatsAppLink(

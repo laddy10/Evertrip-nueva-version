@@ -5,6 +5,7 @@ import RouteJsonLd from "@/components/RouteJsonLd";
 import { routes, getRouteBySlug, getPriceCards } from "@/data/routes";
 import { locales, isLocale } from "@/i18n/config";
 import { pageMetadata } from "@/lib/seo";
+import { getRelatedRoutes } from "@/lib/routeRelationships";
 
 export const dynamicParams = false;
 
@@ -44,10 +45,10 @@ export default async function RoutePage({
   if (!route) notFound();
 
   const priceCards = getPriceCards(route);
-  const relatedRoutes = routes
-    .filter((r) => r.slug !== route.slug)
-    .slice(0, 4)
-    .map((r) => ({ label: r.h1[locale], slug: r.slug }));
+  const relatedRoutes = getRelatedRoutes(route.slug).map((relatedRoute) => ({
+    label: relatedRoute.h1[locale],
+    slug: relatedRoute.slug,
+  }));
 
   return (
     <>

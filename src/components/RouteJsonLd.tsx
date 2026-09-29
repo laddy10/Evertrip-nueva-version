@@ -29,6 +29,12 @@ export default function RouteJsonLd({
         {
           "@type": "ListItem",
           position: 2,
+          name: locale === "es" ? "Todas las rutas" : "All Routes",
+          item: localizedUrl(locale, "all-routes"),
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
           name: route.title[locale],
           item: localizedUrl(locale, route.slug),
         },

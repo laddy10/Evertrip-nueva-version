@@ -13,6 +13,10 @@ const readPassengers = () => {
   const value = Number(new URLSearchParams(window.location.search).get("pax"));
   return Number.isInteger(value) && value >= 1 && value <= 30 ? value : 2;
 };
+const readOrigin = () =>
+  new URLSearchParams(window.location.search).get("origin") || "";
+const readDestination = () =>
+  new URLSearchParams(window.location.search).get("destination") || "";
 interface QuoteCalculatorProps {
   routeSlug: string;
   locale: Locale;
@@ -30,11 +34,21 @@ export default function QuoteCalculator({
     readPassengers,
     () => 2,
   );
+  const origin = useSyncExternalStore(subscribe, readOrigin, () => "");
+  const destination = useSyncExternalStore(
+    subscribe,
+    readDestination,
+    () => "",
+  );
   const [selection, setSelection] = useState<number | null>(null);
   const passengers = selection ?? queryPassengers;
   const quote = getQuoteForRoute(routeSlug, passengers);
   if (!quote) return null;
-  const message = `${waBaseMessage}\n\nDetalles / Details:\n- Pasajeros / Passengers: ${passengers}\n- Vehículo sugerido / Suggested Vehicle: ${quote.vehicle.name[locale]}`;
+  const direction =
+    origin && destination && origin !== destination
+      ? `\n- ${es ? "Trayecto" : "Route"}: ${origin} → ${destination}`
+      : "";
+  const message = `${waBaseMessage}\n\nDetalles / Details:${direction}\n- Pasajeros / Passengers: ${passengers}\n- Vehículo sugerido / Suggested Vehicle: ${quote.vehicle.name[locale]}`;
   return (
     <div className="quote-notebook">
       <p className="small-note">
