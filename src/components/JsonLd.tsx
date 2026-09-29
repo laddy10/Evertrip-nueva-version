@@ -12,13 +12,26 @@ export default function JsonLd({ locale }: { locale: Locale }) {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": ["LocalBusiness", "TaxiService"],
+        "@type": "LocalBusiness",
         "@id": BUSINESS_ID,
         name: "VIAJES Y TOURS EVERTRIP",
+        alternateName: "Evertrip",
         url: siteUrl(),
         telephone: "+573147659756",
-        priceRange: "$$",
+        priceRange: "$",
         description: businessDescription[locale],
+        logo: {
+          "@type": "ImageObject",
+          url: siteUrl("/assets/logo2-normal-ui.png"),
+        },
+        image: [
+          siteUrl("/assets/pilot/routes/private-route-01.webp"),
+          siteUrl("/assets/lugares/real-group-transfer.jpg"),
+        ],
+        sameAs: [
+          "https://www.instagram.com/evertripviajesytours/",
+          "https://www.google.com/maps/search/?api=1&query=Evertrip&query_place_id=ChIJHzbjopH19I4RBmesdbLr950",
+        ],
         areaServed: [
           { "@type": "City", name: "Barranquilla" },
           { "@type": "City", name: "Santa Marta" },
@@ -26,9 +39,7 @@ export default function JsonLd({ locale }: { locale: Locale }) {
           { "@type": "Place", name: "Palomino" },
           { "@type": "Place", name: "Tayrona" },
           { "@type": "Place", name: "Minca" },
-          { "@type": "Place", name: "Riohacha" },
-          { "@type": "Place", name: "Cabo de la Vela" },
-          { "@type": "Place", name: "Valledupar" },
+          { "@type": "City", name: "Valledupar" },
         ],
         contactPoint: {
           "@type": "ContactPoint",
