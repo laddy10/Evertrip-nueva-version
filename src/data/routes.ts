@@ -1,5 +1,6 @@
 import { palominoPricing, santaMartaPricing, formatCOP } from "./pricing";
 import { getVehicleForPassengers, Vehicle } from "./vehicles";
+export { getWhatsAppLink } from "@/lib/whatsapp";
 
 export type Locale = "es" | "en";
 
@@ -36,7 +37,6 @@ export function getRouteCardTitle(route: RouteDefinition, locale: Locale): strin
   return route.h1[locale].replace(locale === "es" ? /^Transporte privado / : /^Private Transfer /, "");
 }
 
-const WHATSAPP_NUMBER = "573147659756";
 
 export interface QuoteResult {
   vehicle: Vehicle;
@@ -1383,6 +1383,3 @@ export function getRouteBySlug(slug: string): RouteDefinition | undefined {
   return routes.find((r) => r.slug === slug);
 }
 
-export function getWhatsAppLink(message: string): string {
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-}

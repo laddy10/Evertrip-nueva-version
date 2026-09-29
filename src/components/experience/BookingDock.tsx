@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowUpRight, Minus, Plus, X } from "lucide-react";
-import { routes, getWhatsAppLink } from "@/data/routes";
+import { getWhatsAppLink } from "@/lib/whatsapp";
 import { getVehicleForPassengers } from "@/data/vehicles";
 import type { Locale } from "@/i18n/config";
 
@@ -17,7 +17,13 @@ const places = [
   "Tayrona",
 ];
 
-export default function BookingDock({ locale }: { locale: Locale }) {
+export default function BookingDock({
+  locale,
+  routeSlugs,
+}: {
+  locale: Locale;
+  routeSlugs: string[];
+}) {
   const es = locale === "es";
   const dialog = useRef<HTMLDialogElement>(null);
   const router = useRouter();
@@ -39,17 +45,17 @@ export default function BookingDock({ locale }: { locale: Locale }) {
     const slugs = [origin, destination].map((value) =>
       value.toLowerCase().replaceAll(" ", "-"),
     );
-    const route = routes.find((item) =>
-      slugs.every((slug) => item.slug.includes(slug)),
+    const routeSlug = routeSlugs.find((item) =>
+      slugs.every((slug) => item.includes(slug)),
     );
-    if (route) {
+    if (routeSlug) {
       close();
       const search = new URLSearchParams({
         pax: String(pax),
         origin,
         destination,
       });
-      router.push(`/${locale}/${route.slug}?${search.toString()}`);
+      router.push(`/${locale}/${routeSlug}?${search.toString()}`);
     } else
       window.open(
         getWhatsAppLink(

@@ -6,6 +6,7 @@ import TravelPromise from "@/components/experience/TravelPromise";
 import TravelJournal from "@/components/experience/TravelJournal";
 import TravelQuestions from "@/components/experience/TravelQuestions";
 import { preload } from "react-dom";
+import { routes } from "@/data/routes";
 import { isLocale, defaultLocale, type Locale } from "@/i18n/config";
 
 export default async function Home({
@@ -16,6 +17,21 @@ export default async function Home({
   const { locale: rawLocale } = await params;
   const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
 
+  const routeSlugs = routes.map((route) => route.slug);
+  const atlasDurations = Object.fromEntries(
+    routes
+      .filter((route) =>
+        [
+          "santa-marta-to-palomino",
+          "santa-marta-to-tayrona",
+          "private-transfer-santa-marta-cartagena",
+          "santa-marta-to-minca",
+          "barranquilla-to-santa-marta",
+        ].includes(route.slug),
+      )
+      .map((route) => [route.slug, route.duration[locale]]),
+  );
+
   preload("/assets/journey/evertrip-real-drive-poster.webp", {
     as: "image",
     fetchPriority: "high",
@@ -24,8 +40,8 @@ export default async function Home({
   return (
     <div className="experience-home">
       <JsonLd locale={locale} />
-      <CoastalOverture locale={locale} />
-      <DestinationAtlas locale={locale} />
+      <CoastalOverture locale={locale} routeSlugs={routeSlugs} />
+      <DestinationAtlas locale={locale} durations={atlasDurations} />
       <FleetAtelier locale={locale} />
       <TravelPromise locale={locale} />
       <TravelJournal locale={locale} />

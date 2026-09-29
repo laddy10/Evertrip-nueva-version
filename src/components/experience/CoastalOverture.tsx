@@ -22,7 +22,13 @@ function subscribeMediaQuery(queryText: string, onChange: () => void) {
   return () => query.removeEventListener("change", onChange);
 }
 
-export default function CoastalOverture({ locale }: { locale: Locale }) {
+export default function CoastalOverture({
+  locale,
+  routeSlugs,
+}: {
+  locale: Locale;
+  routeSlugs: string[];
+}) {
   const es = locale === "es";
   const section = useRef<HTMLElement>(null);
   const video = useRef<HTMLVideoElement>(null);
@@ -248,7 +254,7 @@ export default function CoastalOverture({ locale }: { locale: Locale }) {
           />
         </svg>
       </div>
-      <BookingDock locale={locale} />
+      <BookingDock locale={locale} routeSlugs={routeSlugs} />
       <dialog
         ref={videoDialog}
         className="brand-film-dialog"

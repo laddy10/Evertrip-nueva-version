@@ -4,7 +4,6 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { getRouteBySlug } from "@/data/routes";
 import type { Locale } from "@/i18n/config";
 
 const destinations = [
@@ -45,10 +44,15 @@ const destinations = [
   },
 ];
 
-export default function DestinationAtlas({ locale }: { locale: Locale }) {
+export default function DestinationAtlas({
+  locale,
+  durations,
+}: {
+  locale: Locale;
+  durations: Record<string, string>;
+}) {
   const [active, setActive] = useState(0);
   const destination = destinations[active];
-  const route = getRouteBySlug(destination.slug)!;
   const es = locale === "es";
   return (
     <section
@@ -132,7 +136,7 @@ export default function DestinationAtlas({ locale }: { locale: Locale }) {
               </span>
               <strong>Santa Marta ↔ {destination.name}</strong>
             </div>
-            <span>{route.duration[locale]}</span>
+            <span>{durations[destination.slug]}</span>
             <Link
               href={`/${locale}/${destination.slug}`}
               aria-label={`${es ? "Ver ruta entre Santa Marta y" : "View route between Santa Marta and"} ${destination.name}`}
