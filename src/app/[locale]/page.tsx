@@ -5,6 +5,7 @@ import FleetAtelier from "@/components/experience/FleetAtelier";
 import TravelPromise from "@/components/experience/TravelPromise";
 import TravelJournal from "@/components/experience/TravelJournal";
 import TravelQuestions from "@/components/experience/TravelQuestions";
+import { preload } from "react-dom";
 import { isLocale, defaultLocale, type Locale } from "@/i18n/config";
 
 export default async function Home({
@@ -14,6 +15,11 @@ export default async function Home({
 }) {
   const { locale: rawLocale } = await params;
   const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+
+  preload("/assets/journey/evertrip-real-drive-poster.webp", {
+    as: "image",
+    fetchPriority: "high",
+  });
 
   return (
     <div className="experience-home">

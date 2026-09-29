@@ -60,6 +60,8 @@ export default function TravelPromise({ locale }: { locale: Locale }) {
           />
           <img
             src="/assets/pilot/routes/tayrona-01.webp"
+            loading="lazy"
+            decoding="async"
             alt={
               es
                 ? "La costa del Parque Tayrona"
