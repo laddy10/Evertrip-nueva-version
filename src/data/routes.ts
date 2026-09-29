@@ -773,172 +773,163 @@ export const routes: RouteDefinition[] = [
     slug: "cartagena-to-valledupar",
     featured: false,
     priceMode: "quote",
-    title: {
-      es: "Transporte privado de Cartagena a Valledupar | EverTrip",
-      en: "Private Transfer Cartagena to Valledupar | EverTrip",
-    },
-    h1: {
-      es: "Transporte privado Cartagena ↔ Valledupar",
-      en: "Private Transfer Cartagena ↔ Valledupar",
-    },
+    title: { es: "Transporte privado Cartagena - Valledupar | EverTrip", en: "Private Transfer Cartagena - Valledupar | EverTrip" },
+    h1: { es: "Transporte privado Cartagena ↔ Valledupar", en: "Private Transfer Cartagena ↔ Valledupar" },
     metaDescription: {
-      es: "Viaje privado puerta a puerta entre Cartagena y Valledupar. Reserva tu traslado con EverTrip. Conductores expertos y vehiculos premium.",
-      en: "Door-to-door private transfer between Cartagena and Valledupar. Book your ride with EverTrip. Expert drivers and premium vehicles.",
+      es: "Traslado privado entre Cartagena y Valledupar con recogida en hotel, dirección o aeropuerto. Equipaje y paradas coordinadas por WhatsApp.",
+      en: "Private transfer between Cartagena and Valledupar with hotel, address or airport pickup. Luggage and coordinated stops via WhatsApp.",
     },
     description: {
-      es: "Disfruta de un viaje comodo, seguro y sin complicaciones entre Cartagena y Valledupar. Nuestros servicios son 100% privados, asegurando tu tranquilidad.",
-      en: "Enjoy a comfortable, safe, and hassle-free journey between Cartagena and Valledupar. Our services are 100% private, ensuring your peace of mind.",
+      es: "Coordinamos transporte privado entre Cartagena y Valledupar con recogida en hoteles, direcciones, aeropuerto y otros puntos accesibles acordados previamente. El servicio puede reservarse en cualquiera de los dos sentidos.",
+      en: "We coordinate private transportation between Cartagena and Valledupar with pickup at hotels, addresses, the airport and other accessible points arranged in advance. The service can be booked in either direction.",
     },
     duration: { es: "Aprox. 6h", en: "Approx. 6h" },
-    idealFor: { es: "Parejas, Familias y Grupos", en: "Couples, Families, and Groups" },
+    idealFor: { es: "Viajeros, familias, grupos y negocios", en: "Travelers, families, groups and business" },
     highlights: {
       es: [
-        "Misma tarifa en ambos sentidos",
-        "Servicio puerta a puerta",
-        "Vehiculo privado con aire acondicionado",
-        "Conductor puntual y profesional",
-        "Sin cargos ocultos",
-        "Asistencia y soporte via WhatsApp"
+        "Recogida en hoteles, direcciones o aeropuertos de Cartagena o Valledupar",
+        "Equipaje coordinado según pasajeros y vehículo",
+        "Paradas de aproximadamente 30 a 40 minutos, coordinadas con anticipación",
+        "Servicio privado puerta a puerta cuando el punto es accesible",
+        "Disponible en ambos sentidos, con cada trayecto cotizado por separado",
       ],
       en: [
-        "Same rate in both directions",
-        "Door-to-door service",
-        "Private vehicle with AC",
-        "Punctual and professional driver",
-        "No hidden fees",
-        "WhatsApp support and assistance"
-      ]
+        "Pickup at hotels, addresses or airports in Cartagena or Valledupar",
+        "Luggage coordinated according to passengers and vehicle",
+        "Stops of approximately 30 to 40 minutes, arranged in advance",
+        "Private door-to-door service when the location is accessible",
+        "Available in both directions, with each trip quoted separately",
+      ],
     },
     faqs: [
       {
-        q: { es: "¿El servicio es compartido?", en: "Is the service shared?" },
-        a: { es: "No, todos nuestros traslados son 100% privados para ti y tu grupo.", en: "No, all our transfers are 100% private for you and your group." }
+        q: { es: "¿Cuánto dura el viaje entre Cartagena y Valledupar?", en: "How long is the trip between Cartagena and Valledupar?" },
+        a: { es: "El trayecto suele durar aproximadamente 6 horas, dependiendo del tráfico y de los puntos exactos de recogida y llegada. Las paradas coordinadas aumentan el tiempo total.", en: "The trip usually takes approximately 6 hours, depending on traffic and the exact pickup and drop-off points. Coordinated stops increase the total journey time." },
       },
       {
-        q: { es: "¿Puedo hacer paradas en el camino?", en: "Can I make stops along the way?" },
-        a: { es: "Sí, podemos programar paradas breves para ir al baño o comprar snacks. Por favor indícalo al momento de reservar.", en: "Yes, we can schedule brief stops for restrooms or snacks. Please let us know when booking." }
-      }
+        q: { es: "¿El servicio es puerta a puerta?", en: "Is the service door-to-door?" },
+        a: { es: "Sí, cuando el punto de recogida y llegada es accesible y seguro para el vehículo. No ingresamos a zonas de alto riesgo ni a lugares sin acceso adecuado.", en: "Yes, when the pickup and drop-off locations are accessible and safe for the vehicle. We do not enter high-risk areas or locations without suitable access." },
+      },
+      {
+        q: { es: "¿Puedo hacer una parada en el camino?", en: "Can I make a stop along the way?" },
+        a: { es: "Sí. Se pueden coordinar paradas de aproximadamente 30 a 40 minutos. Son flexibles y extienden la duración total del viaje.", en: "Yes. Stops of approximately 30 to 40 minutes can be arranged. They are flexible and extend the total journey time." },
+      },
+      {
+        q: { es: "¿Puedo reservar Valledupar → Cartagena?", en: "Can I book Valledupar → Cartagena?" },
+        a: { es: "Sí. El servicio está disponible en ambos sentidos y cada trayecto se cotiza y cobra por separado.", en: "Yes. The service is available in both directions, and each trip is quoted and charged separately." },
+      },
     ],
-    waMessage: {
-      es: "Hola, me gustaria cotizar un traslado privado desde Cartagena hacia Valledupar.",
-      en: "Hello, I would like to get a quote for a private transfer from Cartagena to Valledupar."
-    },
+    waMessage: { es: "Hola, necesito un transporte privado entre Cartagena y Valledupar.", en: "Hi, I need a private transfer between Cartagena and Valledupar." },
     image: "/assets/pilot/routes/cartagena-01.webp",
-    image2: "/assets/pilot/routes/valledupar-01.webp"
+    image2: "/assets/pilot/routes/valledupar-01.webp",
   },
   {
     slug: "cartagena-to-minca",
     featured: false,
     priceMode: "quote",
-    title: {
-      es: "Transporte privado de Cartagena a Minca | EverTrip",
-      en: "Private Transfer Cartagena to Minca | EverTrip",
-    },
-    h1: {
-      es: "Transporte privado Cartagena ↔ Minca",
-      en: "Private Transfer Cartagena ↔ Minca",
-    },
+    title: { es: "Transporte privado Cartagena - Minca | EverTrip", en: "Private Transfer Cartagena - Minca | EverTrip" },
+    h1: { es: "Transporte privado Cartagena ↔ Minca", en: "Private Transfer Cartagena ↔ Minca" },
     metaDescription: {
-      es: "Viaje privado puerta a puerta entre Cartagena y Minca. Reserva tu traslado con EverTrip. Conductores expertos y vehiculos premium.",
-      en: "Door-to-door private transfer between Cartagena and Minca. Book your ride with EverTrip. Expert drivers and premium vehicles.",
+      es: "Traslado privado entre Cartagena y Minca con recogida en hotel, dirección o aeropuerto. Equipaje, paradas coordinadas y acceso según la vía.",
+      en: "Private transfer between Cartagena and Minca with hotel, address or airport pickup. Luggage, coordinated stops and access according to road conditions.",
     },
     description: {
-      es: "Disfruta de un viaje comodo, seguro y sin complicaciones entre Cartagena y Minca. Nuestros servicios son 100% privados, asegurando tu tranquilidad.",
-      en: "Enjoy a comfortable, safe, and hassle-free journey between Cartagena and Minca. Our services are 100% private, ensuring your peace of mind.",
+      es: "Coordinamos el traslado privado entre Cartagena y Minca con recogida en hoteles, direcciones o aeropuerto y llegada al punto accesible previamente acordado. En zonas de montaña, el punto final depende de las condiciones de acceso para el vehículo.",
+      en: "We coordinate private transportation between Cartagena and Minca with pickup at hotels, addresses or the airport and drop-off at the accessible point arranged in advance. In mountain areas, the final drop-off depends on vehicle access conditions.",
     },
     duration: { es: "Aprox. 4h 30m", en: "Approx. 4h 30m" },
-    idealFor: { es: "Parejas, Familias y Grupos", en: "Couples, Families, and Groups" },
+    idealFor: { es: "Parejas, familias y grupos", en: "Couples, families and groups" },
     highlights: {
       es: [
-        "Misma tarifa en ambos sentidos",
-        "Servicio puerta a puerta",
-        "Vehiculo privado con aire acondicionado",
-        "Conductor puntual y profesional",
-        "Sin cargos ocultos",
-        "Asistencia y soporte via WhatsApp"
+        "Recogida en hoteles, direcciones o aeropuerto de Cartagena",
+        "Llegada a un punto accesible previamente coordinado en Minca",
+        "Equipaje coordinado según pasajeros y vehículo",
+        "Paradas de aproximadamente 30 a 40 minutos, coordinadas con anticipación",
+        "Disponible en ambos sentidos, con cada trayecto cotizado por separado",
       ],
       en: [
-        "Same rate in both directions",
-        "Door-to-door service",
-        "Private vehicle with AC",
-        "Punctual and professional driver",
-        "No hidden fees",
-        "WhatsApp support and assistance"
-      ]
+        "Pickup at hotels, addresses or Cartagena airport",
+        "Drop-off at an accessible point in Minca arranged in advance",
+        "Luggage coordinated according to passengers and vehicle",
+        "Stops of approximately 30 to 40 minutes, arranged in advance",
+        "Available in both directions, with each trip quoted separately",
+      ],
     },
     faqs: [
       {
-        q: { es: "¿El servicio es compartido?", en: "Is the service shared?" },
-        a: { es: "No, todos nuestros traslados son 100% privados para ti y tu grupo.", en: "No, all our transfers are 100% private for you and your group." }
+        q: { es: "¿Cuánto dura el viaje entre Cartagena y Minca?", en: "How long is the trip between Cartagena and Minca?" },
+        a: { es: "El trayecto suele durar aproximadamente 4 horas y media, dependiendo del tráfico y de los puntos exactos de recogida y llegada. Las paradas coordinadas aumentan el tiempo total.", en: "The trip usually takes approximately 4.5 hours, depending on traffic and the exact pickup and drop-off points. Coordinated stops increase the total journey time." },
       },
       {
-        q: { es: "¿Puedo hacer paradas en el camino?", en: "Can I make stops along the way?" },
-        a: { es: "Sí, podemos programar paradas breves para ir al baño o comprar snacks. Por favor indícalo al momento de reservar.", en: "Yes, we can schedule brief stops for restrooms or snacks. Please let us know when booking." }
-      }
+        q: { es: "¿Pueden llegar hasta cualquier alojamiento en Minca?", en: "Can you reach any accommodation in Minca?" },
+        a: { es: "Llegamos hasta puntos accesibles para el vehículo. Si el camino no es transitable o está en una zona de alto riesgo, coordinamos un punto seguro y accesible de llegada.", en: "We reach locations that are accessible by vehicle. If the road is not passable or is in a high-risk area, we coordinate a safe, accessible drop-off point." },
+      },
+      {
+        q: { es: "¿Puedo hacer una parada durante el trayecto?", en: "Can I make a stop during the trip?" },
+        a: { es: "Sí. Podemos coordinar paradas de aproximadamente 30 a 40 minutos. Son flexibles y extienden la duración total del viaje.", en: "Yes. We can coordinate stops of approximately 30 to 40 minutes. They are flexible and extend the total journey time." },
+      },
+      {
+        q: { es: "¿Puedo reservar Minca → Cartagena?", en: "Can I book Minca → Cartagena?" },
+        a: { es: "Sí. El servicio está disponible en ambos sentidos y cada trayecto se cotiza y cobra por separado.", en: "Yes. The service is available in both directions, and each trip is quoted and charged separately." },
+      },
     ],
-    waMessage: {
-      es: "Hola, me gustaria cotizar un traslado privado desde Cartagena hacia Minca.",
-      en: "Hello, I would like to get a quote for a private transfer from Cartagena to Minca."
-    },
+    waMessage: { es: "Hola, necesito un transporte privado entre Cartagena y Minca.", en: "Hi, I need a private transfer between Cartagena and Minca." },
     image: "/assets/pilot/routes/cartagena-01.webp",
-    image2: "/assets/lugares/minca.jpg"
+    image2: "/assets/lugares/minca.jpg",
   },
   {
     slug: "cartagena-to-tayrona",
     featured: false,
     priceMode: "quote",
-    title: {
-      es: "Transporte privado de Cartagena a Tayrona | EverTrip",
-      en: "Private Transfer Cartagena to Tayrona | EverTrip",
-    },
-    h1: {
-      es: "Transporte privado Cartagena ↔ Tayrona",
-      en: "Private Transfer Cartagena ↔ Tayrona",
-    },
+    title: { es: "Transporte privado Cartagena - Tayrona | EverTrip", en: "Private Transfer Cartagena - Tayrona | EverTrip" },
+    h1: { es: "Transporte privado Cartagena ↔ Tayrona", en: "Private Transfer Cartagena ↔ Tayrona" },
     metaDescription: {
-      es: "Viaje privado puerta a puerta entre Cartagena y Tayrona. Reserva tu traslado con EverTrip. Conductores expertos y vehiculos premium.",
-      en: "Door-to-door private transfer between Cartagena and Tayrona. Book your ride with EverTrip. Expert drivers and premium vehicles.",
+      es: "Traslado privado entre Cartagena y Tayrona con recogida en hotel, dirección o aeropuerto. Equipaje, paradas y punto de acceso coordinados.",
+      en: "Private transfer between Cartagena and Tayrona with hotel, address or airport pickup. Luggage, stops and access point arranged in advance.",
     },
     description: {
-      es: "Disfruta de un viaje comodo, seguro y sin complicaciones entre Cartagena y Tayrona. Nuestros servicios son 100% privados, asegurando tu tranquilidad.",
-      en: "Enjoy a comfortable, safe, and hassle-free journey between Cartagena and Tayrona. Our services are 100% private, ensuring your peace of mind.",
+      es: "Coordinamos tu traslado privado entre Cartagena y el punto de acceso acordado a Tayrona, con recogida en hotel, dirección o aeropuerto. El regreso también puede reservarse y se cobra como un trayecto independiente.",
+      en: "We coordinate your private transfer between Cartagena and the agreed Tayrona access point, with pickup at a hotel, address or airport. Return service can also be booked and is charged as a separate trip.",
     },
     duration: { es: "Aprox. 5h", en: "Approx. 5h" },
-    idealFor: { es: "Parejas, Familias y Grupos", en: "Couples, Families, and Groups" },
+    idealFor: { es: "Parejas, familias y grupos", en: "Couples, families and groups" },
     highlights: {
       es: [
-        "Misma tarifa en ambos sentidos",
-        "Servicio puerta a puerta",
-        "Vehiculo privado con aire acondicionado",
-        "Conductor puntual y profesional",
-        "Sin cargos ocultos",
-        "Asistencia y soporte via WhatsApp"
+        "Recogida en hoteles, direcciones o aeropuerto de Cartagena",
+        "Llegada al punto de acceso a Tayrona previamente coordinado",
+        "Equipaje coordinado según pasajeros y vehículo",
+        "Paradas de aproximadamente 30 a 40 minutos, coordinadas con anticipación",
+        "Regreso disponible y cotizado como un trayecto independiente",
       ],
       en: [
-        "Same rate in both directions",
-        "Door-to-door service",
-        "Private vehicle with AC",
-        "Punctual and professional driver",
-        "No hidden fees",
-        "WhatsApp support and assistance"
-      ]
+        "Pickup at hotels, addresses or Cartagena airport",
+        "Drop-off at the Tayrona access point arranged in advance",
+        "Luggage coordinated according to passengers and vehicle",
+        "Stops of approximately 30 to 40 minutes, arranged in advance",
+        "Return service available and quoted as a separate trip",
+      ],
     },
     faqs: [
       {
-        q: { es: "¿El servicio es compartido?", en: "Is the service shared?" },
-        a: { es: "No, todos nuestros traslados son 100% privados para ti y tu grupo.", en: "No, all our transfers are 100% private for you and your group." }
+        q: { es: "¿Cuánto dura el viaje entre Cartagena y Tayrona?", en: "How long is the trip between Cartagena and Tayrona?" },
+        a: { es: "El trayecto suele durar aproximadamente 5 horas, dependiendo del tráfico y de los puntos exactos de recogida y llegada. Las paradas coordinadas aumentan el tiempo total.", en: "The trip usually takes approximately 5 hours, depending on traffic and the exact pickup and drop-off points. Coordinated stops increase the total journey time." },
       },
       {
-        q: { es: "¿Puedo hacer paradas en el camino?", en: "Can I make stops along the way?" },
-        a: { es: "Sí, podemos programar paradas breves para ir al baño o comprar snacks. Por favor indícalo al momento de reservar.", en: "Yes, we can schedule brief stops for restrooms or snacks. Please let us know when booking." }
-      }
+        q: { es: "¿Hasta dónde llega el vehículo en Tayrona?", en: "How far does the vehicle go in Tayrona?" },
+        a: { es: "El punto de llegada se coordina previamente según el acceso disponible para vehículos. No ingresamos a zonas de alto riesgo ni a lugares que no sean accesibles para el vehículo.", en: "The drop-off point is arranged in advance according to available vehicle access. We do not enter high-risk areas or locations that are not accessible by vehicle." },
+      },
+      {
+        q: { es: "¿Puedo hacer una parada durante el trayecto?", en: "Can I make a stop during the trip?" },
+        a: { es: "Sí. Podemos coordinar paradas de aproximadamente 30 a 40 minutos. Son flexibles y extienden la duración total del viaje.", en: "Yes. We can coordinate stops of approximately 30 to 40 minutes. They are flexible and extend the total journey time." },
+      },
+      {
+        q: { es: "¿Puedo reservar Tayrona → Cartagena?", en: "Can I book Tayrona → Cartagena?" },
+        a: { es: "Sí. El servicio está disponible en ambos sentidos y cada trayecto se cotiza y cobra por separado.", en: "Yes. The service is available in both directions, and each trip is quoted and charged separately." },
+      },
     ],
-    waMessage: {
-      es: "Hola, me gustaria cotizar un traslado privado desde Cartagena hacia Tayrona.",
-      en: "Hello, I would like to get a quote for a private transfer from Cartagena to Tayrona."
-    },
+    waMessage: { es: "Hola, necesito un transporte privado entre Cartagena y Tayrona.", en: "Hi, I need a private transfer between Cartagena and Tayrona." },
     image: "/assets/pilot/routes/cartagena-01.webp",
-    image2: "/assets/pilot/routes/tayrona-01.webp"
+    image2: "/assets/pilot/routes/tayrona-01.webp",
   },
   {
     slug: "barranquilla-to-minca",
