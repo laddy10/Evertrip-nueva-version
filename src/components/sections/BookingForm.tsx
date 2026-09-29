@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { Locale } from "@/i18n/config";
-import { getWhatsAppLink } from "@/data/routes";
+import { getWhatsAppLink } from "@/lib/whatsapp";
 import { FaArrowRight } from "react-icons/fa";
 
 const content = {

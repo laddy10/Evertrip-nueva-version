@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Expand } from "lucide-react";
 import { vehicles, type VehicleId } from "@/data/vehicles";
-import { getWhatsAppLink } from "@/data/routes";
+import { getWhatsAppLink } from "@/lib/whatsapp";
 import type { Locale } from "@/i18n/config";
 import { VehicleLightbox, useClickGesture } from "../sections/FleetShowcase";
 

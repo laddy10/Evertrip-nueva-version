@@ -2,7 +2,8 @@
 import { useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import { ArrowUpRight, Minus, Plus } from "lucide-react";
-import { getQuoteForRoute, getWhatsAppLink } from "@/data/routes";
+import { getQuoteForRoute } from "@/data/routes";
+import { getWhatsAppLink } from "@/lib/whatsapp";
 import type { Locale } from "@/i18n/config";
 
 const subscribe = (listener: () => void) => {

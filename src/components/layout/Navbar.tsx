@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import { type Locale } from "@/i18n/config";
 import { dictionaries } from "@/i18n/dictionaries";
-import { getWhatsAppLink } from "@/data/routes";
+import { getWhatsAppLink } from "@/lib/whatsapp";
 
 export default function Navbar({ locale }: { locale: Locale }) {
   const dict = dictionaries[locale];

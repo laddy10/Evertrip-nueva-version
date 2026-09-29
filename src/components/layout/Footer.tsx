@@ -1,6 +1,6 @@
 ﻿import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { getWhatsAppLink } from "@/data/routes";
+import { getWhatsAppLink } from "@/lib/whatsapp";
 import { dictionaries } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
 
