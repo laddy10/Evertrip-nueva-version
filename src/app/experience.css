@@ -1201,9 +1201,9 @@ body:has(.brand-film-dialog[open]) {
 }
 .traveler-voice {
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 6vw;
-  padding: 60px 0 115px;
+  grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.7fr);
+  gap: clamp(48px, 5vw, 88px);
+  padding: 60px 0 96px;
   border-top: 1px solid #bac8b5;
 }
 .traveler-intro {
@@ -1229,20 +1229,27 @@ body:has(.brand-film-dialog[open]) {
   object-fit: cover;
   object-position: center 48%;
 }
+.traveler-quote {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  max-width: 880px;
+}
 .traveler-quote blockquote {
   font-family: var(--font-outfit);
   font-size: clamp(25px, 2.85vw, 43px);
   font-weight: 350;
-  line-height: 1.35;
+  line-height: 1.3;
   letter-spacing: -0.025em;
-  min-height: 230px;
+  min-height: 150px;
+  margin: 0;
 }
 .traveler-quote > div {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 25px;
-  gap: 20px;
+  align-items: flex-end;
+  justify-content: flex-start;
+  margin-top: 34px;
+  gap: 32px;
   font-size: 11px;
 }
 .traveler-meta {
@@ -2074,13 +2081,19 @@ body:has(.brand-film-dialog[open]) {
     height: 235px;
     border-radius: 22px;
   }
+  .traveler-quote {
+    max-width: none;
+  }
   .traveler-quote blockquote {
     font-size: 28px;
-    min-height: 290px;
+    min-height: 0;
   }
   .traveler-quote > div {
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 28px;
     font-size: 10px;
-    gap: 10px;
+    gap: 14px;
   }
   .journal-controls {
     gap: 10px;
