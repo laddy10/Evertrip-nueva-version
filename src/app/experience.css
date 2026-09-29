@@ -1233,7 +1233,9 @@ body:has(.brand-film-dialog[open]) {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  align-self: center;
   max-width: 880px;
+  padding-top: 54px;
 }
 .traveler-quote blockquote {
   font-family: var(--font-outfit);
@@ -1246,10 +1248,10 @@ body:has(.brand-film-dialog[open]) {
 }
 .traveler-quote > div {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: flex-start;
-  margin-top: 34px;
-  gap: 32px;
+  margin-top: 28px;
+  gap: 28px;
   font-size: 11px;
 }
 .traveler-meta {
@@ -2083,6 +2085,7 @@ body:has(.brand-film-dialog[open]) {
   }
   .traveler-quote {
     max-width: none;
+    padding-top: 0;
   }
   .traveler-quote blockquote {
     font-size: 28px;
