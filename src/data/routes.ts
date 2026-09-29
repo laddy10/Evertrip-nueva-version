@@ -628,39 +628,53 @@ export const routes: RouteDefinition[] = [
   {
     slug: "custom-private-routes",
     priceMode: "quote",
-    title: { es: "Rutas personalizadas por la costa Caribe | EverTrip", en: "Custom Private Routes on the Caribbean Coast | EverTrip" },
+    title: { es: "Rutas privadas personalizadas por el Caribe | EverTrip", en: "Custom Private Routes on the Caribbean Coast | EverTrip" },
     h1: { es: "Rutas personalizadas", en: "Custom Routes" },
     metaDescription: {
-      es: "¿Tu ruta no está en la lista? Diseñamos traslados privados a la medida en toda la costa Caribe colombiana, desde Barranquilla hasta Valledupar.",
-      en: "Don't see your route listed? We design custom private transfers across the entire Colombian Caribbean coast, from Barranquilla to Valledupar.",
+      es: "Transporte privado a la medida por la costa Caribe. Coordinamos varios destinos, equipaje, paradas y puntos de recogida accesibles por WhatsApp.",
+      en: "Tailored private transportation across the Caribbean coast. Coordinate multiple destinations, luggage, stops and accessible pickup points via WhatsApp.",
     },
     description: {
-      es: "Cubrimos toda la costa Caribe colombiana: Barranquilla, Santa Marta, Cartagena, Palomino, Tayrona, Minca, Riohacha, Cabo de la Vela, Valledupar, Mompox y más. Si tu itinerario combina varios destinos, lo armamos contigo.",
-      en: "We cover the entire Colombian Caribbean coast: Barranquilla, Santa Marta, Cartagena, Palomino, Tayrona, Minca, Riohacha, Cabo de la Vela, Valledupar, Mompox and more. If your itinerary combines several destinations, we'll build it with you.",
+      es: "Si tu trayecto no aparece entre nuestras rutas publicadas, podemos evaluar una ruta privada a la medida. Coordinamos origen, destino, número de pasajeros, equipaje, paradas y puntos accesibles antes de confirmar la cotización.",
+      en: "If your trip is not among our published routes, we can evaluate a tailored private route. We coordinate origin, destination, passenger count, luggage, stops and accessible points before confirming the quote.",
     },
-    duration: { es: "Flexible", en: "Flexible" },
-    idealFor: { es: "Itinerarios a la medida", en: "Tailored itineraries" },
+    duration: { es: "Flexible según la ruta", en: "Flexible depending on the route" },
+    idealFor: { es: "Itinerarios a la medida y varios destinos", en: "Tailored and multi-destination itineraries" },
     highlights: {
       es: [
-        "Rutas combinadas y multi-destino",
-        "Disponible para grupos grandes y eventos",
-        "Vehículo según el número de pasajeros",
-        "Cotización personalizada por WhatsApp",
+        "Rutas evaluadas según origen, destino y condiciones de acceso",
+        "Recogida en hoteles, direcciones, aeropuertos, pueblos o playas accesibles",
+        "Equipaje coordinado según pasajeros y vehículo",
+        "Paradas de aproximadamente 30 a 40 minutos cuando se acuerdan",
+        "Cotización personalizada antes de confirmar el servicio",
       ],
       en: [
-        "Combined, multi-destination routes",
-        "Available for large groups and events",
-        "Vehicle sized to your passenger count",
-        "Personalized quote via WhatsApp",
+        "Routes evaluated according to origin, destination and access conditions",
+        "Pickup at accessible hotels, addresses, airports, towns or beaches",
+        "Luggage coordinated according to passengers and vehicle",
+        "Stops of approximately 30 to 40 minutes when arranged",
+        "Personalized quote before service confirmation",
       ],
     },
     faqs: [
       {
-        q: { es: "¿Pueden armar un itinerario de varios días?", en: "Can you build a multi-day itinerary?" },
-        a: { es: "Sí, cuéntanos los destinos que quieres visitar y armamos el plan de transporte completo.", en: "Yes, tell us the destinations you want to visit and we'll build the full transport plan." },
+        q: { es: "¿Qué información necesitan para cotizar una ruta personalizada?", en: "What information do you need to quote a custom route?" },
+        a: { es: "Origen, destino o destinos, fecha, número de pasajeros, equipaje y cualquier parada que quieras coordinar. Con esos datos evaluamos el servicio y la cotización.", en: "Origin, destination or destinations, date, passenger count, luggage and any stop you want to arrange. With that information we evaluate the service and quote." },
+      },
+      {
+        q: { es: "¿Puedo incluir varios destinos?", en: "Can I include multiple destinations?" },
+        a: { es: "Sí. Podemos evaluar itinerarios con varios destinos y coordinar cada tramo antes de confirmar el servicio.", en: "Yes. We can evaluate multi-destination itineraries and coordinate each leg before confirming the service." },
+      },
+      {
+        q: { es: "¿Atienden cualquier ubicación?", en: "Do you serve every location?" },
+        a: { es: "Evaluamos cada punto de recogida y llegada. No ingresamos a zonas de alto riesgo ni a lugares que no sean accesibles para el vehículo.", en: "We evaluate every pickup and drop-off point. We do not enter high-risk areas or locations that are not accessible by vehicle." },
+      },
+      {
+        q: { es: "¿Se pueden coordinar paradas?", en: "Can stops be arranged?" },
+        a: { es: "Sí. Las paradas pueden coordinarse con anticipación y suelen ser de aproximadamente 30 a 40 minutos; estas extienden la duración total del viaje.", en: "Yes. Stops can be arranged in advance and are usually approximately 30 to 40 minutes; they extend the total journey time." },
       },
     ],
-    waMessage: { es: "Hola, quiero cotizar una ruta personalizada.", en: "Hi, I'd like a quote for a custom route." },
+    waMessage: { es: "Hola, quiero cotizar una ruta privada personalizada.", en: "Hi, I'd like a quote for a custom private route." },
     image: "/assets/pilot/routes/private-route-01.webp",
   },
   {
@@ -1205,179 +1219,161 @@ export const routes: RouteDefinition[] = [
     slug: "valledupar-to-minca",
     featured: false,
     priceMode: "quote",
-    title: {
-      es: "Transporte privado de Valledupar a Minca | EverTrip",
-      en: "Private Transfer Valledupar to Minca | EverTrip",
-    },
-    h1: {
-      es: "Transporte privado Valledupar ↔ Minca",
-      en: "Private Transfer Valledupar ↔ Minca",
-    },
+    title: { es: "Transporte privado Valledupar - Minca | EverTrip", en: "Private Transfer Valledupar - Minca | EverTrip" },
+    h1: { es: "Transporte privado Valledupar ↔ Minca", en: "Private Transfer Valledupar ↔ Minca" },
     metaDescription: {
-      es: "Viaje privado puerta a puerta entre Valledupar y Minca. Reserva tu traslado con EverTrip. Conductores expertos y vehiculos premium.",
-      en: "Door-to-door private transfer between Valledupar and Minca. Book your ride with EverTrip. Expert drivers and premium vehicles.",
+      es: "Traslado privado entre Valledupar y Minca con recogida en hotel, dirección o punto accesible. Equipaje, paradas coordinadas y acceso según la vía.",
+      en: "Private transfer between Valledupar and Minca with hotel, address or accessible pickup. Luggage, coordinated stops and access according to road conditions.",
     },
     description: {
-      es: "Disfruta de un viaje comodo, seguro y sin complicaciones entre Valledupar y Minca. Nuestros servicios son 100% privados, asegurando tu tranquilidad.",
-      en: "Enjoy a comfortable, safe, and hassle-free journey between Valledupar and Minca. Our services are 100% private, ensuring your peace of mind.",
+      es: "Coordinamos el traslado privado entre Valledupar y Minca con recogida en hoteles, direcciones u otros puntos accesibles y llegada al punto accesible previamente acordado. En zonas de montaña, el punto final depende de las condiciones de acceso para el vehículo.",
+      en: "We coordinate private transportation between Valledupar and Minca with pickup at hotels, addresses or other accessible points and drop-off at the accessible point arranged in advance. In mountain areas, the final drop-off depends on vehicle access conditions.",
     },
     duration: { es: "Aprox. 4h 30m", en: "Approx. 4h 30m" },
-    idealFor: { es: "Parejas, Familias y Grupos", en: "Couples, Families, and Groups" },
+    idealFor: { es: "Parejas, familias y grupos", en: "Couples, families and groups" },
     highlights: {
       es: [
-        "Misma tarifa en ambos sentidos",
-        "Servicio puerta a puerta",
-        "Vehiculo privado con aire acondicionado",
-        "Conductor puntual y profesional",
-        "Sin cargos ocultos",
-        "Asistencia y soporte via WhatsApp"
+        "Recogida en hoteles, direcciones o puntos accesibles de Valledupar",
+        "Llegada a un punto accesible previamente coordinado en Minca",
+        "Equipaje coordinado según pasajeros y vehículo",
+        "Paradas de aproximadamente 30 a 40 minutos, coordinadas con anticipación",
+        "Disponible en ambos sentidos, con cada trayecto cotizado por separado",
       ],
       en: [
-        "Same rate in both directions",
-        "Door-to-door service",
-        "Private vehicle with AC",
-        "Punctual and professional driver",
-        "No hidden fees",
-        "WhatsApp support and assistance"
-      ]
+        "Pickup at hotels, addresses or accessible points in Valledupar",
+        "Drop-off at an accessible point in Minca arranged in advance",
+        "Luggage coordinated according to passengers and vehicle",
+        "Stops of approximately 30 to 40 minutes, arranged in advance",
+        "Available in both directions, with each trip quoted separately",
+      ],
     },
     faqs: [
       {
-        q: { es: "¿El servicio es compartido?", en: "Is the service shared?" },
-        a: { es: "No, todos nuestros traslados son 100% privados para ti y tu grupo.", en: "No, all our transfers are 100% private for you and your group." }
+        q: { es: "¿Cuánto dura el viaje entre Valledupar y Minca?", en: "How long is the trip between Valledupar and Minca?" },
+        a: { es: "El trayecto suele durar aproximadamente 4 horas y media, dependiendo del tráfico y de los puntos exactos de recogida y llegada. Las paradas coordinadas aumentan el tiempo total.", en: "The trip usually takes approximately 4.5 hours, depending on traffic and the exact pickup and drop-off points. Coordinated stops increase the total journey time." },
       },
       {
-        q: { es: "¿Puedo hacer paradas en el camino?", en: "Can I make stops along the way?" },
-        a: { es: "Sí, podemos programar paradas breves para ir al baño o comprar snacks. Por favor indícalo al momento de reservar.", en: "Yes, we can schedule brief stops for restrooms or snacks. Please let us know when booking." }
-      }
+        q: { es: "¿Pueden llegar hasta cualquier alojamiento en Minca?", en: "Can you reach any accommodation in Minca?" },
+        a: { es: "Llegamos hasta puntos accesibles para el vehículo. Si el camino no es transitable o está en una zona de alto riesgo, coordinamos un punto seguro y accesible de llegada.", en: "We reach locations that are accessible by vehicle. If the road is not passable or is in a high-risk area, we coordinate a safe, accessible drop-off point." },
+      },
+      {
+        q: { es: "¿Puedo hacer una parada durante el trayecto?", en: "Can I make a stop during the trip?" },
+        a: { es: "Sí. Podemos coordinar paradas de aproximadamente 30 a 40 minutos. Son flexibles y extienden la duración total del viaje.", en: "Yes. We can coordinate stops of approximately 30 to 40 minutes. They are flexible and extend the total journey time." },
+      },
+      {
+        q: { es: "¿Puedo reservar Minca → Valledupar?", en: "Can I book Minca → Valledupar?" },
+        a: { es: "Sí. El servicio está disponible en ambos sentidos y cada trayecto se cotiza y cobra por separado.", en: "Yes. The service is available in both directions, and each trip is quoted and charged separately." },
+      },
     ],
-    waMessage: {
-      es: "Hola, me gustaria cotizar un traslado privado desde Valledupar hacia Minca.",
-      en: "Hello, I would like to get a quote for a private transfer from Valledupar to Minca."
-    },
+    waMessage: { es: "Hola, necesito un transporte privado entre Valledupar y Minca.", en: "Hi, I need a private transfer between Valledupar and Minca." },
     image: "/assets/pilot/routes/valledupar-01.webp",
-    image2: "/assets/lugares/minca.jpg"
+    image2: "/assets/lugares/minca.jpg",
   },
   {
     slug: "valledupar-to-tayrona",
     featured: false,
     priceMode: "quote",
-    title: {
-      es: "Transporte privado de Valledupar a Tayrona | EverTrip",
-      en: "Private Transfer Valledupar to Tayrona | EverTrip",
-    },
-    h1: {
-      es: "Transporte privado Valledupar ↔ Tayrona",
-      en: "Private Transfer Valledupar ↔ Tayrona",
-    },
+    title: { es: "Transporte privado Valledupar - Tayrona | EverTrip", en: "Private Transfer Valledupar - Tayrona | EverTrip" },
+    h1: { es: "Transporte privado Valledupar ↔ Tayrona", en: "Private Transfer Valledupar ↔ Tayrona" },
     metaDescription: {
-      es: "Viaje privado puerta a puerta entre Valledupar y Tayrona. Reserva tu traslado con EverTrip. Conductores expertos y vehiculos premium.",
-      en: "Door-to-door private transfer between Valledupar and Tayrona. Book your ride with EverTrip. Expert drivers and premium vehicles.",
+      es: "Traslado privado entre Valledupar y Tayrona con recogida en hotel, dirección o punto accesible. Equipaje, paradas y punto de acceso coordinados.",
+      en: "Private transfer between Valledupar and Tayrona with hotel, address or accessible pickup. Luggage, stops and access point arranged in advance.",
     },
     description: {
-      es: "Disfruta de un viaje comodo, seguro y sin complicaciones entre Valledupar y Tayrona. Nuestros servicios son 100% privados, asegurando tu tranquilidad.",
-      en: "Enjoy a comfortable, safe, and hassle-free journey between Valledupar and Tayrona. Our services are 100% private, ensuring your peace of mind.",
+      es: "Coordinamos tu traslado privado entre Valledupar y el punto de acceso acordado a Tayrona, con recogida en hotel, dirección u otro punto accesible. El regreso también puede reservarse y se cobra como un trayecto independiente.",
+      en: "We coordinate your private transfer between Valledupar and the agreed Tayrona access point, with pickup at a hotel, address or another accessible point. Return service can also be booked and is charged as a separate trip.",
     },
     duration: { es: "Aprox. 4h 30m", en: "Approx. 4h 30m" },
-    idealFor: { es: "Parejas, Familias y Grupos", en: "Couples, Families, and Groups" },
+    idealFor: { es: "Parejas, familias y grupos", en: "Couples, families and groups" },
     highlights: {
       es: [
-        "Misma tarifa en ambos sentidos",
-        "Servicio puerta a puerta",
-        "Vehiculo privado con aire acondicionado",
-        "Conductor puntual y profesional",
-        "Sin cargos ocultos",
-        "Asistencia y soporte via WhatsApp"
+        "Recogida en hoteles, direcciones o puntos accesibles de Valledupar",
+        "Llegada al punto de acceso a Tayrona previamente coordinado",
+        "Equipaje coordinado según pasajeros y vehículo",
+        "Paradas de aproximadamente 30 a 40 minutos, coordinadas con anticipación",
+        "Regreso disponible y cotizado como un trayecto independiente",
       ],
       en: [
-        "Same rate in both directions",
-        "Door-to-door service",
-        "Private vehicle with AC",
-        "Punctual and professional driver",
-        "No hidden fees",
-        "WhatsApp support and assistance"
-      ]
+        "Pickup at hotels, addresses or accessible points in Valledupar",
+        "Drop-off at the Tayrona access point arranged in advance",
+        "Luggage coordinated according to passengers and vehicle",
+        "Stops of approximately 30 to 40 minutes, arranged in advance",
+        "Return service available and quoted as a separate trip",
+      ],
     },
     faqs: [
       {
-        q: { es: "¿El servicio es compartido?", en: "Is the service shared?" },
-        a: { es: "No, todos nuestros traslados son 100% privados para ti y tu grupo.", en: "No, all our transfers are 100% private for you and your group." }
+        q: { es: "¿Cuánto dura el viaje entre Valledupar y Tayrona?", en: "How long is the trip between Valledupar and Tayrona?" },
+        a: { es: "El trayecto suele durar aproximadamente 4 horas y media, dependiendo del tráfico y de los puntos exactos de recogida y llegada. Las paradas coordinadas aumentan el tiempo total.", en: "The trip usually takes approximately 4.5 hours, depending on traffic and the exact pickup and drop-off points. Coordinated stops increase the total journey time." },
       },
       {
-        q: { es: "¿Puedo hacer paradas en el camino?", en: "Can I make stops along the way?" },
-        a: { es: "Sí, podemos programar paradas breves para ir al baño o comprar snacks. Por favor indícalo al momento de reservar.", en: "Yes, we can schedule brief stops for restrooms or snacks. Please let us know when booking." }
-      }
+        q: { es: "¿Hasta dónde llega el vehículo en Tayrona?", en: "How far does the vehicle go in Tayrona?" },
+        a: { es: "El punto de llegada se coordina previamente según el acceso disponible para vehículos. No ingresamos a zonas de alto riesgo ni a lugares que no sean accesibles para el vehículo.", en: "The drop-off point is arranged in advance according to available vehicle access. We do not enter high-risk areas or locations that are not accessible by vehicle." },
+      },
+      {
+        q: { es: "¿Puedo hacer una parada durante el trayecto?", en: "Can I make a stop during the trip?" },
+        a: { es: "Sí. Podemos coordinar paradas de aproximadamente 30 a 40 minutos. Son flexibles y extienden la duración total del viaje.", en: "Yes. We can coordinate stops of approximately 30 to 40 minutes. They are flexible and extend the total journey time." },
+      },
+      {
+        q: { es: "¿Puedo reservar Tayrona → Valledupar?", en: "Can I book Tayrona → Valledupar?" },
+        a: { es: "Sí. El servicio está disponible en ambos sentidos y cada trayecto se cotiza y cobra por separado.", en: "Yes. The service is available in both directions, and each trip is quoted and charged separately." },
+      },
     ],
-    waMessage: {
-      es: "Hola, me gustaria cotizar un traslado privado desde Valledupar hacia Tayrona.",
-      en: "Hello, I would like to get a quote for a private transfer from Valledupar to Tayrona."
-    },
+    waMessage: { es: "Hola, necesito un transporte privado entre Valledupar y Tayrona.", en: "Hi, I need a private transfer between Valledupar and Tayrona." },
     image: "/assets/pilot/routes/valledupar-01.webp",
-    image2: "/assets/pilot/routes/tayrona-01.webp"
+    image2: "/assets/pilot/routes/tayrona-01.webp",
   },
   {
     slug: "valledupar-to-santa-marta",
     featured: false,
     priceMode: "quote",
-    title: {
-      es: "Transporte privado de Valledupar a Santa Marta | EverTrip",
-      en: "Private Transfer Valledupar to Santa Marta | EverTrip",
-    },
-    h1: {
-      es: "Transporte privado Valledupar ↔ Santa Marta",
-      en: "Private Transfer Valledupar ↔ Santa Marta",
-    },
+    title: { es: "Transporte privado Valledupar - Santa Marta | EverTrip", en: "Private Transfer Valledupar - Santa Marta | EverTrip" },
+    h1: { es: "Transporte privado Valledupar ↔ Santa Marta", en: "Private Transfer Valledupar ↔ Santa Marta" },
     metaDescription: {
-      es: "Viaje privado puerta a puerta entre Valledupar y Santa Marta. Reserva tu traslado con EverTrip. Conductores expertos y vehiculos premium.",
-      en: "Door-to-door private transfer between Valledupar and Santa Marta. Book your ride with EverTrip. Expert drivers and premium vehicles.",
+      es: "Traslado privado entre Valledupar y Santa Marta con recogida en hotel, dirección o punto accesible. Equipaje y paradas coordinadas por WhatsApp.",
+      en: "Private transfer between Valledupar and Santa Marta with hotel, address or accessible pickup. Luggage and coordinated stops via WhatsApp.",
     },
     description: {
-      es: "Disfruta de un viaje comodo, seguro y sin complicaciones entre Valledupar y Santa Marta. Nuestros servicios son 100% privados, asegurando tu tranquilidad.",
-      en: "Enjoy a comfortable, safe, and hassle-free journey between Valledupar and Santa Marta. Our services are 100% private, ensuring your peace of mind.",
+      es: "Conectamos Valledupar y Santa Marta en servicio privado, con recogida en hoteles, direcciones y otros puntos accesibles previamente coordinados. El trayecto puede reservarse en cualquiera de los dos sentidos.",
+      en: "We connect Valledupar and Santa Marta by private transfer, with pickup at hotels, addresses and other accessible points arranged in advance. The trip can be booked in either direction.",
     },
     duration: { es: "Aprox. 4h", en: "Approx. 4h" },
-    idealFor: { es: "Parejas, Familias y Grupos", en: "Couples, Families, and Groups" },
+    idealFor: { es: "Viajeros, familias, grupos y negocios", en: "Travelers, families, groups and business" },
     highlights: {
       es: [
-        "Misma tarifa en ambos sentidos",
-        "Servicio puerta a puerta",
-        "Vehiculo privado con aire acondicionado",
-        "Conductor puntual y profesional",
-        "Sin cargos ocultos",
-        "Asistencia y soporte via WhatsApp"
+        "Recogida en hoteles, direcciones o puntos accesibles de Valledupar o Santa Marta",
+        "Equipaje coordinado según pasajeros y vehículo",
+        "Paradas de aproximadamente 30 a 40 minutos, coordinadas con anticipación",
+        "Servicio privado puerta a puerta cuando el punto es accesible",
+        "Disponible en ambos sentidos, con cada trayecto cotizado por separado",
       ],
       en: [
-        "Same rate in both directions",
-        "Door-to-door service",
-        "Private vehicle with AC",
-        "Punctual and professional driver",
-        "No hidden fees",
-        "WhatsApp support and assistance"
-      ]
+        "Pickup at hotels, addresses or accessible points in Valledupar or Santa Marta",
+        "Luggage coordinated according to passengers and vehicle",
+        "Stops of approximately 30 to 40 minutes, arranged in advance",
+        "Private door-to-door service when the location is accessible",
+        "Available in both directions, with each trip quoted separately",
+      ],
     },
     faqs: [
       {
-        q: { es: "¿El servicio es compartido?", en: "Is the service shared?" },
-        a: { es: "No, todos nuestros traslados son 100% privados para ti y tu grupo.", en: "No, all our transfers are 100% private for you and your group." }
+        q: { es: "¿Cuánto dura el viaje entre Valledupar y Santa Marta?", en: "How long is the trip between Valledupar and Santa Marta?" },
+        a: { es: "El trayecto suele durar aproximadamente 4 horas, dependiendo del tráfico y de los puntos exactos de recogida y llegada. Las paradas coordinadas aumentan el tiempo total.", en: "The trip usually takes approximately 4 hours, depending on traffic and the exact pickup and drop-off points. Coordinated stops increase the total journey time." },
       },
       {
-        q: { es: "¿Puedo hacer paradas en el camino?", en: "Can I make stops along the way?" },
-        a: { es: "Sí, podemos programar paradas breves para ir al baño o comprar snacks. Por favor indícalo al momento de reservar.", en: "Yes, we can schedule brief stops for restrooms or snacks. Please let us know when booking." }
-      }
+        q: { es: "¿El servicio es puerta a puerta?", en: "Is the service door-to-door?" },
+        a: { es: "Sí, cuando el punto de recogida y llegada es accesible y seguro para el vehículo. No ingresamos a zonas de alto riesgo ni a lugares sin acceso adecuado.", en: "Yes, when the pickup and drop-off locations are accessible and safe for the vehicle. We do not enter high-risk areas or locations without suitable access." },
+      },
+      {
+        q: { es: "¿Puedo hacer una parada durante el trayecto?", en: "Can I make a stop during the trip?" },
+        a: { es: "Sí. Se pueden coordinar paradas de aproximadamente 30 a 40 minutos. Son flexibles y extienden la duración total del viaje.", en: "Yes. Stops of approximately 30 to 40 minutes can be arranged. They are flexible and extend the total journey time." },
+      },
+      {
+        q: { es: "¿Puedo reservar Santa Marta → Valledupar?", en: "Can I book Santa Marta → Valledupar?" },
+        a: { es: "Sí. El servicio está disponible en ambos sentidos y cada trayecto se cotiza y cobra por separado.", en: "Yes. The service is available in both directions, and each trip is quoted and charged separately." },
+      },
     ],
-    waMessage: {
-      es: "Hola, me gustaria cotizar un traslado privado desde Valledupar hacia Santa Marta.",
-      en: "Hello, I would like to get a quote for a private transfer from Valledupar to Santa Marta."
-    },
+    waMessage: { es: "Hola, necesito un transporte privado entre Valledupar y Santa Marta.", en: "Hi, I need a private transfer between Valledupar and Santa Marta." },
     image: "/assets/pilot/routes/valledupar-01.webp",
-    image2: "/assets/pilot/routes/santa-marta-01.webp"
-  }
-];
-
-export function getRouteBySlug(slug: string): RouteDefinition | undefined {
-  return routes.find((r) => r.slug === slug);
-}
-
-export function getWhatsAppLink(message: string): string {
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-}
+    image2: "/assets/pilot/routes/santa-marta-01.webp",
+  },
