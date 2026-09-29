@@ -6,41 +6,56 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import type { Locale } from "@/i18n/config";
 
-const destinations = [
+const routesShowcase = [
   {
-    name: "Palomino",
-    slug: "santa-marta-to-palomino",
-    photo: "palomino-01.webp",
-    es: "Donde el río encuentra el mar.",
-    en: "Where the river meets the sea.",
-  },
-  {
-    name: "Tayrona",
-    slug: "santa-marta-to-tayrona",
-    photo: "tayrona-01.webp",
-    es: "La naturaleza marca el ritmo.",
-    en: "Let nature set the pace.",
-  },
-  {
-    name: "Cartagena",
-    slug: "private-transfer-santa-marta-cartagena",
-    photo: "cartagena-01.webp",
-    es: "Historias detrás de cada color.",
-    en: "A story behind every color.",
-  },
-  {
-    name: "Minca",
-    slug: "santa-marta-to-minca",
-    photo: "minca-01.webp",
-    es: "Respira. Ya estás en la sierra.",
-    en: "Breathe. You’re in the mountains.",
-  },
-  {
-    name: "Barranquilla",
+    label: "Santa Marta ↔ Barranquilla",
     slug: "barranquilla-to-santa-marta",
-    photo: "barranquilla-01.webp",
-    es: "El Caribe tiene mil maneras de recibirte.",
-    en: "The Caribbean has a thousand welcomes.",
+    origin: "Santa Marta",
+    destination: "Barranquilla",
+    originPhoto: "santa-marta-01.webp",
+    destinationPhoto: "barranquilla-01.webp",
+    es: "Dos ciudades del Caribe, un solo camino.",
+    en: "Two Caribbean cities, one seamless journey.",
+  },
+  {
+    label: "Santa Marta ↔ Cartagena",
+    slug: "private-transfer-santa-marta-cartagena",
+    origin: "Santa Marta",
+    destination: "Cartagena",
+    originPhoto: "santa-marta-01.webp",
+    destinationPhoto: "cartagena-01.webp",
+    es: "Del mar de Santa Marta a las murallas de Cartagena.",
+    en: "From Santa Marta's coast to Cartagena's walls.",
+  },
+  {
+    label: "Santa Marta ↔ Palomino",
+    slug: "santa-marta-to-palomino",
+    origin: "Santa Marta",
+    destination: "Palomino",
+    originPhoto: "santa-marta-01.webp",
+    destinationPhoto: "palomino-01.webp",
+    es: "Donde la ciudad da paso a la naturaleza.",
+    en: "Where the city gives way to nature.",
+  },
+  {
+    label: "Cartagena ↔ Barranquilla",
+    slug: "cartagena-to-barranquilla",
+    origin: "Cartagena",
+    destination: "Barranquilla",
+    originPhoto: "cartagena-01.webp",
+    destinationPhoto: "barranquilla-01.webp",
+    es: "Dos capitales del Caribe conectadas en privado.",
+    en: "Two Caribbean capitals connected in private.",
+  },
+  {
+    label: "Santa Marta ↔ Tayrona",
+    slug: "santa-marta-to-tayrona",
+    origin: "Santa Marta",
+    destination: "Tayrona",
+    originPhoto: "santa-marta-01.webp",
+    destinationPhoto: "tayrona-01.webp",
+    es: "De la ciudad a la naturaleza del Tayrona.",
+    en: "From the city to Tayrona's natural landscape.",
   },
 ];
 
@@ -52,7 +67,7 @@ export default function DestinationAtlas({
   durations: Record<string, string>;
 }) {
   const [active, setActive] = useState(0);
-  const destination = destinations[active];
+  const route = routesShowcase[active];
   const es = locale === "es";
   return (
     <section
@@ -87,15 +102,15 @@ export default function DestinationAtlas({
               : "Every route has its own rhythm, landscape, and way to be experienced."}
           </p>
           <span className="small-note">
-            {es ? "Elige tu próxima parada" : "Choose your next destination"}
+            {es ? "Elige una ruta" : "Choose a route"}
           </span>
-          {destinations.map((item, index) => (
+          {routesShowcase.map((item, index) => (
             <button
               key={item.slug}
               aria-pressed={active === index}
               onClick={() => setActive(index)}
             >
-              <span>{item.name}</span>
+              <span>{item.label}</span>
               <ArrowUpRight size={24} aria-hidden="true" />
             </button>
           ))}
@@ -109,37 +124,37 @@ export default function DestinationAtlas({
             <div className="atlas-photo-pair">
               <div className="atlas-photo-panel">
                 <Image
-                  src="/assets/pilot/routes/santa-marta-01.webp"
-                  alt={es ? "Santa Marta" : "Santa Marta"}
+                  src={`/assets/pilot/routes/${route.originPhoto}`}
+                  alt={route.origin}
                   fill
                   sizes="(max-width: 700px) 50vw, 30vw"
                 />
-                <span className="atlas-photo-place">Santa Marta</span>
+                <span className="atlas-photo-place">{route.origin}</span>
               </div>
               <div className="atlas-photo-panel">
                 <Image
-                  key={destination.photo}
-                  src={`/assets/pilot/routes/${destination.photo}`}
-                  alt={destination.name}
+                  key={route.destinationPhoto}
+                  src={`/assets/pilot/routes/${route.destinationPhoto}`}
+                  alt={route.destination}
                   fill
                   sizes="(max-width: 700px) 50vw, 34vw"
                 />
-                <span className="atlas-photo-place">{destination.name}</span>
+                <span className="atlas-photo-place">{route.destination}</span>
               </div>
             </div>
-            <span className="atlas-photo-caption">{destination[locale]}</span>
+            <span className="atlas-photo-caption">{route[locale]}</span>
           </div>
           <div className="atlas-route">
             <div>
               <span>
                 {es ? "Disponible en ambos sentidos" : "Available both ways"}
               </span>
-              <strong>Santa Marta ↔ {destination.name}</strong>
+              <strong>{route.label}</strong>
             </div>
-            <span>{durations[destination.slug]}</span>
+            <span>{durations[route.slug]}</span>
             <Link
-              href={`/${locale}/${destination.slug}`}
-              aria-label={`${es ? "Ver ruta entre Santa Marta y" : "View route between Santa Marta and"} ${destination.name}`}
+              href={`/${locale}/${route.slug}`}
+              aria-label={`${es ? "Ver ruta" : "View route"} ${route.label}`}
             >
               <ArrowUpRight size={28} />
             </Link>

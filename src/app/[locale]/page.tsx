@@ -22,11 +22,11 @@ export default async function Home({
     routes
       .filter((route) =>
         [
-          "santa-marta-to-palomino",
-          "santa-marta-to-tayrona",
-          "private-transfer-santa-marta-cartagena",
-          "santa-marta-to-minca",
           "barranquilla-to-santa-marta",
+          "private-transfer-santa-marta-cartagena",
+          "santa-marta-to-palomino",
+          "cartagena-to-barranquilla",
+          "santa-marta-to-tayrona",
         ].includes(route.slug),
       )
       .map((route) => [route.slug, route.duration[locale]]),
