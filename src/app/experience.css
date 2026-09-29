@@ -415,7 +415,7 @@ html[lang="en"] .overture-title h1 {
   width: 540px;
   border: 0;
   padding: 0;
-  background: var(--salt);
+  background: #ffffff;
   color: var(--sea);
 }
 .booking-dialog::backdrop,
@@ -449,6 +449,7 @@ body:has(.brand-film-dialog[open]) {
   letter-spacing: -0.045em;
   line-height: 1.02;
   margin: 23px 0 36px;
+  color: var(--sea);
 }
 .booking-sheet form {
   position: relative;
@@ -465,7 +466,7 @@ body:has(.brand-film-dialog[open]) {
   display: block;
   background: transparent;
   border: 0;
-  border-bottom: 1px solid #073b3a35;
+  border-bottom: 1px solid rgba(16, 155, 150, 0.28);
   min-height: 50px;
   font-family: var(--font-outfit);
   font-size: 22px;
@@ -485,12 +486,12 @@ body:has(.brand-film-dialog[open]) {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--sea);
+  background: var(--brand-teal);
 }
 .booking-path span {
   width: 1px;
   flex: 1;
-  background: #073b3a50;
+  background: rgba(16, 155, 150, 0.34);
 }
 .booking-people {
   display: flex;
@@ -517,7 +518,7 @@ body:has(.brand-film-dialog[open]) {
   height: 44px;
   display: grid;
   place-items: center;
-  border: 1px solid #073b3a25;
+  border: 1px solid rgba(16, 155, 150, 0.22);
 }
 .booking-people button:disabled {
   opacity: 0.3;
@@ -537,10 +538,14 @@ body:has(.brand-film-dialog[open]) {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: var(--sea);
-  color: var(--salt);
+  background: var(--brand-teal);
+  color: #ffffff;
   padding: 15px 20px;
   font-size: 13px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.booking-submit:hover {
+  background: var(--brand-teal-light);
 }
 .booking-footnote {
   font-size: 10px;
@@ -2754,4 +2759,18 @@ body:has(.brand-film-dialog[open]) {
     grid-row: 1/3;
     grid-column: 2;
   }
+}
+
+.booking-sheet > .small-note {
+  color: var(--brand-teal);
+}
+.booking-sheet .dialog-close {
+  color: var(--sea);
+}
+.booking-sheet select:focus-visible,
+.booking-people button:focus-visible,
+.booking-people input:focus-visible,
+.booking-submit:focus-visible {
+  outline: 2px solid var(--brand-teal);
+  outline-offset: 3px;
 }
