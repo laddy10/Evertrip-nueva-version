@@ -1377,3 +1377,12 @@ export const routes: RouteDefinition[] = [
     image: "/assets/pilot/routes/valledupar-01.webp",
     image2: "/assets/pilot/routes/santa-marta-01.webp",
   },
+];
+
+export function getRouteBySlug(slug: string): RouteDefinition | undefined {
+  return routes.find((r) => r.slug === slug);
+}
+
+export function getWhatsAppLink(message: string): string {
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
