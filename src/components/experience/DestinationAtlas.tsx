@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowLeftRight, ArrowUpRight } from "lucide-react";
 import type { Locale } from "@/i18n/config";
 
 const routesShowcase = [
@@ -115,7 +115,7 @@ export default function DestinationAtlas({
               >
                 <span className="atlas-route-option">
                   <span>{item.origin}</span>
-                  <ArrowRight size={16} aria-hidden="true" />
+                  <ArrowLeftRight size={15} aria-hidden="true" />
                   <span>{item.destination}</span>
                 </span>
                 <span className="atlas-route-state" aria-hidden="true">
