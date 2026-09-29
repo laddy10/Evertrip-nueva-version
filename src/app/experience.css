@@ -2296,9 +2296,11 @@ body:has(.brand-film-dialog[open]) {
   }
 }
 /* The same journal continues into destination and quotation pages. */
-.route-journal,
-.route-directory {
+.route-journal {
   background: var(--salt);
+}
+.route-directory {
+  background: #ffffff;
 }
 .route-cover {
   height: 76svh;
@@ -2567,13 +2569,24 @@ body:has(.brand-film-dialog[open]) {
   margin-top: 25px;
 }
 .directory-cover {
-  padding: 150px 7vw 70px;
+  padding: 148px max(7vw, calc((100vw - 1480px) / 2)) 82px;
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: 5vw;
+  grid-template-columns: minmax(0, 0.9fr) minmax(420px, 1.1fr);
+  gap: clamp(56px, 7vw, 110px);
   align-items: center;
   background: var(--sea);
-  color: var(--salt);
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+.directory-cover::after {
+  content: "";
+  position: absolute;
+  left: max(7vw, calc((100vw - 1480px) / 2));
+  right: max(7vw, calc((100vw - 1480px) / 2));
+  bottom: 28px;
+  height: 1px;
+  background: rgba(24, 184, 178, 0.28);
 }
 .directory-cover h1 {
   font-size: clamp(50px, 6.5vw, 99px);
@@ -2586,28 +2599,45 @@ body:has(.brand-film-dialog[open]) {
 .directory-cover > div > p:last-child {
   font-size: 13px;
   line-height: 1.9;
-  max-width: 350px;
-  color: #c3d1c5;
+  max-width: 390px;
+  color: rgba(255, 255, 255, 0.74);
 }
 .directory-photo {
   position: relative;
-  height: 470px;
-  border-radius: 50% 50% 0 0;
+  height: clamp(420px, 34vw, 540px);
   overflow: hidden;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 28px 70px rgba(2, 28, 28, 0.26);
+  background: #0a4a48;
+}
+.directory-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(7, 59, 58, 0.03) 0%,
+    rgba(7, 59, 58, 0.14) 100%
+  );
 }
 .directory-photo > img {
   object-fit: cover;
+  object-position: center 48%;
 }
 .directory-index {
-  padding: 75px 8vw 100px;
+  padding: 72px max(8vw, calc((100vw - 1480px) / 2)) 110px;
+  background: #ffffff;
 }
 .directory-index > label {
-  max-width: 500px;
+  max-width: 560px;
   display: flex;
   align-items: center;
   gap: 15px;
-  border-bottom: 1px solid #93a88f;
+  border-bottom: 1px solid rgba(16, 155, 150, 0.34);
   min-height: 60px;
+  color: var(--brand-teal);
 }
 .directory-index input {
   min-width: 0;
@@ -2619,28 +2649,41 @@ body:has(.brand-film-dialog[open]) {
 .directory-index > p {
   font-size: 11px;
   color: var(--muted);
-  margin: 24px 0;
+  margin: 22px 0 28px;
 }
 .directory-index > div > a {
   display: grid;
-  grid-template-columns: 1fr 200px 30px;
-  gap: 30px;
+  grid-template-columns: minmax(0, 1fr) 180px 34px;
+  gap: 28px;
   align-items: center;
-  padding: 23px 0;
-  border-bottom: 1px solid #bdccb6;
+  padding: 24px 0;
+  border-bottom: 1px solid rgba(16, 155, 150, 0.16);
+  color: var(--ink);
+  transition:
+    color 0.2s ease,
+    padding-left 0.2s ease;
 }
 .directory-index > div > a > span {
   font-family: var(--font-outfit);
-  font-size: 29px;
+  font-size: clamp(24px, 2vw, 31px);
   letter-spacing: -0.025em;
-  font-weight: 400;
+  font-weight: 450;
 }
 .directory-index > div > a > small {
   font-size: 11px;
   color: var(--muted);
+  justify-self: start;
 }
 .directory-index > div > a:hover {
-  color: #109b96;
+  color: var(--brand-teal);
+  padding-left: 8px;
+}
+.directory-index > div > a > svg {
+  color: var(--brand-teal);
+  transition: transform 0.2s ease;
+}
+.directory-index > div > a:hover > svg {
+  transform: translate(3px, -3px);
 }
 @media (max-width: 700px) {
   .route-cover {
@@ -2722,8 +2765,13 @@ body:has(.brand-film-dialog[open]) {
     line-height: 1.25;
   }
   .directory-cover {
-    padding: 135px 24px 50px;
+    padding: 118px 24px 56px;
     display: block;
+  }
+  .directory-cover::after {
+    left: 24px;
+    right: 24px;
+    bottom: 24px;
   }
   .directory-cover h1 {
     font-size: 53px;
@@ -2732,11 +2780,12 @@ body:has(.brand-film-dialog[open]) {
     font-size: 12px;
   }
   .directory-photo {
-    height: 330px;
-    margin-top: 35px;
+    height: 320px;
+    margin-top: 38px;
+    border-radius: 22px;
   }
   .directory-index {
-    padding: 40px 24px 70px;
+    padding: 42px 24px 76px;
   }
   .directory-index input {
     font-size: 12px;
