@@ -3,7 +3,10 @@ import { existsSync, readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 
 // Check the exported artifacts, not just the metadata helper's return values.
-const origin = "https://evertrip.co";
+// Pin the acceptance target independently: importing SITE_ORIGIN would let an
+// accidental change to the application domain change the expected result too.
+const origin = "https://evertripviajes.com";
+const businessId = `${origin}/#business`;
 const read = (file) => readFileSync(file, "utf8");
 const attributes = (tag) => Object.fromEntries(
   [...tag.matchAll(/([\w:-]+)="([^"]*)"/g)].map((match) => [match[1].toLowerCase(), match[2]]),
@@ -17,7 +20,56 @@ const alternates = (html) => Object.fromEntries(tags(html, "link")
   .filter((tag) => tag.rel === "alternate" && tag.hreflang)
   .map((tag) => [tag.hreflang, tag.href]));
 const graph = (html) => [...html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs)]
-  .flatMap((match) => JSON.parse(match[1])["@graph"] || []);
+  .flatMap((match) => {
+    const data = JSON.parse(match[1]);
+    return data["@graph"] || data;
+  });
+
+const assertSiteUrl = (value, label) => {
+  assert.equal(new URL(value).origin, origin, `${label}: expected production domain`);
+};
+const assertStructuredData = (value, label) => {
+  if (!value || typeof value !== "object") return;
+  if (Array.isArray(value)) {
+    value.forEach((item, index) => assertStructuredData(item, `${label}[${index}]`));
+    return;
+  }
+  if ([value["@type"]].flat().includes("LocalBusiness")) {
+    assert.equal(value["@id"], businessId, `${label}: LocalBusiness must use the stable production ID`);
+  }
+  for (const [key, child] of Object.entries(value)) {
+    // sameAs and @context deliberately retain their external social/schema URLs.
+    if (["@id", "url", "item", "image", "logo"].includes(key)) {
+      for (const reference of [child].flat()) {
+        if (typeof reference === "string") assertSiteUrl(reference, `${label}.${key}`);
+      }
+    }
+    assertStructuredData(child, `${label}.${key}`);
+  }
+};
+
+// Scan the whole deployable text output, including Next's RSC payloads and JS,
+// so an old host cannot survive outside the 50 commercial HTML documents.
+const exportedTextFiles = readdirSync("out", { recursive: true, withFileTypes: true })
+  .filter((entry) => entry.isFile() && /\.(?:html?|txt|xml|json|js|mjs|css|map|svg|webmanifest|htaccess)$/i.test(entry.name))
+  .map((entry) => path.join(entry.parentPath, entry.name));
+for (const file of exportedTextFiles) {
+  const text = read(file);
+  assert(!/\b(?:www\.)?evertrip\.co\b/i.test(text), `${file}: legacy domain in generated output`);
+  if (!file.endsWith(".html")) continue;
+  for (const tag of canonical(text)) assertSiteUrl(tag.href, `${file}: canonical`);
+  for (const tag of tags(text, "link").filter((tag) => tag.rel === "alternate" && tag.hreflang)) {
+    assertSiteUrl(tag.href, `${file}: hreflang ${tag.hreflang}`);
+  }
+  for (const tag of tags(text, "meta")) {
+    if (["og:url", "og:image", "og:image:url", "og:image:secure_url", "twitter:image", "twitter:image:src"].includes(tag.property || tag.name)) {
+      assertSiteUrl(tag.content, `${file}: ${tag.property || tag.name}`);
+    }
+  }
+  const nodes = graph(text);
+  assert(nodes.filter((node) => [node["@type"]].flat().includes("LocalBusiness")).length <= 1, `${file}: duplicate LocalBusiness definitions`);
+  assertStructuredData(nodes, `${file}: JSON-LD`);
+}
 
 const slugs = [...read("src/data/routes.ts").matchAll(/\bslug:\s*"([^"]+)"/g)]
   .map((match) => match[1]);
@@ -77,10 +129,13 @@ for (const locale of ["es", "en"]) {
       );
       const service = nodes.find((node) => node["@type"] === "Service");
       assert.equal(service.url, url);
-      assert.equal(service.provider["@id"], `${origin}/#business`);
+      assert.equal(service.provider["@id"], businessId);
       assert.equal(service.provider.url, `${origin}/`);
     } else if (!slug) {
-      const business = nodes.find((node) => node["@id"] === `${origin}/#business`);
+      const businesses = nodes.filter((node) => [node["@type"]].flat().includes("LocalBusiness"));
+      assert.equal(businesses.length, 1, `${url}: expected exactly one LocalBusiness definition`);
+      const business = businesses[0];
+      assert.equal(business["@id"], businessId);
       assert.equal(business.url, `${origin}/`);
     }
   }
@@ -110,5 +165,7 @@ assert(!existsSync("out/es/unknown-route/index.html"));
 const robots = read("out/robots.txt");
 assert(robots.includes("Allow: /"));
 assert(robots.includes(`Sitemap: ${origin}/sitemap.xml`));
+assert.deepEqual([...robots.matchAll(/^Sitemap:\s*(\S+)\s*$/gm)].map((match) => match[1]), [`${origin}/sitemap.xml`]);
+console.log(`Production domain verified: ${origin}; ${exportedTextFiles.length} exported text files checked; stable entity ${businessId}.`);
 console.log("Static SEO verification passed: 50 commercial URLs, 46 route pages, 2 functional QR exports, root fallback and 404 artifact.");
 console.log("Production HTTP redirects and 404 status still require hosting verification.");

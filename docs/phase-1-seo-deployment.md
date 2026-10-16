@@ -10,7 +10,7 @@ The commercial inventory remains 50 URLs: two homepages, two directories and 23 
 - Publish the complete contents of the newly generated `out/` directory.
 - The pre-existing `out.zip` was not regenerated. Do not deploy that older archive as this build; deploy the fresh `out/` directory or package it again as part of the approved deployment.
 - `/es/` and `/en/` are explicit static pages. There is no request-time language negotiation.
-- `/` exports an immediate HTML meta refresh to `/es/`, a canonical to `https://evertrip.co/es/`, and a normal fallback link. It works without JavaScript. This is an HTML redirect, not an HTTP 301/308.
+- `/` exports an immediate HTML meta refresh to `/es/`, a canonical to `https://evertripviajes.com/es/`, and a normal fallback link. It works without JavaScript. This is an HTML redirect, not an HTTP 301/308.
 - `src/proxy.ts` was removed. Its Accept-Language redirects and blanket prefixing of unknown paths were unsupported in production static export. Development now follows the same explicit locale URLs, with Spanish as the root destination. Language switching on localized pages is unchanged.
 - Locale and route segments use `dynamicParams = false`; invalid values also call `notFound()` instead of falling back to Spanish metadata.
 - The generated `404.html` retains Next.js's existing error presentation and `noindex`. Static files cannot set their own HTTP response status.
@@ -23,8 +23,8 @@ The commercial inventory remains 50 URLs: two homepages, two directories and 23 
 The hosting provider and active deployment configuration are not identified in the repository. No provider-specific rules have been deployed or assumed. Configure the following on the actual host/CDN:
 
 1. Serve this build's `out/` as the document root. Do not use `next start` for an exported deployment; the existing package command is not a static file server.
-2. Redirect HTTP and alternate hostnames (including `www`, if configured) permanently to `https://evertrip.co`, preserving the path and query. Confirm certificates and DNS for each hostname before activating those rules.
-3. Prefer an exact-path HTTP 301 or 308 redirect from `/` to `https://evertrip.co/es/`. The exported HTML refresh is the fallback if the host cannot supply this rule. Do not apply this redirect to every path.
+2. Redirect HTTP and alternate hostnames (including `www`, if configured) permanently to `https://evertripviajes.com`, preserving the path and query. Confirm certificates and DNS for each hostname before activating those rules.
+3. Prefer an exact-path HTTP 301 or 308 redirect from `/` to `https://evertripviajes.com/es/`. The exported HTML refresh is the fallback if the host cannot supply this rule. Do not apply this redirect to every path.
 4. Resolve an existing page directory to its `index.html`. Permanently redirect slashless existing page URLs to the slash version, preserving query parameters. Do not append slashes to assets, `robots.txt` or `sitemap.xml`.
 5. If direct `index.html` URLs are served, permanently normalize `/es/index.html` to `/es/` and the corresponding route aliases. Normalize `/index.html` to the chosen root destination.
 6. For a missing path, return **HTTP 404** while serving `out/404.html` as the error body. Do not rewrite missing paths to `/`, `/es/` or `index.html` with a 200 response. This includes invalid locales, missing route slugs and unknown files. Do not enable a single-page-app catch-all fallback.

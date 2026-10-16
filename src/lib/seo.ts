@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { defaultLocale, type Locale } from "@/i18n/config";
 
-export const SITE_ORIGIN = "https://evertrip.co";
+export const SITE_ORIGIN = "https://evertripviajes.com";
 
 /** Asset/file URLs keep their extension; page URLs use localizedUrl below. */
 export function siteUrl(path = "/"): string {
