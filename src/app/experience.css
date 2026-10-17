@@ -46,19 +46,6 @@ button {
   text-decoration: underline;
   text-underline-offset: 5px;
 }
-.showcase-credit {
-  height: 26px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: var(--sea);
-  color: #e1eae4;
-  font-size: 9px;
-  gap: 3px;
-  letter-spacing: 0.02em;
-  position: relative;
-  z-index: 60;
-}
 .site-header {
   position: fixed;
   top: 0;
@@ -66,15 +53,9 @@ button {
   width: 100%;
   background: var(--sea);
   color: var(--salt);
-  transition:
-    background 0.3s,
-    top 0.3s;
-}
-.site-header[data-scrolled="false"] {
-  top: 26px;
+  transition: background 0.3s;
 }
 .site-header.home-header[data-scrolled="false"] {
-  top: 26px;
   background: transparent;
 }
 .site-header[data-scrolled="true"],
@@ -1641,14 +1622,6 @@ body:has(.brand-film-dialog[open]) {
   }
 }
 @media (max-width: 700px) {
-  .showcase-credit {
-    font-size: 8px;
-    height: 24px;
-  }
-  .site-header[data-scrolled="false"],
-  .site-header.home-header[data-scrolled="false"] {
-    top: 24px;
-  }
   .site-nav {
     padding: 10px 20px;
     gap: 10px;
@@ -2284,7 +2257,6 @@ body:has(.brand-film-dialog[open]) {
 }
 @media print {
   .site-header,
-  .showcase-credit,
   .trip-dock {
     display: none;
   }

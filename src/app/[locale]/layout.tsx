@@ -74,9 +74,6 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={`${outfit.variable} ${inter.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body className="flex flex-col min-h-screen" suppressHydrationWarning>
-        <div className="showcase-credit print:hidden">
-          {locale === "es" ? "Diseño creado con " : "Design created with "}<strong>GPT-6 Astra</strong> · Ultra
-        </div>
         <Navbar locale={locale} />
         <main className="flex-grow">{children}</main>
         <div className="print:hidden">
