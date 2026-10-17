@@ -3,8 +3,8 @@ import { faqsByLocale } from "@/data/faq";
 import { BUSINESS_ID, siteUrl } from "@/lib/seo";
 
 const businessDescription = {
-  es: "Traslados privados puerta a puerta por la costa Caribe colombiana. Recogida en aeropuerto, reserva por WhatsApp, vans cómodas para familias y grupos.",
-  en: "Private door-to-door transfers across Colombia's Caribbean coast. Airport pickup, WhatsApp booking, comfortable vans for families and groups.",
+  es: "Traslados privados puerta a puerta y experiencias turísticas por el Caribe colombiano. Reserva y cotización por WhatsApp para viajeros, familias y grupos.",
+  en: "Private door-to-door transfers and tour experiences across Colombia's Caribbean region. WhatsApp booking and quotes for travelers, families and groups.",
 };
 
 export default function JsonLd({ locale }: { locale: Locale }) {

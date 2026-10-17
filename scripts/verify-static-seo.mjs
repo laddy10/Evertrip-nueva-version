@@ -73,15 +73,20 @@ for (const file of exportedTextFiles) {
 
 const slugs = [...read("src/data/routes.ts").matchAll(/\bslug:\s*"([^"]+)"/g)]
   .map((match) => match[1]);
+const tourSlugs = [...read("src/data/tours.ts").matchAll(/\bslug:\s*"([^"]+)"/g)]
+  .map((match) => match[1]);
 assert.equal(slugs.length, 23, "Phase 1 must retain the 23 existing route definitions");
 assert.equal(new Set(slugs).size, slugs.length, "Duplicate route slug");
-const paths = ["", "all-routes", ...slugs];
+assert.equal(tourSlugs.length, 3, "Tours launch must retain the three confirmed tour definitions");
+assert.equal(new Set(tourSlugs).size, tourSlugs.length, "Duplicate tour slug");
+const tourPaths = ["tours", ...tourSlugs.map((slug) => `tours/${slug}`)];
+const paths = ["", "all-routes", ...slugs, ...tourPaths];
 const pagePath = (locale, slug) => `/${locale}/${slug ? `${slug}/` : ""}`;
 const expected = ["es", "en"].flatMap((locale) => paths.map((slug) => origin + pagePath(locale, slug))).sort();
 const sitemap = read("out/sitemap.xml");
 const entries = [...sitemap.matchAll(/<url>(.*?)<\/url>/gs)].map((match) => match[1]);
 assert.deepEqual(entries.map((entry) => entry.match(/<loc>(.*?)<\/loc>/)[1]).sort(), expected);
-assert.equal(expected.length, 50);
+assert.equal(expected.length, 58);
 assert(!sitemap.includes("<lastmod>"), "Do not invent content modification dates");
 
 for (const locale of ["es", "en"]) {
@@ -131,6 +136,16 @@ for (const locale of ["es", "en"]) {
       assert.equal(service.url, url);
       assert.equal(service.provider["@id"], businessId);
       assert.equal(service.provider.url, `${origin}/`);
+    } else if (slug.startsWith("tours/") && slug !== "tours") {
+      const service = nodes.find((node) => node["@type"] === "Service");
+      assert(service, `${url}: expected tour Service JSON-LD`);
+      assert.equal(service.url, url);
+      assert.equal(service.provider["@id"], businessId);
+      const breadcrumb = nodes.find((node) => node["@type"] === "BreadcrumbList");
+      assert.deepEqual(
+        breadcrumb.itemListElement.map((item) => item.item),
+        [origin + pagePath(locale, ""), origin + pagePath(locale, "tours"), url],
+      );
     } else if (!slug) {
       const businesses = nodes.filter((node) => [node["@type"]].flat().includes("LocalBusiness"));
       assert.equal(businesses.length, 1, `${url}: expected exactly one LocalBusiness definition`);
@@ -167,5 +182,5 @@ assert(robots.includes("Allow: /"));
 assert(robots.includes(`Sitemap: ${origin}/sitemap.xml`));
 assert.deepEqual([...robots.matchAll(/^Sitemap:\s*(\S+)\s*$/gm)].map((match) => match[1]), [`${origin}/sitemap.xml`]);
 console.log(`Production domain verified: ${origin}; ${exportedTextFiles.length} exported text files checked; stable entity ${businessId}.`);
-console.log("Static SEO verification passed: 50 commercial URLs, 46 route pages, 2 functional QR exports, root fallback and 404 artifact.");
+console.log("Static SEO verification passed: 58 commercial URLs, 46 route pages, 6 tour pages, 2 tour directories, 2 functional QR exports, root fallback and 404 artifact.");
 console.log("Production HTTP redirects and 404 status still require hosting verification.");

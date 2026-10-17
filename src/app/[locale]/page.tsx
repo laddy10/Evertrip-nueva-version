@@ -5,6 +5,7 @@ import FleetAtelier from "@/components/experience/FleetAtelier";
 import TravelPromise from "@/components/experience/TravelPromise";
 import TravelJournal from "@/components/experience/TravelJournal";
 import TravelQuestions from "@/components/experience/TravelQuestions";
+import TourExperiences from "@/components/experience/TourExperiences";
 import { preload } from "react-dom";
 import { routes } from "@/data/routes";
 import { isLocale, defaultLocale, type Locale } from "@/i18n/config";
@@ -42,6 +43,7 @@ export default async function Home({
       <JsonLd locale={locale} />
       <CoastalOverture locale={locale} routeSlugs={routeSlugs} />
       <DestinationAtlas locale={locale} durations={atlasDurations} />
+      <TourExperiences locale={locale} />
       <FleetAtelier locale={locale} />
       <TravelPromise locale={locale} />
       <TravelJournal locale={locale} />

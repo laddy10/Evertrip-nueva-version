@@ -26,14 +26,14 @@ export const dynamicParams = false;
 
 const metaByLocale: Record<Locale, { title: string; description: string }> = {
   es: {
-    title: "Transporte privado puerta a puerta | Barranquilla, Santa Marta, Palomino | EverTrip",
+    title: "Transporte privado y tours en el Caribe colombiano | EverTrip",
     description:
-      "Traslados privados puerta a puerta por la costa Caribe: Barranquilla, Santa Marta, Cartagena, Palomino y Valledupar. Reserva por WhatsApp en minutos.",
+      "Traslados privados puerta a puerta y experiencias turísticas por el Caribe colombiano. Explora rutas, tours y cotiza por WhatsApp con EverTrip.",
   },
   en: {
-    title: "Private Door-to-Door Transfers | Barranquilla, Santa Marta, Palomino | EverTrip",
+    title: "Private transfers and tours in the Colombian Caribbean | EverTrip",
     description:
-      "Private door-to-door transfers across the Caribbean coast: Barranquilla, Santa Marta, Cartagena, Palomino and Valledupar. Book on WhatsApp in minutes.",
+      "Private door-to-door transfers and tour experiences across the Colombian Caribbean. Explore routes, tours and request a quote on WhatsApp with EverTrip.",
   },
 };
 

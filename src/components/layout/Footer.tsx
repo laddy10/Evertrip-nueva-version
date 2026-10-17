@@ -49,6 +49,7 @@ export default function Footer({ locale }: { locale: Locale }) {
         </div>
         <nav aria-label={es ? "Enlaces del pie de página" : "Footer links"}>
           <Link href={`/${locale}/all-routes`}>{t.popularRoutes}</Link>
+          <Link href={`/${locale}/tours`}>{es ? "Tours y experiencias" : "Tours & experiences"}</Link>
           <Link href={`/${locale}#how-it-works`}>{t.howItWorks}</Link>
           <Link href={`/${locale}#faq`}>{t.faq}</Link>
           {[t.privacy, t.terms, t.cancellation].map((label) => (

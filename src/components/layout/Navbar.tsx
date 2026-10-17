@@ -14,6 +14,7 @@ export default function Navbar({ locale }: { locale: Locale }) {
     { id: "why-choose-us", label: locale === "es" ? "Por qué elegirnos" : "Why choose us" },
     { id: "fleet", label: locale === "es" ? "Nuestros carros" : "Our vehicles" },
     { id: "routes", label: locale === "es" ? "Nuestras rutas" : "Our routes" },
+    { id: "tours", label: locale === "es" ? "Tours" : "Tours" },
     { id: "faq", label: dict.nav.faq },
   ];
   const pathname = usePathname();
