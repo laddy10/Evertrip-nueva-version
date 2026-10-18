@@ -2,6 +2,11 @@ import type { Locale } from "@/i18n/config";
 
 type LocalizedText = Record<Locale, string>;
 
+export type TourImage = {
+  src: string;
+  alt: LocalizedText;
+};
+
 export type TourExperience = {
   slug: string;
   name: LocalizedText;
@@ -12,7 +17,10 @@ export type TourExperience = {
   intro: LocalizedText;
   description: LocalizedText;
   highlights: Record<Locale, string[]>;
+  images: TourImage[];
 };
+
+const ASSET_ORIGIN = "https://assets.evertripviajes.com";
 
 export const tours: TourExperience[] = [
   {
@@ -49,6 +57,36 @@ export const tours: TourExperience[] = [
         "Local guides accompany the experience.",
       ],
     },
+    images: [
+      {
+        src: ASSET_ORIGIN + "/tours/tubing-rio-don-diego/hero.webp",
+        alt: {
+          es: "Experiencia de tubing en el río Don Diego, Sierra Nevada",
+          en: "Tubing experience on the Don Diego River in the Sierra Nevada",
+        },
+      },
+      {
+        src: ASSET_ORIGIN + "/tours/tubing-rio-don-diego/actividad-01.webp",
+        alt: {
+          es: "Viajeros preparados para la actividad de tubing en el río Don Diego",
+          en: "Travelers preparing for the tubing experience on the Don Diego River",
+        },
+      },
+      {
+        src: ASSET_ORIGIN + "/tours/tubing-rio-don-diego/actividad-02.webp",
+        alt: {
+          es: "Recorrido de tubing rodeado por el entorno natural del río Don Diego",
+          en: "Tubing route surrounded by the natural landscape of the Don Diego River",
+        },
+      },
+      {
+        src: ASSET_ORIGIN + "/tours/tubing-rio-don-diego/actividad-03.webp",
+        alt: {
+          es: "Actividad de tubing en las aguas del río Don Diego",
+          en: "Tubing activity on the waters of the Don Diego River",
+        },
+      },
+    ],
   },
   {
     slug: "avistamiento-flamencos-tarde-rancheria",
@@ -86,6 +124,36 @@ export const tours: TourExperience[] = [
         "Introduction to cultural expressions such as face painting, clothing, music and traditional drinks.",
       ],
     },
+    images: [
+      {
+        src: ASSET_ORIGIN + "/tours/flamencos-rancheria/camarones.webp",
+        alt: {
+          es: "Paisaje de Camarones durante la experiencia de avistamiento de flamencos",
+          en: "Landscape of Camarones during the flamingo watching experience",
+        },
+      },
+      {
+        src: ASSET_ORIGIN + "/tours/flamencos-rancheria/canoa.webp",
+        alt: {
+          es: "Recorrido en canoa durante la experiencia en Camarones",
+          en: "Canoe trip during the experience in Camarones",
+        },
+      },
+      {
+        src: ASSET_ORIGIN + "/tours/flamencos-rancheria/canoa-02.webp",
+        alt: {
+          es: "Navegación en canoa por la laguna de Camarones",
+          en: "Canoe navigation across the lagoon in Camarones",
+        },
+      },
+      {
+        src: ASSET_ORIGIN + "/tours/flamencos-rancheria/rancheria.webp",
+        alt: {
+          es: "Experiencia cultural en una ranchería Wayuu",
+          en: "Cultural experience at a Wayuu ranchería",
+        },
+      },
+    ],
   },
   {
     slug: "pasadia-cabo-de-la-vela",
@@ -120,6 +188,7 @@ export const tours: TourExperience[] = [
         "Visit to Riohacha, its waterfront and Wayuu handicrafts.",
       ],
     },
+    images: [],
   },
 ];
 

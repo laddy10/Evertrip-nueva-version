@@ -26,6 +26,11 @@ const nextConfig: NextConfig = {
         hostname: "pub-9936f5f82a2345e986d1f24b51d2341d.r2.dev",
         pathname: "/vehicles/**",
       },
+      {
+        protocol: "https",
+        hostname: "assets.evertripviajes.com",
+        pathname: "/tours/**",
+      },
     ],
   },
 };
