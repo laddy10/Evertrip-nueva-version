@@ -24,13 +24,19 @@ export default function TourExperiences({ locale }: { locale: Locale }) {
       </div>
 
       <div className="tour-showcase-grid">
-        {tours.map((tour, index) => (
+        {tours.map((tour, index) => {
+          const coverImage =
+            tour.slug === "avistamiento-flamencos-tarde-rancheria"
+              ? tour.images.find((image) => image.src.endsWith("/rancheria.webp"))
+              : tour.images[0];
+
+          return (
           <Link key={tour.slug} href={"/" + locale + "/tours/#" + tour.slug} className="tour-showcase-card">
             <div className="tour-showcase-media">
-              {tour.images[0] ? (
+              {coverImage ? (
                 <Image
-                  src={tour.images[0].src}
-                  alt={tour.images[0].alt[locale]}
+                  src={coverImage.src}
+                  alt={coverImage.alt[locale]}
                   fill
                   sizes="(max-width: 700px) 92vw, 31vw"
                 />
@@ -47,7 +53,8 @@ export default function TourExperiences({ locale }: { locale: Locale }) {
               <ArrowUpRight size={21} aria-hidden="true" />
             </div>
           </Link>
-        ))}
+          );
+        })}
       </div>
 
       <Link href={"/" + locale + "/tours/"} className="tour-showcase-all">
