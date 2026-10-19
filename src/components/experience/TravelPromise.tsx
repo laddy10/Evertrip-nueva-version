@@ -54,12 +54,8 @@ export default function TravelPromise({ locale }: { locale: Locale }) {
     >
       <div className="promise-landscape">
         <picture className="promise-landscape-media">
-          <source
-            media="(min-width: 901px)"
-            srcSet="/assets/pilot/routes/tayrona-desktop-new.webp"
-          />
           <img
-            src="/assets/pilot/routes/tayrona-01.webp"
+            src="https://assets.evertripviajes.com/routes/tayrona/hero%20(2).webp?v=2"
             loading="lazy"
             decoding="async"
             alt={
@@ -80,6 +76,7 @@ export default function TravelPromise({ locale }: { locale: Locale }) {
             ? "Así se siente viajar con Evertrip"
             : "This is how an Evertrip journey feels"}
         </span>
+        <p className="promise-location">Cabo San Juan · Parque Tayrona</p>
       </div>
       <div className="promise-narrative" id="how-it-works">
         <svg

@@ -17,6 +17,7 @@ const content = {
     heading: "El Caribe también se vive.",
     copy: "Experiencias seleccionadas entre naturaleza, cultura y aventura. Conoce cada actividad y conversa con nuestro equipo para coordinar disponibilidad, detalles y cotización.",
     navLabel: "Explora las experiencias",
+    explore: "Ver experiencia",
     story: "La experiencia",
     moments: "Lo que vivirás",
     quote: "Consultar por WhatsApp",
@@ -30,6 +31,7 @@ const content = {
     heading: "The Caribbean is meant to be experienced.",
     copy: "Selected experiences across nature, culture and adventure. Discover each activity and talk to our team to coordinate availability, details and a quote.",
     navLabel: "Explore the experiences",
+    explore: "View experience",
     story: "The experience",
     moments: "What you’ll experience",
     quote: "Ask on WhatsApp",
@@ -80,16 +82,40 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
         </div>
       </header>
 
-      <nav className="tours-anchor-nav" aria-label={t.navLabel}>
-        {tours.map((tour, index) => (
-          <a key={tour.slug} href={"#" + tour.slug}>
-            <span>{String(index + 1).padStart(2, "0")}</span>
-            {tour.name[locale]}
-          </a>
-        ))}
+      <nav id="experiencias" className="tours-discovery" aria-label={t.navLabel}>
+        {tours.map((tour, index) => {
+          const preview = tour.images[tour.slug === "avistamiento-flamencos-tarde-rancheria" ? 1 : 0];
+
+          return (
+            <a className="tours-discovery-card" key={tour.slug} href={"#" + tour.slug} aria-labelledby={tour.slug + "-preview-title"}>
+              <div className="tours-discovery-media">
+                {preview ? (
+                  <Image
+                    src={preview.src}
+                    alt={preview.alt[locale]}
+                    fill
+                    sizes="(max-width: 600px) 32vw, (max-width: 1440px) 29vw, 400px"
+                    preload={index === 0}
+                  />
+                ) : (
+                  <div className="tours-discovery-edition" aria-hidden="true">
+                    <span>{tour.category[locale]}</span>
+                    <p>{tour.name[locale]}</p>
+                  </div>
+                )}
+              </div>
+              <div className="tours-discovery-copy">
+                <span className="tours-discovery-location">{tour.location[locale]}</span>
+                <strong id={tour.slug + "-preview-title"}>{tour.name[locale]}</strong>
+                <p>{tour.intro[locale]}</p>
+                <span className="tours-discovery-link">{t.explore}<ArrowUpRight size={17} aria-hidden="true" /></span>
+              </div>
+            </a>
+          );
+        })}
       </nav>
 
-      <main id="experiencias" className="tours-story">
+      <div className="tours-story">
         {tours.map((tour, index) => {
           const whatsapp = getWhatsAppLink(
             es
@@ -102,92 +128,76 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
             <article
               key={tour.slug}
               id={tour.slug}
-              className={"tour-story-block" + (reverse ? " tour-story-block--reverse" : "")}
+              aria-labelledby={tour.slug + "-title"}
+              className={"tour-story-block" + (reverse ? " tour-story-block--reverse" : "") + (tour.images.length === 0 ? " tour-story-block--text" : "")}
             >
-              <div className="tour-story-heading">
-                <span className="tour-story-index">{String(index + 1).padStart(2, "0")}</span>
-                <div>
+              <div className="tour-story-overview">
+                <div className="tour-story-heading">
                   <p className="tour-story-category">{tour.category[locale]}</p>
-                  <h2>{tour.name[locale]}</h2>
+                  <h2 id={tour.slug + "-title"}>{tour.name[locale]}</h2>
                   <p className="tour-story-intro">{tour.intro[locale]}</p>
                   <div className="tour-story-meta">
                     <span>{tour.location[locale]}</span>
                     {tour.duration && <span>{tour.duration[locale]}</span>}
                   </div>
+                  <a className="tour-story-enquire" href={whatsapp} target="_blank" rel="noopener noreferrer">
+                    {t.quote}<ArrowUpRight size={17} aria-hidden="true" />
+                  </a>
                 </div>
-              </div>
-
-              <div className="tour-story-visual">
-                {tour.images.length > 0 ? (
-                  <>
-                    <div className="tour-story-hero-image">
-                      <Image
-                        src={tour.images[0].src}
-                        alt={tour.images[0].alt[locale]}
-                        fill
-                        sizes="(max-width: 900px) 100vw, 58vw"
-                        priority={index === 0}
-                      />
-                    </div>
-                    {tour.images[1] && (
-                      <div className="tour-story-secondary-image">
-                        <Image
-                          src={tour.images[1].src}
-                          alt={tour.images[1].alt[locale]}
-                          fill
-                          sizes="(max-width: 900px) 46vw, 21vw"
-                        />
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  <div className="tour-story-placeholder" aria-hidden="true">
-                    <span>{String(index + 1).padStart(2, "0")}</span>
-                    <p>{t.noImage}</p>
+                {tour.images[0] && (
+                  <div className="tour-story-hero-image">
+                    <Image
+                      src={tour.images[0].src}
+                      alt={tour.images[0].alt[locale]}
+                      fill
+                      sizes="(max-width: 900px) 90vw, (max-width: 1440px) 44vw, 620px"
+                    />
                   </div>
                 )}
               </div>
 
               <div className="tour-story-content">
                 <div className="tour-story-description">
-                  <span>{t.story}</span>
+                  <h3>{t.story}</h3>
                   <p>{tour.description[locale]}</p>
-                </div>
-                <div className="tour-story-highlights">
-                  <span>{t.moments}</span>
-                  <ol>
-                    {tour.highlights[locale].map((highlight, highlightIndex) => (
-                      <li key={highlight}>
-                        <span>{String(highlightIndex + 1).padStart(2, "0")}</span>
-                        <p>{highlight}</p>
-                      </li>
-                    ))}
-                  </ol>
-                </div>
-              </div>
-
-              {tour.images[2] && (
-                <div className="tour-story-gallery">
-                  {tour.images.slice(2, 4).map((image) => (
-                    <div className="tour-story-gallery-image" key={image.src}>
-                      <Image src={image.src} alt={image.alt[locale]} fill sizes="(max-width: 700px) 100vw, 38vw" />
+                  {tour.images.length > 1 ? (
+                    <div className={"tour-story-gallery" + (tour.slug === "avistamiento-flamencos-tarde-rancheria" ? " tour-story-gallery--portraits" : "")}>
+                      {tour.images.slice(1).map((image) => (
+                        <div className="tour-story-gallery-image" key={image.src}>
+                          <Image src={image.src} alt={image.alt[locale]} fill sizes="(max-width: 600px) 44vw, (max-width: 900px) 30vw, 24vw" />
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  ) : (
+                    <p className="tour-story-note">{t.noImage}</p>
+                  )}
                 </div>
-              )}
-
-              <div className="tour-story-cta">
-                <p>{t.note}</p>
-                <a href={whatsapp} target="_blank" rel="noopener noreferrer">
-                  <MessageCircle size={19} aria-hidden="true" />
-                  {t.quote}
-                  <ArrowUpRight size={18} aria-hidden="true" />
-                </a>
+                <div>
+                  <div className="tour-story-highlights">
+                    <h3>{t.moments}</h3>
+                    <ol>
+                      {tour.highlights[locale].map((highlight, highlightIndex) => (
+                        <li key={highlight}>
+                          <span aria-hidden="true">{String(highlightIndex + 1).padStart(2, "0")}</span>
+                          <p>{highlight}</p>
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                  <div className="tour-story-cta">
+                    <p>{t.note}</p>
+                    <a href={whatsapp} target="_blank" rel="noopener noreferrer">
+                      <MessageCircle size={19} aria-hidden="true" />
+                      {t.quote}
+                      <ArrowUpRight size={18} aria-hidden="true" />
+                    </a>
+                  </div>
+                </div>
               </div>
             </article>
           );
         })}
-      </main>
+      </div>
 
       <section className="tours-closing">
         <p>{es ? "EverTrip · Caribe colombiano" : "EverTrip · Colombian Caribbean"}</p>
