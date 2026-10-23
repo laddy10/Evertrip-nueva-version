@@ -3,6 +3,17 @@ import { defaultLocale, type Locale } from "@/i18n/config";
 
 export const SITE_ORIGIN = "https://evertripviajes.com";
 
+// Document keys stay stable while their public slugs follow the page language.
+export const legalPaths = {
+  "privacy-policy": { es: "politica-privacidad", en: "privacy-policy" },
+  "terms-and-conditions": { es: "terminos-condiciones", en: "terms-and-conditions" },
+} as const;
+
+export function legalKeyForPath(locale: Locale, path: string) {
+  return (Object.keys(legalPaths) as (keyof typeof legalPaths)[])
+    .find((key) => legalPaths[key][locale] === path);
+}
+
 /** Asset/file URLs keep their extension; page URLs use localizedUrl below. */
 export function siteUrl(path = "/"): string {
   return new URL(path, `${SITE_ORIGIN}/`).href;
@@ -10,7 +21,9 @@ export function siteUrl(path = "/"): string {
 
 export function localizedPath(locale: Locale, path = ""): string {
   const segment = path.replace(/^\/+|\/+$/g, "");
-  return `/${locale}/${segment ? `${segment}/` : ""}`;
+  const legalKey = legalKeyForPath("es", segment) ?? legalKeyForPath("en", segment);
+  const localizedSegment = legalKey ? legalPaths[legalKey][locale] : segment;
+  return `/${locale}/${localizedSegment ? `${localizedSegment}/` : ""}`;
 }
 
 export function localizedUrl(locale: Locale, path = ""): string {

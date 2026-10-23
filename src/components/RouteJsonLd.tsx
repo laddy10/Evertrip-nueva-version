@@ -1,6 +1,7 @@
 import type { Locale } from "@/i18n/config";
 import type { RouteDefinition, PriceCard } from "@/data/routes";
 import { BUSINESS_ID, localizedUrl, siteUrl } from "@/lib/seo";
+import { routeRelationshipMetadata } from "@/lib/routeRelationships";
 
 function parsePriceToNumber(price: string): number {
   const digits = price.replace(/[^\d]/g, "");
@@ -42,8 +43,10 @@ export default function RouteJsonLd({
     },
     {
       "@type": "Service",
+      "@id": `${localizedUrl(locale, route.slug)}#service`,
+      name: route.h1[locale],
       url: localizedUrl(locale, route.slug),
-      serviceType: "Private ground transportation",
+      serviceType: locale === "es" ? "Transporte terrestre privado" : "Private ground transportation",
       provider: {
         "@type": "LocalBusiness",
         "@id": BUSINESS_ID,
@@ -51,7 +54,9 @@ export default function RouteJsonLd({
         name: "VIAJES Y TOURS EVERTRIP",
         telephone: "+573147659756",
       },
-      areaServed: "Colombian Caribbean Coast",
+      areaServed: routeRelationshipMetadata[route.slug]?.locations.length
+        ? routeRelationshipMetadata[route.slug].locations.map((name) => ({ "@type": "Place", name }))
+        : locale === "es" ? "Caribe colombiano" : "Colombian Caribbean",
       description: route.metaDescription[locale],
       ...(priceCards.length > 0 && {
         offers: priceCards.map((card) => ({

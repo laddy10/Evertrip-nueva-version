@@ -1,0 +1,122 @@
+[
+  {
+    "locale": "en",
+    "path": "",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "locale": "en",
+    "path": "tours/",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "locale": "en",
+    "path": "all-routes/",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "locale": "en",
+    "path": "santa-marta-airport-transfer/",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "locale": "en",
+    "path": "terms-and-conditions/",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "locale": "en",
+    "path": "",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "locale": "en",
+    "path": "tours/",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "locale": "en",
+    "path": "all-routes/",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "locale": "en",
+    "path": "santa-marta-airport-transfer/",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "locale": "en",
+    "path": "terms-and-conditions/",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "locale": "es",
+    "path": "",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "locale": "es",
+    "path": "tours/",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "locale": "es",
+    "path": "all-routes/",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "locale": "es",
+    "path": "santa-marta-airport-transfer/",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "locale": "es",
+    "path": "terminos-condiciones/",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "locale": "es",
+    "path": "",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "locale": "es",
+    "path": "tours/",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "locale": "es",
+    "path": "all-routes/",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "locale": "es",
+    "path": "santa-marta-airport-transfer/",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "locale": "es",
+    "path": "terminos-condiciones/",
+    "width": 1440,
+    "violations": []
+  }
+]

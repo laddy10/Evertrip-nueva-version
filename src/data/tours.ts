@@ -18,6 +18,8 @@ export type TourExperience = {
   description: LocalizedText;
   highlights: Record<Locale, string[]>;
   images: TourImage[];
+  /** Optional Tours-page photography, independent of the homepage selection. */
+  pageImages?: TourImage[];
 };
 
 const ASSET_ORIGIN = "https://assets.evertripviajes.com";
@@ -58,6 +60,13 @@ export const tours: TourExperience[] = [
       ],
     },
     images: [
+      {
+        src: ASSET_ORIGIN + "/tours/tubing-rio-don-diego/hero_Tubing.webp",
+        alt: {
+          es: "Viajeros con chalecos salvavidas junto a flotadores en la orilla del río Don Diego",
+          en: "Travelers wearing life jackets beside tubes on the bank of the Don Diego River",
+        },
+      },
       {
         src: ASSET_ORIGIN + "/tours/tubing-rio-don-diego/hero.webp",
         alt: {
@@ -126,10 +135,10 @@ export const tours: TourExperience[] = [
     },
     images: [
       {
-        src: ASSET_ORIGIN + "/tours/flamencos-rancheria/camarones.webp",
+        src: ASSET_ORIGIN + "/tours/flamencos-rancheria/Avistamiento_flamencos.webp",
         alt: {
-          es: "Paisaje de Camarones durante la experiencia de avistamiento de flamencos",
-          en: "Landscape of Camarones during the flamingo watching experience",
+          es: "Flamencos rosados en las aguas poco profundas de la laguna de Camarones",
+          en: "Pink flamingos in the shallow waters of the Camarones lagoon",
         },
       },
       {
@@ -189,6 +198,43 @@ export const tours: TourExperience[] = [
       ],
     },
     images: [],
+    pageImages: [
+      {
+        src: ASSET_ORIGIN + "/tours/cabo-de-la-vela/Cabo_de_la_Vela._Guajira_2.webp",
+        alt: {
+          es: "Playa de arena dorada y cerros rocosos frente al mar turquesa en Cabo de la Vela",
+          en: "Golden beach and rocky hills beside turquoise water at Cabo de la Vela",
+        },
+      },
+      {
+        src: ASSET_ORIGIN + "/tours/cabo-de-la-vela/Cabo_de_la_Vela._Guajira.webp",
+        alt: {
+          es: "Playa y costa rocosa de Cabo de la Vela, La Guajira",
+          en: "Beach and rocky coastline at Cabo de la Vela, La Guajira",
+        },
+      },
+      {
+        src: ASSET_ORIGIN + "/tours/cabo-de-la-vela/PLAYA_EL_PIL%C3%93N_DE_AZ%C3%9ACAR_-_CABO_DE_LA_VELA.webp",
+        alt: {
+          es: "Arena dorada y mar Caribe en la playa del Pilón de Azúcar",
+          en: "Golden sand and Caribbean waters at Pilón de Azúcar beach",
+        },
+      },
+      {
+        src: ASSET_ORIGIN + "/tours/cabo-de-la-vela/Ojo_del_Agua.webp",
+        alt: {
+          es: "Playa y acantilados de Ojo del Agua en Cabo de la Vela",
+          en: "Beach and cliffs at Ojo del Agua in Cabo de la Vela",
+        },
+      },
+      {
+        src: ASSET_ORIGIN + "/tours/cabo-de-la-vela/Playa_Arcoiris.webp",
+        alt: {
+          es: "Escaleras hacia la arena dorada y el mar turquesa de Playa Arcoíris en Cabo de la Vela",
+          en: "Steps leading to the golden sand and turquoise sea at Playa Arcoíris in Cabo de la Vela",
+        },
+      },
+    ],
   },
 ];
 

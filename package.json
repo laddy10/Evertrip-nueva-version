@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev --webpack",
     "build": "next build",
+    "postbuild": "node scripts/normalize-static-segments.mjs",
     "verify:seo": "node scripts/verify-static-seo.mjs",
+    "verify": "node scripts/normalize-static-segments.mjs --check && npm run verify:seo",
     "start": "next start",
     "lint": "eslint",
     "test:e2e": "playwright test",

@@ -18,7 +18,6 @@ export default function JsonLd({ locale }: { locale: Locale }) {
         alternateName: "Evertrip",
         url: siteUrl(),
         telephone: "+573147659756",
-        priceRange: "$",
         description: businessDescription[locale],
         logo: {
           "@type": "ImageObject",

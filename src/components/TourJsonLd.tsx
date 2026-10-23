@@ -28,6 +28,7 @@ export default function TourJsonLd({ locale }: { locale: Locale }) {
             name: tour.name[locale],
             description: tour.metaDescription[locale],
             serviceType: locale === "es" ? "Experiencia turística" : "Tour experience",
+            areaServed: tour.location[locale],
             url: url + "#" + tour.slug,
             provider: {
               "@id": BUSINESS_ID,

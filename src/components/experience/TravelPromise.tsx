@@ -68,8 +68,8 @@ export default function TravelPromise({ locale }: { locale: Locale }) {
         <div />
         <h2 id="promise-title">
           {es
-            ? "Menos pendientes.\nMás Caribe."
-            : "Less to think about.\nMore Caribbean."}
+            ? "Hay lugares que se quedan contigo."
+            : "Some places stay with you."}
         </h2>
         <span>
           {es

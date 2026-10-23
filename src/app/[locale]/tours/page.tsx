@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowDown, ArrowUpRight, MessageCircle } from "lucide-react";
+import { ArrowUpRight, MessageCircle } from "lucide-react";
 import { notFound } from "next/navigation";
 import { locales, isLocale } from "@/i18n/config";
 import { pageMetadata } from "@/lib/seo";
@@ -69,54 +68,11 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
     <div className="tours-landing">
       <TourJsonLd locale={locale} />
 
-      <header className="tours-landing-hero">
-        <div className="tours-landing-hero-copy">
-          <p className="chapter-caption">{t.eyebrow}</p>
-          <h1>{t.heading}</h1>
-        </div>
-        <div className="tours-landing-hero-side">
-          <p>{t.copy}</p>
-          <a href="#experiencias" className="tours-scroll-link">
-            {t.navLabel}<ArrowDown size={18} aria-hidden="true" />
-          </a>
-        </div>
-      </header>
-
-      <nav id="experiencias" className="tours-discovery" aria-label={t.navLabel}>
-        {tours.map((tour, index) => {
-          const preview = tour.images[tour.slug === "avistamiento-flamencos-tarde-rancheria" ? 1 : 0];
-
-          return (
-            <a className="tours-discovery-card" key={tour.slug} href={"#" + tour.slug} aria-labelledby={tour.slug + "-preview-title"}>
-              <div className="tours-discovery-media">
-                {preview ? (
-                  <Image
-                    src={preview.src}
-                    alt={preview.alt[locale]}
-                    fill
-                    sizes="(max-width: 600px) 32vw, (max-width: 1440px) 29vw, 400px"
-                    preload={index === 0}
-                  />
-                ) : (
-                  <div className="tours-discovery-edition" aria-hidden="true">
-                    <span>{tour.category[locale]}</span>
-                    <p>{tour.name[locale]}</p>
-                  </div>
-                )}
-              </div>
-              <div className="tours-discovery-copy">
-                <span className="tours-discovery-location">{tour.location[locale]}</span>
-                <strong id={tour.slug + "-preview-title"}>{tour.name[locale]}</strong>
-                <p>{tour.intro[locale]}</p>
-                <span className="tours-discovery-link">{t.explore}<ArrowUpRight size={17} aria-hidden="true" /></span>
-              </div>
-            </a>
-          );
-        })}
-      </nav>
+      <h1 className="sr-only">{t.title}</h1>
 
       <div className="tours-story">
         {tours.map((tour, index) => {
+          const images = tour.pageImages ?? tour.images;
           const whatsapp = getWhatsAppLink(
             es
               ? "Hola Evertrip, estoy interesado en " + tour.name.es + ". Quisiera consultar disponibilidad, detalles y cotización."
@@ -129,8 +85,11 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
               key={tour.slug}
               id={tour.slug}
               aria-labelledby={tour.slug + "-title"}
-              className={"tour-story-block" + (reverse ? " tour-story-block--reverse" : "") + (tour.images.length === 0 ? " tour-story-block--text" : "")}
+              className={"tour-story-block" + (reverse ? " tour-story-block--reverse" : "") + (images.length === 0 ? " tour-story-block--text" : "")}
             >
+              {tour.slug === "pasadia-cabo-de-la-vela" && (
+                <span id="cabo-de-la-vela" className="tour-anchor-alias" aria-hidden="true" />
+              )}
               <div className="tour-story-overview">
                 <div className="tour-story-heading">
                   <p className="tour-story-category">{tour.category[locale]}</p>
@@ -140,15 +99,12 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                     <span>{tour.location[locale]}</span>
                     {tour.duration && <span>{tour.duration[locale]}</span>}
                   </div>
-                  <a className="tour-story-enquire" href={whatsapp} target="_blank" rel="noopener noreferrer">
-                    {t.quote}<ArrowUpRight size={17} aria-hidden="true" />
-                  </a>
                 </div>
-                {tour.images[0] && (
+                {images[0] && (
                   <div className="tour-story-hero-image">
                     <Image
-                      src={tour.images[0].src}
-                      alt={tour.images[0].alt[locale]}
+                      src={images[0].src}
+                      alt={images[0].alt[locale]}
                       fill
                       sizes="(max-width: 900px) 90vw, (max-width: 1440px) 44vw, 620px"
                     />
@@ -160,9 +116,9 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                 <div className="tour-story-description">
                   <h3>{t.story}</h3>
                   <p>{tour.description[locale]}</p>
-                  {tour.images.length > 1 ? (
+                  {images.length > 1 ? (
                     <div className={"tour-story-gallery" + (tour.slug === "avistamiento-flamencos-tarde-rancheria" ? " tour-story-gallery--portraits" : "")}>
-                      {tour.images.slice(1).map((image) => (
+                      {images.slice(1).map((image) => (
                         <div className="tour-story-gallery-image" key={image.src}>
                           <Image src={image.src} alt={image.alt[locale]} fill sizes="(max-width: 600px) 44vw, (max-width: 900px) 30vw, 24vw" />
                         </div>
@@ -198,14 +154,6 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
           );
         })}
       </div>
-
-      <section className="tours-closing">
-        <p>{es ? "EverTrip · Caribe colombiano" : "EverTrip · Colombian Caribbean"}</p>
-        <h2>{es ? "Tu próximo viaje puede empezar con una conversación." : "Your next journey can start with a conversation."}</h2>
-        <Link href={"/" + locale + "/#tours"}>
-          {es ? "Volver a EverTrip" : "Back to EverTrip"}<ArrowUpRight size={19} aria-hidden="true" />
-        </Link>
-      </section>
     </div>
   );
 }

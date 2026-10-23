@@ -1,0 +1,913 @@
+{
+  "inventory": {
+    "files": 755,
+    "bytes": 76559830,
+    "html": 62,
+    "sitemapURLs": 56,
+    "localReferences": 107,
+    "referencedAssets": 42,
+    "missingReferences": [],
+    "nextStaticFiles": 23,
+    "nextStaticMismatches": [],
+    "developmentFiles": [],
+    "htaccess": false,
+    "r2URLs": 30
+  },
+  "localHTTP": {
+    "resources": [
+      {
+        "path": "/404/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/404.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/assets/journey/evertrip-real-drive-mobile.mp4",
+        "status": 200,
+        "type": "video/mp4"
+      },
+      {
+        "path": "/assets/journey/evertrip-real-drive-poster.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/journey/evertrip-real-drive.mp4",
+        "status": 200,
+        "type": "video/mp4"
+      },
+      {
+        "path": "/assets/logo2-apple-touch.png",
+        "status": 200,
+        "type": "image/png"
+      },
+      {
+        "path": "/assets/logo2-normal-review.png",
+        "status": 200,
+        "type": "image/png"
+      },
+      {
+        "path": "/assets/logo2-normal-small.png",
+        "status": 200,
+        "type": "image/png"
+      },
+      {
+        "path": "/assets/logo2-normal-ui.png",
+        "status": 200,
+        "type": "image/png"
+      },
+      {
+        "path": "/assets/logo2-normal.png",
+        "status": 200,
+        "type": "image/png"
+      },
+      {
+        "path": "/assets/logo2-rounded-small.png",
+        "status": 200,
+        "type": "image/png"
+      },
+      {
+        "path": "/assets/logo2-rounded-ui.png",
+        "status": 200,
+        "type": "image/png"
+      },
+      {
+        "path": "/assets/lugares/barranquilla.jpg",
+        "status": 200,
+        "type": "image/jpeg"
+      },
+      {
+        "path": "/assets/lugares/beach.jpg",
+        "status": 200,
+        "type": "image/jpeg"
+      },
+      {
+        "path": "/assets/lugares/cartagena-magic.jpg",
+        "status": 200,
+        "type": "image/jpeg"
+      },
+      {
+        "path": "/assets/lugares/cartagena.jpg",
+        "status": 200,
+        "type": "image/jpeg"
+      },
+      {
+        "path": "/assets/lugares/minca.jpg",
+        "status": 200,
+        "type": "image/jpeg"
+      },
+      {
+        "path": "/assets/lugares/palomino.jpg",
+        "status": 200,
+        "type": "image/jpeg"
+      },
+      {
+        "path": "/assets/lugares/punta-gallinas.jpg",
+        "status": 200,
+        "type": "image/jpeg"
+      },
+      {
+        "path": "/assets/lugares/real-airport-transfer.jpg",
+        "status": 200,
+        "type": "image/jpeg"
+      },
+      {
+        "path": "/assets/lugares/real-bus-interior.jpg",
+        "status": 200,
+        "type": "image/jpeg"
+      },
+      {
+        "path": "/assets/lugares/real-bus.jpg",
+        "status": 200,
+        "type": "image/jpeg"
+      },
+      {
+        "path": "/assets/lugares/real-group-transfer.jpg",
+        "status": 200,
+        "type": "image/jpeg"
+      },
+      {
+        "path": "/assets/lugares/real-guajira-cultura.jpg",
+        "status": 200,
+        "type": "image/jpeg"
+      },
+      {
+        "path": "/assets/lugares/real-punta-gallinas.jpg",
+        "status": 200,
+        "type": "image/jpeg"
+      },
+      {
+        "path": "/assets/lugares/real-suv.jpg",
+        "status": 200,
+        "type": "image/jpeg"
+      },
+      {
+        "path": "/assets/lugares/real-van.jpg",
+        "status": 200,
+        "type": "image/jpeg"
+      },
+      {
+        "path": "/assets/lugares/santa-marta.jpg",
+        "status": 200,
+        "type": "image/jpeg"
+      },
+      {
+        "path": "/assets/lugares/tayrona.jpg",
+        "status": 200,
+        "type": "image/jpeg"
+      },
+      {
+        "path": "/assets/lugares/valledupar.jpg",
+        "status": 200,
+        "type": "image/jpeg"
+      },
+      {
+        "path": "/assets/pilot/bus-exterior-01.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/pilot/bus-exterior-02.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/pilot/bus-interior-01.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/pilot/hero/evertrip-youtube-poster.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/pilot/hyundai-h1-exterior-01.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/pilot/hyundai-h1-exterior-02.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/pilot/hyundai-h1-interior-01.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/pilot/mercedes-vito-exterior-01.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/pilot/mercedes-vito-exterior-02.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/pilot/mercedes-vito-interior-01.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/pilot/nissan-kicks-exterior-01.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/pilot/nissan-kicks-exterior-02.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/pilot/nissan-kicks-interior-01.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/pilot/renault-duster-exterior-01.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/pilot/renault-duster-exterior-02.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/pilot/renault-duster-interior-01.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/pilot/routes/airport-transfer-01.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/pilot/routes/barranquilla-01.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/pilot/routes/cartagena-01.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/pilot/routes/minca-01.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/pilot/routes/palomino-01.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/pilot/routes/private-route-01.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/pilot/routes/santa-marta-01.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/pilot/routes/tayrona-01.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/pilot/routes/tayrona-desktop-new.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/pilot/routes/valledupar-01.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/review_qr.png",
+        "status": 200,
+        "type": "image/png"
+      },
+      {
+        "path": "/assets/vehicles/bus-ejecutivo/Bus-exterior-1-webp-q92.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/vehicles/bus-ejecutivo/Bus-exterior-2-webp-q92.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/vehicles/bus-ejecutivo/Bus-interior-1-webp-q92.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/vehicles/hyundai-h1/hyundai-h1-exterior-01-webp-q92.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/vehicles/hyundai-h1/hyundai-h1-exterior-02-webp-q92.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/vehicles/hyundai-h1/hyundai-h1-interior-01-webp-q92.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/vehicles/mercedes-vito/mercedes-vito-exterior-01-webp-q92.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/vehicles/mercedes-vito/mercedes-vito-exterior-02-webp-q92.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/vehicles/mercedes-vito/mercedes-vito-interior-01-webp-q92.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/vehicles/nissan-kicks/nissan-kicks-exterior-01-webp-q92.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/vehicles/nissan-kicks/nissan-kicks-exterior-02-webp-q92.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/vehicles/nissan-kicks/nissan-kicks-interior-01-webp-q92.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/vehicles/renault-duster/renault-duster-exterior-01-webp-q92.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/vehicles/renault-duster/renault-duster-exterior-02-webp-q92.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/assets/vehicles/renault-duster/renault-duster-interior-01-webp-q92.webp",
+        "status": 200,
+        "type": "image/webp"
+      },
+      {
+        "path": "/en/all-routes/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/en/barranquilla-to-minca/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/en/barranquilla-to-palomino/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/en/barranquilla-to-santa-marta/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/en/barranquilla-to-tayrona/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/en/barranquilla-to-valledupar/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/en/cartagena-airport-to-santa-marta/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/en/cartagena-to-barranquilla/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/en/cartagena-to-minca/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/en/cartagena-to-palomino/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/en/cartagena-to-tayrona/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/en/cartagena-to-valledupar/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/en/custom-private-routes/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/en/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/en/palomino-to-minca/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/en/palomino-to-tayrona/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/en/palomino-to-valledupar/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/en/privacy-policy/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/en/private-transfer-santa-marta-cartagena/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/en/review-qr/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/en/santa-marta-airport-transfer/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/en/santa-marta-to-minca/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/en/santa-marta-to-palomino/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/en/santa-marta-to-tayrona/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/en/terms-and-conditions/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/en/tours/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/en/valledupar-to-minca/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/en/valledupar-to-santa-marta/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/en/valledupar-to-tayrona/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/es/all-routes/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/es/barranquilla-to-minca/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/es/barranquilla-to-palomino/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/es/barranquilla-to-santa-marta/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/es/barranquilla-to-tayrona/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/es/barranquilla-to-valledupar/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/es/cartagena-airport-to-santa-marta/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/es/cartagena-to-barranquilla/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/es/cartagena-to-minca/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/es/cartagena-to-palomino/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/es/cartagena-to-tayrona/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/es/cartagena-to-valledupar/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/es/custom-private-routes/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/es/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/es/palomino-to-minca/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/es/palomino-to-tayrona/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/es/palomino-to-valledupar/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/es/politica-privacidad/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/es/private-transfer-santa-marta-cartagena/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/es/review-qr/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/es/santa-marta-airport-transfer/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/es/santa-marta-to-minca/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/es/santa-marta-to-palomino/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/es/santa-marta-to-tayrona/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/es/terminos-condiciones/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/es/tours/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/es/valledupar-to-minca/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/es/valledupar-to-santa-marta/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/es/valledupar-to-tayrona/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/favicon.ico",
+        "status": 200,
+        "type": "image/x-icon"
+      },
+      {
+        "path": "/fonts/inter-latin.woff2",
+        "status": 200,
+        "type": "font/woff2"
+      },
+      {
+        "path": "/fonts/outfit-latin.woff2",
+        "status": 200,
+        "type": "font/woff2"
+      },
+      {
+        "path": "/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/review_qr.png",
+        "status": 200,
+        "type": "image/png"
+      },
+      {
+        "path": "/sitemap.xml",
+        "status": 200,
+        "type": "application/xml"
+      },
+      {
+        "path": "/_next/static/b1t43qv0wXllDzuP4XFZQ/_buildManifest.js",
+        "status": 200,
+        "type": "text/javascript"
+      },
+      {
+        "path": "/_next/static/b1t43qv0wXllDzuP4XFZQ/_clientMiddlewareManifest.js",
+        "status": 200,
+        "type": "text/javascript"
+      },
+      {
+        "path": "/_next/static/b1t43qv0wXllDzuP4XFZQ/_ssgManifest.js",
+        "status": 200,
+        "type": "text/javascript"
+      },
+      {
+        "path": "/_next/static/chunks/05-c3ty_6dwfk.js",
+        "status": 200,
+        "type": "text/javascript"
+      },
+      {
+        "path": "/_next/static/chunks/0a6j5y4j601go.js",
+        "status": 200,
+        "type": "text/javascript"
+      },
+      {
+        "path": "/_next/static/chunks/0cz1d0mv5g_q7.js",
+        "status": 200,
+        "type": "text/javascript"
+      },
+      {
+        "path": "/_next/static/chunks/0iec5q4ack_04.js",
+        "status": 200,
+        "type": "text/javascript"
+      },
+      {
+        "path": "/_next/static/chunks/0mr0fnckbkr54.js",
+        "status": 200,
+        "type": "text/javascript"
+      },
+      {
+        "path": "/_next/static/chunks/0ox1b6ecsap_g.css",
+        "status": 200,
+        "type": "text/css"
+      },
+      {
+        "path": "/_next/static/chunks/14mrh2-p_w84d.js",
+        "status": 200,
+        "type": "text/javascript"
+      },
+      {
+        "path": "/_next/static/chunks/15sn_fipheh2w.js",
+        "status": 200,
+        "type": "text/javascript"
+      },
+      {
+        "path": "/_next/static/chunks/1orx6qsj1uw4l.js",
+        "status": 200,
+        "type": "text/javascript"
+      },
+      {
+        "path": "/_next/static/chunks/1vh8u1j0udmo4.js",
+        "status": 200,
+        "type": "text/javascript"
+      },
+      {
+        "path": "/_next/static/chunks/27jktro2p5rq9.js",
+        "status": 200,
+        "type": "text/javascript"
+      },
+      {
+        "path": "/_next/static/chunks/2x5e5g-m0wffe.js",
+        "status": 200,
+        "type": "text/javascript"
+      },
+      {
+        "path": "/_next/static/chunks/3rg55-ov2lb4p.css",
+        "status": 200,
+        "type": "text/css"
+      },
+      {
+        "path": "/_next/static/chunks/3w53b_b5e3k1q.js",
+        "status": 200,
+        "type": "text/javascript"
+      },
+      {
+        "path": "/_next/static/chunks/3wdf0sa3g3vpg.js",
+        "status": 200,
+        "type": "text/javascript"
+      },
+      {
+        "path": "/_next/static/chunks/403hs3x3fo6y_.js",
+        "status": 200,
+        "type": "text/javascript"
+      },
+      {
+        "path": "/_next/static/chunks/44scxgogxs6rk.js",
+        "status": 200,
+        "type": "text/javascript"
+      },
+      {
+        "path": "/_next/static/chunks/turbopack-3x4061frfbqgg.js",
+        "status": 200,
+        "type": "text/javascript"
+      },
+      {
+        "path": "/_next/static/media/inter_latin-s.p.2bn3s6zvc0dyp.woff2",
+        "status": 200,
+        "type": "font/woff2"
+      },
+      {
+        "path": "/_next/static/media/outfit_latin-s.p.1gsd1jahc5dg_.woff2",
+        "status": 200,
+        "type": "font/woff2"
+      },
+      {
+        "path": "/_not-found/index.html",
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      }
+    ],
+    "aliases": [
+      {
+        "path": "/es",
+        "status": 308,
+        "location": "/es/"
+      },
+      {
+        "path": "/en/tours?pax=4",
+        "status": 308,
+        "location": "/en/tours/?pax=4"
+      },
+      {
+        "path": "/es/barranquilla-to-palomino",
+        "status": 308,
+        "location": "/es/barranquilla-to-palomino/"
+      },
+      {
+        "path": "/es/unknown-route/",
+        "status": 404,
+        "location": null
+      },
+      {
+        "path": "/fr/",
+        "status": 404,
+        "location": null
+      },
+      {
+        "path": "/",
+        "status": 200,
+        "location": null
+      }
+    ]
+  },
+  "legalDates": [
+    {
+      "file": "politica-privacidad.md",
+      "line": 4,
+      "currentMarkerHidden": true,
+      "approvedValueRetained": true
+    },
+    {
+      "file": "terminos-condiciones.md",
+      "line": 4,
+      "currentMarkerHidden": true,
+      "approvedValueRetained": true
+    },
+    {
+      "file": "privacy-policy.en.md",
+      "line": 4,
+      "currentMarkerHidden": true,
+      "approvedValueRetained": true
+    },
+    {
+      "file": "terms-and-conditions.en.md",
+      "line": 4,
+      "currentMarkerHidden": true,
+      "approvedValueRetained": true
+    }
+  ],
+  "anchorFailure": {
+    "url": "http://127.0.0.1:3001/es/tours/#pasadia-cabo-de-la-vela",
+    "scrollY": 1590,
+    "documentHeight": 4871,
+    "calls": [
+      {
+        "time": 2743.7999997138977,
+        "id": "tours",
+        "url": "http://127.0.0.1:3001/es/#tours"
+      },
+      {
+        "time": 4430.299999713898,
+        "id": "pasadia-cabo-de-la-vela",
+        "url": "http://127.0.0.1:3001/es/tours/#pasadia-cabo-de-la-vela"
+      }
+    ],
+    "tourBounds": [
+      {
+        "id": "tubing-rio-don-diego",
+        "top": -1590,
+        "height": 1454.015625
+      },
+      {
+        "id": "avistamiento-flamencos-tarde-rancheria",
+        "top": -135.984375,
+        "height": 1503.125
+      },
+      {
+        "id": "pasadia-cabo-de-la-vela",
+        "top": 1367.140625,
+        "height": 1239.796875
+      }
+    ],
+    "assertionTimeoutMs": 10000
+  }
+}

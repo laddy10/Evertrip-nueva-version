@@ -73,8 +73,8 @@ export default function TravelJournal({ locale }: { locale: Locale }) {
         <div className="traveler-intro">
           <h2 id="journal-title">
             {es
-              ? "El viaje, contado\npor quienes lo vivieron."
-              : "The journey, told\nby those who lived it."}
+              ? "Lo que nuestros viajeros dicen de EverTrip."
+              : "What our travelers say about EverTrip."}
           </h2>
           <div className="traveler-proof-photo">
             <Image

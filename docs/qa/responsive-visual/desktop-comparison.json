@@ -1,0 +1,201 @@
+{
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "method": "Pixels whose sum of absolute RGB channel differences exceeds 12; full screenshots, dynamic content not masked.",
+  "captures": [
+    {
+      "locale": "es",
+      "section": "tayrona",
+      "width": 1440,
+      "height": 900,
+      "changedPixels": 0,
+      "percent": 0
+    },
+    {
+      "locale": "es",
+      "section": "narrative",
+      "width": 1440,
+      "height": 900,
+      "changedPixels": 0,
+      "percent": 0
+    },
+    {
+      "locale": "es",
+      "section": "narrative-road",
+      "width": 1440,
+      "height": 900,
+      "changedPixels": 0,
+      "percent": 0
+    },
+    {
+      "locale": "es",
+      "section": "reviews",
+      "width": 1440,
+      "height": 900,
+      "changedPixels": 0,
+      "percent": 0
+    },
+    {
+      "locale": "es",
+      "section": "tours",
+      "width": 1440,
+      "height": 900,
+      "changedPixels": 72,
+      "percent": 0.005555555555555556
+    },
+    {
+      "locale": "es",
+      "section": "fleet",
+      "width": 1440,
+      "height": 900,
+      "changedPixels": 0,
+      "percent": 0
+    },
+    {
+      "locale": "es",
+      "section": "routes",
+      "width": 1440,
+      "height": 900,
+      "changedPixels": 36,
+      "percent": 0.002777777777777778
+    },
+    {
+      "locale": "es",
+      "section": "faq",
+      "width": 1440,
+      "height": 900,
+      "changedPixels": 0,
+      "percent": 0
+    },
+    {
+      "locale": "es",
+      "section": "barranquilla-to-palomino-cover",
+      "width": 1440,
+      "height": 900,
+      "changedPixels": 0,
+      "percent": 0
+    },
+    {
+      "locale": "es",
+      "section": "barranquilla-to-palomino-planning",
+      "width": 1440,
+      "height": 900,
+      "changedPixels": 0,
+      "percent": 0
+    },
+    {
+      "locale": "es",
+      "section": "barranquilla-to-palomino-quote",
+      "width": 1440,
+      "height": 900,
+      "changedPixels": 0,
+      "percent": 0
+    },
+    {
+      "locale": "es",
+      "section": "barranquilla-to-palomino-related",
+      "width": 1440,
+      "height": 900,
+      "changedPixels": 0,
+      "percent": 0
+    },
+    {
+      "locale": "en",
+      "section": "tayrona",
+      "width": 1440,
+      "height": 900,
+      "changedPixels": 0,
+      "percent": 0
+    },
+    {
+      "locale": "en",
+      "section": "narrative",
+      "width": 1440,
+      "height": 900,
+      "changedPixels": 0,
+      "percent": 0
+    },
+    {
+      "locale": "en",
+      "section": "narrative-road",
+      "width": 1440,
+      "height": 900,
+      "changedPixels": 0,
+      "percent": 0
+    },
+    {
+      "locale": "en",
+      "section": "reviews",
+      "width": 1440,
+      "height": 900,
+      "changedPixels": 0,
+      "percent": 0
+    },
+    {
+      "locale": "en",
+      "section": "tours",
+      "width": 1440,
+      "height": 900,
+      "changedPixels": 0,
+      "percent": 0
+    },
+    {
+      "locale": "en",
+      "section": "fleet",
+      "width": 1440,
+      "height": 900,
+      "changedPixels": 0,
+      "percent": 0
+    },
+    {
+      "locale": "en",
+      "section": "routes",
+      "width": 1440,
+      "height": 900,
+      "changedPixels": 50170,
+      "percent": 3.871141975308642
+    },
+    {
+      "locale": "en",
+      "section": "faq",
+      "width": 1440,
+      "height": 900,
+      "changedPixels": 0,
+      "percent": 0
+    },
+    {
+      "locale": "en",
+      "section": "barranquilla-to-palomino-cover",
+      "width": 1440,
+      "height": 900,
+      "changedPixels": 0,
+      "percent": 0
+    },
+    {
+      "locale": "en",
+      "section": "barranquilla-to-palomino-planning",
+      "width": 1440,
+      "height": 900,
+      "changedPixels": 0,
+      "percent": 0
+    },
+    {
+      "locale": "en",
+      "section": "barranquilla-to-palomino-quote",
+      "width": 1440,
+      "height": 900,
+      "changedPixels": 0,
+      "percent": 0
+    },
+    {
+      "locale": "en",
+      "section": "barranquilla-to-palomino-related",
+      "width": 1440,
+      "height": 900,
+      "changedPixels": 0,
+      "percent": 0
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+[
+  {
+    "locale": "es",
+    "audits": [
+      {
+        "path": "",
+        "width": 390,
+        "violations": []
+      },
+      {
+        "path": "tours/",
+        "width": 390,
+        "violations": []
+      },
+      {
+        "path": "all-routes/",
+        "width": 390,
+        "violations": []
+      },
+      {
+        "path": "santa-marta-airport-transfer/",
+        "width": 390,
+        "violations": []
+      },
+      {
+        "path": "terminos-condiciones/",
+        "width": 390,
+        "violations": []
+      },
+      {
+        "path": "",
+        "width": 1440,
+        "violations": []
+      },
+      {
+        "path": "tours/",
+        "width": 1440,
+        "violations": []
+      },
+      {
+        "path": "all-routes/",
+        "width": 1440,
+        "violations": []
+      },
+      {
+        "path": "santa-marta-airport-transfer/",
+        "width": 1440,
+        "violations": []
+      },
+      {
+        "path": "terminos-condiciones/",
+        "width": 1440,
+        "violations": []
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "audits": [
+      {
+        "path": "",
+        "width": 390,
+        "violations": []
+      },
+      {
+        "path": "tours/",
+        "width": 390,
+        "violations": []
+      },
+      {
+        "path": "all-routes/",
+        "width": 390,
+        "violations": []
+      },
+      {
+        "path": "santa-marta-airport-transfer/",
+        "width": 390,
+        "violations": []
+      },
+      {
+        "path": "terms-and-conditions/",
+        "width": 390,
+        "violations": []
+      },
+      {
+        "path": "",
+        "width": 1440,
+        "violations": []
+      },
+      {
+        "path": "tours/",
+        "width": 1440,
+        "violations": []
+      },
+      {
+        "path": "all-routes/",
+        "width": 1440,
+        "violations": []
+      },
+      {
+        "path": "santa-marta-airport-transfer/",
+        "width": 1440,
+        "violations": []
+      },
+      {
+        "path": "terms-and-conditions/",
+        "width": 1440,
+        "violations": []
+      }
+    ]
+  }
+]

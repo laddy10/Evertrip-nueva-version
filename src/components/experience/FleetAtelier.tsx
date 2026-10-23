@@ -82,7 +82,7 @@ export default function FleetAtelier({ locale }: { locale: Locale }) {
             : "Choose your travel companions. We’ll bring the space."}
         </p>
         <h2 id="fleet-title">
-          {es ? "Tu gente.\nTu espacio." : "Your people.\nYour space."}
+          {es ? "Conoce nuestros vehículos VIP." : "Explore our VIP vehicles."}
         </h2>
         <p>
           {es

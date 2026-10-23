@@ -104,12 +104,11 @@ export default function DestinationAtlas({
           <span className="small-note">
             {es ? "Elige una ruta" : "Choose a route"}
           </span>
-          <div className="atlas-route-list" role="list">
+          <div className="atlas-route-list" role="group" aria-label={es ? "Elige una ruta" : "Choose a route"}>
             {routesShowcase.map((item, index) => (
               <button
                 key={item.slug}
                 type="button"
-                role="listitem"
                 aria-pressed={active === index}
                 onClick={() => setActive(index)}
               >

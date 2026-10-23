@@ -15,7 +15,9 @@ export default defineConfig({
   },
   projects: [{ name: "chromium", use: { browserName: "chromium" } }],
   webServer: process.env.PLAYWRIGHT_BASE_URL ? undefined : {
-    command: "npm.cmd run dev -- --port 3001",
+    command: process.env.PLAYWRIGHT_STATIC_EXPORT
+      ? "node tests/e2e/static-server.mjs"
+      : "npm.cmd run dev -- --port 3001",
     url: "http://localhost:3001/es/",
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,

@@ -6,7 +6,7 @@ import {
   useMotionValue,
   useTransform,
 } from "framer-motion";
-import { ArrowDown, Play, X } from "lucide-react";
+import { ArrowDown, Pause, Play, X } from "lucide-react";
 import type { Locale } from "@/i18n/config";
 import BookingDock from "./BookingDock";
 
@@ -35,6 +35,7 @@ export default function CoastalOverture({
   const videoDialog = useRef<HTMLDialogElement>(null);
   const [watchFilm, setWatchFilm] = useState(false);
   const [ready, setReady] = useState(false);
+  const [pausedByUser, setPausedByUser] = useState(false);
   const reducedMotion = useSyncExternalStore(
     (onChange) => subscribeMediaQuery(reducedMotionQuery, onChange),
     getReducedMotion,
@@ -54,9 +55,9 @@ export default function CoastalOverture({
     const element = video.current;
     const stage = section.current?.querySelector(".overture-stage");
     if (!element || !stage) return;
-    if (reducedMotion) {
+    if (reducedMotion || pausedByUser) {
       element.pause();
-      playbackProgress.set(0);
+      if (reducedMotion) playbackProgress.set(0);
       return;
     }
 
@@ -149,7 +150,7 @@ export default function CoastalOverture({
       cancelFrame();
       element.pause();
     };
-  }, [playbackProgress, reducedMotion]);
+  }, [playbackProgress, reducedMotion, pausedByUser]);
 
   return (
     <section
@@ -212,6 +213,18 @@ export default function CoastalOverture({
             </p>
           </div>
         </div>
+        {!reducedMotion && (
+          <button
+            type="button"
+            className="overture-video-toggle"
+            aria-label={pausedByUser
+              ? (es ? "Reanudar vídeo de fondo" : "Resume background video")
+              : (es ? "Pausar vídeo de fondo" : "Pause background video")}
+            onClick={() => setPausedByUser((paused) => !paused)}
+          >
+            {pausedByUser ? <Play size={18} aria-hidden="true" /> : <Pause size={18} aria-hidden="true" />}
+          </button>
+        )}
         <div className="overture-bottom">
           <button
             className="film-trigger"

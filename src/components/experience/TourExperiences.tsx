@@ -1,8 +1,25 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { tours } from "@/data/tours";
+import { tours, type TourImage } from "@/data/tours";
 import type { Locale } from "@/i18n/config";
+
+const homepageCoverImages: Partial<Record<string, TourImage>> = {
+  "tubing-rio-don-diego": {
+    src: "https://assets.evertripviajes.com/tours/tubing-rio-don-diego/hero_Tubing.webp",
+    alt: {
+      es: "Viajeros con chalecos salvavidas junto a flotadores en la orilla del río Don Diego",
+      en: "Travelers wearing life jackets beside tubes on the bank of the Don Diego River",
+    },
+  },
+  "avistamiento-flamencos-tarde-rancheria": {
+    src: "https://assets.evertripviajes.com/tours/flamencos-rancheria/Avistamiento_flamencos.webp",
+    alt: {
+      es: "Flamencos rosados en las aguas poco profundas de la laguna de Camarones",
+      en: "Pink flamingos in the shallow waters of the Camarones lagoon",
+    },
+  },
+};
 
 export default function TourExperiences({ locale }: { locale: Locale }) {
   const es = locale === "es";
@@ -13,7 +30,7 @@ export default function TourExperiences({ locale }: { locale: Locale }) {
         <div className="tour-showcase-heading">
           <p className="chapter-caption">{es ? "Experiencias Evertrip" : "Evertrip experiences"}</p>
           <h2 id="tour-showcase-title">
-            {es ? "También es lo que vives cuando llegas." : "It’s also what you experience when you arrive."}
+            {es ? "Descubre las experiencias que te esperan." : "Discover the experiences waiting for you."}
           </h2>
           <p>
             {es
@@ -25,12 +42,13 @@ export default function TourExperiences({ locale }: { locale: Locale }) {
         <div className="tour-showcase-grid">
           {tours.map((tour) => {
             const coverImage =
-              tour.slug === "avistamiento-flamencos-tarde-rancheria"
-                ? tour.images.find((image) => image.src.endsWith("/rancheria.webp"))
-                : tour.images[0];
+              homepageCoverImages[tour.slug] ??
+              (tour.slug === "pasadia-cabo-de-la-vela" ? tour.pageImages?.[0] : tour.images[0]);
 
             return (
-              <Link key={tour.slug} href={"/" + locale + "/tours/#" + tour.slug} className="tour-showcase-card">
+              // A document navigation keeps the tour fragment independent of
+              // a homepage smooth scroll still in progress.
+              <a key={tour.slug} href={"/" + locale + "/tours/#" + tour.slug} className="tour-showcase-card">
                 <div className="tour-showcase-media">
                   {coverImage ? (
                     <Image
@@ -51,7 +69,7 @@ export default function TourExperiences({ locale }: { locale: Locale }) {
                   <p>{tour.location[locale]}</p>
                   <ArrowUpRight size={21} aria-hidden="true" />
                 </div>
-              </Link>
+              </a>
             );
           })}
         </div>

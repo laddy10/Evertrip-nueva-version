@@ -10,8 +10,8 @@ export const faqsByLocale = {
     { q: "¿Proveen sillas para niños?", a: "Sí, las sillas para niños están disponibles bajo solicitud. Cuéntanos la edad y el peso del niño al momento de reservar." },
     { q: "¿Cuánto equipaje podemos llevar?", a: "Nuestras vans tienen espacio cómodo para varias maletas grandes y equipaje de mano. Al reservar, cuéntanos cuánto equipaje tienes para asignarte el vehículo adecuado." },
     { q: "¿Podemos hacer una parada en el camino?", a: "Claro. Al ser un traslado privado, podemos coordinar paradas cortas para baño o refrigerio. Solo avísanos con anticipación o infórmale al conductor." },
-    { q: "¿Cómo pago?", a: "Ofrecemos opciones de pago seguras y flexibles que confirmaremos contigo por WhatsApp durante el proceso de reserva." },
-    { q: "¿Cuál es su política de cancelación?", a: "Entendemos que los planes cambian. Ofrecemos cancelaciones flexibles hasta cierto tiempo antes de tu viaje. Consulta nuestra política completa o pregúntanos por WhatsApp." },
+    { q: "¿Cómo pago?", a: "Normalmente pagas el día del servicio, sin anticipo para las reservas habituales. Los medios de pago se coordinan por WhatsApp. Si un servicio excepcional requiere un anticipo o condiciones especiales, se informan para tu aceptación antes de confirmar la reserva." },
+    { q: "¿Cuál es su política de cancelación?", a: "Actualmente puedes cancelar las reservas habituales sin penalización. Comunícalo por el WhatsApp oficial, preferiblemente con anticipación. Las condiciones especiales de un servicio deben informarse y aceptarse previamente, sin limitar tus derechos legales. Consulta el apartado de cancelaciones en nuestros términos y condiciones." },
   ],
   en: [
     { q: "How do I book a transfer?", a: "Booking is simple: just click any WhatsApp button on our site. Send us your travel dates, route, and number of passengers, and we'll reply within minutes with a quote and confirmation." },
@@ -24,7 +24,7 @@ export const faqsByLocale = {
     { q: "Do you provide child seats?", a: "Yes, child seats are available upon request. Please let us know the age and weight of your child when booking." },
     { q: "How much luggage can we bring?", a: "Our vans can comfortably hold up to a certain number of large suitcases and carry-ons. When booking, let us know how much luggage you have so we ensure the right vehicle." },
     { q: "Can we make a stop along the way?", a: "Absolutely. Since the transfer is private, we can arrange short stops for restrooms or snacks. Just let us know in advance or inform the driver." },
-    { q: "How do I pay?", a: "We offer secure and flexible payment options which we will confirm with you via WhatsApp during the booking process." },
-    { q: "What is your cancellation policy?", a: "We understand plans change. We offer flexible cancellations up to a certain time before your trip. Please review our full cancellation policy or ask us on WhatsApp." },
+    { q: "How do I pay?", a: "You normally pay on the day of the service, with no advance payment for standard bookings. Payment methods are arranged via WhatsApp. If an exceptional service requires an advance payment or special conditions, these are explained for your acceptance before the booking is confirmed." },
+    { q: "What is your cancellation policy?", a: "You can currently cancel standard bookings without penalty. Let us know through our official WhatsApp channel, preferably in advance. Any special service conditions must be disclosed and accepted beforehand, without limiting your legal rights. See the cancellations section in our terms and conditions." },
   ],
 };

@@ -4,6 +4,7 @@ import { FaWhatsapp } from "react-icons/fa";
 import { getWhatsAppLink } from "@/lib/whatsapp";
 import { dictionaries } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
+import { localizedPath } from "@/lib/seo";
 
 export default function Footer({ locale }: { locale: Locale }) {
   const es = locale === "es";
@@ -52,21 +53,9 @@ export default function Footer({ locale }: { locale: Locale }) {
           <Link href={`/${locale}/tours`}>{es ? "Tours y experiencias" : "Tours & experiences"}</Link>
           <Link href={`/${locale}#how-it-works`}>{t.howItWorks}</Link>
           <Link href={`/${locale}#faq`}>{t.faq}</Link>
-          {[t.privacy, t.terms, t.cancellation].map((label) => (
-            <a
-              key={label}
-              href={getWhatsAppLink(
-                es
-                  ? `Hola, quisiera consultar: ${label}.`
-                  : `Hi, I would like to ask about: ${label}.`,
-              )}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {label}
-              <span className="sr-only"> (WhatsApp)</span>
-            </a>
-          ))}
+          <Link href={localizedPath(locale, "privacy-policy")}>{t.privacy}</Link>
+          <Link href={localizedPath(locale, "terms-and-conditions")}>{t.terms}</Link>
+          <a href={`${localizedPath(locale, "terms-and-conditions")}#section-6`}>{t.cancellation}</a>
         </nav>
       </div>
     </footer>

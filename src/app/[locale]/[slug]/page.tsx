@@ -4,13 +4,18 @@ import RoutePageTemplate from "@/components/RoutePageTemplate";
 import RouteJsonLd from "@/components/RouteJsonLd";
 import { routes, getRouteBySlug, getPriceCards } from "@/data/routes";
 import { locales, isLocale } from "@/i18n/config";
-import { pageMetadata } from "@/lib/seo";
+import { legalKeyForPath, legalPaths, pageMetadata } from "@/lib/seo";
 import { getRelatedRoutes } from "@/lib/routeRelationships";
+import LegalDocument from "@/components/legal/LegalDocument";
+import { legalMetadata, legalSlugs } from "@/lib/legal";
 
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return locales.flatMap((locale) => routes.map((route) => ({ locale, slug: route.slug })));
+  return locales.flatMap((locale) => [
+    ...routes.map((route) => ({ locale, slug: route.slug })),
+    ...legalSlugs.map((key) => ({ locale, slug: legalPaths[key][locale] })),
+  ]);
 }
 
 export async function generateMetadata({
@@ -21,6 +26,8 @@ export async function generateMetadata({
   const { locale: rawLocale, slug } = await params;
   if (!isLocale(rawLocale)) notFound();
   const locale = rawLocale;
+  const legalKey = legalKeyForPath(locale, slug);
+  if (legalKey) return legalMetadata(locale, legalKey);
   const route = getRouteBySlug(slug);
   if (!route) notFound();
 
@@ -41,6 +48,8 @@ export default async function RoutePage({
   const { locale: rawLocale, slug } = await params;
   if (!isLocale(rawLocale)) notFound();
   const locale = rawLocale;
+  const legalKey = legalKeyForPath(locale, slug);
+  if (legalKey) return <LegalDocument locale={locale} slug={legalKey} />;
   const route = getRouteBySlug(slug);
   if (!route) notFound();
 

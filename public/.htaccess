@@ -1,0 +1,50 @@
+# EverTrip Viajes — Hostinger (Apache / LiteSpeed) Production Rules
+# Generated for Static Export (Next.js 16)
+# Domain: https://evertripviajes.com
+
+# 1. Basic Options & Directory Indexes
+DirectorySlash On
+DirectoryIndex index.html
+
+# 2. Custom 404 Document (Returns HTTP 404 with custom page)
+ErrorDocument 404 /404.html
+
+# 3. MIME Types Configuration
+<IfModule mod_mime.c>
+  AddType text/html .html
+  AddType text/plain .txt
+  AddType application/xml .xml
+  AddType text/css .css
+  AddType text/javascript .js .mjs
+  AddType application/json .json
+  AddType image/webp .webp
+  AddType image/svg+xml .svg
+  AddType font/woff2 .woff2
+</IfModule>
+
+# 4. Rewrite Engine Rules
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 4A. Root URL redirect to default language (/es/)
+  # Directly redirects https://evertripviajes.com/ and /index.html to /es/
+  RewriteRule ^(?:index\.html)?$ /es/ [R=301,L,QSA]
+
+  # 4B. Normalize explicit subdirectory index.html requests (e.g., /es/index.html -> /es/)
+  RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\s+(.+/)index\.html(?:\?[^\s]*)?\s+HTTP/ [NC]
+  RewriteRule ^(.+/)index\.html$ /$1 [R=301,L]
+</IfModule>
+
+# 5. Browser Caching
+<IfModule mod_headers.c>
+  # Hashed static assets and media
+  <FilesMatch "\.(?:woff2|webp|png|jpg|jpeg|gif|ico|svg)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # HTML, XML, and RSC .txt payloads must revalidate to reflect new deployments
+  <FilesMatch "\.(?:html|txt|xml|json)$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>

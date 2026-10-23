@@ -7,6 +7,7 @@ import { useState, useEffect, useRef } from "react";
 import { type Locale } from "@/i18n/config";
 import { dictionaries } from "@/i18n/dictionaries";
 import { getWhatsAppLink } from "@/lib/whatsapp";
+import { localizedPath } from "@/lib/seo";
 
 export default function Navbar({ locale }: { locale: Locale }) {
   const dict = dictionaries[locale];
@@ -19,7 +20,10 @@ export default function Navbar({ locale }: { locale: Locale }) {
   ];
   const pathname = usePathname();
   const isHome = pathname.replace(/\/$/, "") === `/${locale}`;
+  const isTours = pathname.replace(/\/$/, "") === `/${locale}/tours`;
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+  const activeNavigation = isTours ? "tours" : isHome ? activeSection : null;
   const router = useRouter();
   const [menuPath, setMenuPath] = useState<string | null>(null);
   const menuOpen = menuPath === pathname;
@@ -28,15 +32,32 @@ export default function Navbar({ locale }: { locale: Locale }) {
   const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 65);
+    const sections = isHome
+      ? Array.from(navbarRef.current?.querySelectorAll<HTMLAnchorElement>("nav:first-of-type > a") ?? [])
+          .map((link) => document.getElementById(link.hash.slice(1)))
+          .filter((section): section is HTMLElement => section !== null)
+      : [];
+    const onScroll = () => {
+      setScrolled(window.scrollY > 65);
+      const headerBottom = navbarRef.current?.getBoundingClientRect().bottom ?? 0;
+      setActiveSection(sections.find((section) => {
+        const bounds = section.getBoundingClientRect();
+        const anchorOffset = Math.max(headerBottom, parseFloat(getComputedStyle(section).scrollMarginTop) || 0) + 1;
+        return bounds.top <= anchorOffset && bounds.bottom > anchorOffset;
+      })?.id ?? null);
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
     onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [isHome, pathname]);
 
   const handleLanguageChange = (event: React.MouseEvent<HTMLAnchorElement>, targetLocale: Locale) => {
     const url = new URL(window.location.href);
-    url.pathname = url.pathname.replace(/^\/(es|en)(?=\/|$)/, `/${targetLocale}`);
+    url.pathname = localizedPath(targetLocale, url.pathname.replace(/^\/(es|en)(?=\/|$)/, ""));
     const href = `${url.pathname}${url.search}`;
     event.currentTarget.href = href;
 
@@ -96,7 +117,7 @@ export default function Navbar({ locale }: { locale: Locale }) {
 
         <nav className="hidden lg:flex items-center gap-4 lg:gap-8 text-xs font-medium text-brand-text-primary/80">
           {navigationItems.map((item) => (
-            <Link key={item.id} href={`/${locale}#${item.id}`} className="hover:text-brand-accent transition-colors">
+            <Link key={item.id} href={`/${locale}#${item.id}`} aria-current={item.id === activeNavigation ? (isTours ? "page" : "location") : undefined} className="hover:text-brand-accent transition-colors">
               {item.label}
             </Link>
           ))}
@@ -107,7 +128,7 @@ export default function Navbar({ locale }: { locale: Locale }) {
             className="language-switch text-xs font-bold tracking-widest text-brand-text-secondary hover:text-brand-text-primary transition-colors max-md:inline-flex max-md:items-center max-md:min-h-11 max-md:whitespace-nowrap"
           >
             <Link
-              href={pathname.replace(/^\/(es|en)(?=\/|$)/, "/es")}
+              href={localizedPath("es", pathname.replace(/^\/(es|en)(?=\/|$)/, ""))}
               aria-label="Cambiar a español"
               aria-current={locale === "es" ? "page" : undefined}
               hrefLang="es"
@@ -120,7 +141,7 @@ export default function Navbar({ locale }: { locale: Locale }) {
             </Link>{" "}
             <span className="opacity-30 mx-1">|</span>{" "}
             <Link
-              href={pathname.replace(/^\/(es|en)(?=\/|$)/, "/en")}
+              href={localizedPath("en", pathname.replace(/^\/(es|en)(?=\/|$)/, ""))}
               aria-label="Switch to English"
               aria-current={locale === "en" ? "page" : undefined}
               hrefLang="en"
@@ -162,7 +183,7 @@ export default function Navbar({ locale }: { locale: Locale }) {
           className="lg:hidden absolute top-full left-0 right-0 mt-2 rounded-[24px] border border-slate-200/50 bg-brand-primary-bg p-2 shadow-lg max-h-[calc(100dvh-7rem)] overflow-y-auto"
         >
           {navigationItems.map((item) => (
-            <Link key={item.id} href={`/${locale}#${item.id}`} onClick={() => setMenuOpen(false)} className="flex min-h-11 items-center rounded-2xl px-4 py-3 text-sm font-medium text-brand-text-primary hover:text-brand-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent">
+            <Link key={item.id} href={`/${locale}#${item.id}`} aria-current={item.id === activeNavigation ? (isTours ? "page" : "location") : undefined} onClick={() => setMenuOpen(false)} className="flex min-h-11 items-center rounded-2xl px-4 py-3 text-sm font-medium text-brand-text-primary hover:text-brand-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent">
               {item.label}
             </Link>
           ))}

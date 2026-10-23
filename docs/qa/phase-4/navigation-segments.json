@@ -1,0 +1,23 @@
+[
+  {
+    "path": "/es/__next.$d$locale.__PAGE__.txt",
+    "status": 200,
+    "mime": "text/plain; charset=utf-8",
+    "bytes": 22645,
+    "equalsExport": true
+  },
+  {
+    "path": "/es/tours/__next.$d$locale.tours.__PAGE__.txt",
+    "status": 200,
+    "mime": "text/plain; charset=utf-8",
+    "bytes": 19244,
+    "equalsExport": true
+  },
+  {
+    "path": "/en/all-routes/__next.$d$locale.all-routes.__PAGE__.txt",
+    "status": 200,
+    "mime": "text/plain; charset=utf-8",
+    "bytes": 2931,
+    "equalsExport": true
+  }
+]
