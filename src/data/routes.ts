@@ -1057,11 +1057,11 @@ export const routes: RouteDefinition[] = [
     slug: "palomino-to-valledupar",
     featured: false,
     priceMode: "quote",
-    title: { es: "Transporte privado Palomino - Valledupar | EverTrip", en: "Private Transfer Palomino - Valledupar | EverTrip" },
+    title: { es: "Transporte Palomino a Valledupar Puerta a Puerta | EverTrip", en: "Private Door-to-Door Transfer Palomino - Valledupar | EverTrip" },
     h1: { es: "Transporte privado Palomino ↔ Valledupar", en: "Private Transfer Palomino ↔ Valledupar" },
     metaDescription: {
-      es: "Traslado privado entre Palomino y Valledupar con recogida en hotel, dirección o punto accesible. Equipaje y paradas coordinadas por WhatsApp.",
-      en: "Private transfer between Palomino and Valledupar with hotel, address or accessible pickup. Luggage and coordinated stops via WhatsApp.",
+      es: "Servicio privado puerta a puerta entre Palomino y Valledupar. Vehículos climatizados, paradas flexibles y cotización inmediata por WhatsApp con EverTrip.",
+      en: "Private door-to-door transfer between Palomino and Valledupar. Air-conditioned vehicles, flexible stops and instant quote via WhatsApp with EverTrip.",
     },
     description: {
       es: "Coordinamos transporte privado entre Palomino y Valledupar con recogida en hoteles, direcciones y otros puntos accesibles acordados previamente. El servicio puede reservarse en cualquiera de los dos sentidos.",
@@ -1219,11 +1219,11 @@ export const routes: RouteDefinition[] = [
     slug: "valledupar-to-minca",
     featured: false,
     priceMode: "quote",
-    title: { es: "Transporte privado Valledupar - Minca | EverTrip", en: "Private Transfer Valledupar - Minca | EverTrip" },
+    title: { es: "Transporte Valledupar a Minca Puerta a Puerta | EverTrip", en: "Private Transfer Valledupar to Minca Door-to-Door | EverTrip" },
     h1: { es: "Transporte privado Valledupar ↔ Minca", en: "Private Transfer Valledupar ↔ Minca" },
     metaDescription: {
-      es: "Traslado privado entre Valledupar y Minca con recogida en hotel, dirección o punto accesible. Equipaje, paradas coordinadas y acceso según la vía.",
-      en: "Private transfer between Valledupar and Minca with hotel, address or accessible pickup. Luggage, coordinated stops and access according to road conditions.",
+      es: "Viaja cómodo y directo entre Valledupar y Minca. Vehículos climatizados puerta a puerta, paradas coordinadas y reserva rápida por WhatsApp con EverTrip.",
+      en: "Comfortable, direct private transfer between Valledupar and Minca. Air-conditioned door-to-door vehicles, flexible stops and easy booking via WhatsApp with EverTrip.",
     },
     description: {
       es: "Coordinamos el traslado privado entre Valledupar y Minca con recogida en hoteles, direcciones u otros puntos accesibles y llegada al punto accesible previamente acordado. En zonas de montaña, el punto final depende de las condiciones de acceso para el vehículo.",

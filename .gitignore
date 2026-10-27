@@ -46,3 +46,14 @@ next-env.d.ts
 
 evertrip-hostinger.zip
 evertrip-hostinger/
+out.zip
+*.zip
+
+# secrets & tokens
+client_secret*.json
+*.token.json
+token.json
+
+# logs
+*.log
+debug.log

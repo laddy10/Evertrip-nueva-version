@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { locales, isLocale, type Locale } from "@/i18n/config";
@@ -26,14 +27,14 @@ export const dynamicParams = false;
 
 const metaByLocale: Record<Locale, { title: string; description: string }> = {
   es: {
-    title: "Transporte privado y tours en el Caribe colombiano | EverTrip",
+    title: "Transporte Privado en Santa Marta y Traslados Caribe | EverTrip",
     description:
-      "Traslados privados puerta a puerta y experiencias turísticas por el Caribe colombiano. Explora rutas, tours y cotiza por WhatsApp con EverTrip.",
+      "Transporte privado puerta a puerta en Santa Marta y el Caribe. Traslados a aeropuertos, Palomino, Tayrona, Minca y Cartagena. Cotiza por WhatsApp con EverTrip.",
   },
   en: {
-    title: "Private transfers and tours in the Colombian Caribbean | EverTrip",
+    title: "Private Transfers in Santa Marta & Caribbean Tours | EverTrip",
     description:
-      "Private door-to-door transfers and tour experiences across the Colombian Caribbean. Explore routes, tours and request a quote on WhatsApp with EverTrip.",
+      "Private door-to-door transportation in Santa Marta and the Caribbean. Airport transfers to Palomino, Tayrona, Minca & Cartagena. Book via WhatsApp with EverTrip.",
   },
 };
 
@@ -74,6 +75,21 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={`${outfit.variable} ${inter.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body className="flex flex-col min-h-screen" suppressHydrationWarning>
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-01T76KKXGN"
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+        >
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-01T76KKXGN');
+          `}
+        </Script>
         <Navbar locale={locale} />
         <main className="flex-grow">{children}</main>
         <div className="print:hidden">
